@@ -59,7 +59,7 @@ components.forEach(item => {
 let template = 
 `import utils from './utils.js';
 import {DataAdapter} from './DataAdapter.js';
-import {DataAdapterFactory} from './DataAdapterFactory.js';
+import {DataSource} from './DataSource.js';
 ${jsImport.join("\r\n")}
 const version = "${packageJSON.version}";
 const description = "${packageJSON.description}";
@@ -77,7 +77,7 @@ const install = function (Vue, opts = {}) {
 if (typeof window !== 'undefined' && window.Vue) {
     install(window.Vue);
 }
-export {utils, version, description, author, DataAdapter, DataAdapterFactory}
+export {utils, version, description, author, DataAdapter, DataSource}
 export default Object.assign({}, {install, ...components});`
 
 fs.writeFileSync(OUTPUT_PATH, template);

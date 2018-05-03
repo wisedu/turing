@@ -18,7 +18,7 @@
 export default {
   name: "tg-listview",
   props: {
-    datasource: String,
+    datasource: Object,
     layout: String,
     enableInfinite: Boolean,
     pageSize: {
@@ -46,9 +46,7 @@ export default {
   },
   mounted: function() {
     var that = this;
-    window.turing.dataSources
-      .get(this.datasource)
-      .findAll({ pageSize: this.pageSize })
+    this.datasource.inst.findAll({ pageSize: this.pageSize })
       .then(function(datas) {
         that.list = datas.rows;
       });
@@ -57,9 +55,7 @@ export default {
     loadmore: function() {
       this.pageNumber = this.pageNumber + 1;
       var that = this;
-      window.turing.dataSources
-        .get(this.datasource)
-        .findAll({
+      this.datasource.inst.findAll({
           pageNumber: this.pageNumber,
           pageSize: this.pageSize
         })

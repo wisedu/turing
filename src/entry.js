@@ -1,6 +1,6 @@
 import utils from './utils.js';
 import {DataAdapter} from './DataAdapter.js';
-import {DataAdapterFactory} from './DataAdapterFactory.js';
+import {DataSource} from './DataSource.js';
 import TgListview from './components/tg-listview.vue';
 const version = "1.0.0";
 const description = "turing components";
@@ -18,5 +18,5 @@ const install = function (Vue, opts = {}) {
 if (typeof window !== 'undefined' && window.Vue) {
     install(window.Vue);
 }
-export {utils, version, description, author, DataAdapter, DataAdapterFactory}
+export {utils, version, description, author, DataAdapter, DataSource}
 export default Object.assign({}, {install, ...components});
