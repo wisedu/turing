@@ -1,0 +1,88 @@
+[{
+    "name": "submitCommand",
+    "parentElementName": "toolbar",
+    "attrs": {
+      "afterCommandEvent": {
+        "afterCommandEvent": ""
+      },
+      "name": {
+        "name": "提交"
+      },
+      "id": {
+        "id": "HandleCommand_2"
+      },
+      "execute": {
+        "execute": "do_submit()"
+      }
+    },
+    "xmlRowNumber": 0,
+    "xmlColumnNumber": 0,
+    "extensionElements": {},
+    "attributes": {}
+  }, {
+    "name": "processStatusCommand",
+    "parentElementName": "toolbar",
+    "attrs": {
+      "afterCommandEvent": {
+        "afterCommandEvent": "interestingEvent_startCommand_HandleCommand_1"
+      },
+      "name": {
+        "name": "流程状态"
+      },
+      "id": {
+        "id": "HandleCommand_4"
+      },
+      "execute": {
+        "execute": "do_processStatus()"
+      }
+    },
+    "xmlRowNumber": 0,
+    "xmlColumnNumber": 0,
+    "extensionElements": {},
+    "attributes": {}
+  }, {
+    "name": "startCommand",
+    "parentElementName": "toolbar",
+    "attrs": {
+      "afterCommandEvent": {
+        "afterCommandEvent": ""
+      },
+      "name": {
+        "name": "启动"
+      },
+      "id": {
+        "id": "HandleCommand_1"
+      },
+      "execute": {
+        "execute": "do_start()"
+      }
+    },
+    "xmlRowNumber": 0,
+    "xmlColumnNumber": 0,
+    "extensionElements": {},
+    "attributes": {}
+  }, {
+    "name": "turnbackCommand",
+    "parentElementName": "toolbar",
+    "attrs": {
+      "backTo": {
+        "backTo": "startevent1"
+      },
+      "afterCommandEvent": {
+        "afterCommandEvent": ""
+      },
+      "name": {
+        "name": "退回"
+      },
+      "id": {
+        "id": "HandleCommand_3"
+      },
+      "execute": {
+        "execute": "do_turnback()"
+      }
+    },
+    "xmlRowNumber": 0,
+    "xmlColumnNumber": 0,
+    "extensionElements": {},
+    "attributes": {}
+  }]

@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  /* box-sizing: border-box; */
+}
+
+body {
+    height: 100vh;
+    /* background-color: #f9f9f9; */
+    font-family: ZhiFont, ".SFNSText-Regular", "Helvetica Neue", Roboto, "Segoe UI", sans-serif;;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+body.preventScroll {
+}
+.preventScroll .main__content {
+    height: calc(100vh - 44px);
+    overflow: hidden;
+}
