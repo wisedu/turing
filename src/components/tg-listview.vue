@@ -46,9 +46,9 @@ export default {
   },
   mounted: function() {
     var that = this;
-    window.turning.dataSources
+    window.turing.dataSources
       .get(this.datasource)
-      .actions.findAll({ pageSize: this.pageSize })
+      .findAll({ pageSize: this.pageSize })
       .then(function(datas) {
         that.list = datas.rows;
       });
@@ -57,9 +57,9 @@ export default {
     loadmore: function() {
       this.pageNumber = this.pageNumber + 1;
       var that = this;
-      window.turning.dataSources
+      window.turing.dataSources
         .get(this.datasource)
-        .actions.findAll({
+        .findAll({
           pageNumber: this.pageNumber,
           pageSize: this.pageSize
         })
