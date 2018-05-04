@@ -1,4 +1,6 @@
 import utils from './utils.js';
+import axios from 'axios';
+import moment from 'moment';
 import {DataAdapter} from './DataAdapter.js';
 import {DataSource} from './DataSource.js';
 import TgDiv from './components/tg-div.vue';
@@ -21,5 +23,5 @@ const install = function (Vue, opts = {}) {
 if (typeof window !== 'undefined' && window.Vue) {
     install(window.Vue);
 }
-export {utils, version, description, author, DataAdapter, DataSource}
+export {utils, version, description, author, DataAdapter, DataSource, axios, moment}
 export default Object.assign({}, {install, ...components});

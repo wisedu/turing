@@ -24,10 +24,7 @@ function serialize(data) {
 // function getApi (name) {
 //   return api[name] || name
 // }
-let utils = {
-  axios:axios,
-  moment:moment
-};
+let utils = {};
 
 /**
  * @method Post
@@ -86,6 +83,14 @@ utils.getUrlParam = function(name) {
   var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
   var r = window.location.search.substr(1).match(reg);  //匹配目标参数
   if (r != null) return unescape(r[2]); return null; //返回参数值
+}
+
+utils.setFullUrl = function(url, prefix) {
+  if ([".", "/"].indexOf(url.substring(0, 1)) > -1) {
+    return prefix + url;
+  } else {
+    return url;
+  }
 }
 
 

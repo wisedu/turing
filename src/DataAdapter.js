@@ -1,4 +1,5 @@
 import utils from './utils.js';
+import axios from 'axios'
 
 if (typeof Object.assign != 'function') {
     // Must be writable: true, enumerable: false, configurable: true
@@ -53,9 +54,9 @@ export class DataAdapter {
             url = action.url
         }
         if (action.method.toLowerCase() === "post") {
-            return utils.axios.post(url, params)
+            return axios.post(url, params)
         } else {
-            return utils.axios.get(url, {params: params})
+            return axios.get(url, {params: params})
         }
     }
     events = {
