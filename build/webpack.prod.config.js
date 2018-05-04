@@ -40,7 +40,7 @@ let config = merge(webpackBaseConfig, {
     },
     plugins: [
         // @todo
-        new ExtractTextPlugin({filename: 'style/' + process.env.COLOR_THEME + '/emap.css', allChunks: true}),
+        new ExtractTextPlugin({filename: 'style/' + process.env.COLOR_THEME + '/'+packageJSON.packageName+'.css', allChunks: true}),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': '"production"'
         }),
