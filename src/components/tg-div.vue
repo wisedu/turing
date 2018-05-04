@@ -13,7 +13,7 @@
         }
     };
 </script>
-<style lang="css">
+<style>
     .tg-div {
         position: relative;
     }
