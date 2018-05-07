@@ -27,11 +27,7 @@ export default {
     },
     size: {
       type: String,
-      default: "default",
-      validator: function (value) {
-        // 这个值必须匹配下列字符串中的一个
-        return ['small', 'default', 'large'].indexOf(value) !== -1
-      }
+      default: "default"
     },
     emptyText: {
       type: String,
@@ -65,6 +61,9 @@ export default {
         this.layoutStyle = {};
     }
     switch (this.size) {
+      case "default":
+        this.itemStyle.padding = "12px";
+        break;
       case "small":
         this.itemStyle.padding = "8px";
         break;
@@ -72,7 +71,7 @@ export default {
         this.itemStyle.padding = "16px";
         break;
       default:
-        this.itemStyle.padding = "12px";
+        this.itemStyle.padding = this.size;
     }
   },
   mounted: function() {

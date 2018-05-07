@@ -5,7 +5,7 @@
         <h1 class="index">
             首页
         </h1>
-        <tg-listview>
+        <tg-listview :datasource="ds">
             <template slot="itemTemplate" slot-scope="props">
                 <tg-div class="tg-col-6 tg-col-560-6 ">
                     <tg-text class="tg-primary-1">主标题{{props.index}}</tg-text>
@@ -39,7 +39,16 @@
     export default {
         data(){
             return {
-                page: 'about'
+                page: 'about',
+                ds:{
+                    inst:{
+                        findAll:function() {
+                            return new Promise((resolve, reject) => {
+                                resolve({rows:[{},{},{}]});
+                            });
+                        }
+                    }
+                }
             }
         },
         components: {
