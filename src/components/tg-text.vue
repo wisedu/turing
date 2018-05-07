@@ -1,8 +1,8 @@
 <template>
-  <div @click="handleClick">
+  <span @click="handleClick">
     <pre v-if="wordwrap"><slot></slot></pre>
     <slot v-else></slot>
-  </div>
+  </span>
 </template>
 
 <script>

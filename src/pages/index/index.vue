@@ -5,7 +5,20 @@
         <h1 class="index">
             首页
         </h1>
-        <emap-flow-toolbar defkey="aaa" taskid="aaa"></emap-flow-toolbar>
+        <tg-listview>
+            <template slot="itemTemplate" slot-scope="props">
+                <tg-div class="tg-col-6 tg-col-560-6 ">
+                    <tg-text class="tg-primary-1">主标题{{props.index}}</tg-text>
+                    <tg-text class="tg-grey-3">副标题{{props.index}}</tg-text>
+                </tg-div>
+                <tg-div class="tg-col-3 tg-col-560-6">
+                    <tg-text><Badge count="new" class-name="tg-primary-1 tg-bg-white tg-br-primary-1"></Badge></tg-text>
+                </tg-div>
+                <tg-div class="tg-col-3 tg-col-560-hide">
+                    <tg-text><tg-linkbutton @click="clickHandler">Text</tg-linkbutton></tg-text>
+                </tg-div>
+            </template>
+        </tg-listview>
     </div>
 </template>
 <style>
@@ -22,7 +35,7 @@
 }
 </style>
 <script type="text/javascript">
-    import EmapFlowToolbar from '../../components/emap-flow-toolbar.vue'
+    import TgListview from '../../components/tg-listview.vue'
     export default {
         data(){
             return {
@@ -30,7 +43,7 @@
             }
         },
         components: {
-            EmapFlowToolbar
+            TgListview
         },
         mounted(){
         }

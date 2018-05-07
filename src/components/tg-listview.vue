@@ -1,13 +1,12 @@
 <template>
     <div>
-        <div v-for="(item, index) in list" :style="layoutStyle" :key="index">
-            <slot name="itemTemplate" :data="item" :index="index" v-if="index%2 === 0"></slot>
-            <slot name="alternateTemplate" :data="item" :index="index" v-if="index%2 === 1">
-                <slot name="itemTemplate" :data="item" :index="index"></slot>
-            </slot>
+        <div v-for="(item, index) in list" :style="layoutStyle" :key="index" >
+            <div class="tg-row tg-br-b-grey-4" :style="itemStyle">
+              <slot name="itemTemplate" :data="item" :index="index"></slot>
+            </div>
         </div>
         <div style="clear:both">
-            <slot name="pager">
+            <slot name="pager" v-if="pagination">
                 <button @click="loadmore">加载更多</button>
             </slot>
         </div>
@@ -18,9 +17,30 @@
 export default {
   name: "tg-listview",
   props: {
+    grid: Object,
     datasource: Object,
     layout: String,
     enableInfinite: Boolean,
+    bordered: {
+      type:Boolean,
+      default: false
+    },
+    size: {
+      type: String,
+      default: "default",
+      validator: function (value) {
+        // 这个值必须匹配下列字符串中的一个
+        return ['small', 'default', 'large'].indexOf(value) !== -1
+      }
+    },
+    emptyText: {
+      type: String,
+      default: "暂无数据"
+    },
+    pagination: {
+      type: Boolean,
+      default: true
+    },
     pageSize: {
       type: Number,
       default: 10
@@ -30,7 +50,8 @@ export default {
     return {
       list: [],
       layoutStyle: {},
-      pageNumber: 1
+      pageNumber: 1,
+      itemStyle: {width:"100%"}
     };
   },
   created: function() {
@@ -43,11 +64,22 @@ export default {
       default:
         this.layoutStyle = {};
     }
+    switch (this.size) {
+      case "small":
+        this.itemStyle.padding = "8px";
+        break;
+      case "large":
+        this.itemStyle.padding = "16px";
+        break;
+      default:
+        this.itemStyle.padding = "12px";
+    }
   },
   mounted: function() {
     var that = this;
     this.datasource.inst.findAll({ pageSize: this.pageSize })
       .then(function(datas) {
+        let b = "";
         that.list = datas.rows;
       });
   },

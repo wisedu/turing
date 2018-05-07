@@ -8,9 +8,8 @@ import route from './router';
 import * as utils from './utils'
 import api from './api'
 // import fcutil from './fcUtil'
-window.ELEMENT = ElementUI
 
-Vue.use(ElementUI);
+Vue.use(iView);
 Vue.use(VueRouter);
 const router = new VueRouter(route);
 
