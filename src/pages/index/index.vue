@@ -15,7 +15,7 @@
                     <tg-text><Badge count="new" class-name="tg-primary-1 tg-bg-white tg-br-primary-1"></Badge></tg-text>
                 </tg-div>
                 <tg-div class="tg-col-3 tg-col-560-hide">
-                    <tg-text><tg-linkbutton @click="clickHandler">Text</tg-linkbutton></tg-text>
+                    <tg-text><tg-linkbutton>Text</tg-linkbutton></tg-text>
                 </tg-div>
             </template>
         </tg-listview>
@@ -36,6 +36,9 @@
 </style>
 <script type="text/javascript">
     import TgListview from '../../components/tg-listview.vue'
+    import TgDiv from '../../components/tg-div.vue'
+    import TgText from '../../components/tg-text.vue'
+    import TgLinkbutton from '../../components/tg-linkbutton.vue'
     export default {
         data(){
             return {
@@ -52,7 +55,7 @@
             }
         },
         components: {
-            TgListview
+            TgListview,TgDiv,TgText,TgLinkbutton
         },
         mounted(){
         }
