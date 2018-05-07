@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div :class="containerClass">
         <div v-for="(item, index) in list" :style="layoutStyle" :key="index" >
-            <div class="tg-row tg-br-b-grey-4" :style="itemStyle">
+            <div class="tg-row" :class="itemClassObject">
               <slot name="itemTemplate" :data="item" :index="index"></slot>
             </div>
         </div>
@@ -21,10 +21,7 @@ export default {
     datasource: Object,
     layout: String,
     enableInfinite: Boolean,
-    bordered: {
-      type:Boolean,
-      default: false
-    },
+    bordered: Boolean,
     size: {
       type: String,
       default: "default"
@@ -33,10 +30,7 @@ export default {
       type: String,
       default: "暂无数据"
     },
-    pagination: {
-      type: Boolean,
-      default: true
-    },
+    pagination: Boolean,
     pageSize: {
       type: Number,
       default: 10
@@ -47,8 +41,18 @@ export default {
       list: [],
       layoutStyle: {},
       pageNumber: 1,
-      itemStyle: {width:"100%"}
+      containerClass: "",
+      itemClass: ""
     };
+  },
+  computed: {
+    itemClassObject: function () {
+      let co = {
+        'tg-br-b-grey-4':this.bordered
+      }
+      co[this.itemClass] = true;
+      return co;
+    }
   },
   created: function() {
     switch (this.layout) {
@@ -60,19 +64,8 @@ export default {
       default:
         this.layoutStyle = {};
     }
-    switch (this.size) {
-      case "default":
-        this.itemStyle.padding = "12px";
-        break;
-      case "small":
-        this.itemStyle.padding = "8px";
-        break;
-      case "large":
-        this.itemStyle.padding = "16px";
-        break;
-      default:
-        this.itemStyle.padding = this.size;
-    }
+    this.itemClass = "tg-listview-item-" + this.size
+    this.containerClass = "tg-listview-container-" + this.size
   },
   mounted: function() {
     var that = this;
@@ -99,5 +92,22 @@ export default {
 </script>
 
 <style>
-
+.tg-listview-item-small{
+  padding: 8px 0;
+}
+.tg-listview-item-default{
+  padding: 12px 0;
+}
+.tg-listview-item-large{
+  padding: 16px 0;
+}
+.tg-listview-container-small{
+  padding:0 8px;
+}
+.tg-listview-container-default{
+  padding:0 12px;
+}
+.tg-listview-container-large{
+  padding:0 16px;
+}
 </style>

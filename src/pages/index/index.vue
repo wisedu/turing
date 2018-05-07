@@ -1,14 +1,13 @@
 <template>
     <div class="page_border">
         <!-- 静态图片的写法请参照以下方式 -->
-        <img class="right_icon" src="../../assets/title.jpg">
         <h1 class="index">
             首页
         </h1>
-        <tg-listview :datasource="ds">
+        <tg-listview :datasource="ds" bordered pagination>
             <template slot="itemTemplate" slot-scope="props">
                 <tg-div class="tg-col-6 tg-col-560-6 ">
-                    <tg-text class="tg-primary-1">主标题{{props.index}}</tg-text>
+                    <tg-text class="tg-primary-1">主标题{{props.data}}</tg-text>
                     <tg-text class="tg-grey-3">副标题{{props.index}}</tg-text>
                 </tg-div>
                 <tg-div class="tg-col-3 tg-col-560-6">
