@@ -1,5 +1,5 @@
 /dist
-
+/src/entry*.*
 # Logs
 logs
 *.log

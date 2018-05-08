@@ -1,0 +1,9 @@
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+
+  @if ($breakpoint > 0) {
+    .#{$namespace}-w-#{$breakpoint}{
+      width: #{$breakpoint}px;
+    }
+  }
+}

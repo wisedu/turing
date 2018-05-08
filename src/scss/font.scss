@@ -1,0 +1,37 @@
+h2,
+.#{$namespace}-h2{
+  font-size: 18px;
+  line-height: 36px;
+  margin: 0;
+}
+
+h3,
+.#{$namespace}-h3{
+  font-size: 14px;
+  line-height: 18px;
+  margin: 0;
+}
+
+.#{$namespace}-text{
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: normal;
+}
+
+.#{$namespace}-link{
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: normal;
+  color: $primary-lv1;
+
+  &:hover{
+    color: $primary-lv2;
+  }
+}
+
+.#{$namespace}-caption{
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: normal;
+}
+

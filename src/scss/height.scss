@@ -1,0 +1,9 @@
+
+@each $breakpoint in map-keys($height-breakpoints) {
+
+  @if ($breakpoint > 0) {
+    .#{$namespace}-h-#{$breakpoint}{
+      height: #{$breakpoint}px;
+    }
+  }
+}

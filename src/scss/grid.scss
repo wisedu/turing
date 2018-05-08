@@ -1,0 +1,22 @@
+
+
+
+.#{$namespace}-row{
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+
+  &:after{
+    content: "";
+    //flex-basis: 0;
+    display: none;
+    display: table\9;
+    clear: both\9;
+  }
+}
+
+.#{$namespace}-col-hide{
+  display: none !important;
+}
+
+@include make-grid-columns();

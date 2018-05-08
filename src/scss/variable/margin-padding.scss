@@ -1,0 +1,13 @@
+$m-p-breakpoints: (
+        '': '',
+        top: t,
+        bottom: b,
+        left: l,
+        right: r
+) !default;
+
+$m-p-step: 4;
+
+$m-p-max: 32;
+
+$m-p-count: $m-p-max / $m-p-step;

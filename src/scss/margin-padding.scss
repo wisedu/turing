@@ -1,0 +1,20 @@
+@function m-p-key($name) {
+  @return if($name != "", "-#{$name}", "");
+}
+
+@for $i from 1 through $m-p-count {
+  $value: $i * $m-p-step;
+
+  @each $break-key in map-keys($m-p-breakpoints) {
+    $infix: map-get($m-p-breakpoints, $break-key);
+    $key: m-p-key($break-key);
+
+    .#{$namespace}-m#{$infix}-#{$value} {
+      margin#{$key}: #{$value}px;
+    }
+
+    .#{$namespace}-p#{$infix}-#{$value} {
+      padding#{$key}: #{$value}px;
+    }
+  }
+}

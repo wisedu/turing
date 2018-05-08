@@ -1,0 +1,47 @@
+/**该居中仅适用于flex**/
+
+
+
+.#{$namespace}-row-center{
+  align-items: center;
+  text-align: center;
+}
+
+.#{$namespace}-row-center-h{
+  text-align: center;
+}
+
+
+.#{$namespace}-row-center-v{
+  align-items: center;
+}
+
+
+
+.#{$namespace}-col-center{
+  align-self: center;
+  text-align: center;
+}
+
+.#{$namespace}-col-center-h{
+  text-align: center;
+}
+
+
+.#{$namespace}-col-center-v{
+  align-self: center;
+}
+
+
+
+
+/**这下面的适用于普通css设置**/
+.#{$namespace}-text-center{
+  text-align: center;
+}
+
+//该居中对于块元素适用，前提必须定宽
+.#{$namespace}-container-center{
+  margin-left: auto !important;
+  margin-right: auto !important;
+}

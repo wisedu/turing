@@ -1,0 +1,48 @@
+
+@each $colorName in map-keys($color-obj) {
+  $color: map-get($color-obj, $colorName);
+
+  .#{$namespace}-#{$colorName}{
+    color: $color;
+  }
+  .#{$namespace}-h-#{$colorName}{
+    &:hover{
+      color: $color;
+    }
+  }
+
+
+  .#{$namespace}-bg-#{$colorName}{
+    background-color: $color;
+  }
+  .#{$namespace}-bg-h-#{$colorName}{
+    &:hover{
+      background-color: $color;
+    }
+  }
+
+
+
+  .#{$namespace}-br-#{$colorName}{
+    border: 1px solid $color;
+  }
+  .#{$namespace}-br-t-#{$colorName}{
+    border-top: 1px solid $color;
+  }
+  .#{$namespace}-br-b-#{$colorName}{
+    border-bottom: 1px solid $color;
+  }
+  .#{$namespace}-br-l-#{$colorName}{
+    border-left: 1px solid $color;
+  }
+  .#{$namespace}-br-r-#{$colorName}{
+    border-right: 1px solid $color;
+  }
+
+  .#{$namespace}-br-h-#{$colorName}{
+    &:hover{
+      border: 1px solid $color;
+    }
+  }
+
+}

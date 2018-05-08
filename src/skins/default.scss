@@ -1,0 +1,65 @@
+
+
+$primary-lv1: #2e8cf0;
+$primary-lv2: #2c84e4;
+$primary-lv3: #d5e9fc;
+$primary-lv4: #eaf4fe;
+
+
+$success-lv1: #17bf6a;
+$success-lv2: #09a254;
+$success-lv3: #dcf8e9;
+$success-lv4: #e8f9f0;
+
+
+$warning-lv1: #ff9900;
+$warning-lv2: #ff7100;
+$warning-lv3: #ffebcc;
+$warning-lv4: #fff5e6;
+
+
+$danger-lv1: #ee3f15;
+$danger-lv2: #eb0303;
+$danger-lv3: #fbd9d1;
+$danger-lv4: #fdeceb;
+
+
+$grey-lv1: #13152d;
+$grey-lv2: #43454f;
+$grey-lv3: #767a8c;
+$grey-lv4: #c4c9d9;
+$grey-lv5: #eeeeee;
+$grey-lv6: #f6f9fe;
+
+$white: #fff;
+
+$transparent: transparent;
+
+
+
+$color-obj: (
+        primary-1: $primary-lv1,
+        primary-2: $primary-lv2,
+        primary-3: $primary-lv3,
+        primary-4: $primary-lv4,
+        success-1: $success-lv1,
+        success-2: $success-lv2,
+        success-3: $success-lv3,
+        success-4: $success-lv4,
+        warning-1: $warning-lv1,
+        warning-2: $warning-lv2,
+        warning-3: $warning-lv3,
+        warning-4: $warning-lv4,
+        danger-1: $danger-lv1,
+        danger-2: $danger-lv2,
+        danger-3: $danger-lv3,
+        danger-4: $danger-lv4,
+        grey-1: $grey-lv1,
+        grey-2: $grey-lv2,
+        grey-3: $grey-lv3,
+        grey-4: $grey-lv4,
+        grey-5: $grey-lv5,
+        grey-6: $grey-lv6,
+        white: $white,
+        transparent: $transparent,
+) !default;

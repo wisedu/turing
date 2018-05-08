@@ -1,0 +1,16 @@
+$grid-columns: 12;
+$grid-columns-padding-h: 30px;
+
+
+$grid-breakpoints: (
+        0: 0,
+        1712: 1712px - $grid-columns-padding-h * 2 + 1,
+        1136: 1136px - $grid-columns-padding-h * 2 + 1,
+        560: 560px - $grid-columns-padding-h * 2 + 1,
+        368: 368px - $grid-columns-padding-h * 2 + 1
+) !default;
+
+
+$height-breakpoints: (
+        1: 400px
+) !default;
