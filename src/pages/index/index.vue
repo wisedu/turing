@@ -4,18 +4,34 @@
         <h1 class="index">
             首页
         </h1>
-        <tg-listview :datasource="ds" bordered pagination>
+        <h2>列表样式</h2>
+        <tg-listview :datasource="ds" bordered>
             <template slot="itemTemplate" slot-scope="props">
-                <tg-div class="tg-col-6 tg-col-560-6 ">
-                    <tg-text class="tg-primary-1">主标题{{props.data}}</tg-text>
-                    <tg-text class="tg-grey-3">副标题{{props.index}}</tg-text>
+                <tg-div class="tg-col-6">
+                    <tg-text class="tg-primary-1">数据内容{{props.data}}</tg-text>
+                    <tg-text class="tg-grey-3">行标识{{props.index}}</tg-text>
                 </tg-div>
-                <tg-div class="tg-col-3 tg-col-560-6">
+                <tg-div class="tg-col-3">
                     <tg-text><Badge count="new" class-name="tg-primary-1 tg-bg-white tg-br-primary-1"></Badge></tg-text>
                 </tg-div>
-                <tg-div class="tg-col-3 tg-col-560-hide">
+                <tg-div class="tg-col-3">
                     <tg-text><tg-linkbutton>Text</tg-linkbutton></tg-text>
                 </tg-div>
+            </template>
+        </tg-listview>
+        <p />
+        <h2>卡片样式</h2>
+        <tg-listview :datasource="ds" :grid="{gutter: 16, column: 3}">
+            <template slot="itemTemplate" slot-scope="props">
+                <Card style="width:100%">
+                    <p slot="title">
+                        <Icon type="ios-film-outline"></Icon>
+                        <tg-text class="tg-primary-1">主标题{{props.data}}</tg-text>
+                    </p>
+                    <tg-text class="tg-grey-3">副标题{{props.index}}</tg-text>
+                    <tg-text><Badge count="new" class-name="tg-primary-1 tg-bg-white tg-br-primary-1"></Badge></tg-text>
+                    <tg-text><tg-linkbutton>Text</tg-linkbutton></tg-text>
+                </Card>
             </template>
         </tg-listview>
     </div>
@@ -42,9 +58,12 @@
         data(){
             return {
                 page: 'about',
+                grid: {
+                    gutter: 16, column: 3
+                },
                 ds:{
                     inst:{
-                        findAll:function() {
+                        findAll:function(params) {
                             return new Promise((resolve, reject) => {
                                 resolve({rows:[{},{},{}]});
                             });

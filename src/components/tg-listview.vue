@@ -1,16 +1,19 @@
 <template>
-    <div :class="containerClass">
-        <div v-for="(item, index) in list" :style="layoutStyle" :key="index" >
-            <div class="tg-row" :class="itemClassObject">
-              <slot name="itemTemplate" :data="item" :index="index"></slot>
-            </div>
+  <div>
+    <div :class="containerClass" :style="containerStyle">
+        <div v-for="(item, index) in list" :style="layoutStyle" :class="layoutClassObject" :key="index" >
+          <slot name="itemTemplate" :data="item" :index="index"></slot>
         </div>
-        <div style="clear:both">
-            <slot name="pager" v-if="pagination">
-                <button @click="loadmore">加载更多</button>
-            </slot>
+        <div v-if="list === undefined || list.length === 0">
+          <slot name="emptyTemplate">{{emptyText}}</slot>
         </div>
     </div>
+    <div style="clear:both">
+        <slot name="pager" v-if="pagination">
+            <button @click="loadmore">加载更多</button>
+        </slot>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -19,7 +22,6 @@ export default {
   props: {
     grid: Object,
     datasource: Object,
-    layout: String,
     enableInfinite: Boolean,
     bordered: Boolean,
     size: {
@@ -40,47 +42,54 @@ export default {
     return {
       list: [],
       layoutStyle: {},
+      layoutClassObject: {},
       pageNumber: 1,
       containerClass: "",
-      itemClass: ""
+      containerStyle: {}
     };
   },
-  computed: {
-    itemClassObject: function () {
-      let co = {
-        'tg-br-b-grey-4':this.bordered
-      }
-      co[this.itemClass] = true;
-      return co;
-    }
-  },
   created: function() {
-    switch (this.layout) {
-      case "h":
-        this.layoutStyle = {
-          float: "left"
-        };
-        break;
-      default:
-        this.layoutStyle = {};
+    if (this.grid) {
+      //横向排列模式
+      let gutter = isNaN(Number(this.grid.gutter)) ? 0 : Number(this.grid.gutter);
+      this.layoutStyle = {
+        padding: "" + (gutter/2) + "px"
+      }
+      this.containerStyle = {
+        margin: "0 -"+(gutter/2)+"px"
+      }
+      if (this.grid.column !== undefined){
+        //栅格模式，按照百分比宽度伸缩
+        let size = isNaN(Number(this.grid.column)) ? 12 : 12/Number(this.grid.column)
+        this.layoutClassObject["tg-col-" + size ] = true
+        this.containerClass = 'tg-row';
+      } else {
+        //定宽模式，slot内控制宽度
+        this.layoutStyle["float"] = "left";
+      }
+    } else {
+      //行模式
+      this.layoutClassObject = {
+        'tg-row': true,
+        'tg-br-b-grey-4': this.bordered
+      }
+      this.layoutClassObject["tg-listview-item-" + this.size] = true;
+      this.containerClass = "tg-listview-container-" + this.size
     }
-    this.itemClass = "tg-listview-item-" + this.size
-    this.containerClass = "tg-listview-container-" + this.size
+    
   },
   mounted: function() {
     var that = this;
     this.datasource.inst.findAll({ pageSize: this.pageSize })
       .then(function(datas) {
-        let b = "";
         that.list = datas.rows;
       });
   },
   methods: {
     loadmore: function() {
-      this.pageNumber = this.pageNumber + 1;
       var that = this;
       this.datasource.inst.findAll({
-          pageNumber: this.pageNumber,
+          pageNumber: ++this.pageNumber,
           pageSize: this.pageSize
         })
         .then(function(datas) {
