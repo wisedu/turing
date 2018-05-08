@@ -1,3 +1,4 @@
+import axios from 'axios'
 export class DataSource{
     static _ds = {};
     inst;
@@ -23,9 +24,24 @@ export class DataSource{
     static get(name) {
         return this._ds[name].inst;
     }
-    static init(callback) {
-        for (var item in this._ds) {
-            callback(this._ds[item])
+    static ready(callback) {
+        var dss = [];
+        for (var key in this._ds) {
+            var item = this._ds[key];
+            // callback(this._ds[item])
+            if (item.meta !== undefined) {
+                item.inst = window.turing.DataAdapterFactory.create(item.meta, item.name, item.findParams);	
+            } else {
+                item.inst = window.turing.DataAdapterFactory.create();
+                dss.push(item.inst.load(item.url, item.name, item.findParams))
+            }
+        }
+        if (dss.length > 0) {
+            axios.all(dss).then(function() {
+                callback();
+            })
+        } else {
+            callback();
         }
     }
 }
