@@ -1,6 +1,11 @@
 export class DataSource{
     static _ds = {};
-    constructor(name, url){
+    inst;
+    name;
+    url;
+    meta;
+    findParams;
+    constructor(name, url, params){
         if (typeof(url) === "string") {
             this.url = url;
         } else if (typeof(url) === "object") {
@@ -8,7 +13,7 @@ export class DataSource{
         } else {
             throw "第二个参数应为url字符串，或者是模型的json"
         }
-        
+        this.findParams = params;
         this.inst = undefined;
         this.name = name;
     }
