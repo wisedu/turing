@@ -4,6 +4,11 @@
         <h1 class="index">
             首页
         </h1>
+        <tg-div>
+            <tg-div class="tg-left">1</tg-div>
+            <tg-div class="tg-left">2</tg-div>
+            <tg-div class="tg-left">3</tg-div>
+        </tg-div>
         <h2>列表样式</h2>
         <tg-listview :datasource="ds" bordered autoReadyDataBind pagination>
             <template slot="itemTemplate" slot-scope="props">
@@ -36,7 +41,7 @@
         </tg-listview>
         <p />
         <h2>图标样式</h2>
-        <tg-listview :datasource="ds" :grid="{gutter: 40}" @ready="init" pagination>
+        <tg-listview ref="tglist" :datasource="ds" :grid="{gutter: 40}" @ready="init" pagination>
             <template slot="itemTemplate" slot-scope="props">
                 <tg-div>
                     <Icon type="stop" size="107"></Icon>

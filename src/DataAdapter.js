@@ -49,7 +49,7 @@ export class DataAdapter {
             Object.assign(params, action.params, data || {})
         }
         if ([".", "/"].indexOf(action.url.substring(0, 1)) > -1) {
-            url = window.apiPath + action.url
+            url = window.apiPath || '' + action.url
         } else {
             url = action.url
         }
