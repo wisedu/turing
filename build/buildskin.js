@@ -68,7 +68,7 @@ skins.map(item => {
   fs.writeFileSync(OUTPUT_PATH, skinTemp);
 
   webpackConfig.entry.main = './src/entry-' + item.filename + ".scss";
-  webpackConfig.plugins.push(new ExtractTextPlugin({filename: './dist/css/'+item.filename+'/turing.css', allChunks: true}))
+  webpackConfig.plugins.push(new ExtractTextPlugin({filename: './dist/css/'+item.filename+'/turing.min.css', allChunks: true}))
 
   webpack(webpackConfig, (err, stats) => {
     if (err || stats.hasErrors()) {

@@ -63,11 +63,14 @@ config.module = {
       options: {
         loaders: {
           css: ExtractTextPlugin.extract({
-            use: ['css-loader', { loader: 'postcss-loader', options: { sourceMap: 'inline' } }],
+            use: [
+                { loader: 'css-loader', options: { sourceMap: 'inline', minimize: true } },
+                { loader: 'postcss-loader', options: { sourceMap: 'inline', minimize: true } }],
             fallback: 'vue-style-loader'
           }),
           postcss: ExtractTextPlugin.extract({
-            use: ['css-loader', { loader: 'postcss-loader', options: { sourceMap: 'inline' } }],
+            use: [{ loader: 'css-loader', options: { sourceMap: 'inline', minimize: true } },
+                { loader: 'postcss-loader', options: { sourceMap: 'inline', minimize: true } }],
             fallback: 'vue-style-loader'
           })
         },
@@ -86,11 +89,12 @@ config.module = {
       loader: ExtractTextPlugin.extract({
         fallback: 'style-loader',
         use: [
-          'css-loader',
+            { loader: 'css-loader', options: { sourceMap: 'inline', minimize: true } },
           {
             loader: 'postcss-loader',
             options: {
-              sourceMap: 'inline'
+              sourceMap: 'inline',
+                minimize: true
             }
           },
           'autoprefixer-loader'
