@@ -5,37 +5,29 @@
           <slot name="itemTemplate" :data="item" :index="index"></slot>
         </div>
         <div v-if="list === undefined || list.length === 0">
-          <slot name="emptyTemplate">{{emptyText}}</slot>
+          <slot name="emptyTemplate">暂无数据</slot>
         </div>
     </div>
     <div style="clear:both">
-        <slot name="pager" v-if="pagination">
-            <button @click="loadmore">加载更多</button>
+        <slot name="pagerTemplate" v-if="pagination">
+            <button @click="LoadMore">加载更多</button>
         </slot>
     </div>
   </div>
 </template>
 
 <script>
+import ComDataBindBase from '../ComDataBindBase'
 export default {
+  extends: ComDataBindBase,
   name: "tg-listview",
   props: {
     grid: Object,
-    datasource: Object,
-    enableInfinite: Boolean,
     bordered: Boolean,
+    pagination: Boolean,
     size: {
       type: String,
       default: "default"
-    },
-    emptyText: {
-      type: String,
-      default: "暂无数据"
-    },
-    pagination: Boolean,
-    pageSize: {
-      type: Number,
-      default: 10
     }
   },
   data: function() {
@@ -43,7 +35,6 @@ export default {
       list: [],
       layoutStyle: {},
       layoutClassObject: {},
-      pageNumber: 1,
       containerClass: "",
       containerStyle: {}
     };
@@ -76,25 +67,25 @@ export default {
       this.layoutClassObject["tg-listview-item-" + this.size] = true;
       this.containerClass = "tg-listview-container-" + this.size
     }
-    
   },
   mounted: function() {
-    var that = this;
-    this.datasource.inst.findAll({ pageSize: this.pageSize })
-      .then(function(datas) {
-        that.list = datas.rows;
-      });
+    this.$emit("ready", this)
+    if (this.autoReadyDataBind === true) {
+      this.DataBind()
+    }
   },
   methods: {
-    loadmore: function() {
+    SetData(datas) {
+      this.list = datas.rows;
+    },
+    LoadMore() {
       var that = this;
-      this.datasource.inst.findAll({
+      this.DataBind({
           pageNumber: ++this.pageNumber,
           pageSize: this.pageSize
-        })
-        .then(function(datas) {
+        }, function(datas) {
           that.list = that.list.concat(datas.rows);
-        });
+        })
     }
   }
 };

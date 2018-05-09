@@ -5,7 +5,7 @@
             首页
         </h1>
         <h2>列表样式</h2>
-        <tg-listview :datasource="ds" bordered>
+        <tg-listview :datasource="ds" bordered autoReadyDataBind pagination>
             <template slot="itemTemplate" slot-scope="props">
                 <tg-div class="tg-col-6">
                     <tg-text class="tg-primary-1">数据内容{{props.data}}</tg-text>
@@ -21,7 +21,7 @@
         </tg-listview>
         <p />
         <h2>卡片样式</h2>
-        <tg-listview :datasource="ds" :grid="{gutter: 16, column: 3}">
+        <tg-listview :datasource="ds" :grid="{gutter: 16, column: 3}" @ready="init" pagination>
             <template slot="itemTemplate" slot-scope="props">
                 <Card style="width:100%">
                     <p slot="title">
@@ -32,6 +32,18 @@
                     <tg-text><Badge count="new" class-name="tg-primary-1 tg-bg-white tg-br-primary-1"></Badge></tg-text>
                     <tg-text><tg-linkbutton>Text</tg-linkbutton></tg-text>
                 </Card>
+            </template>
+        </tg-listview>
+        <p />
+        <h2>图标样式</h2>
+        <tg-listview :datasource="ds" :grid="{gutter: 40}" @ready="init" pagination>
+            <template slot="itemTemplate" slot-scope="props">
+                <tg-div>
+                    <Icon type="stop" size="107"></Icon>
+                </tg-div>
+                <tg-div class="tg-text-center">
+                    <tg-text class="tg-primary-1">主标题{{props.data}}</tg-text>
+                </tg-div>
             </template>
         </tg-listview>
     </div>
@@ -76,6 +88,11 @@
             TgListview,TgDiv,TgText,TgLinkbutton
         },
         mounted(){
+        },
+        methods:{
+            init(inst){
+                inst.DataBind();
+            }
         }
     }
 </script>
