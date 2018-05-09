@@ -7,10 +7,11 @@ $grid-breakpoints: (
         1712: 1712px - $grid-columns-padding-h * 2 + 1,
         1136: 1136px - $grid-columns-padding-h * 2 + 1,
         560: 560px - $grid-columns-padding-h * 2 + 1,
-        368: 368px - $grid-columns-padding-h * 2 + 1
+        368: 368px - $grid-columns-padding-h * 2 + 1,
+        176: 176px - $grid-columns-padding-h * 2 + 1
 ) !default;
 
 
 $height-breakpoints: (
-        1: 400px
+        400: 400px
 ) !default;
