@@ -36,7 +36,7 @@
                     </p>
                     <tg-text class="tg-grey-3">副标题{{props.index}}</tg-text>
                     <tg-text><Badge count="new" class-name="tg-primary-1 tg-bg-white tg-br-primary-1"></Badge></tg-text>
-                    <tg-text><tg-linkbutton>Text</tg-linkbutton></tg-text>
+                    <tg-text><tg-linkbutton href="http://www.baidu.com">Text</tg-linkbutton></tg-text>
                 </Card>
             </template>
         </tg-listview>
