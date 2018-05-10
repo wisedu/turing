@@ -37,26 +37,17 @@ export class DataAdapter {
     constructor(meta) {
         this.__meta = meta;
     }
-    getMeta() {
-        return this.__meta;
+    getMeta(metaid) {
+        let struct = this.defaultMeta;
+        let result = {}
+        for(let prop in struct[metaid]) {
+            result[prop] = {};
+            Object.assign(result[prop], struct["default"][prop], struct[metaid][prop]);
+        }
+        return result;
     }
-    setMeta(meta){
-        this.__meta = meta;
-        // let define = {
-        //     name:{caption:"名称"},
-        //     status:{caption:"状态"}
-        // }
-        // let meta = {
-        //     list:{
-        //         name:{},
-        //         status:{}
-        //     }
-        // }
-
-        // for(let prop in meta[metaid]) {
-        //     Object.assign(meta[metaid][prop], define[prop]);
-        // }
-        // meta[metaid];
+    setMeta(metas){
+        this.defaultMeta = metas;
     }
     execute(action, data){
         var url = "";
@@ -65,7 +56,7 @@ export class DataAdapter {
             Object.assign(params, action.params, data || {})
         }
         if ([".", "/"].indexOf(action.url.substring(0, 1)) > -1) {
-            url = window.apiPath || '' + action.url
+            url = (window.apiPath || '') + action.url
         } else {
             url = action.url
         }
@@ -104,5 +95,17 @@ export class DataAdapter {
         return this.execute(this.actions.find, param).then(function(result){
             return result.data.datas[that.actions.find.name];
         });
+    }
+
+    findById() {
+
+    }
+
+    delete() {
+
+    }
+
+    save() {
+        
     }
 }
