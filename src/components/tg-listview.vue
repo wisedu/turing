@@ -17,11 +17,12 @@
 </template>
 
 <script>
-import ComDataBindBase from '../ComDataBindBase'
+import ComDataBindBase from '../DataBind/ComDataBindBase'
 export default {
   extends: ComDataBindBase,
   name: "tg-listview",
   props: {
+    datas: Array,
     grid: Object,
     bordered: Boolean,
     pagination: Boolean,
@@ -72,6 +73,15 @@ export default {
     this.$emit("ready", this)
     if (this.autoReadyDataBind === true) {
       this.DataBind()
+    } else {
+      if (this.datas && this.datas.length > 0) {
+        this.list = this.datas;
+      }
+    }
+  },
+  watch: {
+    datas: function(val) {
+      this.list = val;
     }
   },
   methods: {

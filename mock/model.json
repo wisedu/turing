@@ -1,0 +1,98 @@
+[
+    {
+        "name": "WID",
+        "dataType": "String",
+        "caption": "WID",
+        "grid.fixed": true,
+        "dataSize": 40,
+        "hidden": true
+    },
+    {
+        "name": "JXJDM",
+        "dataType": "String",
+        "caption": "奖学金代码",
+        "grid.fixed": true,
+        "dataSize": 40,
+        "hidden": true
+    },
+    {
+        "name": "JXJMC",
+        "dataType": "String",
+        "caption": "奖学金名称",
+        "quickSearch": true,
+        "dataSize": 300
+    },
+    {
+        "name": "JXJLX",
+        "dataType": "String",
+        "caption": "奖学金类型",
+        "url": "/axsfw/code/cf8602d3-bb66-44c8-aad4-8f7769442bf9.do",
+        "xtype": "select",
+        "dataSize": 40
+    },
+    {
+        "name": "JLJB",
+        "dataType": "String",
+        "caption": "奖励级别",
+        "url": "/axsfw/code/67dbb4e6-5283-4da2-ae0c-37414988b50b/JXJJLJB.do",
+        "xtype": "select",
+        "dataSize": 40
+    },
+    {
+        "name": "SLDW",
+        "dataType": "String",
+        "caption": "设立单位",
+        "dataSize": 200
+    },
+    {
+        "name": "ZJLY",
+        "dataType": "String",
+        "caption": "资金来源",
+        "url": "/axsfw/code/67dbb4e6-5283-4da2-ae0c-37414988b50b/ZJLY.do",
+        "search.xtype": "multi-select2",
+        "xtype": "select",
+        "dataSize": 200
+    },
+    {
+        "name": "FPFS",
+        "dataType": "String",
+        "caption": "分配方式",
+        "url": "/axsfw/code/67dbb4e6-5283-4da2-ae0c-37414988b50b/FPFS.do",
+        "search.xtype": "multi-select2",
+        "xtype": "radiolist",
+        "dataSize": 40
+    },
+    {
+        "name": "SFFDJ",
+        "dataType": "String",
+        "caption": "是否分等级",
+        "url": "/axsfw/code/67dbb4e6-5283-4da2-ae0c-37414988b50b/SFSY.do",
+        "xtype": "select",
+        "dataSize": 3
+    },
+    {
+        "name": "XSKSQ",
+        "dataType": "String",
+        "caption": "学生可申请",
+        "url": "/axsfw/code/67dbb4e6-5283-4da2-ae0c-37414988b50b/SFSY.do",
+        "xtype": "select",
+        "dataSize": 3
+    },
+    {
+        "name": "SFGDJE",
+        "dataType": "String",
+        "caption": "是否固定金额",
+        "url": "/axsfw/code/67dbb4e6-5283-4da2-ae0c-37414988b50b/SFSY.do",
+        "xtype": "select",
+        "dataSize": 3
+    },
+    {
+        "name": "SFJRJZZE",
+        "dataType": "String",
+        "caption": "是否计入奖助总额",
+        "url": "/axsfw/code/67dbb4e6-5283-4da2-ae0c-37414988b50b/SFSY.do",
+        "search.xtype": "multi-select2",
+        "xtype": "select",
+        "dataSize": 3
+    }
+]

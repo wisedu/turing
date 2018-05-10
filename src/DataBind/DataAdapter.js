@@ -33,6 +33,7 @@ if (typeof Object.assign != 'function') {
   
 export class DataAdapter {
     __meta;
+    defaultMeta;
     constructor(meta) {
         this.__meta = meta;
     }
@@ -41,6 +42,21 @@ export class DataAdapter {
     }
     setMeta(meta){
         this.__meta = meta;
+        let define = {
+            name:{caption:"名称"},
+            status:{caption:"状态"}
+        }
+        let meta = {
+            list:{
+                name:{},
+                status:{}
+            }
+        }
+
+        for(let prop in meta[metaid]) {
+            Object.assign(meta[metaid][prop], define[prop]);
+        }
+        meta[metaid];
     }
     execute(action, data){
         var url = "";

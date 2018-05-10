@@ -9,8 +9,9 @@
             <tg-div class="tg-left">2</tg-div>
             <tg-div class="tg-left">3</tg-div>
         </tg-div>
+        <Button @click="clickHandler">AA</Button>
         <h2>列表样式</h2>
-        <tg-listview :datasource="ds" bordered autoReadyDataBind pagination>
+        <tg-listview :datas="data1" bordered pagination>
             <template slot="itemTemplate" slot-scope="props">
                 <tg-div class="tg-col-6">
                     <tg-text class="tg-primary-1">数据内容{{props.data}}</tg-text>
@@ -51,6 +52,8 @@
                 </tg-div>
             </template>
         </tg-listview>
+
+        <Table :columns="columns1" :data="data1"></Table>
     </div>
 </template>
 <style>
@@ -86,7 +89,38 @@
                             });
                         }
                     }
-                }
+                },
+                columns1: [{
+                    title: 'Name',
+                    key: 'name'
+                },{
+                    title: 'Age',
+                    key: 'age'
+                },{
+                    title: 'Address',
+                    key: 'address'
+                }],
+                data1: [{
+                    name: 'John Brown',
+                    age: 18,
+                    address: 'New York No. 1 Lake Park',
+                    date: '2016-10-03'
+                },{
+                    name: 'Jim Green',
+                    age: 24,
+                    address: 'London No. 1 Lake Park',
+                    date: '2016-10-01'
+                },{
+                    name: 'Joe Black',
+                    age: 30,
+                    address: 'Sydney No. 1 Lake Park',
+                    date: '2016-10-02'
+                },{
+                    name: 'Jon Snow',
+                    age: 26,
+                    address: 'Ottawa No. 2 Lake Park',
+                    date: '2016-10-04'
+                }]
             }
         },
         components: {
@@ -97,6 +131,9 @@
         methods:{
             init(inst){
                 inst.DataBind();
+            },
+            clickHandler() {
+                this.data1 = []
             }
         }
     }

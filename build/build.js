@@ -60,8 +60,8 @@ let template =
 `import utils from './utils.js';
 import axios from 'axios';
 import moment from 'moment';
-import {DataAdapter} from './DataAdapter.js';
-import {DataSource} from './DataSource.js';
+import {DataAdapter} from './DataBind/DataAdapter.js';
+import {DataSource} from './DataBind/DataSource.js';
 ${jsImport.join("\r\n")}
 const version = "${packageJSON.version}";
 const description = "${packageJSON.description}";
