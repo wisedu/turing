@@ -15,17 +15,13 @@ module.exports = merge(webpackBaseConfig, {
     historyApiFallback: true,
     noInfo: true,
     host: '0.0.0.0',
-    port: 8082,
+    port: 8082, 
     proxy: {
-      '/emap/sys/student_app1.2/*default/index.do': {
-        bypass: function(req, res, proxyOptions) {
-          if (req.url.indexOf('index.do') > -1) {
-            return '/index.html'
-          } else {
-            return req.url.replace('/emap/sys/student_app1.2/*default', '')
-          }
-        }
-      } 
+    //   '/axsfw/code/80f9d8aa-d053-4312-b725-016642b74e3e.do': {
+    //     target:"http://localhost:8082/static/json/jbxx/80f9d8aa-d053-4312-b725-016642b74e3e.do",
+    //     changeOrigin: true
+    //   }
+      // '/axsfw/code/80f9d8aa-d053-4312-b725-016642b74e3e.do':"/static/json/jbxx/80f9d8aa-d053-4312-b725-016642b74e3e.do"
     }
   },
   performance: {

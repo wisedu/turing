@@ -18,6 +18,9 @@ export default function(type, model, params){
                 let newFormItem = Object.assign({}, model[prop], {
                     name:prop, 
                 }, params);
+                if (model[prop].xtype !== undefined && model[prop].options === undefined){
+                    model[prop].options = [];
+                }
                 iviewModel.push(newFormItem);
                 break;
             default:
