@@ -1,23 +1,28 @@
-export default function(type, model){
-    let iviewModel;
-    switch (type) {
-        case "table":
-            iviewModel = [];
-            for(let prop in model){
-                iviewModel.push({title:model[prop].caption, key:prop, width:model[prop].width});
-            }
-            // model.map(item => {
-            //     iviewModel.push({title:item[1].caption, key:item[0]});
-            // })
-            break;
-        case "form":
-            iviewModel = [];
-            for(let prop in model){
-                iviewModel.push({title:model[prop].caption, key:prop, placeholder:model[prop].placeholder});
-            }
-            break;
-        default:
-            break;
+export default function(type, model, params){
+    let iviewModel = [];
+
+    for(let prop in model){
+        if (model[prop].hidden === true){
+            continue;
+        }
+        switch (type) {
+            case "table":
+                let newTableItem = Object.assign({}, model[prop], {
+                    title:model[prop].caption, 
+                    key:prop, 
+                    minWidth:100
+                }, params);
+                iviewModel.push(newTableItem);
+                break;
+            case "form":
+                let newFormItem = Object.assign({}, model[prop], {
+                    name:prop, 
+                }, params);
+                iviewModel.push(newFormItem);
+                break;
+            default:
+                break;
+        }
     }
     return iviewModel;
 }
