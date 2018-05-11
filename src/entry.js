@@ -4,7 +4,6 @@ import moment from 'moment';
 import {DataAdapter} from './DataBind/DataAdapter.js';
 import {DataSource} from './DataBind/DataSource.js';
 import TgDiv from './components/tg-div.vue';
-import TgForm from './components/tg-form.vue';
 import TgImg from './components/tg-img.vue';
 import TgLinkbutton from './components/tg-linkbutton.vue';
 import TgListview from './components/tg-listview.vue';
@@ -13,7 +12,7 @@ const version = "1.0.0";
 const description = "turing components";
 const author = "金智教育 wisedu";
 const components = {
-    TgDiv,TgForm,TgImg,TgLinkbutton,TgListview,TgText
+    TgDiv,TgImg,TgLinkbutton,TgListview,TgText
 };
 const install = function (Vue, opts = {}) {
     if (install.installed) return;

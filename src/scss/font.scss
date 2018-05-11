@@ -1,37 +1,46 @@
-h2,
-.#{$namespace}-h2{
-  font-size: 18px;
-  line-height: 36px;
-  margin: 0;
+@mixin make-font($className, $size, $weight, $color, $height){
+  #{$className}{
+      font-size: $size;
+      font-weight: $weight;
+      color: $color;
+      line-height: $height;
+  }
 }
 
-h3,
-.#{$namespace}-h3{
-  font-size: 14px;
-  line-height: 18px;
-  margin: 0;
+@function get-class-name($name) {
+  @return ".#{$namespace}-#{$name}";
 }
 
-.#{$namespace}-text{
-  font-size: 14px;
-  line-height: 18px;
-  font-weight: normal;
+@for $i from 1 through 5 {
+  h#{$i},.#{$namespace}-h#{$i}{
+    margin: 0;
+  }
 }
 
-.#{$namespace}-link{
-  font-size: 14px;
-  line-height: 18px;
-  font-weight: normal;
-  color: $primary-lv1;
 
+@for $i from 1 through length($font-obj){
+  $item: nth($font-obj, $i);
+
+  $name: map-get($item, name);
+  $size: map-get($item, size);
+  $weight: map-get($item, weight);
+  $color: map-get($item, color);
+  $height: map-get($item, height);
+
+  @if $name == h1 or $name == h2 or $name == h3 or $name == h4 or $name == h5{
+    @include make-font($name, $size, $weight, $color, $height);
+  }
+
+  @include make-font(get-class-name($name), $size, $weight, $color, $height);
+
+}
+
+
+
+.#{$namespace}-text-link{
   &:hover{
     color: $primary-lv2;
   }
 }
 
-.#{$namespace}-caption{
-  font-size: 12px;
-  line-height: 14px;
-  font-weight: normal;
-}
 

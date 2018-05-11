@@ -1,0 +1,13 @@
+$font-obj: (
+                (name: h1, weight: bold, color: $grey-lv1, size: 24px, height: 42px),
+                (name: h2, weight: bold, color: $grey-lv1, size: 20px, height: 36px),
+                (name: h3, weight: bold, color: $grey-lv1, size: 18px, height: 32px),
+                (name: h4, weight: bold, color: $grey-lv1, size: 16px, height: 28px),
+                (name: h5, weight: bold, color: $grey-lv1, size: 14px, height: 24px),
+                (name: text-bold, weight: bold, color: $grey-lv2, size: 14px, height: 24px),
+                (name: text, weight: normal, color: $grey-lv2, size: 14px, height: 24px),
+                (name: text-link, weight: normal, color: $primary-lv1, size: 14px, height: 24px),
+                (name: text-caption, weight: normal, color: $grey-lv3, size: 12px, height: 18px)
+);
+
+
