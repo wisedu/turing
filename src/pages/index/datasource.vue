@@ -3,7 +3,7 @@
         <Table :columns="columns1" :data="result.rows"></Table>
         <Page :total="result.totalSize" :current="result.pageNumber" :page-size="result.pageSize" show-elevator show-sizer></Page>
 
-        <biz-form :fields="fields" v-model="formItem"></biz-form>
+        <emap-form :fields="fields" v-model="formItem"></emap-form>
 
         <Button @click="getData">GetData</Button>
   </div>
@@ -27,7 +27,7 @@ export default {
         }
     },
     components: {
-        TgListview, EmapForm
+        EmapForm
     },
     created(){
         let da = new DataAdapter();
