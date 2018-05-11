@@ -1,11 +1,11 @@
 {
-  "name": "turing",
+  "name": "tg-turing",
   "description": "turing components",
   "version": "1.0.0",
   "author": "金智教育 wisedu",
   "homepage": "http://github.com/wisedu",
-  "packageName": "turing",
-  "main": "dist/turing.min.js",
+  "packageName": "tg-turing",
+  "main": "dist/tg-turing.min.js",
   "scripts": {
     "dev": "npm run buildcss && cross-env NODE_ENV=development webpack-dev-server --open --inline --hot --config build/webpack.dev.config.js",
     "build": "npm run buildskin && node ./build/build.js && cross-env NODE_ENV=production webpack --progress --hide-modules --config build/webpack.prod.config.js",

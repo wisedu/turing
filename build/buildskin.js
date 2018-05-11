@@ -3,6 +3,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var webpackConfig = require('./webpack.skin.config.js');
 var path = require('path');
 var fs = require('fs');
+var packageJSON = JSON.parse(fs.readFileSync("./package.json"));
 
 let skins = []
 const skinPath = './src/skins'
@@ -68,7 +69,7 @@ skins.map(item => {
   fs.writeFileSync(OUTPUT_PATH, skinTemp);
 
   webpackConfig.entry.main = './src/entry-' + item.filename + ".scss";
-  webpackConfig.plugins.push(new ExtractTextPlugin({filename: './dist/css/'+item.filename+'/turing.min.css', allChunks: true}))
+  webpackConfig.plugins.push(new ExtractTextPlugin({filename: './dist/css/'+item.filename+'/'+packageJSON.packageName+'.min.css', allChunks: true}))
 
   webpack(webpackConfig, (err, stats) => {
     if (err || stats.hasErrors()) {
