@@ -53,10 +53,7 @@ export class DataAdapter {
     }
     execute(action, data){
         var url = "";
-        var params = {};
-        if (action.params !== undefined) {
-            Object.assign(params, action.params, data || {})
-        }
+        var params = Object.assign({}, action.params, data || {})
         if ([".", "/"].indexOf(action.url.substring(0, 1)) > -1) {
             url = (window.apiPath || '') + action.url
         } else {
