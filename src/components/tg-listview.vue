@@ -1,5 +1,5 @@
 <template>
-  <div style="overflow:hidden">
+  <div>
     <div :class="containerClass" :style="containerStyle">
         <div v-for="(item, index) in list" :style="layoutStyle" :class="layoutClassObject" :key="index" >
           <slot name="itemTemplate" :data="item" :index="index"></slot>
