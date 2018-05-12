@@ -61,7 +61,10 @@ export class DataAdapter {
         }
         if (action.method.toLowerCase() === "post") {
             return axios.post(url, params)
-        } else {
+        } else if (action.method.toLowerCase() === "delete") {
+            //删除资源仅允许与rest接口约定的url方式
+            return axios.delete(url)
+        }else {
             return axios.get(url, {params: params})
         }
     }
