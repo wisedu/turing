@@ -1,20 +1,26 @@
 export default function(type, model, params){
     let iviewModel = [];
-
-    for(let prop in model){
-        if (model[prop].hidden === true){
-            continue;
-        }
-        switch (type) {
-            case "table":
+    switch (type) {
+        case "table":
+            iviewModel.push({
+                type: 'index',
+                width: 60,
+                align: 'center'
+            })
+            for(let prop in model){
+                if (model[prop].hidden === true){
+                    continue;
+                }
                 let newTableItem = Object.assign({}, model[prop], {
                     title:model[prop].caption, 
                     key:prop, 
-                    minWidth:100
+                    minWidth:120
                 }, params);
                 iviewModel.push(newTableItem);
-                break;
-            case "form":
+            }
+            break;
+        case "form":
+            for(let prop in model){
                 let newFormItem = Object.assign({}, model[prop], {
                     name:prop, 
                 }, params);
@@ -22,10 +28,11 @@ export default function(type, model, params){
                     model[prop].options = [];
                 }
                 iviewModel.push(newFormItem);
-                break;
-            default:
-                break;
-        }
+            }
+            break;
+        default:
+            break;
     }
+    
     return iviewModel;
 }
