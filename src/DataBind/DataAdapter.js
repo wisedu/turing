@@ -34,6 +34,7 @@ if (typeof Object.assign != 'function') {
 export class DataAdapter {
     __meta;
     defaultMeta;
+    rootKey;
     constructor(meta) {
         this.__meta = meta;
     }
@@ -90,10 +91,19 @@ export class DataAdapter {
         }
     }
 
-    findAll(param) {
+    findAll(param, rootKey) {
+        let rk = rootKey || this.rootKey;
         var that = this;
         return this.execute(this.actions.find, param).then(function(result){
-            return result.data.datas[that.actions.find.name];
+            if (rk !== undefined) {
+                if (rk.toLowerCase() === "emap") {
+                    return result.data.datas[that.actions.find.name];
+                } else {
+                    return result.data[rk];
+                }
+            } else {
+                return result.data;
+            }
         });
     }
 
