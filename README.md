@@ -1,22 +1,10 @@
-# wisedu-h5tag
+# tg-turing
 
-> wisedu-h5tag 业务组件库
+> tg-turing 业务组件库
 
 ## 开发流程
 
-#### 1、 初始化项目，**必须** 调整package.json中的配置项，关键字段如下：
-
-```json
-{
-    "name": "wisedu-h5tag",  //one word, no spaces
-    "packageName": "wisedu-h5tag",   //打包出来的文件名称，npm publish时的包名称，可能需要考虑全球唯一性
-    "version": "1.0.0",     //打包时，版本号会跟入包内，npm publish时，每个版本号仅能发布一次
-    "main": "dist/wisedu-h5tag.min.js",  //与packageName的名称一致，仅在npm publish时使用，作为包的入口地址
-    ...
-}
-```
-
-#### 2、 新增组件，规则有两种：
+#### 1、 新增组件，规则有两种：
 
 ##### 单文件组件，在文件夹 ./src/components 中，直接建立一个组件文件
 
@@ -34,7 +22,7 @@
 命名规则：多个单词间以 "-" 连接，全部小写
 
 
-#### 3、 当前库中调试组件，在index.vue中引用该组件，关键点如下：
+#### 2、 当前库中调试组件，在index.vue中引用该组件，关键点如下：
 
 > * import EmapFlowToolbar from '../../components/emap-flow-toolbar.vue'
 > * components: { EmapFlowToolbar },
@@ -46,7 +34,7 @@
 npm run dev
 ```
 
-#### 4、 打包生成组件
+#### 3、 打包生成组件
 
 ``` bash
 #开发
@@ -97,7 +85,7 @@ npm run build
 ## 目录结构说明
 
 ```
-wisedu-h5tag/
+turing/
 │
 ├── build/                              打包脚本
 │   └── ...        

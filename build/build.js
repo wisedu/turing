@@ -60,6 +60,7 @@ let template =
 `import utils from './utils.js';
 import axios from 'axios';
 import moment from 'moment';
+import {iviewAdapter} from './ComAdapter/iviewAdapter.js';
 import {DataAdapter} from './DataBind/DataAdapter.js';
 import {DataSource} from './DataBind/DataSource.js';
 ${jsImport.join("\r\n")}
