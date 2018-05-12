@@ -35,6 +35,7 @@ export class DataAdapter {
     __meta;
     defaultMeta;
     rootKey;
+    id;
     constructor(meta) {
         this.__meta = meta;
     }
@@ -111,11 +112,17 @@ export class DataAdapter {
 
     }
 
-    delete() {
-
+    delete(params) {
+        var that = this;
+        return this.execute(this.actions.delete, params).then(function(result){
+            return result.data;
+        });
     }
 
-    save() {
-        
+    save(data) {
+        var that = this;
+        return this.execute(this.actions.save, data).then(function(result){
+            return result.data;
+        });
     }
 }
