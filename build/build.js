@@ -83,7 +83,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 export default Object.assign({}, {
     install, 
     ...components,
-    utils, version, description, author, DataAdapter, DataSource, axios, moment
+    utils, version, description, author, DataAdapter, DataSource, iviewAdapter, axios, moment
 });`
 
 fs.writeFileSync(OUTPUT_PATH, template);
