@@ -80,8 +80,11 @@ const install = function (Vue, opts = {}) {
 if (typeof window !== 'undefined' && window.Vue) {
     install(window.Vue);
 }
-export {utils, version, description, author, DataAdapter, DataSource, axios, moment}
-export default Object.assign({}, {install, ...components});`
+export default Object.assign({}, {
+    install, 
+    ...components,
+    utils, version, description, author, DataAdapter, DataSource, axios, moment
+});`
 
 fs.writeFileSync(OUTPUT_PATH, template);
 console.log('[build entry] DONE:' + OUTPUT_PATH);
