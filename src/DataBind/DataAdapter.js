@@ -87,7 +87,7 @@ export class DataAdapter {
         },
         find:{
             url:"",
-            method:"get",
+            method:"post",
             name:""
         }
     }

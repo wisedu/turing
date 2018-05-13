@@ -2,11 +2,6 @@ export default function(type, model, params){
     let iviewModel = [];
     switch (type) {
         case "table":
-            iviewModel.push({
-                type: 'index',
-                width: 60,
-                align: 'center'
-            })
             for(let prop in model){
                 if (model[prop].hidden === true){
                     continue;
