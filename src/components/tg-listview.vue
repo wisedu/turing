@@ -1,12 +1,14 @@
 <template>
   <div>
     <div :class="containerClass" :style="containerStyle">
+        <slot name="beforeTemplate"></slot>
         <div v-for="(item, index) in list" :style="layoutStyle" :class="layoutClassObject" :key="index" >
           <slot name="itemTemplate" :data="item" :index="index"></slot>
         </div>
         <div v-if="list === undefined || list.length === 0">
           <slot name="emptyTemplate">暂无数据</slot>
         </div>
+        <slot name="afterTemplate"></slot>
     </div>
     <div style="clear:both">
         <slot name="pagerTemplate" v-if="pagination">
