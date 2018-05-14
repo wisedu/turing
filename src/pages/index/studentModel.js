@@ -42,6 +42,12 @@ export default class{
         return iviewAdapter(iviewtype, this.dataAdapter.getMeta(metaid), params);
     }
     findAll(params) {
+        let search = {
+            where:{"key1":"AA", "key2":"BB"},//只传参数，后台拼条件
+            include:["table1","table2"],
+            order:[{"key1":"+"},{"key2":"-"}],
+            offset: 5, limit: 5
+        }
         return this.dataAdapter.findAll(params)
     }
     save(data) {

@@ -16,10 +16,11 @@ export default{
         SetData(){
             console.warn("需要在组件中实现该方法")
         },
-        DataBind(params, callback) {
+        DataBind(params, ctlparams, callback) {
             let that = this;
-            let localparam = Object.assign({ pageSize: this.pageSize }, params)
-            this.datasource.inst.findAll(localparam).then(function(datas) {
+            this.datasource.inst.pageSize = ctlparams && ctlparams.pageSize || this.pageSize;
+            this.datasource.inst.pageNumber = ctlparams && ctlparams.pageNumber || this.pageNumber;
+            this.datasource.inst.findAll(params).then(function(datas) {
                 if (callback === undefined){
                     that.SetData(datas);
                 } else {

@@ -1,5 +1,4 @@
 import utils from '../utils.js';
-import axios from 'axios'
 
 if (typeof Object.assign != 'function') {
     // Must be writable: true, enumerable: false, configurable: true
@@ -32,12 +31,14 @@ if (typeof Object.assign != 'function') {
 }
   
 export class DataAdapter {
-    __meta;
-    defaultMeta;
-    rootKey;
-    id;
+    
     constructor(meta) {
         this.__meta = meta;
+        this.defaultMeta;
+        this.__includes = [];
+        this.__orders = [];
+        this.pageNumber = 1;
+        this.pageSize = 10;
     }
     getMeta(metaid) {
         let struct = this.defaultMeta;
@@ -51,7 +52,8 @@ export class DataAdapter {
     setMeta(metas){
         this.defaultMeta = metas;
     }
-    execute(action, data){
+    execute(action, data, paramReduce){
+        let prCallback = paramReduce || this.executeParamReduce;
         var url = "";
         var params = Object.assign({}, action.params, data || {})
         if ([".", "/"].indexOf(action.url.substring(0, 1)) > -1) {
@@ -60,12 +62,28 @@ export class DataAdapter {
             url = action.url
         }
         if (action.method.toLowerCase() === "post") {
-            return axios.post(url, params)
+            if (prCallback !== undefined) {
+                params = prCallback("post", params, this.__includes, this.__orders, this.pageNumber, this.pageSize)
+            } else {
+                params = {where: params};
+                if (this.__includes !== undefined && this.__includes.length > 0) {
+                    params["include"] = this.__includes;
+                }
+                if (this.__orders !== undefined && this.__orders.length > 0) {
+                    params["order"] = this.__orders;
+                }
+                params["offset"] = (this.pageNumber - 1) * this.pageSize;
+                params["limit"] = this.pageSize;
+            }
+            return window["tg-turing"].axios.post(url, params)
         } else if (action.method.toLowerCase() === "delete") {
             //删除资源仅允许与rest接口约定的url方式
-            return axios.delete(url)
+            return window["tg-turing"].axios.delete(url)
         }else {
-            return axios.get(url, {params: params})
+            if (prCallback !== undefined) {
+                params = prCallback("get", params, this.__includes, this.__orders, this.pageNumber, this.pageSize)
+            }
+            return window["tg-turing"].axios.get(url, {params: params})
         }
     }
     events = {
@@ -92,8 +110,8 @@ export class DataAdapter {
         }
     }
 
-    findAll(param, resultExtract) {
-        let reCallback = resultExtract || this.resultExtract;
+    findAll(param, resultReduce) {
+        let reCallback = resultReduce || this.findAllResultReduce;
         var that = this;
         return this.execute(this.actions.find, param).then(function(result){
             if (reCallback !== undefined) {
@@ -120,5 +138,21 @@ export class DataAdapter {
         return this.execute(this.actions.save, data).then(function(result){
             return result.data;
         });
+    }
+    /**
+     * @description 包含关联表
+     * @example ["table1","table2"]
+     * @param {[]} tabNames 
+     */
+    include(tabNames){
+        this.__includes = tabNames;
+    }
+    /**
+     * @description 排序列
+     * @example [{"key1":"+"},{"key2":"-"}]
+     * @param {[]} fields 
+     */
+    order(fields){
+        this.__orders = fields;
     }
 }

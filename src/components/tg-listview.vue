@@ -92,7 +92,7 @@ export default {
     },
     LoadMore() {
       var that = this;
-      this.DataBind({
+      this.DataBind({}, {
           pageNumber: ++this.pageNumber,
           pageSize: this.pageSize
         }, function(datas) {
