@@ -1,4 +1,5 @@
 import utils from '../utils.js';
+import axios from 'axios'
 
 if (typeof Object.assign != 'function') {
     // Must be writable: true, enumerable: false, configurable: true
@@ -75,15 +76,15 @@ export class DataAdapter {
                 params["offset"] = (this.pageNumber - 1) * this.pageSize;
                 params["limit"] = this.pageSize;
             }
-            return window["tg-turing"].axios.post(url, params)
+            return axios.post(url, params)
         } else if (action.method.toLowerCase() === "delete") {
             //删除资源仅允许与rest接口约定的url方式
-            return window["tg-turing"].axios.delete(url)
+            return axios.delete(url)
         }else {
             if (prCallback !== undefined) {
                 params = prCallback("get", params, this.__includes, this.__orders, this.pageNumber, this.pageSize)
             }
-            return window["tg-turing"].axios.get(url, {params: params})
+            return axios.get(url, {params: params})
         }
     }
     events = {
