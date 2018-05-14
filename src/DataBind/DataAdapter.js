@@ -92,16 +92,12 @@ export class DataAdapter {
         }
     }
 
-    findAll(param, rootKey) {
-        let rk = rootKey || this.rootKey;
+    findAll(param, resultExtract) {
+        let reCallback = resultExtract || this.resultExtract;
         var that = this;
         return this.execute(this.actions.find, param).then(function(result){
-            if (rk !== undefined) {
-                if (rk.toLowerCase() === "emap") {
-                    return result.data.datas[that.actions.find.name];
-                } else {
-                    return result.data[rk];
-                }
+            if (reCallback !== undefined) {
+                return reCallback(result.data, that.actions.find);
             } else {
                 return result.data;
             }

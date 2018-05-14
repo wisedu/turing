@@ -84,7 +84,10 @@ export default Object.assign({}, {
     install, 
     ...components,
     utils, version, description, author, DataAdapter, DataSource, iviewAdapter, axios, moment
-});`
+});
+export {
+    utils, version, description, author, DataAdapter, DataSource, iviewAdapter, axios, moment
+}`
 
 fs.writeFileSync(OUTPUT_PATH, template);
 console.log('[build entry] DONE:' + OUTPUT_PATH);

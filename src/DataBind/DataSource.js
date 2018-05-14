@@ -30,9 +30,9 @@ export class DataSource{
             var item = this._ds[key];
             // callback(this._ds[item])
             if (item.meta !== undefined) {
-                item.inst = window.turing.DataAdapterFactory.create(item.meta, item.name, item.findParams);	
+                item.inst = window["tg-turing"].DataAdapterFactory.create(item.meta, item.name, item.findParams);	
             } else {
-                item.inst = window.turing.DataAdapterFactory.create();
+                item.inst = window["tg-turing"].DataAdapterFactory.create();
                 dss.push(item.inst.load(item.url, item.name, item.findParams))
             }
         }

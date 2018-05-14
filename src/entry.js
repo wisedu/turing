@@ -30,3 +30,6 @@ export default Object.assign({}, {
     ...components,
     utils, version, description, author, DataAdapter, DataSource, iviewAdapter, axios, moment
 });
+export {
+    utils, version, description, author, DataAdapter, DataSource, iviewAdapter, axios, moment
+}
