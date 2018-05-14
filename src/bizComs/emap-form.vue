@@ -36,6 +36,8 @@
 </template>
 
 <script>
+import TgListview from '../components/tg-listview.vue'
+import utils from '../utils.js';
 export default {
     name:"emap-form",
     props:{
@@ -46,6 +48,9 @@ export default {
             type:Number,
             default:100
         }
+    },
+    components: {
+        TgListview
     },
     data(){
         return {

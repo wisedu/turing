@@ -1,5 +1,5 @@
 import axios from 'axios'
-export class DataSource{
+export class DataSourceManager{
     static _ds = {};
     inst;
     name;

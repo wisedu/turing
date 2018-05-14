@@ -62,7 +62,7 @@ import axios from 'axios';
 import moment from 'moment';
 import iviewAdapter from './ComAdapter/iviewAdapter.js';
 import {DataAdapter} from './DataBind/DataAdapter.js';
-import {DataSource} from './DataBind/DataSource.js';
+import {DataSourceManager} from './DataBind/DataSourceManager.js';
 ${jsImport.join("\r\n")}
 const version = "${packageJSON.version}";
 const description = "${packageJSON.description}";
@@ -83,10 +83,10 @@ if (typeof window !== 'undefined' && window.Vue) {
 export default Object.assign({}, {
     install, 
     ...components,
-    utils, version, description, author, DataAdapter, DataSource, iviewAdapter, axios, moment
+    utils, version, description, author, DataAdapter, DataSourceManager, iviewAdapter, axios, moment
 });
 export {
-    utils, version, description, author, DataAdapter, DataSource, iviewAdapter, axios, moment
+    utils, version, description, author, DataAdapter, DataSourceManager, iviewAdapter, axios, moment
 }`
 
 fs.writeFileSync(OUTPUT_PATH, template);
