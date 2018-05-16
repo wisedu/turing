@@ -1,9 +1,9 @@
 <template>
   <div class="tg-row">
-      <div class="tg-col-4">
-          <Tree :data="data1"></Tree>
+      <div class="tg-col-3">
+            <Tree :data="data1"></Tree>
       </div>
-      <div class="tg-col-8">
+      <div class="tg-col-9">
             <Table :columns="columnDefs" :data="rowData" @on-sort-change="sortChanged"></Table>
       </div>
   </div>
@@ -25,7 +25,8 @@ export default {
             rowData: null,
             gridApi: null,
             columnApi: null,
-            autoGroupColumnDef: null
+            autoGroupColumnDef: null,
+
         }
     },
     beforeMount() {
@@ -36,30 +37,42 @@ export default {
             this.data1 = inst.toTreeData(datas.data);
         })
         this.queryUser();
+        inst_scd.getAllCreatedTime().then(data => {
+            this.columnDefs.filter(item => {
+                if (item.key === "created_at") {
+                    item.filters = data.map(records => {
+                        return {
+                            label: records.created_at,
+                            value: records.created_at
+                        }
+                    });
+                    item.filterRemote = function(value, key, meta, params) {
+                        let filter = {};
+                        filter[key] = value;
+                        this.queryUser(filter);
+                    }
+                } else if (item.key === "photo") {
+                    item.filterRemote = function(value, key, meta, params) {
+                        let filter = {};
+                        filter[key] = value;
+                        this.queryUser(filter);
+                    }
+                }
+            })
+        })
     },
     methods: {
-        queryUser(){
+        queryUser() {
             inst_scd.staticOrder([{"created_at":"+"}])
-            inst_scd.pageSize = 500;
+            inst_scd.pageSize = 10;
             inst_scd.findAll().then(datas => {
                 this.rowData = datas.data;
             })
         },
-        onGridReady(params) {
-            this.gridApi = params.api;
-            this.columnApi = params.columnApi;
-        },
-        getSelectedRows() {
-            const selectedNodes = this.gridApi.getSelectedNodes();
-            const selectedData = selectedNodes.map(node => node.data);
-            const selectedDataStringPresentation = selectedData.map(node => node.make + ' ' + node.model).join(', ');
-            alert(`Selected nodes: ${selectedDataStringPresentation}`);
-        },
         sortChanged(param) {
             let field = {};
             field[param.key] = param.order === "desc" ? "-" : "+";
-            inst_scd.order([field]);
-            debugger
+            let order = inst_scd.order(field);
             this.queryUser();
         }
     },

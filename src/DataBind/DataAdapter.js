@@ -66,19 +66,6 @@ export class DataAdapter {
         if (action.method.toLowerCase() === "post") {
             if (prCallback !== undefined) {
                 params = prCallback("post", params, this.__includes, this.__orders, this.pageNumber, this.pageSize)
-            } else {
-                params = {where: params};
-                if (this.__includes !== undefined && this.__includes.length > 0) {
-                    params["include"] = this.__includes;
-                }
-
-                params["order"] = this.__static_orders.concat(this.__orders);
-                if (params["order"].length == 0) {
-                    delete params.order;
-                }
-
-                params["offset"] = (this.pageNumber - 1) * this.pageSize;
-                params["limit"] = this.pageSize;
             }
             return axios.post(url, params)
         } else if (action.method.toLowerCase() === "delete") {
@@ -118,7 +105,19 @@ export class DataAdapter {
     findAll(param, resultReduce) {
         let reCallback = resultReduce || this.findAllResultReduce;
         var that = this;
-        return this.execute(this.actions.find, param).then(function(result){
+        let defaultParams = {where: param};
+        if (this.__includes !== undefined && this.__includes.length > 0) {
+            defaultParams["include"] = this.__includes;
+        }
+
+        defaultParams["order"] = this.__static_orders.concat(this.__orders);
+        if (defaultParams["order"].length == 0) {
+            delete defaultParams.order;
+        }
+
+        defaultParams["offset"] = (this.pageNumber - 1) * this.pageSize;
+        defaultParams["limit"] = this.pageSize;
+        return this.execute(this.actions.find, defaultParams).then(function(result){
             if (reCallback !== undefined) {
                 return reCallback(result.data, that.actions.find);
             } else {

@@ -1,7 +1,7 @@
 {
   "name": "tg-turing",
   "description": "turing components",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "author": "金智教育 wisedu",
   "homepage": "http://github.com/wisedu",
   "packageName": "tg-turing",
@@ -14,8 +14,6 @@
     "buildskin": "node ./build/buildskin.js"
   },
   "dependencies": {
-    "ag-grid": "^17.1.1",
-    "ag-grid-vue": "^17.1.0",
     "axios": "^0.18.0",
     "bh-iview": "^1.0.1",
     "moment": "^2.22.1",

@@ -16,8 +16,8 @@ export default class extends DataAdapter{
             "默认表格": {
                 name: {sortable: "custom"},
                 workcode: {sortable: "custom"},
-                photo: {},
-                created_at: {},
+                photo: {filters:[{label:"全部",value:"all"}]},
+                created_at: {filters:[]},
                 updated_at: {},
                 deleted_at: {}
             },
@@ -41,5 +41,8 @@ export default class extends DataAdapter{
     }
     metaAG(metaid, type, params) {
         return aggridAdapter(type, this.getMeta(metaid), params);
+    }
+    getAllCreatedTime() {
+        return this.execute({url:"/api/user/getAllCreatedTime", method:"get"}).then(datas => datas.data.data)
     }
 }
