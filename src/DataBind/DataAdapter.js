@@ -37,6 +37,7 @@ export class DataAdapter {
         this.__meta = meta;
         this.defaultMeta;
         this.__includes = [];
+        this.__static_orders = [];
         this.__orders = [];
         this.pageNumber = 1;
         this.pageSize = 10;
@@ -70,9 +71,12 @@ export class DataAdapter {
                 if (this.__includes !== undefined && this.__includes.length > 0) {
                     params["include"] = this.__includes;
                 }
-                if (this.__orders !== undefined && this.__orders.length > 0) {
-                    params["order"] = this.__orders;
+
+                params["order"] = this.__static_orders.concat(this.__orders);
+                if (params["order"].length == 0) {
+                    delete params.order;
                 }
+
                 params["offset"] = (this.pageNumber - 1) * this.pageSize;
                 params["limit"] = this.pageSize;
             }
@@ -147,6 +151,9 @@ export class DataAdapter {
      */
     include(tabNames){
         this.__includes = tabNames;
+    }
+    staticOrder(fields){
+        this.__static_orders = fields;
     }
     /**
      * @description 排序列

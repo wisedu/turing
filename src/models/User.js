@@ -1,44 +1,45 @@
-import turing from 'tg-turing'
-export default class {
+import {DataAdapter} from '../DataBind/DataAdapter'
+import iviewAdapter from '../ComAdapter/iviewAdapter'
+import aggridAdapter from "../ComAdapter/aggridAdapter";
+export default class extends DataAdapter{
     constructor() {
-        this.dataAdapter = new turing.DataAdapter();
+        super()
         let struct = {
             "default": {
                 name: { caption: "姓名" },
                 workcode: { caption: "工号" },
                 photo: { caption: "照片" },
+                created_at: { caption: "创建时间" },
+                updated_at: { caption: "更新时间" },
+                deleted_at: { caption: "删除时间" }
             },
-            "grid": {
+            "默认表格": {
+                name: {sortable: "custom"},
+                workcode: {sortable: "custom"},
+                photo: {},
+                created_at: {},
+                updated_at: {},
+                deleted_at: {}
+            },
+            "默认表单": {
                 name: {},
                 workcode: {},
                 photo: {},
             },
-            "form": {
-                name: {},
-                workcode: {},
-                photo: {},
-            },
-            "search": {
+            "默认查询": {
             }
         }
-        this.dataAdapter.actions.find.url = "/api/user";
-        this.dataAdapter.actions.save.url = "/api/user/save";
-        this.dataAdapter.actions.delete.url = "/api/user";
-        this.dataAdapter.actions.delete.method = "delete"
+        this.actions.find.url = "/api/user";
+        this.actions.save.url = "/api/user/save";
+        this.actions.delete.url = "/api/user";
+        this.actions.delete.method = "delete"
 
-        this.dataAdapter.setMeta(struct);
+        this.setMeta(struct);
     }
-    meta(metaid, iviewtype) {
-        return turing.iviewAdapter(iviewtype, this.dataAdapter.getMeta(metaid));
+    meta(metaid, iviewtype, params) {
+        return iviewAdapter(iviewtype, this.getMeta(metaid), params);
     }
-    findAll(params) {
-        return this.dataAdapter.findAll(params)
-    }
-    save(data) {
-        return this.dataAdapter.save(data)
-    }
-    delete(id) {
-        this.dataAdapter.actions.delete.url += "/" + id;
-        return this.dataAdapter.delete()
+    metaAG(metaid, type, params) {
+        return aggridAdapter(type, this.getMeta(metaid), params);
     }
 }

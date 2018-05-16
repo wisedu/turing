@@ -1,3 +1,4 @@
+import utils from '../utils.js';
 export default function(type, model, params){
     let iviewModel = [];
     switch (type) {
@@ -24,6 +25,16 @@ export default function(type, model, params){
                 }
                 iviewModel.push(newFormItem);
             }
+            break;
+        case "tree":
+            let datas = model;
+            let root = params.root;
+            model.map(item => {
+                item.title = item[params.label]
+            })
+            delete params.label;
+            delete params.root;
+            iviewModel = utils.toTreeData(datas, root, Object.assign({toCKey:'children'}, params))
             break;
         default:
             break;

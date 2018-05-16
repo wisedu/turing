@@ -14,6 +14,8 @@
     "buildskin": "node ./build/buildskin.js"
   },
   "dependencies": {
+    "ag-grid": "^17.1.1",
+    "ag-grid-vue": "^17.1.0",
     "axios": "^0.18.0",
     "bh-iview": "^1.0.1",
     "moment": "^2.22.1",
@@ -40,7 +42,6 @@
     "babel-runtime": "^6.23.0",
     "cross-env": "^3.2.4",
     "css-loader": "^0.25.0",
-    "element-theme-default": "^1.4.7",
     "extract-text-webpack-plugin": "^3.0.1",
     "file-loader": "^0.9.0",
     "node-sass": "^4.9.0",
@@ -54,7 +55,7 @@
     "url-loader": "^0.5.7",
     "vue-loader": "^10.0.0",
     "vue-style-loader": "^4.1.0",
-    "vue-template-compiler": "^2.5.0",
+    "vue-template-compiler": "^2.5.16",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.8.2",
     "webpack-merge": "^4.1.0"

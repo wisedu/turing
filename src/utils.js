@@ -35,15 +35,15 @@ let utils = {};
  */
 utils.Post = (url, data = null, config = {}) => {
   return axios({
-      method: 'post',
-      url: url,
-      data: serialize(data),
-      withCredentials: true,
-      headers:{
-        contentType: "application/json"
-      },
-      ...config
-      // adapter: config.mockFlag ? () => MOCK_DATA[config.mock] : null
+    method: 'post',
+    url: url,
+    data: serialize(data),
+    withCredentials: true,
+    headers: {
+      contentType: "application/json"
+    },
+    ...config
+    // adapter: config.mockFlag ? () => MOCK_DATA[config.mock] : null
   })
 }
 
@@ -55,43 +55,61 @@ utils.Post = (url, data = null, config = {}) => {
  * @param {*} config - 运行环境是今日校园时，此参数为header参数；运行环境不是今日校园时，此参数为请求配置，详见axios文档 [https://github.com/mzabriskie/axios]；
  */
 utils.Get = (url, data = null, config = {}) => {
-//   使用今日校园壳子的ajax，在特定的版本再开启，如公有云跨域版本
-//   if (/wisedu/.test(UA)) {
-//     // 今日校园 原生壳子 get方法
-//     let requestUrl = getApi(url) + serialize(data)
-//     return new Promise((resolve, reject) => {
-//       SDK.bh.http.sendGetRequest(requestUrl, (response) => {
-//         if (response.code !== 200) {
-//           reject(response)
-//         }
-//         resolve({
-//           data: JSON.parse(response.data)
-//         })
-//       }, config)
-//     })
-//   } else {
-    return axios({
-      method: 'get',
-      url: url,
-      params: serialize(data),
-      ...config
-    })
-//   }
+  //   使用今日校园壳子的ajax，在特定的版本再开启，如公有云跨域版本
+  //   if (/wisedu/.test(UA)) {
+  //     // 今日校园 原生壳子 get方法
+  //     let requestUrl = getApi(url) + serialize(data)
+  //     return new Promise((resolve, reject) => {
+  //       SDK.bh.http.sendGetRequest(requestUrl, (response) => {
+  //         if (response.code !== 200) {
+  //           reject(response)
+  //         }
+  //         resolve({
+  //           data: JSON.parse(response.data)
+  //         })
+  //       }, config)
+  //     })
+  //   } else {
+  return axios({
+    method: 'get',
+    url: url,
+    params: serialize(data),
+    ...config
+  })
+  //   }
 }
 
-utils.getUrlParam = function(name) {
+utils.getUrlParam = function (name) {
   var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
   var r = window.location.search.substr(1).match(reg);  //匹配目标参数
   if (r != null) return unescape(r[2]); return null; //返回参数值
 }
 
-utils.setFullUrl = function(url, prefix) {
+utils.setFullUrl = function (url, prefix) {
   if ([".", "/"].indexOf(url.substring(0, 1)) > -1) {
     return prefix + url;
   } else {
     return url;
   }
 }
+
+utils.toTreeData = function (data, parent_id, options) {
+  let opt = options || {ukey:"id", pkey:'parent_id', toCKey:'children'}
+  var tree = [];
+  var temp;
+  for (var i = 0; i < data.length; i++) {
+    if (data[i][opt.pkey] == parent_id) {
+      var obj = data[i];
+      temp = utils.toTreeData(data, data[i][opt.ukey], opt);
+      if (temp.length > 0) {
+        obj[opt.toCKey] = temp;
+      }
+      tree.push(obj);
+    }
+  }
+  return tree;
+}
+
 
 
 export default utils;

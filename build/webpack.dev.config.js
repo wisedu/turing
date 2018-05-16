@@ -27,7 +27,7 @@ module.exports = merge(webpackBaseConfig, {
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: '#cheap-module-eval-source-map'
 });
 
 if (process.env.NODE_ENV === 'production') {

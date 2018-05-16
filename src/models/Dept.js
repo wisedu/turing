@@ -1,45 +1,40 @@
-import turing from 'tg-turing'
-export default class {
+import {DataAdapter} from '../DataBind/DataAdapter'
+import iviewAdapter from '../ComAdapter/iviewAdapter'
+export default class extends DataAdapter {
     constructor() {
-        this.dataAdapter = new turing.DataAdapter();
+        super()
         let struct = {
             "default": {
                 name: { caption: "名称" },
-                parent_dept_id: { caption: "父级部门编号" },
+                parent_id: { caption: "父级部门编号" },
             },
-            "grid": {
+            "默认列表": {
                 name: {},
-                parent_dept_id: {},
+                parent_id: {},
             },
-            "form": {
+            "默认表单": {
                 id: {},
                 name: {},
-                parent_dept_id: {},
+                parent_id: {},
                 created_at: {},
                 updated_at: {},
                 deleted_at: {},
             },
-            "search": {
+            "查询": {
             }
         }
-        this.dataAdapter.actions.find.url = "/api/dept";
-        this.dataAdapter.actions.save.url = "/api/dept/save";
-        this.dataAdapter.actions.delete.url = "/api/dept";
-        this.dataAdapter.actions.delete.method = "delete"
+        this.actions.find.url = "/api/dept";
+        this.actions.find.method = "get"
+        this.actions.save.url = "/api/dept/save";
+        this.actions.delete.url = "/api/dept";
+        this.actions.delete.method = "delete"
 
-        this.dataAdapter.setMeta(struct);
+        this.setMeta(struct);
     }
-    meta(metaid, iviewtype) {
-        return turing.iviewAdapter(iviewtype, this.dataAdapter.getMeta(metaid));
+    meta(metaid, iviewtype, params) {
+        return iviewAdapter(iviewtype, this.getMeta(metaid), params);
     }
-    findAll(params) {
-        return this.dataAdapter.findAll(params)
-    }
-    save(data) {
-        return this.dataAdapter.save(data)
-    }
-    delete(id) {
-        this.dataAdapter.actions.delete.url += "/" + id;
-        return this.dataAdapter.delete()
+    toTreeData(data) {
+        return iviewAdapter("tree", data, {ukey:"id", pkey:'pId', root: "", label:"name"})
     }
 }
