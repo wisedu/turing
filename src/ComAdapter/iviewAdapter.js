@@ -12,6 +12,11 @@ export default function(type, model, params){
                     key:prop, 
                     minWidth:120
                 }, params);
+                if (newTableItem.filters !== undefined){
+                    newTableItem.filterRemote = function(value,key,column) {
+                        column.selectedFilterValue = value;
+                    }
+                }
                 iviewModel.push(newTableItem);
             }
             break;

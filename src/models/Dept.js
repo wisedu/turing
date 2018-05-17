@@ -5,20 +5,19 @@ export default class extends DataAdapter {
         super()
         let struct = {
             "default": {
+                id: { caption: "编号" },
                 name: { caption: "名称" },
-                parent_id: { caption: "父级部门编号" },
+                pId: { caption: "父级部门编号" },
             },
             "默认列表": {
+                id: {},
                 name: {},
-                parent_id: {},
+                pId: {},
             },
             "默认表单": {
                 id: {},
                 name: {},
-                parent_id: {},
-                created_at: {},
-                updated_at: {},
-                deleted_at: {},
+                pId: {},//xtype:"tree", url:"/api/dept"
             },
             "查询": {
             }

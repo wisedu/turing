@@ -6,6 +6,7 @@ export default class extends DataAdapter{
         super()
         let struct = {
             "default": {
+                opt:{ caption:"" },
                 name: { caption: "姓名" },
                 workcode: { caption: "工号" },
                 photo: { caption: "照片" },
@@ -14,9 +15,10 @@ export default class extends DataAdapter{
                 deleted_at: { caption: "删除时间" }
             },
             "默认表格": {
+                opt: {type: 'selection',width: 60,align: 'center'},
                 name: {sortable: "custom"},
                 workcode: {sortable: "custom"},
-                photo: {filters:[{label:"全部",value:"all"}]},
+                photo: { },
                 created_at: {filters:[]},
                 updated_at: {},
                 deleted_at: {}
@@ -44,5 +46,8 @@ export default class extends DataAdapter{
     }
     getAllCreatedTime() {
         return this.execute({url:"/api/user/getAllCreatedTime", method:"get"}).then(datas => datas.data.data)
+    }
+    setUserToDept(dept, users){
+        return this.execute({url:"/api/user/setUserToDept", method:"post", params:{dept, users}}).then(datas => datas.data.data)
     }
 }

@@ -37,7 +37,6 @@ export class DataAdapter {
         this.__meta = meta;
         this.defaultMeta;
         this.__includes = [];
-        this.__static_orders = [];
         this.__orders = [];
         this.pageNumber = 1;
         this.pageSize = 10;
@@ -54,27 +53,20 @@ export class DataAdapter {
     setMeta(metas){
         this.defaultMeta = metas;
     }
-    execute(action, data, paramReduce){
-        let prCallback = paramReduce || this.executeParamReduce;
+    execute(action, data){
         var url = "";
-        var params = Object.assign({}, action.params, data || {})
+        var params = data || action.params;
         if ([".", "/"].indexOf(action.url.substring(0, 1)) > -1) {
             url = (window.apiPath || '') + action.url
         } else {
             url = action.url
         }
         if (action.method.toLowerCase() === "post") {
-            if (prCallback !== undefined) {
-                params = prCallback("post", params, this.__includes, this.__orders, this.pageNumber, this.pageSize)
-            }
             return axios.post(url, params)
         } else if (action.method.toLowerCase() === "delete") {
             //删除资源仅允许与rest接口约定的url方式
             return axios.delete(url)
         }else {
-            if (prCallback !== undefined) {
-                params = prCallback("get", params, this.__includes, this.__orders, this.pageNumber, this.pageSize)
-            }
             return axios.get(url, {params: params})
         }
     }
@@ -86,40 +78,55 @@ export class DataAdapter {
 
     actions = {
         save:{
-            url:"",
-            method:"post",
-            name:""
+            url: "",
+            method: "post",
+            name: ""
         },
         delete:{
-            url:"",
-            method:"post",
-            name:""
+            url: "",
+            method: "post",
+            name: ""
         },
         find:{
-            url:"",
-            method:"post",
-            name:""
+            url: "",
+            method: "post",
+            name: "",
+            params: {},
+            orders: [],
+            include: []
         }
     }
 
-    findAll(param, resultReduce) {
-        let reCallback = resultReduce || this.findAllResultReduce;
+    findAll(param) {
+        let bfCallback = this.beforeFindAll;
+        let afCallback = this.afterFindAll;
         var that = this;
-        let defaultParams = {where: param};
-        if (this.__includes !== undefined && this.__includes.length > 0) {
-            defaultParams["include"] = this.__includes;
+        
+        let defaultParams = {
+            where: Object.assign({}, this.actions.find.params, param || {})
+        };
+        if (this.actions.find.include.length > 0) {
+            defaultParams["include"] = this.actions.find.include;
         }
 
-        defaultParams["order"] = this.__static_orders.concat(this.__orders);
+        defaultParams["order"] = this.actions.find.orders.concat(this.__orders);
         if (defaultParams["order"].length == 0) {
             delete defaultParams.order;
         }
 
         defaultParams["offset"] = (this.pageNumber - 1) * this.pageSize;
         defaultParams["limit"] = this.pageSize;
+
+        if (bfCallback !== undefined) {
+            defaultParams = bfCallback(this.actions.find, defaultParams, {
+                pageNumber: this.pageNumber, 
+                pageSize: this.pageSize
+            });
+        }
+
         return this.execute(this.actions.find, defaultParams).then(function(result){
-            if (reCallback !== undefined) {
-                return reCallback(result.data, that.actions.find);
+            if (afCallback !== undefined) {
+                return afCallback(result.data, that.actions.find);
             } else {
                 return result.data;
             }
@@ -142,17 +149,6 @@ export class DataAdapter {
         return this.execute(this.actions.save, data).then(function(result){
             return result.data;
         });
-    }
-    /**
-     * @description 包含关联表
-     * @example ["table1","table2"]
-     * @param {[]} tabNames 
-     */
-    include(tabNames){
-        this.__includes = tabNames;
-    }
-    staticOrder(fields){
-        this.__static_orders = fields;
     }
     /**
      * @description 排序列
