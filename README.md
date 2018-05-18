@@ -1,6 +1,7 @@
 # tg-turing
 
-> tg-turing 数据适配引擎 + 模型驱动组件库
+> * tg-turing 数据适配引擎 + 模型驱动组件库
+> * 组件库文档：[res.wisedu.com](http://res.wisedu.com/pc/tg-listview)
 
 ## 基本用法
 
