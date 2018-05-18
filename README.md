@@ -8,9 +8,8 @@
 npm i tg-turing --save
 ```
 
-### 定义一个数据适配器
+### 定义一个数据适配器，如：Dept.js
 
-Dept.js
 > es6 写法
 
 ```js
@@ -118,6 +117,33 @@ console.log(columns)
 | checkType | 校验类型 | Enum | 空 |
 | JSONParam | 传递个实际组件的参数 | Object | 空 |
 
+xtype 控件类型枚举
+
+| 属性 | 描述 | 
+| :--- | :--- | 
+| select | 单选下拉 
+| multi-select | 多选下拉
+| selecttable | 下拉表格/模糊搜索 
+| date-ym | 年月选择框， 默认 yyyy-MM 
+| date-local | 日期选择框， 默认 yyyy-MM-dd 
+| date-full | 日期时间选择框， 默认 yyyy-MM-dd HH:mm 
+| date-range | 日期范围选择， 默认 yyyy-MM-dd 
+| radiolist | 单选按钮组 
+| checkboxlist | 多选按钮组 
+| tree | 单选下拉树 
+| multi-tree | 多选下拉树 
+| switcher | 开关 
+| buttonlist | 单选按钮组 
+| multi-buttonlist | 多选按钮组 
+| textarea | 计数文本域
+| number | 数字文本框
+| number-range | 数字区间
+| uploadfile | 文件上传
+| uploadsingleimage | 单图片上传 
+| uploadmuiltimage | 多图片上传
+| text | 文本 
+| div | div占位 
+| static | 表单静态字段 
 
 
 ### iviewAdapter 组件属性适配器
