@@ -79,6 +79,34 @@ console.log(columns)
 <Table :columns="columns" :data="rowData"></Table>
 ```
 
+### 获取数据 findAll
+
+继承后，带有 findAll 方法可以查询数据
+
+```js
+let inst = new Dept();
+inst.findAll({ parentId:"00001" }).then(datas => {
+    this.rowData = inst.toTreeData(datas.data);
+});
+```
+
+### 保存数据 save
+
+```js
+inst.save(this.deptData).then(result => {
+    alert("ok")
+})
+```
+
+
+### 删除数据 delete
+
+```js
+inst.delete(deptId).then(result => {
+    alert("ok")
+})
+```
+
 
 ## 模型定义
 
