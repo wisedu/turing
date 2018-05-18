@@ -92,8 +92,8 @@ inst.findAll({ parentId:"00001" }).then(datas => {
 
 提交地址在构造函数中的 `this.actions.findAll.url` 中已经配置，默认提交的数据结构如下：
 
-> `this.actions.findAll.params` 中可以配置固定查询参数，会与findAll传入的参数做合并，传入参数的优先级高
-> 与 Sequelize 接近
+> * `this.actions.findAll.params` 中可以配置固定查询参数，会与findAll传入的参数做合并，传入参数的优先级高
+> * 数据格式与 Sequelize 接近
 
 ```js
 {
@@ -110,11 +110,10 @@ inst.findAll({ parentId:"00001" }).then(datas => {
 
 findAll 执行过程中提供以下两个事件可以用于参数 格式处理：
 
-function beforeFindAll(action, params, props) : Object 
+* function beforeFindAll(action, params, props) : Object 
+* function afterFindAll(data, action) : Object
 
-function afterFindAll(data, action) : Object
-
-具体示例可以参见底部的 es5 示例
+需要在构造函数中进行定义，具体示例可以参见底部的 es5 示例
 
 
 ### 保存数据 save
