@@ -9,12 +9,12 @@ export default class extends DataAdapter {
                 name: { caption: "名称" },
                 pId: { caption: "父级部门编号" },
             },
-            "默认列表": {
+            "默认列表:table": {
                 id: {},
                 name: {},
                 pId: {},
             },
-            "默认表单": {
+            "默认表单:form": {
                 id: {},
                 name: {},
                 pId: {},//xtype:"tree", url:"/api/dept"
@@ -30,7 +30,10 @@ export default class extends DataAdapter {
 
         this.setMeta(struct);
     }
-    meta(metaid, iviewtype, params) {
+    meta(name, params) {
+        let props = name.split(":")
+        let metaid = props[0];
+        let iviewtype = props[1];
         return iviewAdapter(iviewtype, this.getMeta(metaid), params);
     }
     toTreeData(data) {

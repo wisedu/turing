@@ -10,11 +10,11 @@ export default class extends DataAdapter{
                 name: { caption: "姓名" },
                 workcode: { caption: "工号" },
                 photo: { caption: "照片" },
-                created_at: { caption: "创建时间" },
-                updated_at: { caption: "更新时间" },
-                deleted_at: { caption: "删除时间" }
+                created_at: { caption: "创建" },
+                updated_at: { caption: "更新" },
+                deleted_at: { caption: "删除" }
             },
-            "默认表格": {
+            "默认表格:table": {
                 opt: {type: 'selection',width: 60,align: 'center'},
                 name: {sortable: "custom"},
                 workcode: {sortable: "custom"},
@@ -23,7 +23,7 @@ export default class extends DataAdapter{
                 updated_at: {},
                 deleted_at: {}
             },
-            "默认表单": {
+            "默认表单:form": {
                 name: {},
                 workcode: {},
                 photo: {},
@@ -38,7 +38,10 @@ export default class extends DataAdapter{
 
         this.setMeta(struct);
     }
-    meta(metaid, iviewtype, params) {
+    meta(name, params) {
+        let props = name.split(":")
+        let metaid = props[0];
+        let iviewtype = props[1];
         return iviewAdapter(iviewtype, this.getMeta(metaid), params);
     }
     metaAG(metaid, type, params) {

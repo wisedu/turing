@@ -47,7 +47,8 @@ export default {
         labelWidth:{
             type:Number,
             default:100
-        }
+        },
+        readonly:Boolean
     },
     components: {
         TgListview

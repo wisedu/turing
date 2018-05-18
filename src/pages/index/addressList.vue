@@ -36,11 +36,11 @@ export default {
     return {
       data1: [],
       gridOptions: {},
-      columnDefs: inst_scd.meta("默认表格", "table"),
+      columnDefs: inst_scd.meta("默认表格:table"),
       rowData: null,
       deptSearchKey: "",
       deptModal: false,
-      fields: inst.meta("默认表单", "form"),
+      fields: inst.meta("默认表单:form"),
       deptData: {},
       userDeptModal: false,
       selectedNode:{},
@@ -54,11 +54,6 @@ export default {
     this.rowData = [];
   },
   created() {
-    // this.columnDefs = [{
-    //                     type: 'selection',
-    //                     width: 60,
-    //                     align: 'center'
-    //                 }].concat(this.columnDefs)
     inst.findAll().then(datas => {
       this.data1 = inst.toTreeData(datas.data);
     });
