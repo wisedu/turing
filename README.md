@@ -244,7 +244,7 @@ actions = {
 
 ```js
 (function (exports) {
-    function EMAPDataAdapter(meta){
+    function ExampleDataAdapter(meta){
             exports.DataAdapter.call(this, meta);
             exports.axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
             exports.axios.defaults.transformRequest = [function (data) {
@@ -264,9 +264,12 @@ actions = {
                 return data.datas[action.name];
             }
     }
-    EMAPDataAdapter.prototype = new exports.DataAdapter();
-    exports.EMAPDataAdapter = EMAPDataAdapter;
+    ExampleDataAdapter.prototype = new exports.DataAdapter();
+    exports.ExampleDataAdapter = ExampleDataAdapter;
 })(window["tg-turing"])
+
+
+var da = new window["tg-turing"].ExampleDataAdapter();
 ```
 
 
