@@ -36,7 +36,7 @@ export default {
     return {
       data1: [],
       gridOptions: {},
-      columnDefs: inst_scd.meta("默认表格:table"),
+      columnDefs: inst_scd.meta("默认列表:table"),
       rowData: null,
       deptSearchKey: "",
       deptModal: false,

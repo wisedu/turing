@@ -14,7 +14,7 @@ export default class extends DataAdapter{
                 updated_at: { caption: "更新" },
                 deleted_at: { caption: "删除" }
             },
-            "默认表格:table": {
+            "默认列表:table": {
                 opt: {type: 'selection',width: 60,align: 'center'},
                 name: {sortable: "custom"},
                 workcode: {sortable: "custom"},
@@ -40,9 +40,8 @@ export default class extends DataAdapter{
     }
     meta(name, params) {
         let props = name.split(":")
-        let metaid = props[0];
         let iviewtype = props[1];
-        return iviewAdapter(iviewtype, this.getMeta(metaid), params);
+        return iviewAdapter(iviewtype, this.getMeta(name), params);
     }
     metaAG(metaid, type, params) {
         return aggridAdapter(type, this.getMeta(metaid), params);

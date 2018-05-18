@@ -32,9 +32,8 @@ export default class extends DataAdapter {
     }
     meta(name, params) {
         let props = name.split(":")
-        let metaid = props[0];
         let iviewtype = props[1];
-        return iviewAdapter(iviewtype, this.getMeta(metaid), params);
+        return iviewAdapter(iviewtype, this.getMeta(name), params);
     }
     toTreeData(data) {
         return iviewAdapter("tree", data, {ukey:"id", pkey:'pId', root: "", label:"name"})
