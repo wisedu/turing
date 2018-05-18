@@ -106,6 +106,16 @@ inst.findAll({ parentId:"00001" }).then(datas => {
 }
 ```
 
+#### 提交参数格式需要 自定义
+
+findAll 执行过程中提供以下两个事件可以用于参数 格式处理：
+
+function beforeFindAll(action, params, props) : Object 
+
+function afterFindAll(data, action) : Object
+
+具体示例可以参见底部的 es5 示例
+
 
 ### 保存数据 save
 
@@ -231,7 +241,7 @@ actions = {
 
 ---
 
-es5 写法
+## es5 写法
 
 ```js
 (function (exports) {
@@ -261,10 +271,3 @@ es5 写法
 ```
 
 
-## 对接自己的后端环境，继承 与 覆盖
-
-findAll 执行过程中提供以下两个事件可以用于参数 格式处理：
-
-function beforeFindAll(action, params, props) : Object 
-
-function afterFindAll(data, action) : Object
