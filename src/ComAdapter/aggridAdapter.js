@@ -7,7 +7,7 @@ export default function(type, model, params){
                 if (model[prop].hidden === true){
                     continue;
                 }
-                let newTableItem = Object.assign({}, model[prop], {
+                let newTableItem = utils.extend({}, model[prop], {
                     headerName:model[prop].caption, 
                     field:prop, 
                     minWidth:120

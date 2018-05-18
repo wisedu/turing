@@ -90,6 +90,23 @@ inst.findAll({ parentId:"00001" }).then(datas => {
 });
 ```
 
+提交地址在构造函数中的 `this.actions.findAll.url` 中已经配置，默认提交的数据结构如下：
+
+> `this.actions.findAll.params` 中可以配置固定查询参数，会与findAll传入的参数做合并，传入参数的优先级高
+> 与 Sequelize 接近
+
+```js
+{
+    "where":{
+        "created_at":["2018-05-16T15:41:16.000Z"],
+        "parentId":"00001"
+    },
+    "order":[{"created_at":"+"},{"workcode":"+"}],
+    "offset":0,"limit":100
+}
+```
+
+
 ### 保存数据 save
 
 ```js
@@ -187,10 +204,67 @@ xtype 控件类型枚举
 ```
 
 
+## action 默认定义
+
+```js
+actions = {
+    save:{
+        url: "",
+        method: "post",
+        name: ""
+    },
+    delete:{
+        url: "",
+        method: "post",
+        name: ""
+    },
+    find:{
+        url: "",
+        method: "post",
+        name: "",
+        params: {},
+        orders: [],
+        include: []
+    }
+}
+```
+
 ---
 
 es5 写法
 
+```js
+(function (exports) {
+    function EMAPDataAdapter(meta){
+            exports.DataAdapter.call(this, meta);
+            exports.axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+            exports.axios.defaults.transformRequest = [function (data) {
+                var ret = []
+                for (var it in data) {
+                    ret.push(encodeURIComponent(it) + '=' + encodeURIComponent(data[it]))
+                }
+                return ret.join('&');
+            }],
+            this.beforeFindAll = function(action, params, props) {
+                return Object.assign({}, params.where, {
+                    pageSize: props.pageSize,
+                    pageNumber: props.pageNumber
+                })
+            }
+            this.afterFindAll = function(data, action){
+                return data.datas[action.name];
+            }
+    }
+    EMAPDataAdapter.prototype = new exports.DataAdapter();
+    exports.EMAPDataAdapter = EMAPDataAdapter;
+})(window["tg-turing"])
 ```
 
-```
+
+## 对接自己的后端环境，继承 与 覆盖
+
+findAll 执行过程中提供以下两个事件可以用于参数 格式处理：
+
+function beforeFindAll(action, params, props) : Object 
+
+function afterFindAll(data, action) : Object

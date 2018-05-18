@@ -7,7 +7,7 @@ export default function(type, model, params){
                 if (model[prop].hidden === true){
                     continue;
                 }
-                let newTableItem = Object.assign({}, model[prop], {
+                let newTableItem = utils.extend({}, model[prop], {
                     title:model[prop].caption, 
                     key:prop, 
                     minWidth:120
@@ -22,7 +22,7 @@ export default function(type, model, params){
             break;
         case "form":
             for(let prop in model){
-                let newFormItem = Object.assign({}, model[prop], {
+                let newFormItem = utils.extend({}, model[prop], {
                     name:prop, 
                 }, params);
                 if (model[prop].xtype !== undefined && model[prop].options === undefined){
@@ -39,7 +39,7 @@ export default function(type, model, params){
             })
             delete params.label;
             delete params.root;
-            iviewModel = utils.toTreeData(datas, root, Object.assign({toCKey:'children'}, params))
+            iviewModel = utils.toTreeData(datas, root, utils.extend({toCKey:'children'}, params))
             break;
         default:
             break;

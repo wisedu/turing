@@ -1,36 +1,7 @@
 import utils from '../utils.js';
 import axios from 'axios'
 
-if (typeof Object.assign != 'function') {
-    // Must be writable: true, enumerable: false, configurable: true
-    Object.defineProperty(Object, "assign", {
-      value: function assign(target, varArgs) { // .length of function is 2
-        'use strict';
-        if (target == null) { // TypeError if undefined or null
-          throw new TypeError('Cannot convert undefined or null to object');
-        }
-  
-        var to = Object(target);
-  
-        for (var index = 1; index < arguments.length; index++) {
-          var nextSource = arguments[index];
-  
-          if (nextSource != null) { // Skip over if undefined or null
-            for (var nextKey in nextSource) {
-              // Avoid bugs when hasOwnProperty is shadowed
-              if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
-                to[nextKey] = nextSource[nextKey];
-              }
-            }
-          }
-        }
-        return to;
-      },
-      writable: true,
-      configurable: true
-    });
-}
-  
+
 export class DataAdapter {
     
     constructor(meta) {
@@ -46,7 +17,7 @@ export class DataAdapter {
         let result = {}
         for(let prop in struct[metaid]) {
             result[prop] = {};
-            Object.assign(result[prop], struct["default"][prop], struct[metaid][prop]);
+            utils.extend(true, result[prop], struct["default"][prop], struct[metaid][prop]);
         }
         return result;
     }
@@ -103,7 +74,7 @@ export class DataAdapter {
         var that = this;
         
         let defaultParams = {
-            where: Object.assign({}, this.actions.find.params, param || {})
+            where: utils.extend(true, {}, this.actions.find.params, param || {})
         };
         if (this.actions.find.include.length > 0) {
             defaultParams["include"] = this.actions.find.include;
