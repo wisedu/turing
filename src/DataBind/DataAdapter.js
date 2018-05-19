@@ -6,23 +6,23 @@ export class DataAdapter {
     
     constructor(meta) {
         this.__meta = meta;
-        this.defaultMeta;
+        this.viewDefine;
         this.__includes = [];
         this.__orders = [];
         this.pageNumber = 1;
         this.pageSize = 10;
     }
-    getMeta(metaid) {
-        let struct = this.defaultMeta;
+    getView(viewId) {
+        let views = this.viewDefine;
         let result = {}
-        for(let prop in struct[metaid]) {
+        for(let prop in views[viewId]) {
             result[prop] = {};
-            utils.extend(true, result[prop], struct["default"][prop], struct[metaid][prop]);
+            utils.extend(true, result[prop], views["default"][prop], views[viewId][prop]);
         }
         return result;
     }
-    setMeta(metas){
-        this.defaultMeta = metas;
+    initView(views){
+        this.viewDefine = views;
     }
     execute(action, data){
         var url = "";

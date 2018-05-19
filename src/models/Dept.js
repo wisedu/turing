@@ -3,7 +3,7 @@ import iviewAdapter from '../ComAdapter/iviewAdapter'
 export default class extends DataAdapter {
     constructor() {
         super()
-        let struct = {
+        let views = {
             "default": {
                 id: { caption: "编号" },
                 name: { caption: "名称" },
@@ -28,12 +28,12 @@ export default class extends DataAdapter {
         this.actions.delete.url = "/api/dept";
         this.actions.delete.method = "delete"
 
-        this.setMeta(struct);
+        this.initView(views);
     }
-    meta(name, params) {
+    view(name, params) {
         let props = name.split(":")
         let iviewtype = props[1];
-        return iviewAdapter(iviewtype, this.getMeta(name), params);
+        return iviewAdapter(iviewtype, this.getView(name), params);
     }
     toTreeData(data) {
         return iviewAdapter("tree", data, {ukey:"id", pkey:'pId', root: "", label:"name"})

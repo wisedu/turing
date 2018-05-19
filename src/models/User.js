@@ -4,7 +4,7 @@ import aggridAdapter from "../ComAdapter/aggridAdapter";
 export default class extends DataAdapter{
     constructor() {
         super()
-        let struct = {
+        let views = {
             "default": {
                 opt:{ caption:"" },
                 name: { caption: "姓名" },
@@ -36,16 +36,16 @@ export default class extends DataAdapter{
         this.actions.delete.url = "/api/user";
         this.actions.delete.method = "delete"
 
-        this.setMeta(struct);
+        this.initView(views);
     }
-    meta(name, params) {
+    view(name, params) {
         let props = name.split(":")
         let iviewtype = props[1];
-        return iviewAdapter(iviewtype, this.getMeta(name), params);
+        return iviewAdapter(iviewtype, this.getView(name), params);
     }
-    metaAG(metaid, type, params) {
-        return aggridAdapter(type, this.getMeta(metaid), params);
-    }
+    // metaAG(metaid, type, params) {
+    //     return aggridAdapter(type, this.getMeta(metaid), params);
+    // }
     getAllCreatedTime() {
         return this.execute({url:"/api/user/getAllCreatedTime", method:"get"}).then(datas => datas.data.data)
     }

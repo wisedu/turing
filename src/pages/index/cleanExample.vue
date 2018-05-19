@@ -15,8 +15,8 @@ let student = new Student();
 export default {
     data(){
         return {
-            columns1: student.meta("grid", "table"),
-            fields: student.meta("form", "form"),
+            columns1: student.view("grid", "table"),
+            fields: student.view("form", "form"),
             result:[],
             formItem:{},
             pager:{}

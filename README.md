@@ -11,6 +11,10 @@ npm i tg-turing --save
 
 ### 定义一个数据适配器，如：Dept.js
 
+适配器中包含两部分： 
+1. 视图的定义； 即表单、表格所需要呈现的字段属性的定义。
+2. 数据操作的定义；
+
 > es6 写法
 
 ```js
@@ -18,15 +22,15 @@ import {DataAdapter, iviewAdapter} from 'tg-turing'
 export default class extends DataAdapter {
     constructor() {
         super()
-        //模型定义
-        let struct = {
-            //default这一段是模型的基础属性会与以下其他的模型做合并输出
+        //视图定义
+        let views = {
+            //default这一段是基础属性会与以下其他的视图定义做合并输出
             "default": {
                 id: { caption: "编号" },
                 name: { caption: "名称" },
                 pId: { caption: "父级部门编号" },
             },
-            //以下节点根据业务需要，进行追加，每个属性即对于default的扩展
+            //以下视图定义根据业务需要，进行追加，每个属性即对于default的扩展
             "默认列表:table": {
                 id: { },
                 name: { minWidth:150 },
@@ -46,12 +50,12 @@ export default class extends DataAdapter {
         this.actions.delete.url = "/api/dept";
         this.actions.delete.method = "delete"
 
-        this.setMeta(struct);
+        this.initView(views);
     }
-    meta(name, params) {
+    view(name, params) {
         let props = name.split(":")
         let iviewtype = props[1];
-        return iviewAdapter(iviewtype, this.getMeta(props), params);
+        return iviewAdapter(iviewtype, this.getView(props), params);
     }
     toTreeData(data) {
         return iviewAdapter("tree", data, {ukey:"id", pkey:'pId', root: "", label:"name"})
@@ -63,7 +67,7 @@ export default class extends DataAdapter {
 
 ```js
 let inst = new Dept();
-let columns = inst.meta("默认列表:table")
+let columns = inst.view("默认列表:table")
 
 console.log(columns)
 
@@ -135,9 +139,9 @@ inst.delete(deptId).then(result => {
 ```
 
 
-## 模型定义
+## 视图属性的定义
 
-这些属性由标准模型定义，依此映射到不同的实现组件库，如：iview
+以下定义为我们所约定的标准化属性，依此映射到不同的实现组件库，如：iview
 
 ### 标准属性
 
@@ -147,7 +151,8 @@ inst.delete(deptId).then(result => {
 | :--- | :--- | :--- | :--- |
 | caption | 显示文字 | String | 空 |
 | hidden | 是否隐藏 | Boolean | false |
-| format | 日期、数字组件专用 | String | 空 |
+
+format：日期、数字，或字符串格式化，因效率需要通过后端处理 
 
 
 #### 列表

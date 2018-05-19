@@ -36,11 +36,11 @@ export default {
     return {
       data1: [],
       gridOptions: {},
-      columnDefs: inst_scd.meta("默认列表:table"),
+      columnDefs: inst_scd.view("默认列表:table"),
       rowData: null,
       deptSearchKey: "",
       deptModal: false,
-      fields: inst.meta("默认表单:form"),
+      fields: inst.view("默认表单:form"),
       deptData: {},
       userDeptModal: false,
       selectedNode:{},

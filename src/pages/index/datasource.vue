@@ -31,9 +31,9 @@ export default {
     },
     created(){
         let da = new DataAdapter();
-        da.setMeta(strcExample);
-        this.columns1 = iviewAdapter("table", da.getMeta("grid"), {minWidth:150})
-        this.fields = iviewAdapter("form", da.getMeta("form"))
+        da.initView(strcExample);
+        this.columns1 = iviewAdapter("table", da.getView("grid"), {minWidth:150})
+        this.fields = iviewAdapter("form", da.getView("form"))
     },
     methods:{
         getData(){
