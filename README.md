@@ -220,6 +220,8 @@ xtype 控件类型枚举
 
 #### table类型返回结果
 ```js
+console.log(new Dept().view("默认列表:form"));
+
 [
     {"caption":"编号","title":"编号","key":"id","minWidth":120},
     {"caption":"名称","title":"名称","key":"name","minWidth":150},
@@ -229,6 +231,8 @@ xtype 控件类型枚举
 
 #### form类型返回结果
 ```js
+console.log(new Dept().view("默认表单:form"));
+
 [
     {"caption":"编号","name":"id"},
     {"caption":"名称","name":"name","placeholder":"请填写"},
@@ -238,6 +242,14 @@ xtype 控件类型枚举
 
 #### tree类型返回结果
 ```js
+var data = [
+    {"id": "1","name": "党群组织","pId": "","isParent": 1},
+    {"id": "000010","name": "党群组织/工会","pId": "1","isParent": 0},
+    {"id": "000012","name": "行政部门/校长办公室","pId": "3","isParent": 1}
+]
+console.log(iviewAdapter("tree", data, {ukey:"id", pkey:'pId', root: "", label:"name"}))
+
+
 
 ```
 
