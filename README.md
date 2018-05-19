@@ -218,6 +218,29 @@ xtype 控件类型枚举
 },
 ```
 
+#### table类型返回结果
+```js
+[
+    {"caption":"编号","title":"编号","key":"id","minWidth":120},
+    {"caption":"名称","title":"名称","key":"name","minWidth":150},
+    {"caption":"父级部门编号","title":"父级部门编号","key":"pId","minWidth":120}
+]
+```
+
+#### form类型返回结果
+```js
+[
+    {"caption":"编号","name":"id"},
+    {"caption":"名称","name":"name","placeholder":"请填写"},
+    {"caption":"父级部门编号","name":"pId","xtype":"select"}
+]
+```
+
+#### tree类型返回结果
+```js
+
+```
+
 
 ## action 默认定义
 
