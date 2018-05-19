@@ -7,11 +7,11 @@ export default function(type, model, params){
                 if (model[prop].hidden === true){
                     continue;
                 }
-                let newTableItem = utils.extend({}, model[prop], {
+                let newTableItem = utils.extend({}, {
                     title:model[prop].caption, 
                     key:prop, 
                     minWidth:120
-                }, params);
+                }, model[prop], params);
                 if (newTableItem.filters !== undefined){
                     newTableItem.filterRemote = function(value,key,column) {
                         column.selectedFilterValue = value;
@@ -22,9 +22,9 @@ export default function(type, model, params){
             break;
         case "form":
             for(let prop in model){
-                let newFormItem = utils.extend({}, model[prop], {
+                let newFormItem = utils.extend({}, {
                     name:prop, 
-                }, params);
+                }, model[prop], params);
                 if (model[prop].xtype !== undefined && model[prop].options === undefined){
                     model[prop].options = [];
                 }
