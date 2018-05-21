@@ -1,4 +1,4 @@
-import utils from '../utils.js';
+import utils from '../src/utils.js';
 import axios from 'axios'
 
 

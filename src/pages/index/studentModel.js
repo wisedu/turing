@@ -1,5 +1,5 @@
-import iviewAdapter from "../../ComAdapter/iviewAdapter";
-import { DataAdapter } from "../../DataBind/DataAdapter";
+import iviewAdapter from "../../../ComAdapter/iviewAdapter";
+import { DataAdapter } from "../../../DataBind/DataAdapter";
 export default class{
     constructor(){
         this.dataAdapter = new DataAdapter();

@@ -1,5 +1,5 @@
-import {DataAdapter} from '../DataBind/DataAdapter'
-import iviewAdapter from '../ComAdapter/iviewAdapter'
+import {DataAdapter} from '../../DataBind/DataAdapter'
+import iviewAdapter from '../../ComAdapter/iviewAdapter'
 export default class extends DataAdapter {
     constructor() {
         super()

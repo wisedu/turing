@@ -13,8 +13,8 @@
 import EmapForm from '../../bizComs/emap-form'
 import strcExample from "../../../mock/model";
 import dataExample from "../../../mock/data";
-import iviewAdapter from "../../ComAdapter/iviewAdapter";
-import { DataAdapter } from "../../DataBind/DataAdapter";
+import iviewAdapter from "../../../ComAdapter/iviewAdapter";
+import { DataAdapter } from "../../../DataBind/DataAdapter";
 import utils from '../../utils.js';
 export default {
     data(){

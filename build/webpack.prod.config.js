@@ -19,7 +19,7 @@ process.env.NODE_ENV = 'production';
 
 let config = merge(webpackBaseConfig, {
     entry: {
-        main: './src/entry.js'
+        main: './entry.js'
     },
     output: {
         path: path.resolve(__dirname, '../dist'),

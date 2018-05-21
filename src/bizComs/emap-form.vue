@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import TgListview from '../components/tg-listview.vue'
+import TgListview from '../../components/tg-listview.vue'
 import utils from '../utils.js';
 export default {
     name:"emap-form",

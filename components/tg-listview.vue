@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import ComDataBindBase from '../DataBind/ComDataBindBase'
+import ComDataBindBase from './ComDataBindBase'
 export default {
   extends: ComDataBindBase,
   name: "tg-listview",

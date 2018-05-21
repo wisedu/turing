@@ -3,9 +3,9 @@ var path = require('path');
 
 var packageJSON = JSON.parse(fs.readFileSync("./package.json"));
 
-var OUTPUT_PATH = path.join(__dirname, '../src/entry.js')
+var OUTPUT_PATH = path.join(__dirname, '../entry.js')
 var components = [];
-var cmpPath = 'src/components/';
+var cmpPath = 'components/';
 
 // 根据目录生成vue文件名: 'bh-button' -> 'bhButton'
 // 所以组件和目录命名要遵循此规则
@@ -57,7 +57,7 @@ components.forEach(item => {
 });
 
 let template = 
-`import utils from './utils.js';
+`import utils from './src/utils.js';
 import axios from 'axios';
 import moment from 'moment';
 import iviewAdapter from './ComAdapter/iviewAdapter.js';

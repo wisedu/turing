@@ -68,10 +68,10 @@
 }
 </style>
 <script type="text/javascript">
-    import TgListview from '../../components/tg-listview.vue'
-    import TgDiv from '../../components/tg-div.vue'
-    import TgText from '../../components/tg-text.vue'
-    import TgLinkbutton from '../../components/tg-linkbutton.vue'
+    import TgListview from '../../../components/tg-listview.vue'
+    import TgDiv from '../../../components/tg-div.vue'
+    import TgText from '../../../components/tg-text.vue'
+    import TgLinkbutton from '../../../components/tg-linkbutton.vue'
     export default {
         data(){
             return {
