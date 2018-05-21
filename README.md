@@ -1,6 +1,6 @@
 # tg-turing
 
-> * tg-turing 数据适配引擎
+> * tg-turing 视图数据适配引擎
 > * 模型驱动组件库：[res.wisedu.com](http://res.wisedu.com/pc/tg-listview)
 
 ## 基本用法
@@ -9,7 +9,7 @@
 npm i tg-turing --save
 ```
 
-### 定义一个数据适配器，如：Dept.js
+### 定义一个视图数据适配器，如：Dept.js
 
 适配器中包含两部分： 
 1. 视图的定义； 即表单、表格所需要呈现的字段属性的定义。
