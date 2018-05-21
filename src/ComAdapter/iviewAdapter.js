@@ -41,6 +41,9 @@ export default function(type, model, params){
             delete params.root;
             iviewModel = utils.toTreeData(datas, root, utils.extend({toCKey:'children'}, params))
             break;
+        case "dict":
+            
+            break;
         default:
             break;
     }
