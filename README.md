@@ -1,6 +1,6 @@
 # tg-turing
 
-> * tg-turing 数据适配引擎
+> * tg-turing 视图数据适配引擎
 > * 模型驱动组件库：[res.wisedu.com](http://res.wisedu.com/pc/tg-listview)
 
 ## 基本用法
@@ -9,7 +9,7 @@
 npm i tg-turing --save
 ```
 
-### 定义一个数据适配器，如：Dept.js
+### 定义一个视图数据适配器，如：Dept.js
 
 适配器中包含两部分： 
 1. 视图的定义； 即表单、表格所需要呈现的字段属性的定义。
@@ -216,6 +216,41 @@ xtype 控件类型枚举
     name: { minWidth:150 },
     pId: {},
 },
+```
+
+#### table类型返回结果
+```js
+console.log(new Dept().view("默认列表:form"));
+
+[
+    {"caption":"编号","title":"编号","key":"id","minWidth":120},
+    {"caption":"名称","title":"名称","key":"name","minWidth":150},
+    {"caption":"父级部门编号","title":"父级部门编号","key":"pId","minWidth":120}
+]
+```
+
+#### form类型返回结果
+```js
+console.log(new Dept().view("默认表单:form"));
+
+[
+    {"caption":"编号","name":"id"},
+    {"caption":"名称","name":"name","placeholder":"请填写"},
+    {"caption":"父级部门编号","name":"pId","xtype":"select"}
+]
+```
+
+#### tree类型返回结果
+```js
+var data = [
+    {"id": "1","name": "党群组织","pId": "","isParent": 1},
+    {"id": "000010","name": "党群组织/工会","pId": "1","isParent": 0},
+    {"id": "000012","name": "行政部门/校长办公室","pId": "3","isParent": 1}
+]
+console.log(iviewAdapter("tree", data, {ukey:"id", pkey:'pId', root: "", label:"name"}))
+
+
+
 ```
 
 
