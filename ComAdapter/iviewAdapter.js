@@ -12,6 +12,9 @@ export default function(type, model, params){
                     key:prop, 
                     minWidth:120
                 }, model[prop], params);
+                if (newTableItem.dict !== undefined && newTableItem.dict.display !== undefined) {
+                    newTableItem["key"] = newTableItem.dict.display;
+                }
                 if (newTableItem.filters !== undefined){
                     newTableItem.filterRemote = function(value,key,column) {
                         column.selectedFilterValue = value;
