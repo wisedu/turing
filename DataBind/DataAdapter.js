@@ -32,6 +32,12 @@ export class DataAdapter {
         } else {
             url = action.url
         }
+        let matchs = url.match(/\{(.*?)\}/ig);
+        matchs = matchs === null ? [] : matchs;
+        matchs.map(item => {
+            url = url.replace(item, params[item.substring(1, item.length -1)])
+        })
+
         if (action.method.toLowerCase() === "post") {
             return axios.post(url, params)
         } else if (action.method.toLowerCase() === "delete") {
