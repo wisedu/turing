@@ -47,7 +47,7 @@ export default class extends DataAdapter {
         this.actions.find.url = "/api/dept";
         this.actions.find.method = "get"
         this.actions.save.url = "/api/dept/save";
-        this.actions.delete.url = "/api/dept";
+        this.actions.delete.url = "/api/dept/{id}";
         this.actions.delete.method = "delete"
 
         this.initView(views);
@@ -277,6 +277,18 @@ actions = {
         include: []
     }
 }
+```
+
+### 变量参数
+
+url里面可以写{变量名}，会由params中的数据替换掉
+如：
+```js
+this.actions.delete.url = "/api/dept/{id}";
+...
+
+this.delete({id:"123"})
+
 ```
 
 ---
