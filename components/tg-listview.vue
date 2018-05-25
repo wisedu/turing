@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :style="parentStyle">
     <div :class="containerClass" :style="containerStyle">
         <slot name="beforeTemplate"></slot>
         <div v-for="(item, index) in list" :style="layoutStyle" :class="layoutClassObject" :key="index" >
@@ -39,7 +39,8 @@ export default {
       layoutStyle: {},
       layoutClassObject: {},
       containerClass: "",
-      containerStyle: {}
+      containerStyle: {},
+      parentStyle: {}
     };
   },
   created: function() {
@@ -51,6 +52,9 @@ export default {
       }
       this.containerStyle = {
         margin: "0 -"+(gutter/2)+"px"
+      }
+      this.parentStyle = {
+        padding: "" + (gutter/2) + "px"
       }
       if (this.grid.column !== undefined){
         //栅格模式，按照百分比宽度伸缩
