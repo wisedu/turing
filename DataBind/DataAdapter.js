@@ -38,9 +38,9 @@ export class DataAdapter {
             url = url.replace(item, params[item.substring(1, item.length -1)])
         })
 
-        if (action.method.toLowerCase() === "post") {
+        if (action.method === "post") {
             return axios.post(url, params)
-        } else if (action.method.toLowerCase() === "delete") {
+        } else if (action.method === "delete") {
             //删除资源仅允许与rest接口约定的url方式
             return axios.delete(url)
         }else {
