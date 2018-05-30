@@ -56,14 +56,21 @@ components.forEach(item => {
     jsClass.push(item.className);
 });
 
+jsImport.push(`import IviewMdForm from './ComAdapter/iview/iview-md-form';`);
+jsClass.push("IviewMdForm");
+
+jsImport.push(`import IviewMdText from './ComAdapter/iview/iview-md-text';`);
+jsClass.push("IviewMdText");
+
 let template = 
 `import utils from './src/utils.js';
 import axios from 'axios';
 import moment from 'moment';
-import iviewAdapter from './ComAdapter/iviewAdapter.js';
+import ModelDrivenFormItem from './ComAdapter/ModelDrivenFormItem.js';
+import iviewAdapter from './ComAdapter/iview/iviewAdapter.js';
+import iviewForm from './ComAdapter/iview/iviewForm.js';
 import {DataAdapter} from './DataBind/DataAdapter.js';
 import {DataSourceManager} from './DataBind/DataSourceManager.js';
-import {ModelDrivenFormItem} from './components/ModelDrivenFormItem.js';
 ${jsImport.join("\r\n")}
 const version = "${packageJSON.version}";
 const description = "${packageJSON.description}";
@@ -84,10 +91,16 @@ if (typeof window !== 'undefined' && window.Vue) {
 export default Object.assign({}, {
     install, 
     ...components,
-    utils, version, description, author, DataAdapter, DataSourceManager, iviewAdapter, ModelDrivenFormItem, axios, moment
+    utils, version, description, author, 
+    DataAdapter, DataSourceManager, ModelDrivenFormItem, 
+    iviewAdapter, iviewForm,
+    axios, moment
 });
 export {
-    utils, version, description, author, DataAdapter, DataSourceManager, iviewAdapter, ModelDrivenFormItem, axios, moment
+    utils, version, description, author, 
+    DataAdapter, DataSourceManager, ModelDrivenFormItem, 
+    iviewAdapter, iviewForm,
+    axios, moment
 }`
 
 fs.writeFileSync(OUTPUT_PATH, template);
