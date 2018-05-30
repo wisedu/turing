@@ -8,6 +8,8 @@
                 <template slot="itemTemplate" slot-scope="props">
                     <component :model="props.data" :is="registedComponentList[props.data.xtype || 'text'] || 'iview-md-text'" 
                     v-model="formValue[props.data.name]" @sync-change="handleSyncChange" 
+                    :caption="props.data.caption" :xtype="props.data.xtype" :placeholder="props.data.placeholder"
+                    :required="props.data.required" :readonly="props.data.readonly" :disabled="props.data.disabled"
                     :options="optionsMap[props.data.name]" :ref="'field' + props.data.name"></component>
                 </template>
                 <template slot="afterTemplate">
@@ -35,7 +37,6 @@ export default {
     },
     computed:{
         registedComponentList(){
-            // return window["tg-turing"].iviewForm
             return iviewForm;
         }
     },
