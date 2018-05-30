@@ -1,7 +1,7 @@
 <template>
   <div @click="handleClick" class="tg-left-right" :left="left" :right="right">
-    <slot name="left" :style="leftStyle"></slot>
-    <slot name="right" :style="rightStyle"></slot>
+    <slot name="left"></slot>
+    <slot name="right"></slot>
   </div>
 </template>
 <script>
@@ -17,30 +17,25 @@
             left: String,
             right: String
         },
-        data: function() {
-            return {
-                leftStyle: '',
-                rightStyle: ''
-            };
-        },
         methods: {
             handleClick(evt) {
                 this.$emit('click', evt);
             },
             setOtherHalfWidth(width, type){
-                let otherType = type === 'left' ? 'right': 'left';
                 let otherWidth = '';
-
                 width = width.replace(/\s/g, '');
-                if(this.check(width)){
+                if(this.checkWidth(width)){
                     otherWidth = `calc(100% - ${width})`;
                 }else{
                     otherWidth = '50%';
                     width = '50%';
                 }
 
-                this[`${type}Style`] = width;
-                this[`${otherType}Style`] = otherWidth;
+                if(type === 'left'){
+                    this.setChildAttr(width, otherWidth);
+                }else{
+                    this.setChildAttr(otherWidth, width);
+                }
             },
             checkWidth(width){
                 if(/^\d+(\.?\d+)?(px|%)$/.test(width)){
@@ -48,21 +43,23 @@
                 }else{
                     return false;
                 }
+            },
+            setChildAttr(left, right){
+                this.$slots.left[0].data.attrs.width = left;
+                this.$slots.right[0].data.attrs.width = right;
             }
         },
         created: function () {
             let left = this.left || '';
             let right = this.right || '';
             if(left && right){
-                this.leftStyle = left;
-                this.rightStyle = right;
+                this.setChildAttr(left, right);
             }else if(left){
                 this.setOtherHalfWidth(left, 'left');
             }else if(right){
                 this.setOtherHalfWidth(right, 'right');
             }else{
-                this.leftStyle = '50%';
-                this.rightStyle = '50%';
+                this.setChildAttr('50%', '50%');
             }
         }
     };
@@ -71,10 +68,6 @@
 <style lang="css">
   .tg-left-right{
     position: relative;
-  }
-
-  .tg-left-right > *{
-    float: left;
   }
 
   .tg-left-right:after{
