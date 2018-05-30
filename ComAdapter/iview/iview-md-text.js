@@ -5,7 +5,7 @@ export default {
     extends: ModelDrivenFormItem,
     template:`<div>
         <Input v-model="currentValue" :placeholder="placeholder">
-            <span slot="append">{{params.append}}</span>
+            <span slot="append" v-if="params.append">{{params.append}}</span>
         </Input>
     </div>`,
 }

@@ -10,12 +10,22 @@ export default{
         value: null,
         display: String,
         xtype: String,
-        options: Array,
+        options: {
+            type:Array,
+            default(){
+                return []
+            }
+        },
         placeholder: String,
         required: Boolean,
         readonly: Boolean,
         disabled: Boolean,
-        params: Object
+        params: {
+            type:Object, 
+            default(){
+                return {}
+            }
+        }
     },
     data() {
         return {
