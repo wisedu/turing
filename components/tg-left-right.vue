@@ -27,21 +27,39 @@
             handleClick(evt) {
                 this.$emit('click', evt);
             },
-            getOtherHalfWidth(width){
+            setOtherHalfWidth(width, type){
+                let otherType = type === 'left' ? 'right': 'left';
+                let otherWidth = '';
+
                 width = width.replace(/\s/g, '');
-                
+                if(this.check(width)){
+                    otherWidth = `calc(100% - ${width})`;
+                }else{
+                    otherWidth = '50%';
+                    width = '50%';
+                }
+
+                this[`${type}Style`] = width;
+                this[`${otherType}Style`] = otherWidth;
+            },
+            checkWidth(width){
+                if(/^\d+(\.?\d+)?(px|%)$/.test(width)){
+                    return true;
+                }else{
+                    return false;
+                }
             }
         },
         created: function () {
-            let left = this.left;
-            let right = this.right;
+            let left = this.left || '';
+            let right = this.right || '';
             if(left && right){
                 this.leftStyle = left;
                 this.rightStyle = right;
             }else if(left){
-
+                this.setOtherHalfWidth(left, 'left');
             }else if(right){
-
+                this.setOtherHalfWidth(right, 'right');
             }else{
                 this.leftStyle = '50%';
                 this.rightStyle = '50%';
