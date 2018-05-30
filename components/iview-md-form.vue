@@ -18,7 +18,7 @@
 
 <script>
 export default {
-
+    name:"iview-md-form"
 }
 </script>
 

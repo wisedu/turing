@@ -1,9 +1,9 @@
 {
   "name": "tg-turing",
   "description": "turing components",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "author": "金智教育 wisedu",
-  "homepage": "http://github.com/wisedu",
+  "homepage": "https://github.com/wisedu",
   "packageName": "tg-turing",
   "main": "dist/tg-turing.min.js",
   "scripts": {
