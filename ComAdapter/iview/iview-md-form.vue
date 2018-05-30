@@ -35,7 +35,8 @@ export default {
     },
     computed:{
         registedComponentList(){
-            return window["tg-turing"].iviewForm
+            // return window["tg-turing"].iviewForm
+            return iviewForm;
         }
     },
     data(){

@@ -15,7 +15,7 @@ import TgListview from './components/tg-listview.vue';
 import TgText from './components/tg-text.vue';
 import IviewMdForm from './ComAdapter/iview/iview-md-form';
 import IviewMdText from './ComAdapter/iview/iview-md-text';
-const version = "1.2.1";
+const version = "1.2.3";
 const description = "turing components";
 const author = "金智教育 wisedu";
 const components = {
