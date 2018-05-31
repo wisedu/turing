@@ -27,9 +27,6 @@ export default {
             this.$emit('click', evt);
         }
     },
-  props: {
-      position: String
-  },
     created: function () {
         let attrs = this.$attrs;
         this._style = {width: attrs.width};
