@@ -1,13 +1,15 @@
 <template>
-    <div></div>
+    <component :fields="fields" :is="type + '-md-form'"></component>
 </template>
-
 <script>
 export default {
-    name: "tg-form"
+    name: "tg-form",
+    props:{
+        fields:Array,
+        type:String
+    }
 }
 </script>
-
 <style>
 
 </style>
