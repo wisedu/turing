@@ -105,15 +105,13 @@ export default Object.assign({}, {
     ...components,
     utils, version, description, author, 
     DataAdapter, DataSourceManager, ModelDrivenFormItem, 
-    iview:{adapter:iviewAdapter, form:iviewForm},
-    mint:{adapter:mintAdapter, form:mintForm},
+    iview:{form:iviewForm}, mint:{form:mintForm},
     axios, moment
 });
 export {
     utils, version, description, author, 
     DataAdapter, DataSourceManager, ModelDrivenFormItem, 
-    iviewAdapter, iviewForm,
-    mintAdapter, mintForm,
+    iviewForm, mintForm,
     axios, moment
 }`
 
