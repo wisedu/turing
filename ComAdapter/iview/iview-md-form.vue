@@ -6,11 +6,13 @@
                     <slot name="before"></slot>
                 </template>
                 <template slot="itemTemplate" slot-scope="props">
-                    <component :model="props.data" :is="registedComponentList[props.data.xtype || 'static'] || 'iview-md-static'" 
-                    v-model="formValue[props.data.name]" @sync-change="handleSyncChange" 
-                    :caption="props.data.caption" :xtype="props.data.xtype" :placeholder="props.data.placeholder"
-                    :required="props.data.required" :readonly="props.data.readonly" :disabled="props.data.disabled"
-                    :options="optionsMap[props.data.name]" :ref="'field' + props.data.name"></component>
+                    <slot :name="props.data.name" :model="props.data" :value="formValue[props.data.name]" @sync-change="handleSyncChange" :ref="'field' + props.data.name">
+                        <component :model="props.data" :is="registedComponentList[props.data.xtype || 'static'] || 'iview-md-static'" 
+                        v-model="formValue[props.data.name]" @sync-change="handleSyncChange" 
+                        :caption="props.data.caption" :xtype="props.data.xtype" :placeholder="props.data.placeholder"
+                        :required="props.data.required" :readonly="props.data.readonly" :disabled="props.data.disabled"
+                        :options="optionsMap[props.data.name]" :ref="'field' + props.data.name"></component>
+                    </slot>
                 </template>
                 <template slot="afterTemplate">
                     <slot name="after"></slot>
