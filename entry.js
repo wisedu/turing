@@ -16,6 +16,7 @@ import TgContainer from './components/tg-container.vue';
 import TgDiv from './components/tg-div.vue';
 import TgForm from './components/tg-form.vue';
 import TgImg from './components/tg-img.vue';
+import TgLeftRightItem from './components/tg-left-right-item.vue';
 import TgLeftRight from './components/tg-left-right.vue';
 import TgLinkbutton from './components/tg-linkbutton.vue';
 import TgListview from './components/tg-listview.vue';
@@ -28,7 +29,7 @@ const version = "1.3.1";
 const description = "turing components";
 const author = "金智教育 wisedu";
 const components = {
-    TgContainer,TgDiv,TgForm,TgImg,TgLeftRight,TgLinkbutton,TgListview,TgText,IviewMdForm,IviewMdStatic,MintMdForm,MintMdStatic
+    TgContainer,TgDiv,TgForm,TgImg,TgLeftRightItem,TgLeftRight,TgLinkbutton,TgListview,TgText,IviewMdForm,IviewMdStatic,MintMdForm,MintMdStatic
 };
 const install = function (Vue, opts = {}) {
     if (install.installed) return;
