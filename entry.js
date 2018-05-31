@@ -3,10 +3,7 @@ import axios from 'axios';
 import moment from 'moment';
 import ModelDrivenFormItem from './ComAdapter/ModelDrivenFormItem.js';
 
-import iviewAdapter from './ComAdapter/iview/adapter.js';
 import iviewForm from './ComAdapter/iview/form.js';
-
-import mintAdapter from './ComAdapter/mint/adapter.js';
 import mintForm from './ComAdapter/mint/form.js';
 
 
@@ -25,7 +22,7 @@ import IviewMdForm from './ComAdapter/iview/iview-md-form';
 import IviewMdStatic from './ComAdapter/iview/iview-md-static';
 import MintMdForm from './ComAdapter/mint/mint-md-form';
 import MintMdStatic from './ComAdapter/mint/mint-md-static';
-const version = "1.3.1";
+const version = "1.3.2";
 const description = "turing components";
 const author = "金智教育 wisedu";
 const components = {
@@ -46,14 +43,12 @@ export default Object.assign({}, {
     ...components,
     utils, version, description, author, 
     DataAdapter, DataSourceManager, ModelDrivenFormItem, 
-    iview:{adapter:iviewAdapter, form:iviewForm},
-    mint:{adapter:mintAdapter, form:mintForm},
+    iview:{form:iviewForm}, mint:{form:mintForm},
     axios, moment
 });
 export {
     utils, version, description, author, 
     DataAdapter, DataSourceManager, ModelDrivenFormItem, 
-    iviewAdapter, iviewForm,
-    mintAdapter, mintForm,
+    iviewForm, mintForm,
     axios, moment
 }

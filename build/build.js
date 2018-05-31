@@ -74,10 +74,7 @@ import axios from 'axios';
 import moment from 'moment';
 import ModelDrivenFormItem from './ComAdapter/ModelDrivenFormItem.js';
 
-import iviewAdapter from './ComAdapter/iview/adapter.js';
 import iviewForm from './ComAdapter/iview/form.js';
-
-import mintAdapter from './ComAdapter/mint/adapter.js';
 import mintForm from './ComAdapter/mint/form.js';
 
 
