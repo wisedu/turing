@@ -59,16 +59,28 @@ components.forEach(item => {
 jsImport.push(`import IviewMdForm from './ComAdapter/iview/iview-md-form';`);
 jsClass.push("IviewMdForm");
 
-jsImport.push(`import IviewMdText from './ComAdapter/iview/iview-md-text';`);
-jsClass.push("IviewMdText");
+jsImport.push(`import IviewMdStatic from './ComAdapter/iview/iview-md-static';`);
+jsClass.push("IviewMdStatic");
+
+jsImport.push(`import MintMdForm from './ComAdapter/mint/mint-md-form';`);
+jsClass.push("MintMdForm");
+
+jsImport.push(`import MintMdStatic from './ComAdapter/mint/mint-md-static';`);
+jsClass.push("MintMdStatic");
 
 let template = 
 `import utils from './src/utils.js';
 import axios from 'axios';
 import moment from 'moment';
 import ModelDrivenFormItem from './ComAdapter/ModelDrivenFormItem.js';
-import iviewAdapter from './ComAdapter/iview/iviewAdapter.js';
-import iviewForm from './ComAdapter/iview/iviewForm.js';
+
+import iviewAdapter from './ComAdapter/iview/adapter.js';
+import iviewForm from './ComAdapter/iview/form.js';
+
+import mintAdapter from './ComAdapter/mint/adapter.js';
+import mintForm from './ComAdapter/mint/form.js';
+
+
 import {DataAdapter} from './DataBind/DataAdapter.js';
 import {DataSourceManager} from './DataBind/DataSourceManager.js';
 ${jsImport.join("\r\n")}
@@ -93,13 +105,15 @@ export default Object.assign({}, {
     ...components,
     utils, version, description, author, 
     DataAdapter, DataSourceManager, ModelDrivenFormItem, 
-    iviewAdapter, iviewForm,
+    iview:{adapter:iviewAdapter, form:iviewForm},
+    mint:{adapter:mintAdapter, form:mintForm},
     axios, moment
 });
 export {
     utils, version, description, author, 
     DataAdapter, DataSourceManager, ModelDrivenFormItem, 
     iviewAdapter, iviewForm,
+    mintAdapter, mintForm,
     axios, moment
 }`
 

@@ -22,7 +22,7 @@
 
 <script>
 //:display-value.sync="value[props.data.display]" 
-import iviewForm from "./iviewForm";
+import iviewForm from "./form";
 export default {
     name:"iview-md-form",
     props:{
