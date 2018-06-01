@@ -22,7 +22,7 @@ import IviewMdForm from './ComAdapter/iview/iview-md-form';
 import IviewMdStatic from './ComAdapter/iview/iview-md-static';
 import MintMdForm from './ComAdapter/mint/mint-md-form';
 import MintMdStatic from './ComAdapter/mint/mint-md-static';
-const version = "1.3.5";
+const version = "1.3.10";
 const description = "turing components";
 const author = "金智教育 wisedu";
 const components = {

@@ -12,7 +12,8 @@ export default {
             type:Number,
             default:100
         },
-        readonly:Boolean
+        readonly:Boolean,
+        type:String
     },
     data(){
         return {
