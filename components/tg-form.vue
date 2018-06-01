@@ -1,5 +1,5 @@
 <template>
-    <component :model="formValue" :fields="fields" :is="type + '-md-form'" :column="column" :labelWidth="labelWidth" :readonly="readonly"></component>
+    <component :model="formValue" :fields="fields" :is="type + '-fc-form'" :column="column" :labelWidth="labelWidth" :readonly="readonly"></component>
 </template>
 <script>
 export default {
