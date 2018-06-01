@@ -25,48 +25,15 @@
 <script>
 //:display-value.sync="value[props.data.display]" 
 import iviewForm from "./form";
+import formConnector from "../FormConnector";
 export default {
     name:"iview-fc-form",
-    props:{
-        fields:Array,
-        value: { type: Object, default () { return {}; } },
-        column:Number,
-        labelWidth:{
-            type:Number,
-            default:100
-        },
-        readonly:Boolean
-    },
+    extends: formConnector,
     computed:{
         registedComponentList(){
             return iviewForm;
         }
     },
-    data(){
-        return {
-            formValue:this.value,
-            optionsMap: {}
-        }
-    },
-    watch: {
-        value: {
-            deep: true,
-            handler(val) {
-                this.formValue = val;
-            }
-        },
-        formValue: {
-            deep: true,
-            handler(val) {
-                this.$emit('input', val);
-            }
-        },
-    },
-    methods:{
-        handleSyncChange(val, name) {
-            this.$set(this.formValue, name, val);
-        },
-    }
 }
 </script>
 
