@@ -1,3 +1,3 @@
 export default{
-    "static":"mint-md-static"
+    "static":"mint-fc-static"
 }
