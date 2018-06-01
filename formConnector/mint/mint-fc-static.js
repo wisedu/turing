@@ -1,8 +1,8 @@
-import ModelDrivenFormItem from '../ModelDrivenFormItem'
+import FormConnectItem from '../FormConnectItem'
 
 export default {
-    name:"mint-md-static",
-    extends: ModelDrivenFormItem,
+    name:"mint-fc-static",
+    extends: FormConnectItem,
     template:`<div>
         <mt-cell :title="model.caption" :readonly="readonly">
             <div class="em-select-value mt-color-grey">

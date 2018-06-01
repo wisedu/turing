@@ -11,7 +11,7 @@
 <script>
 import mintForm from "./form";
 export default {
-    name:"mint-md-form",
+    name:"mint-fc-form",
     props:{
         fields:Array,
         value: { type: Object, default () { return {}; } },

@@ -56,27 +56,26 @@ components.forEach(item => {
     jsClass.push(item.className);
 });
 
-jsImport.push(`import IviewMdForm from './ComAdapter/iview/iview-md-form';`);
-jsClass.push("IviewMdForm");
+jsImport.push(`import IviewFcForm from './formConnector/iview/iview-fc-form';`);
+jsClass.push("IviewFcForm");
 
-jsImport.push(`import IviewMdStatic from './ComAdapter/iview/iview-md-static';`);
-jsClass.push("IviewMdStatic");
+jsImport.push(`import IviewFcStatic from './formConnector/iview/iview-fc-static';`);
+jsClass.push("IviewFcStatic");
 
-jsImport.push(`import MintMdForm from './ComAdapter/mint/mint-md-form';`);
-jsClass.push("MintMdForm");
+jsImport.push(`import MintFcForm from './formConnector/mint/mint-fc-form';`);
+jsClass.push("MintFcForm");
 
-jsImport.push(`import MintMdStatic from './ComAdapter/mint/mint-md-static';`);
-jsClass.push("MintMdStatic");
+jsImport.push(`import MintFcStatic from './formConnector/mint/mint-fc-static';`);
+jsClass.push("MintFcStatic");
 
 let template = 
 `import utils from './src/utils.js';
 import axios from 'axios';
 import moment from 'moment';
-import ModelDrivenFormItem from './ComAdapter/ModelDrivenFormItem.js';
+import FormConnectItem from './formConnector/FormConnectItem.js';
 
-import iviewForm from './ComAdapter/iview/form.js';
-import mintForm from './ComAdapter/mint/form.js';
-
+import iviewForm from './formConnector/iview/form.js';
+import mintForm from './formConnector/mint/form.js';
 
 import {DataAdapter} from './DataBind/DataAdapter.js';
 import {DataSourceManager} from './DataBind/DataSourceManager.js';
@@ -101,13 +100,13 @@ export default Object.assign({}, {
     install, 
     ...components,
     utils, version, description, author, 
-    DataAdapter, DataSourceManager, ModelDrivenFormItem, 
+    DataAdapter, DataSourceManager, FormConnectItem, 
     iview:{form:iviewForm}, mint:{form:mintForm},
     axios, moment
 });
 export {
     utils, version, description, author, 
-    DataAdapter, DataSourceManager, ModelDrivenFormItem, 
+    DataAdapter, DataSourceManager, FormConnectItem, 
     iviewForm, mintForm,
     axios, moment
 }`

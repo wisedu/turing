@@ -26,7 +26,7 @@
 //:display-value.sync="value[props.data.display]" 
 import iviewForm from "./form";
 export default {
-    name:"iview-md-form",
+    name:"iview-fc-form",
     props:{
         fields:Array,
         value: { type: Object, default () { return {}; } },

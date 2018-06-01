@@ -1,8 +1,8 @@
-import ModelDrivenFormItem from '../ModelDrivenFormItem'
+import FormConnectItem from '../FormConnectItem'
 
 export default {
-    name:"iview-md-static",
-    extends: ModelDrivenFormItem,
+    name:"iview-fc-static",
+    extends: FormConnectItem,
     template:`<div>
         <FormItem :label="caption">
             {{currentValue}}&nbsp;
