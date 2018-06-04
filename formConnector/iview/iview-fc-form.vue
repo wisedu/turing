@@ -5,15 +5,15 @@
                 <template slot="beforeTemplate">
                     <slot name="before"></slot>
                 </template>
-                <template slot="itemTemplate" slot-scope="props">
-                    <slot :name="props.data.name" :model="props.data" :value="formValue[props.data.name]" v-if="props.data.hidden" @sync-change="handleSyncChange" :ref="'field_' + props.data.name">
+                <div slot="itemTemplate" slot-scope="props" v-show="!props.data.hidden">
+                    <slot :name="props.data.name" :model="props.data" :value="formValue[props.data.name]" @sync-change="handleSyncChange" :ref="'field_' + props.data.name">
                         <component :model="props.data" :is="registedComponentList[props.data.xtype || 'static'] || 'iview-fc-static'" @sync-change="handleSyncChange" 
                         v-model="formValue[props.data.name]" :ref="'field_' + props.data.name"
                         :caption="props.data.caption" :xtype="props.data.xtype" :placeholder="props.data.placeholder"
                         :required="props.data.required" :readonly="props.data.readonly" :disabled="props.data.disabled"
                         :params="props.data.params" :options="props.data.options"></component>
                     </slot>
-                </template>
+                </div>
                 <template slot="afterTemplate">
                     <slot name="after"></slot>
                 </template>
