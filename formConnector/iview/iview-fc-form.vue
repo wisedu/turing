@@ -1,21 +1,18 @@
 <template>
     <div>
         <Form :model="formValue" :label-width="labelWidth">
-            <tg-listview :datas="fields" :grid="{gutter:0, column:column}">
+            <tg-listview :datas="tglistFields" :grid="{gutter:0, column:column}">
                 <template slot="beforeTemplate">
                     <slot name="before"></slot>
                 </template>
-                <template slot="itemTemplate" slot-scope="props">
-                    <!-- <template v-if="props.data.hidden === undefined || props.data.hidden === false"></template> -->
-                    {{props.data}}
-                        <slot :name="props.data.name" :model="props.data" :value="formValue[props.data.name]" @sync-change="handleSyncChange" :ref="'field_' + props.data.name">
-                            <component :model="props.data" :is="registedComponentList[props.data.xtype || 'static'] || 'iview-fc-static'" @sync-change="handleSyncChange" 
-                            v-model="formValue[props.data.name]" :ref="'field_' + props.data.name"
-                            :caption="props.data.caption" :xtype="props.data.xtype" :placeholder="props.data.placeholder"
-                            :required="props.data.required" :readonly="props.data.readonly" :disabled="props.data.disabled"
-                            :params="props.data.params" :options="props.data.options"></component>
-                        </slot>
-                    
+                <template slot="itemTemplate" slot-scope="props" v-if="props.data.hidden !== true">
+                    <slot :name="props.data.name" :model="props.data" :value="formValue[props.data.name]" @sync-change="handleSyncChange" :ref="'field_' + props.data.name">
+                        <component :model="props.data" :is="registedComponentList[props.data.xtype || 'static'] || 'iview-fc-static'" @sync-change="handleSyncChange" 
+                        v-model="formValue[props.data.name]" :ref="'field_' + props.data.name"
+                        :caption="props.data.caption" :xtype="props.data.xtype" :placeholder="props.data.placeholder"
+                        :required="props.data.required" :readonly="props.data.readonly" :disabled="props.data.disabled"
+                        :params="props.data.params" :options="props.data.options"></component>
+                    </slot>
                 </template>
                 <template slot="afterTemplate">
                     <slot name="after"></slot>
@@ -37,6 +34,17 @@ export default {
             return iviewForm;
         }
     },
+    data(){
+        return {
+            //当前字段隐藏时，让listview组件所占位的格子也隐藏
+            tglistFields:this.fields.map(item => {
+                if (item.hidden === true) {
+                    item._lv_hidden = true;
+                }
+                return item;
+            })
+        }
+    }
 }
 </script>
 

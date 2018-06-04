@@ -2,7 +2,7 @@
   <div :style="parentStyle">
     <div :class="containerClass" :style="containerStyle">
         <slot name="beforeTemplate"></slot>
-        <div v-for="(item, index) in list" :style="layoutStyle" :class="layoutClassObject" :key="index" >
+        <div v-for="(item, index) in list" v-if="item._lv_hidden !== true" :style="layoutStyle" :class="layoutClassObject" :key="index" >
           <slot name="itemTemplate" :data="item" :index="index"></slot>
         </div>
         <div v-if="list === undefined || list.length === 0">
