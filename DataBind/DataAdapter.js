@@ -10,7 +10,7 @@ export class DataAdapter {
         this.__includes = [];
         this.__orders = [];
         this.pageNumber = 1;
-        this.pageSize = 10;
+        this.pageSize = 100;
     }
     getView(viewId) {
         let views = this.viewDefine;
