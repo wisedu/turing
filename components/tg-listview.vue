@@ -63,7 +63,7 @@ export default {
       }
       
       this.containerStyle = {
-        margin: "0 -"+(gutter/2)+"px"
+        margin: "0 -"+gutter+"px"
       }
       
       if (this.grid.column !== undefined){
