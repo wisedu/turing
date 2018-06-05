@@ -42,7 +42,7 @@
         </tg-listview>
         <p />
         <h2>图标样式</h2>
-        <tg-listview ref="tglist" :datasource="ds" :grid="{gutter: 40}" @ready="init" pagination>
+        <tg-listview ref="tglist" :datasource="ds" :grid="{gutter: '10px 40px'}" @ready="init" pagination>
             <template slot="itemTemplate" slot-scope="props">
                 <tg-div>
                     <Icon type="stop" size="107"></Icon>

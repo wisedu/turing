@@ -1,5 +1,5 @@
 <template>
-  <div :style="parentStyle">
+  <div class="tg-listview-root">
     <div :class="containerClass" :style="containerStyle">
         <slot name="beforeTemplate"></slot>
         <div v-for="(item, index) in list" v-if="item._lv_hidden !== true" :style="layoutStyle" :class="layoutClassObject" :key="index" >
@@ -31,7 +31,7 @@ export default {
     size: {
       type: String,
       default: "default"
-    }
+    },
   },
   data: function() {
     return {
@@ -40,30 +40,41 @@ export default {
       layoutClassObject: {},
       containerClass: "",
       containerStyle: {},
-      parentStyle: {}
     };
   },
   created: function() {
     if (this.grid) {
       //横向排列模式
-      let gutter = isNaN(Number(this.grid.gutter)) ? 0 : Number(this.grid.gutter);
-      this.layoutStyle = {
-        padding: "" + (gutter/2) + "px"
+      let gutter = 0;
+      switch (typeof(this.grid.gutter)){
+        case "number":
+          gutter = isNaN(Number(this.grid.gutter)) ? 0 : Number(this.grid.gutter);
+          this.layoutStyle = {
+            padding: "" + (gutter/2) + "px"
+          }
+          break;
+        case "string":
+          //字符串类型必须最少输入 "0 2px"，取第二位作为左右边距
+          gutter = this.grid.gutter.split(" ")[1].replace("px", "")
+          this.layoutStyle = {
+            padding: this.grid.gutter
+          }
+          break;
       }
+      
       this.containerStyle = {
         margin: "0 -"+(gutter/2)+"px"
       }
-      this.parentStyle = {
-        padding: "0 " + (gutter/2) + "px"
-      }
+      
       if (this.grid.column !== undefined){
         //栅格模式，按照百分比宽度伸缩
-        let size = isNaN(Number(this.grid.column)) ? 12 : 12/Number(this.grid.column)
+        let size = isNaN(Number(this.grid.column)) ? 24 : 24/Number(this.grid.column)
         this.layoutClassObject["tg-col-" + size ] = true
         this.containerClass = 'tg-row';
       } else {
         //定宽模式，slot内控制宽度
         this.layoutStyle["float"] = "left";
+        this.containerClass = 'tg-clear';
       }
     } else {
       //行模式
@@ -125,5 +136,8 @@ export default {
 }
 .tg-listview-container-large{
   padding:0 16px;
+}
+.tg-listview-root{
+  overflow-x: hidden;
 }
 </style>

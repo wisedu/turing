@@ -21,7 +21,7 @@ import IviewFcForm from './formConnector/iview/iview-fc-form';
 import IviewFcStatic from './formConnector/iview/iview-fc-static';
 import MintFcForm from './formConnector/mint/mint-fc-form';
 import MintFcStatic from './formConnector/mint/mint-fc-static';
-const version = "1.4.18";
+const version = "1.4.19";
 const description = "turing components";
 const author = "金智教育 wisedu";
 const components = {
