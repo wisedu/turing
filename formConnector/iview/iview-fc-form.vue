@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Form :model="formValue" :label-width="labelWidth">
+        <Form :model="formValue" :label-width="labelWidth" :rules="ruleValidate">
             <tg-listview :datas="tglistFields" :grid="{gutter:0, column:column}">
                 <template slot="beforeTemplate">
                     <slot name="before"></slot>
@@ -31,15 +31,34 @@ export default {
     data(){
         return {
             //当前字段隐藏时，让listview组件所占位的格子也隐藏
-            tglistFields:this.fields.map(item => {
-                if (item.hidden === true) {
-                    item._lv_hidden = true;
-                }
-                return item;
-            }),
-            iviewForm: iviewForm
+            tglistFields:[],
+            iviewForm: iviewForm,
+            ruleValidate: {}
         }
     },
+    created(){
+        let rules = {};
+        this.tglistFields = this.fields.map(item => {
+            if (item.hidden === true) {
+                item._lv_hidden = true;
+            } else {
+                this.rules[item.name] = []
+                if (item.required === true) {
+                    this.rules[item.name].push({
+                        required: true, trigger: 'blur', message: `${item.name} 不能为空`
+                    });
+                }
+            }
+            return item;
+        });
+
+        for(let key in this.rules) {
+            if (this.rules[key].length === 0){
+                delete this.rules[key];
+            }
+        }
+        this.ruleValidate = this.rules;
+    }
 }
 </script>
 
