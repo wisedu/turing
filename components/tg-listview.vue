@@ -96,11 +96,11 @@ export default {
       }
     }
   },
-  watch: {
-    datas: function(val) {
-      this.list = val;
-    }
-  },
+  // watch: {
+  //   datas: function(val) {
+  //     this.list = val;
+  //   }
+  // },
   methods: {
     SetData(datas) {
       this.list = datas.rows;

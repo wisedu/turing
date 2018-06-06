@@ -7,7 +7,7 @@
                 </template>
                 <template slot="itemTemplate" slot-scope="props" v-if="props.data.hidden !== true">
                     <slot :name="props.data.name" :model="props.data" :value="formValue[props.data.name]" @sync-change="handleSyncChange" :ref="'field_' + props.data.name">
-                        <component :model="props.data" :is="registedComponentList(props.data, iviewForm)" @sync-change="handleSyncChange" 
+                        <component :model="props.data" :is="registedComponentList(props.data, iviewForm, 'iview-fc-static', props.index)" @sync-change="handleSyncChange" 
                         v-model="formValue[props.data.name]" :ref="'field_' + props.data.name"
                         :caption="props.data.caption" :xtype="props.data.xtype" :placeholder="props.data.placeholder"
                         :required="props.data.required" :readonly="props.data.readonly" :disabled="props.data.disabled"
@@ -23,12 +23,14 @@
 </template>
 
 <script>
-//:display-value.sync="value[props.data.display]" 
 import iviewForm from "./form";
 import formConnector from "../FormConnector";
 export default {
     name:"iview-fc-form",
     extends: formConnector,
+    components: {
+        TgListview,IviewFcStatic,IviewFcText
+    },
     data(){
         return {
             //当前字段隐藏时，让listview组件所占位的格子也隐藏
@@ -41,21 +43,6 @@ export default {
             iviewForm: iviewForm
         }
     },
-    methods:{
-        registedComponentList(model, connectorItems){
-            let xtype = model.xtype;
-            let caption = model.caption;
-            if (xtype === undefined) {
-                console.warn(`Turing FormConnector: field ${caption}'s xtype is undefined, instead of using 'static'.`, model)
-                return connectorItems['static']
-            } else if (connectorItems[xtype] === undefined) {
-                console.warn(`Turing FormConnector: field ${caption}'s xtype '${xtype}' is undefined, instead of using 'iview-fc-static'.`, model)
-                return 'iview-fc-static';
-            } else {
-                return connectorItems[xtype]
-            }
-        }
-    }
 }
 </script>
 

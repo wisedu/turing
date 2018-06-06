@@ -2,7 +2,7 @@
     <div class="emapm-form" :class="{'emapm-form-readonly':readonly}">
         <div v-for="metaItem in fields" class="emapm-item" :key="metaItem.name">
             <slot :name="metaItem.name" :model="metaItem" :display-value.sync="formValue[metaItem.displayName]" :value="formValue[metaItem.name]" @sync-change="handleSyncChange" :ref="'field' + metaItem.name">
-                <component :model="metaItem" :is="registedComponentList[metaItem.xtype || 'static'] || 'mint-fc-static'" v-model="formValue[metaItem.name]" @sync-change="handleSyncChange" :display-value.sync="formValue[metaItem.displayName]" :options="optionsMap[metaItem.name]" :ref="'field' + metaItem.name"></component>
+                <component :model="metaItem" :is="registedComponentList(props.data, mintForm, 'mint-fc-static')" v-model="formValue[metaItem.name]" @sync-change="handleSyncChange" :display-value.sync="formValue[metaItem.displayName]" :options="optionsMap[metaItem.name]" :ref="'field' + metaItem.name"></component>
             </slot>
         </div>
     </div>
@@ -14,9 +14,9 @@ import formConnector from "../FormConnector";
 export default {
     name:"mint-fc-form",
     extends: formConnector,
-    computed:{
-        registedComponentList(){
-            return mintForm;
+    data(){
+        return {
+            mintForm: mintForm
         }
     },
 }
