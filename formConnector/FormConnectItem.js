@@ -7,6 +7,7 @@ export default{
             }
         },
         caption: String,
+        name: String,
         value: null,
         display: String,
         xtype: String,

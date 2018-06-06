@@ -11,7 +11,7 @@
                         v-model="formValue[props.data.name]" :ref="'field_' + props.data.name"
                         :caption="props.data.caption" :xtype="props.data.xtype" :placeholder="props.data.placeholder"
                         :required="props.data.required" :readonly="props.data.readonly" :disabled="props.data.disabled"
-                        :params="props.data.params" :options="props.data.options"></component>
+                        :params="props.data.params" :options="props.data.options" @on-item-change="updateValue"></component>
                     </slot>
                 </template>
                 <template slot="afterTemplate">
@@ -28,9 +28,6 @@ import formConnector from "../FormConnector";
 export default {
     name:"iview-fc-form",
     extends: formConnector,
-    components: {
-        TgListview,IviewFcStatic,IviewFcText
-    },
     data(){
         return {
             //当前字段隐藏时，让listview组件所占位的格子也隐藏
