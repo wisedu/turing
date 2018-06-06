@@ -42,9 +42,9 @@ export default {
             if (item.hidden === true) {
                 item._lv_hidden = true;
             } else {
-                this.rules[item.name] = []
+                rules[item.name] = []
                 if (item.required === true) {
-                    this.rules[item.name].push({
+                    rules[item.name].push({
                         required: true, trigger: 'blur', message: `${item.name} 不能为空`
                     });
                 }
@@ -52,12 +52,12 @@ export default {
             return item;
         });
 
-        for(let key in this.rules) {
-            if (this.rules[key].length === 0){
-                delete this.rules[key];
+        for(let key in rules) {
+            if (rules[key].length === 0){
+                delete rules[key];
             }
         }
-        this.ruleValidate = this.rules;
+        this.ruleValidate = rules;
     }
 }
 </script>

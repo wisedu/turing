@@ -1,9 +1,7 @@
 <template>
-    <div>
-        <FormItem :label="caption">
-            {{currentValue}}&nbsp;
-        </FormItem>
-    </div>
+    <FormItem :label="caption">
+        {{currentValue}}&nbsp;
+    </FormItem>
 </template>
 
 <script>

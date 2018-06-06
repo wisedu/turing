@@ -36,6 +36,7 @@ export default {
                 this.formDisplay[name] = value;
             }
             this.$emit("on-value-change", this.formValue, name, value, display);
+            this.$emit("input", this.formValue)
         },
         getValue(name){
             if (name === undefined) {
