@@ -12,13 +12,11 @@ export default {
     data(){
         return {
             formValue:this.value,
+            formDisplay: {},
             optionsMap: {}
         }
     },
     methods:{
-        handleSyncChange(val, name) {
-            this.$set(this.formValue, name, val);
-        },
         registedComponentList(model, connectorItems, defaultXtype, index){
             let xtype = model.xtype;
             let caption = model.caption;
@@ -32,9 +30,12 @@ export default {
                 return connectorItems[xtype]
             }
         },
-        updateValue(name, value){
+        updateValue(name, value, model, display){
             this.formValue[name] = value;
-            this.$emit("onValueChange", this.formValue, name, value);
+            if (display !== undefined) {
+                this.formDisplay[name] = value;
+            }
+            this.$emit("on-value-change", this.formValue, name, value, display);
         }
     }
 }
