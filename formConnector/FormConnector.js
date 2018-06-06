@@ -36,6 +36,20 @@ export default {
                 this.formDisplay[name] = value;
             }
             this.$emit("on-value-change", this.formValue, name, value, display);
+        },
+        getValue(name){
+            if (name === undefined) {
+                return this.formValue;
+            } else {
+                return this.formValue[name];
+            }
+        },
+        getDisplay(name){
+            if (name === undefined) {
+                return this.formDisplay;
+            } else {
+                return this.formDisplay[name];
+            }
         }
     }
 }
