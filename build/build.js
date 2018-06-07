@@ -79,6 +79,7 @@ import mintForm from './formConnector/mint/form.js';
 
 import {DataAdapter} from './DataBind/DataAdapter.js';
 import {DataSourceManager} from './DataBind/DataSourceManager.js';
+import DataFilter from './DataBind/DataFilter.js';
 ${jsImport.join("\r\n")}
 const version = "${packageJSON.version}";
 const description = "${packageJSON.description}";
@@ -101,13 +102,13 @@ export default Object.assign({}, {
     ...components,
     utils, version, description, author, 
     DataAdapter, DataSourceManager, FormConnectItem, 
-    iview:{form:iviewForm}, mint:{form:mintForm},
+    iview:{form:iviewForm}, mint:{form:mintForm}, DataFilter,
     axios, moment
 });
 export {
     utils, version, description, author, 
     DataAdapter, DataSourceManager, FormConnectItem, 
-    iviewForm, mintForm,
+    iviewForm, mintForm, DataFilter,
     axios, moment
 }`
 

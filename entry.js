@@ -8,6 +8,7 @@ import mintForm from './formConnector/mint/form.js';
 
 import {DataAdapter} from './DataBind/DataAdapter.js';
 import {DataSourceManager} from './DataBind/DataSourceManager.js';
+import DataFilter from './DataBind/DataFilter.js';
 import TgContainer from './components/tg-container.vue';
 import TgDiv from './components/tg-div.vue';
 import TgForm from './components/tg-form.vue';
@@ -21,7 +22,7 @@ import IviewFcForm from './formConnector/iview/iview-fc-form';
 import IviewFcStatic from './formConnector/iview/iview-fc-static';
 import MintFcForm from './formConnector/mint/mint-fc-form';
 import MintFcStatic from './formConnector/mint/mint-fc-static';
-const version = "1.5.10";
+const version = "1.5.11";
 const description = "turing components";
 const author = "金智教育 wisedu";
 const components = {
@@ -42,12 +43,12 @@ export default Object.assign({}, {
     ...components,
     utils, version, description, author, 
     DataAdapter, DataSourceManager, FormConnectItem, 
-    iview:{form:iviewForm}, mint:{form:mintForm},
+    iview:{form:iviewForm}, mint:{form:mintForm}, DataFilter,
     axios, moment
 });
 export {
     utils, version, description, author, 
     DataAdapter, DataSourceManager, FormConnectItem, 
-    iviewForm, mintForm,
+    iviewForm, mintForm, DataFilter,
     axios, moment
 }
