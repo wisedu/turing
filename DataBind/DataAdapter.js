@@ -1,13 +1,10 @@
 import utils from '../src/utils.js';
 import axios from 'axios'
 
-
 export class DataAdapter {
-    
     constructor(meta) {
         this.__meta = meta;
         this.viewDefine;
-        this.__includes = [];
         this.__orders = [];
         this.pageNumber = 1;
         this.pageSize = 100;
@@ -64,13 +61,17 @@ export class DataAdapter {
             method: "post",
             name: ""
         },
+        findById:{
+            url: "",
+            method: "get",
+            name: ""
+        },
         find:{
             url: "",
             method: "post",
             name: "",
             params: {},
             orders: [],
-            include: []
         }
     }
 
@@ -82,10 +83,7 @@ export class DataAdapter {
         let defaultParams = {
             where: utils.extend(true, {}, this.actions.find.params, param || {})
         };
-        if (this.actions.find.include.length > 0) {
-            defaultParams["include"] = this.actions.find.include;
-        }
-
+        
         defaultParams["order"] = this.actions.find.orders.concat(this.__orders);
         if (defaultParams["order"].length == 0) {
             delete defaultParams.order;
@@ -109,18 +107,18 @@ export class DataAdapter {
             }
         });
     }
-
-    findById() {
-
+    findById(params) {
+        var that = this;
+        return this.execute(this.actions.findById, params).then(function(result){
+            return result.data;
+        });
     }
-
     delete(params) {
         var that = this;
         return this.execute(this.actions.delete, params).then(function(result){
             return result.data;
         });
     }
-
     save(data) {
         var that = this;
         return this.execute(this.actions.save, data).then(function(result){

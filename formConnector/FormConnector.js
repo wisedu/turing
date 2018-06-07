@@ -33,7 +33,7 @@ export default {
         updateValue(name, value, model, display){
             this.formValue[name] = value;
             if (display !== undefined) {
-                this.formDisplay[name] = value;
+                this.formDisplay[name] = display;
             }
             this.$emit("on-value-change", this.formValue, name, value, display);
             this.$emit("input", this.formValue)
