@@ -1,8 +1,8 @@
 <template>
     <div class="tg-mint-form" :class="{'tg-mint-form-readonly':readonly}">
         <div v-for="metaItem in fields" class="tg-mint-item" :key="metaItem.name">
-            <slot :name="metaItem.name" :model="metaItem" :value="formValue[metaItem.name]" :ref="'field' + metaItem.name">
-                <component :model="metaItem" :is="registedComponentList(props.data, mintForm, 'mint-fc-static')" 
+            <slot :name="metaItem.name" :model="metaItem" :value="formValue[metaItem.name]" :ref="'field' + metaItem.name" :formReadonly="readonly">
+                <component :model="metaItem" :is="registedComponentList(props.data, mintForm, 'mint-fc-static')" :formReadonly="readonly"
                 v-model="formValue[metaItem.name]" :options="optionsMap[metaItem.name]" :ref="'field' + metaItem.name"></component>
             </slot>
         </div>
