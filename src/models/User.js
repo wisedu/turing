@@ -1,6 +1,5 @@
 import {DataAdapter} from '../../DataBind/DataAdapter'
-import iviewAdapter from '../../ComAdapter/iviewAdapter'
-import aggridAdapter from "../../ComAdapter/aggridAdapter";
+import utils from '../utils'
 export default class extends DataAdapter{
     constructor() {
         super()

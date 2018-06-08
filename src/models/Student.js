@@ -216,108 +216,133 @@ export default class extends DataAdapter{
             },
             "默认表单:form": {
                 "WID": {"xtype": "text","dataSize": 40},
-                "XSBH": {"xtype": "text","dataSize": 40},
-                "XH": {"xtype": "text","dataSize": 20},
-                "XM": {"xtype": "text","dataSize": 90},
-                "XMPY": {"dataSize": 120},
-                "CYM": {"dataSize": 120},
-                "XBDM": {"url": "/axsfw/code/b2738d0d-0eb1-4b03-b0f6-98f509a88c8c.do","xtype": "select","dataSize": 1},
-                "CSRQ": {"xtype": "date-local","dataSize": 10},
-                "MZDM": {"url": "/axsfw/code/e8bdc02d-2d5b-4367-b832-cd47e6ac42c1.do","xtype": "select","dataSize": 2},
-                "SFZJLXDM": {"url": "/axsfw/code/553c0263-42d7-45c5-9cc3-049e371ce9d4.do","xtype": "select","dataSize": 1},
-                "SFZJH": {"xtype": "text","dataSize": 20},
-                "JG": {"url": "/axsfw/code/80f9d8aa-d053-4312-b725-016642b74e3e.do","xtype": "tree","dataSize": 6},
-                "CSDDM": {"url": "/axsfw/code/80f9d8aa-d053-4312-b725-016642b74e3e.do","xtype": "tree","dataSize": 6},
-                "SYDDM": {"url": "/axsfw/code/80f9d8aa-d053-4312-b725-016642b74e3e.do","xtype": "tree","dataSize": 6},
-                "HKSZD": {"xtype": "text","dataSize": 180},
-                "GJDQDM": {"url": "/axsfw/code/9ea2317c-be66-428d-b1f4-7f0f5bc5ad09.do","xtype": "select","dataSize": 3},
-                "HKXZDM": {"url": "/axsfw/code/a6308f2e-d206-4bd3-aa79-7a839998120c.do","xtype": "select","dataSize": 1},
-                "GATQDM": {"url": "/axsfw/code/0e53b529-ecdc-4c9c-8c8c-5e26a0a1f304.do","xtype": "select","dataSize": 2},
-                "ZZMMDM": {"url": "/axsfw/code/1079937e-d441-448d-b7e9-1e45bea76e8d.do","xtype": "select","dataSize": 2},
-                "XYZJDM": {"url": "/axsfw/code/492af6f5-4048-4034-beda-8c051a7fcc3d.do","xtype": "select","dataSize": 2},
-                "HYZKDM": {"url": "/axsfw/code/7303c198-94dd-4b89-b972-2e08f622dd28.do","xtype": "select","dataSize": 2},
-                "YKTKH": {"xtype": "text","dataSize": 30},
-                "KHM": {"dataSize": 300},
-                "KKYH": {"dataSize": 20},
-                "YHZH": {"xtype": "text","dataSize": 40},
-                "CCQJ": {"xtype": "selecttable","url": "/axsfw/sys/swpubapp/*default/ggmk/hczzdmhss.do","dataSize": 300},
-                "JKZKDM": {"url": "/axsfw/code/70302a56-36d1-4f5f-b61f-c2e149d27413.do","xtype": "select","dataSize": 2},
-                "XXDM": {"url": "/axsfw/code/bed9e2f1-18fc-47d1-bdd9-0ea71214b7fb.do","xtype": "select","dataSize": 1},
-                "TZ": {"xtype": "text","dataSize": [5,2]},
-                "SG": {"checkSize": 6,"checkType": "custom[number]","xtype": "text","dataSize": 10},
-                "TC": {"xtype": "text","dataSize": 600},
-                "BS": {"dataSize": 600},
-                "SFDSZN": {"url": "/axsfw/code/67dbb4e6-5283-4da2-ae0c-37414988b50b/SFSY.do","xtype": "select","dataSize": 3},
-                "XJZTDM": {"url": "/axsfw/code/12eb4f7c-69a1-41c2-b21e-c99fe850264a.do","xtype": "select","dataSize": 6},
-                "PYFSDM": {"url": "/axsfw/code/9afe2f0b-75ed-44a2-b81c-8ed54b235a2c.do","xtype": "select","dataSize": 2},
-                "DWDM": {"url": "/axsfw/code/ffcf5f04-e557-4b90-8528-f22019bd8cf0.do","xtype": "select","dataSize": 40},
-                "ZYDM": {"url": "/axsfw/code/94b15a8a-9b45-4455-b254-1ec2065028d9.do","xtype": "select","dataSize": 40},
-                "XZNJ": {"xtype": "text","dataSize": 10},
-                "BJDM": {"url": "/axsfw/code/ab43d66a-9778-49b1-b3e0-0ce46317fed9.do","xtype": "select","dataSize": 100},
-                "XZ": {"xtype": "text","dataSize": 10},
-                "XSLBDM": {"url": "/axsfw/code/42122d93-9df9-492b-b647-253817691287.do","xtype": "select","dataSize": 5},
-                "PYCCDM": {"url": "/axsfw/code/9ec58134-0517-4664-8969-5342ffcaf190.do","xtype": "select","dataSize": 1},
-                "LWDBRQ": {"xtype": "date-local","dataSize": 20},
-                "YJBYRQ": {"xtype": "date-local","dataSize": 30},
-                "SJBYRQ": {"xtype": "date-local","dataSize": 10},
-                "WPDW": {"dataSize": 180},
-                "DSZGH": {"dataSize": 40},
-                "XSLXDM": {"xtype": "select","url": "/axsfw/code/eb92b121-4462-41de-9958-82e356fe64c6.do","dataSize": 10},
-                "XXXSDM": {"xtype": "select","url": "/axsfw/code/ba8b3565-59c1-4251-a749-8f9c3dc358a1.do","dataSize": 10},
-                "ZYDLDM": {"xtype": "select","url": "/axsfw/code/c7d50532-bcba-4bb8-84b1-ffd6820c2d0a.do","dataSize": 10},
-                "KSH": {"xtype": "text","dataSize": 20},
-                "KSLBDM": {"url": "/axsfw/code/acc2e70d-21d8-48fd-8c11-762fb2d01c47.do","xtype": "select","dataSize": 10},
-                "RXNY": {"xtype": "date-ym","dataSize": 10},
-                "RXQDW": {"xtype": "text","dataSize": 300},
-                "RXFSDM": {"url": "/axsfw/code/e3c96900-7acb-4265-a81b-45079c3485b8.do","xtype": "select","dataSize": 2},
-                "RXJJDM": {"xtype": "select","url": "/axsfw/code/67dbb4e6-5283-4da2-ae0c-37414988b50b/RXJJ.do","dataSize": 10},
-                "TZSH": {"xtype": "text","dataSize": 20},
-                "GKZF": {"xtype": "text","dataSize": [5,2]},
-                "KM1FS": {"xtype": "text","dataSize": [5,2]},
-                "KM2FS": {"xtype": "text","dataSize": [5,2]},
-                "KM3FS": {"xtype": "text","dataSize": [5,2]},
-                "KM4FS": {"xtype": "text","dataSize": [5,2]},
-                "KM5FS": {"xtype": "text","dataSize": [5,2]},
-                "SJH": {"checkType": "custom[phone]","xtype": "text","dataSize": 40},
-                "DZXX": {"checkType": "custom[email]","xtype": "text","dataSize": 100},
-                "LXDH": {"xtype": "text","dataSize": 300},
-                "QQH": {"xtype": "text","dataSize": 20},
-                "WXH": {"xtype": "text","dataSize": 40},
-                "ZXYZBM": {"xtype": "text","dataSize": 6},
-                "ZXTXDZ": {"col": 3,"xtype": "text","dataSize": 300},
-                "JTDZ": {"col": 3,"xtype": "text","dataSize": 300},
-                "JTDZQH": {"url": "/axsfw/code/80f9d8aa-d053-4312-b725-016642b74e3e.do","xtype": "tree","dataSize": 6},
-                "JTYB": {"checkType": "custom[chinaZip]","xtype": "text","dataSize": 6},
-                "JTDH": {"xtype": "text","dataSize": 100},
-                "ZSDZ": {"xtype": "text","dataSize": 300},
-                "XSZP": {"dataSize": 40},
-                "RDSJ": {"xtype": "date-local","dataSize": 20},
-                "SSDZB": {"dataSize": 120},
-                "SJCJ": {"dataSize": 10},
-                "LJCJ": {"dataSize": 10},
-                "XQDM": {"url": "/axsfw/code/24a8b754-7532-4a76-b07b-4aea4e402382.do","xtype": "select","dataSize": 40},
-                "SSQ": {"url": "/axsfw/code/f4fbe313-bcf7-4599-90ff-f89db2716417.do","xtype": "select","dataSize": 40},
-                "SSL": {"url": "/axsfw/code/c043b195-d8a2-498d-86b5-09e27da23b2d.do","xtype": "select","dataSize": 40},
-                "BZ6": {"xtype": "text","dataSize": 200},
-                "BZ1": {"xtype": "text","dataSize": 200},
-                "BZ2": {"xtype": "text","dataSize": 200},
-                "BZ3": {"xtype": "text","dataSize": 200},
-                "BZ4": {"xtype": "text","dataSize": 200},
-                "BZ5": {"xtype": "text","dataSize": 200},
-                "BZ7": {"dataSize": 300},
-                "BZ8": {"dataSize": 300},
-                "BZ9": {"dataSize": 300},
-                "BZ10": {"dataSize": 300},
-                "BZ11": {"dataSize": 300},
-                "BZ12": {"dataSize": 300},
-                "BZ13": {"dataSize": 300},
-                "BZ14": {"dataSize": 300},
-                "BZ15": {"dataSize": 300},
-                "BZ16": {"dataSize": 300},
-                "BZ17": {"dataSize": 300},
-                "BZ18": {"dataSize": 300},
-                "BZ19": {"dataSize": 300},
-                "BZ20": {"dataSize": 300}
+                "group:[个人基本信息]":{
+                    desc:"",
+                    items:{
+                        "XSBH": {"xtype": "text","dataSize": 40},
+                        "XH": {"xtype": "text","dataSize": 20},
+                        "XM": {"xtype": "text","dataSize": 90},
+                        "XMPY": {"dataSize": 120},
+                        "CYM": {"dataSize": 120},
+                        "XBDM": {"xtype": "select","dataSize": 1},
+                        "CSRQ": {"xtype": "date-local","dataSize": 10},
+                        "MZDM": {"xtype": "select","dataSize": 2},
+                        "SFZJLXDM": {"url": "/axsfw/code/553c0263-42d7-45c5-9cc3-049e371ce9d4.do","xtype": "select","dataSize": 1},
+                        "SFZJH": {"xtype": "text","dataSize": 20},
+                        "JG": {"url": "/axsfw/code/80f9d8aa-d053-4312-b725-016642b74e3e.do","xtype": "tree","dataSize": 6},
+                        "CSDDM": {"url": "/axsfw/code/80f9d8aa-d053-4312-b725-016642b74e3e.do","xtype": "tree","dataSize": 6},
+                        "SYDDM": {"url": "/axsfw/code/80f9d8aa-d053-4312-b725-016642b74e3e.do","xtype": "tree","dataSize": 6},
+                        "HKSZD": {"xtype": "text","dataSize": 180},
+                        "GJDQDM": {"xtype": "select","dataSize": 3},
+                        "HKXZDM": {"url": "/axsfw/code/a6308f2e-d206-4bd3-aa79-7a839998120c.do","xtype": "select","dataSize": 1},
+                        "GATQDM": {"url": "/axsfw/code/0e53b529-ecdc-4c9c-8c8c-5e26a0a1f304.do","xtype": "select","dataSize": 2},
+                        "ZZMMDM": {"url": "/axsfw/code/1079937e-d441-448d-b7e9-1e45bea76e8d.do","xtype": "select","dataSize": 2},
+                        "XYZJDM": {"url": "/axsfw/code/492af6f5-4048-4034-beda-8c051a7fcc3d.do","xtype": "select","dataSize": 2},
+                        "HYZKDM": {"url": "/axsfw/code/7303c198-94dd-4b89-b972-2e08f622dd28.do","xtype": "select","dataSize": 2},
+                        "YKTKH": {"xtype": "text","dataSize": 30},
+                        "KHM": {"dataSize": 300},
+                        "KKYH": {"dataSize": 20},
+                        "YHZH": {"xtype": "text","dataSize": 40},
+                        "CCQJ": {"xtype": "selecttable","url": "/axsfw/sys/swpubapp/*default/ggmk/hczzdmhss.do","dataSize": 300},
+                        "JKZKDM": {"url": "/axsfw/code/70302a56-36d1-4f5f-b61f-c2e149d27413.do","xtype": "select","dataSize": 2},
+                        "XXDM": {"url": "/axsfw/code/bed9e2f1-18fc-47d1-bdd9-0ea71214b7fb.do","xtype": "select","dataSize": 1},
+                        "TZ": {"xtype": "text","dataSize": [5,2]},
+                        "SG": {"checkSize": 6,"checkType": "custom[number]","xtype": "text","dataSize": 10},
+                        "TC": {"xtype": "text","dataSize": 600},
+                        "BS": {"dataSize": 600},
+                        "SFDSZN": {"url": "/axsfw/code/67dbb4e6-5283-4da2-ae0c-37414988b50b/SFSY.do","xtype": "select","dataSize": 3},
+                    }
+                },
+                "group:[学籍信息]":{
+                    desc:"",
+                    items:{
+                        "XJZTDM": {"url": "/axsfw/code/12eb4f7c-69a1-41c2-b21e-c99fe850264a.do","xtype": "select","dataSize": 6},
+                        "PYFSDM": {"url": "/axsfw/code/9afe2f0b-75ed-44a2-b81c-8ed54b235a2c.do","xtype": "select","dataSize": 2},
+                        "DWDM": {"url": "/axsfw/code/ffcf5f04-e557-4b90-8528-f22019bd8cf0.do","xtype": "select","dataSize": 40},
+                        "ZYDM": {"url": "/axsfw/code/94b15a8a-9b45-4455-b254-1ec2065028d9.do","xtype": "select","dataSize": 40},
+                        "XZNJ": {"xtype": "text","dataSize": 10},
+                        "BJDM": {"url": "/axsfw/code/ab43d66a-9778-49b1-b3e0-0ce46317fed9.do","xtype": "select","dataSize": 100},
+                        "XZ": {"xtype": "text","dataSize": 10},
+                        "XSLBDM": {"url": "/axsfw/code/42122d93-9df9-492b-b647-253817691287.do","xtype": "select","dataSize": 5},
+                        "PYCCDM": {"url": "/axsfw/code/9ec58134-0517-4664-8969-5342ffcaf190.do","xtype": "select","dataSize": 1},
+                        "LWDBRQ": {"xtype": "date-local","dataSize": 20},
+                        "YJBYRQ": {"xtype": "date-local","dataSize": 30},
+                        "SJBYRQ": {"xtype": "date-local","dataSize": 10},
+                        "WPDW": {"dataSize": 180},
+                        "DSZGH": {"dataSize": 40},
+                        "XSLXDM": {"xtype": "select","url": "/axsfw/code/eb92b121-4462-41de-9958-82e356fe64c6.do","dataSize": 10},
+                        "XXXSDM": {"xtype": "select","url": "/axsfw/code/ba8b3565-59c1-4251-a749-8f9c3dc358a1.do","dataSize": 10},
+                        "ZYDLDM": {"xtype": "select","url": "/axsfw/code/c7d50532-bcba-4bb8-84b1-ffd6820c2d0a.do","dataSize": 10},
+                    }
+                },
+                "group:[入学信息]":{
+                    desc:"",
+                    items:{
+                        "KSH": {"xtype": "text","dataSize": 20},
+                        "KSLBDM": {"url": "/axsfw/code/acc2e70d-21d8-48fd-8c11-762fb2d01c47.do","xtype": "select","dataSize": 10},
+                        "RXNY": {"xtype": "date-ym","dataSize": 10},
+                        "RXQDW": {"xtype": "text","dataSize": 300},
+                        "RXFSDM": {"url": "/axsfw/code/e3c96900-7acb-4265-a81b-45079c3485b8.do","xtype": "select","dataSize": 2},
+                        "RXJJDM": {"xtype": "select","url": "/axsfw/code/67dbb4e6-5283-4da2-ae0c-37414988b50b/RXJJ.do","dataSize": 10},
+                        "TZSH": {"xtype": "text","dataSize": 20},
+                        "GKZF": {"xtype": "text","dataSize": [5,2]},
+                        "KM1FS": {"xtype": "text","dataSize": [5,2]},
+                        "KM2FS": {"xtype": "text","dataSize": [5,2]},
+                        "KM3FS": {"xtype": "text","dataSize": [5,2]},
+                        "KM4FS": {"xtype": "text","dataSize": [5,2]},
+                        "KM5FS": {"xtype": "text","dataSize": [5,2]},
+                    }
+                },
+                "group:[联系信息]":{
+                    desc:"",
+                    items:{
+                        "SJH": {"checkType": "custom[phone]","xtype": "text","dataSize": 40},
+                        "DZXX": {"checkType": "custom[email]","xtype": "text","dataSize": 100},
+                        "LXDH": {"xtype": "text","dataSize": 300},
+                        "QQH": {"xtype": "text","dataSize": 20},
+                        "WXH": {"xtype": "text","dataSize": 40},
+                        "ZXYZBM": {"xtype": "text","dataSize": 6},
+                        "ZXTXDZ": {"col": 3,"xtype": "text","dataSize": 300},
+                        "JTDZ": {"col": 3,"xtype": "text","dataSize": 300},
+                        "JTDZQH": {"url": "/axsfw/code/80f9d8aa-d053-4312-b725-016642b74e3e.do","xtype": "tree","dataSize": 6},
+                        "JTYB": {"checkType": "custom[chinaZip]","xtype": "text","dataSize": 6},
+                        "JTDH": {"xtype": "text","dataSize": 100},
+                        "ZSDZ": {"xtype": "text","dataSize": 300},
+                    }
+                },
+                "group:[其他信息]":{
+                    desc:"",
+                    items:{
+                        "XSZP": {"dataSize": 40},
+                        "RDSJ": {"xtype": "date-local","dataSize": 20},
+                        "SSDZB": {"dataSize": 120},
+                        "SJCJ": {"dataSize": 10},
+                        "LJCJ": {"dataSize": 10},
+                        "XQDM": {"url": "/axsfw/code/24a8b754-7532-4a76-b07b-4aea4e402382.do","xtype": "select","dataSize": 40},
+                        "SSQ": {"url": "/axsfw/code/f4fbe313-bcf7-4599-90ff-f89db2716417.do","xtype": "select","dataSize": 40},
+                        "SSL": {"url": "/axsfw/code/c043b195-d8a2-498d-86b5-09e27da23b2d.do","xtype": "select","dataSize": 40},
+                        "BZ6": {"xtype": "text","dataSize": 200},
+                        "BZ1": {"xtype": "text","dataSize": 200},
+                        "BZ2": {"xtype": "text","dataSize": 200},
+                        "BZ3": {"xtype": "text","dataSize": 200},
+                        "BZ4": {"xtype": "text","dataSize": 200},
+                        "BZ5": {"xtype": "text","dataSize": 200},
+                        "BZ7": {"dataSize": 300},
+                        "BZ8": {"dataSize": 300},
+                        "BZ9": {"dataSize": 300},
+                        "BZ10": {"dataSize": 300},
+                        "BZ11": {"dataSize": 300},
+                        "BZ12": {"dataSize": 300},
+                        "BZ13": {"dataSize": 300},
+                        "BZ14": {"dataSize": 300},
+                        "BZ15": {"dataSize": 300},
+                        "BZ16": {"dataSize": 300},
+                        "BZ17": {"dataSize": 300},
+                        "BZ18": {"dataSize": 300},
+                        "BZ19": {"dataSize": 300},
+                        "BZ20": {"dataSize": 300}
+                    }
+                },
             },
             "search": {
                 "WID": {},
@@ -438,14 +463,32 @@ export default class extends DataAdapter{
         let model = this.getView(name);
         let iviewModel = []
         for(let prop in model){
-            let newFormItem = utils.extend({}, {
-                name: prop, 
-                xtype: "static"
-            }, model[prop], params);
-            if (model[prop].xtype !== undefined && model[prop].options === undefined){
-                model[prop].options = [];
+            if (prop.startsWith("group:[")) {
+                let newFormGroup = {
+                    name: prop, items:[], title:model[prop].title
+                };
+                for(let item in model[prop].items){
+                    let modelitem = model[prop].items[item];
+                    let newFormItem = utils.extend({}, {
+                        name: item, 
+                        xtype: "static"
+                    }, modelitem, params);
+                    if (modelitem.xtype !== undefined && modelitem.options === undefined){
+                        modelitem.options = [];
+                    }
+                    newFormGroup.items.push(newFormItem);
+                }
+                iviewModel.push(newFormGroup);
+            } else {
+                let newFormItem = utils.extend({}, {
+                    name: prop, 
+                    xtype: "static"
+                }, model[prop], params);
+                if (model[prop].xtype !== undefined && model[prop].options === undefined){
+                    model[prop].options = [];
+                }
+                iviewModel.push(newFormItem);
             }
-            iviewModel.push(newFormItem);
         }
         return iviewModel;
     }

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :class={readonly:readonly}>
         <Form :model="formValue" :label-width="labelWidth" :rules="ruleValidate">
             <tg-listview :datas="tglistFields" :grid="{gutter:0, column:column}">
                 <template slot="beforeTemplate">
@@ -25,9 +25,14 @@
 <script>
 import iviewForm from "./form";
 import formConnector from "../FormConnector";
+import TgListview from "../../components/tg-listview";
+import IviewFcStatic from "./iview-fc-static";
 export default {
     name:"iview-fc-form",
     extends: formConnector,
+    components: {
+        TgListview,IviewFcStatic
+    },
     data(){
         return {
             //当前字段隐藏时，让listview组件所占位的格子也隐藏
@@ -63,5 +68,26 @@ export default {
 </script>
 
 <style>
-
+.readonly .ivu-form{
+    border-top: 1px solid #e9eaec;
+    border-left: 1px solid #e9eaec;
+}
+.readonly .ivu-form .ivu-form-item-label{
+    background-color: #f8f8f9;
+    border-bottom: 1px solid #e9eaec;
+    border-right: 1px solid #e9eaec;
+}
+.readonly .ivu-form .ivu-form-item{
+    margin-bottom: 0;
+    display: flex;
+}
+.readonly .ivu-form .ivu-form-item-content{
+    border-bottom: 1px solid #e9eaec;
+    border-right: 1px solid #e9eaec;
+    width: calc(100% - 100px);
+    margin-left: 0!important;
+}
+.readonly .ivu-form .ivu-upload-select{
+    display: none;
+}
 </style>

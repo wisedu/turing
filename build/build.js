@@ -70,6 +70,7 @@ jsClass.push("MintFcStatic");
 
 let template = 
 `import utils from './src/utils.js';
+import 'core-js';
 import axios from 'axios';
 import moment from 'moment';
 import FormConnectItem from './formConnector/FormConnectItem.js';

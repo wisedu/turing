@@ -14,7 +14,19 @@ export class DataAdapter {
         let result = {}
         for(let prop in views[viewId]) {
             result[prop] = {};
-            utils.extend(true, result[prop], views["default"][prop], views[viewId][prop]);
+            //如果有分组，则循环分组中的items
+            if (prop.startsWith("group:[")) {
+                let newGroupItem = {}
+                let groupItems = views[viewId][prop].items;
+                for(let item in groupItems){
+                    newGroupItem[item] = {};
+                    utils.extend(true, newGroupItem[item], views["default"][item], groupItems[item]);
+                }
+                result[prop].title = prop.match(/\[(.*?)\]/)[1];
+                result[prop].items = newGroupItem;
+            } else {
+                utils.extend(true, result[prop], views["default"][prop], views[viewId][prop]);
+            }
         }
         return result;
     }

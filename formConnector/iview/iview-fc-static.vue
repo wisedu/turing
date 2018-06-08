@@ -1,6 +1,6 @@
 <template>
     <FormItem :label="caption">
-        {{currentValue}}&nbsp;
+        {{value}}&nbsp;
     </FormItem>
 </template>
 
