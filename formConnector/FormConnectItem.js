@@ -19,6 +19,7 @@ export default{
         },
         placeholder: String,
         required: Boolean,
+        formReadonly: Boolean,
         readonly: Boolean,
         disabled: Boolean,
         params: {
