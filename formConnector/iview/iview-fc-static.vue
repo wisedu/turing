@@ -1,6 +1,6 @@
 <template>
     <FormItem :label="caption">
-        {{value}}&nbsp;
+        <div class="iview-fc-static-readonly">{{value}}&nbsp;</div>
     </FormItem>
 </template>
 
@@ -14,5 +14,7 @@ export default {
 </script>
 
 <style>
-
+.iview-fc-static-readonly{
+    padding-left: 8px;
+}
 </style>
