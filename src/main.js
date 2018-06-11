@@ -4,8 +4,9 @@ import VueRouter from 'vue-router';
 import iView from 'bh-iview';
 import App from './app.vue';
 import route from './router';
-import * as utils from './utils'
-import api from './api'
+
+import MintUI from 'bh-mint-ui2'
+Vue.use(MintUI)
 // import fcutil from './fcUtil'
 
 Vue.use(iView);

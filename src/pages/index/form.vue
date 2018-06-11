@@ -1,8 +1,8 @@
 <template>
     <div>
-        <tg-form :fields="fields" type="iview" :column=4></tg-form>
+        <tg-form :fields="fields" type="mint" :column=4></tg-form>
         <hr>
-        <tg-form :fields="fields_scd" type="iview" :column=4></tg-form>
+        <tg-form :fields="fields_scd" type="mint" :column=4></tg-form>
     </div>
 </template>
 

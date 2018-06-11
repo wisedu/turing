@@ -14,9 +14,14 @@
 </template>
 <script>
 import formConnector from "../formConnector/FormConnector";
+
 import IviewFcGroup from '../formConnector/iview/iview-fc-group'
 import IviewFcForm from '../formConnector/iview/iview-fc-form'
 import IviewFcStatic from '../formConnector/iview/iview-fc-static'
+
+import MintFcGroup from '../formConnector/mint/mint-fc-group'
+import MintFcForm from '../formConnector/mint/mint-fc-form'
+import MintFcStatic from '../formConnector/mint/mint-fc-static'
 
 export default {
     name: "tg-form",
@@ -25,7 +30,7 @@ export default {
         type:String
     },
     components: {
-        IviewFcForm,IviewFcStatic,IviewFcGroup
+        IviewFcForm,IviewFcStatic,IviewFcGroup,MintFcGroup,MintFcForm,MintFcStatic
     },
     data(){
         let isGrouped = this.fields.some(item => item.name.startsWith("group:[") === true);

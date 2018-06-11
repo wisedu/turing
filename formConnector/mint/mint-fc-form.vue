@@ -1,9 +1,12 @@
 <template>
     <div class="tg-mint-form" :class="{'tg-mint-form-readonly':readonly}">
-        <div v-for="metaItem in fields" class="tg-mint-item" :key="metaItem.name">
-            <slot :name="metaItem.name" :model="metaItem" :value="formValue[metaItem.name]" :ref="'field' + metaItem.name" :formReadonly="readonly">
-                <component :model="metaItem" :is="registedComponentList(props.data, mintForm, 'mint-fc-static')" :formReadonly="readonly"
-                v-model="formValue[metaItem.name]" :options="optionsMap[metaItem.name]" :ref="'field' + metaItem.name"></component>
+        <div v-for="(metaItem,index) in fields" class="tg-mint-item" :key="metaItem.name">
+            <slot :name="metaItem.name" :model="metaItem" :value="formValue[metaItem.name]" :display="formValue[metaItem.name + displayFieldFormat]" :ref="'field_' + metaItem.name" :formReadonly="readonly">
+                <component :is="registedComponentList(metaItem, mintForm, 'mint-fc-static', index)" :model="metaItem" :name="metaItem.name" 
+                v-model="formValue[metaItem.name]" :display="formValue[metaItem.name + displayFieldFormat]" :ref="'field_' + metaItem.name" :formReadonly="readonly"
+                :caption="metaItem.caption" :xtype="metaItem.xtype" :placeholder="metaItem.placeholder"
+                :required="metaItem.required" :readonly="metaItem.readonly" :disabled="metaItem.disabled"
+                :params="metaItem.params" :options="metaItem.options" @on-item-change="updateValue"></component>
             </slot>
         </div>
     </div>
@@ -12,9 +15,13 @@
 <script>
 import mintForm from "./form";
 import formConnector from "../FormConnector";
+import MintFcStatic from "./mint-fc-static";
 export default {
     name:"mint-fc-form",
     extends: formConnector,
+    components: {
+        MintFcStatic
+    },
     data(){
         return {
             mintForm: mintForm

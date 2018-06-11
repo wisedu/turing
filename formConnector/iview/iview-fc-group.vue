@@ -1,6 +1,7 @@
 <template>
     <div>
         <h4>{{name}}</h4>
+        <label>{{desc}}</label>
         <slot></slot>
     </div>
 </template>

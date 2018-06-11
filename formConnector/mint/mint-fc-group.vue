@@ -1,7 +1,9 @@
 <template>
     <div>
-        <h4>{{name}}</h4>
-        <slot></slot>
+        <mt-cell-group :title="name">
+            <slot></slot>
+        </mt-cell-group>
+        <label>{{desc}}</label>
     </div>
 </template>
 
