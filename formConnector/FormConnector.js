@@ -2,6 +2,7 @@ export default {
     props:{
         fields:Array,
         value: { type: Object, default () { return {}; } },
+        displayFieldFormat: String,
         column:Number,
         labelWidth:{
             type:Number,

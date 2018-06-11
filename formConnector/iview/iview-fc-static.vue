@@ -1,6 +1,6 @@
 <template>
     <FormItem :label="caption">
-        <div class="iview-fc-static-readonly">{{value}}&nbsp;</div>
+        <div class="iview-fc-static-readonly">{{display !== undefined ? display : value}}&nbsp;</div>
     </FormItem>
 </template>
 

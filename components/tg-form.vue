@@ -2,12 +2,12 @@
     <div>
         <template v-if="isGroupForm">
             <component :is="type + '-fc-group'" v-for="item in formitems" :key="item.name" :name="item.title" :desc="item.desc">
-                <component :model="formValue" :fields="item.items" :is="type + '-fc-form'" :value="value"
+                <component :model="formValue" :fields="item.items" :is="type + '-fc-form'" :value="value" :displayFieldFormat="displayFieldFormat"
                 :column="column" :labelWidth="labelWidth" :readonly="readonly" @on-value-change="updateValue"></component>
             </component>
         </template>
         <template v-else>
-            <component :model="formValue" :fields="fields" :is="type + '-fc-form'" :column="column" 
+            <component :model="formValue" :fields="fields" :is="type + '-fc-form'" :column="column" :displayFieldFormat="displayFieldFormat"
             :value="value" :labelWidth="labelWidth" :readonly="readonly" @on-value-change="updateValue"></component>
         </template>
     </div>

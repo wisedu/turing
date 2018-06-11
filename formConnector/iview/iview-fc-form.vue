@@ -6,9 +6,9 @@
                     <slot name="before"></slot>
                 </template>
                 <template slot="itemTemplate" slot-scope="props" v-if="props.data.hidden !== true">
-                    <slot :name="props.data.name" :model="props.data" :value="formValue[props.data.name]" :ref="'field_' + props.data.name" :formReadonly="readonly">
+                    <slot :name="props.data.name" :model="props.data" :value="formValue[props.data.name]" :display="formValue[props.data.name + displayFieldFormat]" :ref="'field_' + props.data.name" :formReadonly="readonly">
                         <component :model="props.data" :name="props.data.name" :is="registedComponentList(props.data, iviewForm, 'iview-fc-static', props.index)"
-                        v-model="formValue[props.data.name]" :ref="'field_' + props.data.name" :formReadonly="readonly"
+                        v-model="formValue[props.data.name]" :display="formValue[props.data.name + displayFieldFormat]" :ref="'field_' + props.data.name" :formReadonly="readonly"
                         :caption="props.data.caption" :xtype="props.data.xtype" :placeholder="props.data.placeholder"
                         :required="props.data.required" :readonly="props.data.readonly" :disabled="props.data.disabled"
                         :params="props.data.params" :options="props.data.options" @on-item-change="updateValue"></component>
