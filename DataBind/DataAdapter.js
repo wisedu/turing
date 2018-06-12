@@ -24,6 +24,7 @@ export class DataAdapter {
                 }
                 result[prop].title = prop.match(/\[(.*?)\]/)[1];
                 result[prop].items = newGroupItem;
+                result[prop].desc = views[viewId][prop].desc;
             } else {
                 utils.extend(true, result[prop], views["default"][prop], views[viewId][prop]);
             }

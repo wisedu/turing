@@ -217,7 +217,7 @@ export default class extends DataAdapter{
             "默认表单:form": {
                 "WID": {"xtype": "text","dataSize": 40},
                 "group:[个人基本信息]":{
-                    desc:"",
+                    desc:"~个人基本信息~",
                     items:{
                         "XSBH": {"xtype": "text","dataSize": 40},
                         "XH": {"xtype": "text","dataSize": 20},
@@ -254,7 +254,7 @@ export default class extends DataAdapter{
                     }
                 },
                 "group:[学籍信息]":{
-                    desc:"",
+                    desc:"~学籍信息~",
                     items:{
                         "XJZTDM": {"url": "/axsfw/code/12eb4f7c-69a1-41c2-b21e-c99fe850264a.do","xtype": "select","dataSize": 6},
                         "PYFSDM": {"url": "/axsfw/code/9afe2f0b-75ed-44a2-b81c-8ed54b235a2c.do","xtype": "select","dataSize": 2},
@@ -276,7 +276,7 @@ export default class extends DataAdapter{
                     }
                 },
                 "group:[入学信息]":{
-                    desc:"",
+                    desc:"~入学信息~",
                     items:{
                         "KSH": {"xtype": "text","dataSize": 20},
                         "KSLBDM": {"url": "/axsfw/code/acc2e70d-21d8-48fd-8c11-762fb2d01c47.do","xtype": "select","dataSize": 10},
@@ -294,7 +294,7 @@ export default class extends DataAdapter{
                     }
                 },
                 "group:[联系信息]":{
-                    desc:"",
+                    desc:"~联系信息~",
                     items:{
                         "SJH": {"checkType": "custom[phone]","xtype": "text","dataSize": 40},
                         "DZXX": {"checkType": "custom[email]","xtype": "text","dataSize": 100},
@@ -311,7 +311,7 @@ export default class extends DataAdapter{
                     }
                 },
                 "group:[其他信息]":{
-                    desc:"",
+                    desc:"~其他信息~",
                     items:{
                         "XSZP": {"dataSize": 40},
                         "RDSJ": {"xtype": "date-local","dataSize": 20},
@@ -465,7 +465,7 @@ export default class extends DataAdapter{
         for(let prop in model){
             if (prop.startsWith("group:[")) {
                 let newFormGroup = {
-                    name: prop, items:[], title:model[prop].title
+                    name: prop, items:[], title:model[prop].title, desc:model[prop].desc
                 };
                 for(let item in model[prop].items){
                     let modelitem = model[prop].items[item];
