@@ -1,8 +1,26 @@
 <template>
     <div>
-        <tg-form :fields="fields" type="mint" :column=4 v-model="data" displayFieldFormat="_DISPLAY"></tg-form>
+        <tg-form :fields="fields" type="iview" :column=4 v-model="data" displayFieldFormat="_DISPLAY">
+            <div slot="group:[个人基本信息]" name="CYM">
+                <div>123</div>
+                <div>456</div>
+            </div>
+            <div slot="group:[学籍信息]" name="XZNJ">
+                <div>aaa</div>
+                <div>456</div>
+            </div>
+        </tg-form>
         <hr>
-        <tg-form :fields="fields_scd" type="mint" :column=4 v-model="data" displayFieldFormat="_DISPLAY"></tg-form>
+        <tg-form :fields="fields_scd" type="iview" :column=4 v-model="data" displayFieldFormat="_DISPLAY">
+            <div slot="renderItem" name="CYM">
+                <div>123</div>
+                <div>456</div>
+            </div>
+            <div slot="renderItem" name="XBDM">
+                <div>aaa</div>
+                <div>456</div>
+            </div>
+        </tg-form>
     </div>
 </template>
 
