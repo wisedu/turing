@@ -56,17 +56,20 @@ components.forEach(item => {
     jsClass.push(item.className);
 });
 
-jsImport.push(`import IviewFcForm from './formConnector/iview/iview-fc-form';`);
-jsClass.push("IviewFcForm");
+// jsImport.push(`import IviewFcForm from './formConnector/iview/iview-fc-form';`);
+// jsClass.push("IviewFcForm");
 
-jsImport.push(`import IviewFcStatic from './formConnector/iview/iview-fc-static';`);
-jsClass.push("IviewFcStatic");
+// jsImport.push(`import IviewFcStatic from './formConnector/iview/iview-fc-static';`);
+// jsClass.push("IviewFcStatic");
 
-jsImport.push(`import MintFcForm from './formConnector/mint/mint-fc-form';`);
-jsClass.push("MintFcForm");
+// jsImport.push(`import MintFcForm from './formConnector/mint/mint-fc-form';`);
+// jsClass.push("MintFcForm");
 
-jsImport.push(`import MintFcStatic from './formConnector/mint/mint-fc-static';`);
-jsClass.push("MintFcStatic");
+// jsImport.push(`import MintFcStatic from './formConnector/mint/mint-fc-static';`);
+// jsClass.push("MintFcStatic");
+
+// import iviewForm from './formConnector/iview/form.js';
+// import mintForm from './formConnector/mint/form.js';
 
 let template = 
 `import utils from './utils.js';
@@ -74,9 +77,6 @@ import 'core-js';
 import axios from 'axios';
 import moment from 'moment';
 import FormConnectItem from './formConnector/FormConnectItem.js';
-
-import iviewForm from './formConnector/iview/form.js';
-import mintForm from './formConnector/mint/form.js';
 
 import {DataAdapter} from './DataBind/DataAdapter.js';
 import {DataSourceManager} from './DataBind/DataSourceManager.js';
@@ -102,14 +102,12 @@ export default Object.assign({}, {
     install, 
     ...components,
     utils, version, description, author, 
-    DataAdapter, DataSourceManager, FormConnectItem, 
-    iview:{form:iviewForm}, mint:{form:mintForm}, DataFilter,
+    DataAdapter, DataSourceManager, FormConnectItem, DataFilter,
     axios, moment
 });
 export {
     utils, version, description, author, 
-    DataAdapter, DataSourceManager, FormConnectItem, 
-    iviewForm, mintForm, DataFilter,
+    DataAdapter, DataSourceManager, FormConnectItem, DataFilter,
     axios, moment
 }`
 
