@@ -1,4 +1,4 @@
-import utils from '../src/utils.js';
+import utils from '../utils.js';
 import axios from 'axios'
 
 export class DataAdapter {

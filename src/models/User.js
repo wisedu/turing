@@ -1,5 +1,4 @@
 import {DataAdapter} from '../../DataBind/DataAdapter'
-import utils from '../utils'
 export default class extends DataAdapter{
     constructor() {
         super()

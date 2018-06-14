@@ -1,8 +1,8 @@
 export default {
-    dictFilter:function(result){
+    dictFilter:[function dictFilter(result){
         return result.data;
-    },
-    dataFilter:function(result){
+    }],
+    dataFilter:[function dataFilter(result){
         return result.data;
-    }
+    }]
 }

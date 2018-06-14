@@ -1,7 +1,7 @@
 import axios from 'axios'
-import moment from 'moment'
+// import moment from 'moment'
 
-const UA = navigator.userAgent.toLowerCase()
+// const UA = navigator.userAgent.toLowerCase()
 
 function serialize(data) {
   if (!data) return '';

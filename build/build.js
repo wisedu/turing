@@ -69,7 +69,7 @@ jsImport.push(`import MintFcStatic from './formConnector/mint/mint-fc-static';`)
 jsClass.push("MintFcStatic");
 
 let template = 
-`import utils from './src/utils.js';
+`import utils from './utils.js';
 import 'core-js';
 import axios from 'axios';
 import moment from 'moment';
