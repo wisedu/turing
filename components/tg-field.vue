@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import formConnectItem from "../formConnector/FormConnectItem";
+import connectItem from "../formConnector/ConnectItem";
 export default {
     name:"tg-field",
-    extends:formConnectItem,
+    extends:connectItem,
     props:{
         type:String,
     },

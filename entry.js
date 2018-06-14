@@ -2,8 +2,9 @@ import utils from './utils.js';
 import 'core-js';
 import axios from 'axios';
 import moment from 'moment';
-import FormConnectItem from './formConnector/FormConnectItem.js';
+import ConnectItem from './formConnector/ConnectItem.js';
 import FormConnector from './formConnector/FormConnector.js';
+import DocConnector from './formConnector/DocConnector.js';
 
 import {DataAdapter} from './DataBind/DataAdapter.js';
 import {DataSourceManager} from './DataBind/DataSourceManager.js';
@@ -18,7 +19,7 @@ import TgLeftRight from './components/tg-left-right.vue';
 import TgLinkbutton from './components/tg-linkbutton.vue';
 import TgListview from './components/tg-listview.vue';
 import TgText from './components/tg-text.vue';
-const version = "1.7.1";
+const version = "1.7.2";
 const description = "turing components";
 const author = "金智教育 wisedu";
 const components = {
@@ -37,11 +38,11 @@ if (typeof window !== 'undefined' && window.Vue) {
 export default Object.assign({}, {
     install, ...components,
     utils, version, description, author, 
-    DataAdapter, DataSourceManager, FormConnectItem, FormConnector, DataFilter,
+    DataAdapter, DataSourceManager, ConnectItem, FormConnector, DocConnector, DataFilter,
     axios, moment
 });
 export {
     utils, version, description, author, 
-    DataAdapter, DataSourceManager, FormConnectItem, FormConnector, DataFilter,
+    DataAdapter, DataSourceManager, ConnectItem, FormConnector, DocConnector, DataFilter,
     axios, moment
 }

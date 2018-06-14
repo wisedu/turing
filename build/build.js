@@ -61,8 +61,9 @@ let template =
 import 'core-js';
 import axios from 'axios';
 import moment from 'moment';
-import FormConnectItem from './formConnector/FormConnectItem.js';
+import ConnectItem from './formConnector/ConnectItem.js';
 import FormConnector from './formConnector/FormConnector.js';
+import DocConnector from './formConnector/DocConnector.js';
 
 import {DataAdapter} from './DataBind/DataAdapter.js';
 import {DataSourceManager} from './DataBind/DataSourceManager.js';
@@ -87,12 +88,12 @@ if (typeof window !== 'undefined' && window.Vue) {
 export default Object.assign({}, {
     install, ...components,
     utils, version, description, author, 
-    DataAdapter, DataSourceManager, FormConnectItem, FormConnector, DataFilter,
+    DataAdapter, DataSourceManager, ConnectItem, FormConnector, DocConnector, DataFilter,
     axios, moment
 });
 export {
     utils, version, description, author, 
-    DataAdapter, DataSourceManager, FormConnectItem, FormConnector, DataFilter,
+    DataAdapter, DataSourceManager, ConnectItem, FormConnector, DocConnector, DataFilter,
     axios, moment
 }`
 
