@@ -3,6 +3,7 @@ import 'core-js';
 import axios from 'axios';
 import moment from 'moment';
 import FormConnectItem from './formConnector/FormConnectItem.js';
+import FormConnector from './formConnector/FormConnector.js';
 
 import {DataAdapter} from './DataBind/DataAdapter.js';
 import {DataSourceManager} from './DataBind/DataSourceManager.js';
@@ -33,14 +34,13 @@ if (typeof window !== 'undefined' && window.Vue) {
     install(window.Vue);
 }
 export default Object.assign({}, {
-    install, 
-    ...components,
+    install, ...components,
     utils, version, description, author, 
-    DataAdapter, DataSourceManager, FormConnectItem, DataFilter,
+    DataAdapter, DataSourceManager, FormConnectItem, FormConnector, DataFilter,
     axios, moment
 });
 export {
     utils, version, description, author, 
-    DataAdapter, DataSourceManager, FormConnectItem, DataFilter,
+    DataAdapter, DataSourceManager, FormConnectItem, FormConnector, DataFilter,
     axios, moment
 }

@@ -56,27 +56,13 @@ components.forEach(item => {
     jsClass.push(item.className);
 });
 
-// jsImport.push(`import IviewFcForm from './formConnector/iview/iview-fc-form';`);
-// jsClass.push("IviewFcForm");
-
-// jsImport.push(`import IviewFcStatic from './formConnector/iview/iview-fc-static';`);
-// jsClass.push("IviewFcStatic");
-
-// jsImport.push(`import MintFcForm from './formConnector/mint/mint-fc-form';`);
-// jsClass.push("MintFcForm");
-
-// jsImport.push(`import MintFcStatic from './formConnector/mint/mint-fc-static';`);
-// jsClass.push("MintFcStatic");
-
-// import iviewForm from './formConnector/iview/form.js';
-// import mintForm from './formConnector/mint/form.js';
-
 let template = 
 `import utils from './utils.js';
 import 'core-js';
 import axios from 'axios';
 import moment from 'moment';
 import FormConnectItem from './formConnector/FormConnectItem.js';
+import FormConnector from './formConnector/FormConnector.js';
 
 import {DataAdapter} from './DataBind/DataAdapter.js';
 import {DataSourceManager} from './DataBind/DataSourceManager.js';
@@ -99,15 +85,14 @@ if (typeof window !== 'undefined' && window.Vue) {
     install(window.Vue);
 }
 export default Object.assign({}, {
-    install, 
-    ...components,
+    install, ...components,
     utils, version, description, author, 
-    DataAdapter, DataSourceManager, FormConnectItem, DataFilter,
+    DataAdapter, DataSourceManager, FormConnectItem, FormConnector, DataFilter,
     axios, moment
 });
 export {
     utils, version, description, author, 
-    DataAdapter, DataSourceManager, FormConnectItem, DataFilter,
+    DataAdapter, DataSourceManager, FormConnectItem, FormConnector, DataFilter,
     axios, moment
 }`
 
