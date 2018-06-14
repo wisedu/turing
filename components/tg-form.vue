@@ -17,13 +17,13 @@
 <script>
 import formConnector from "../formConnector/FormConnector";
 
-import IviewFcGroup from '../formConnector/iview/iview-fc-group'
-import IviewFcForm from '../formConnector/iview/iview-fc-form'
-import IviewFcStatic from '../formConnector/iview/iview-fc-static'
+// import IviewFcGroup from '../formConnector/iview/iview-fc-group'
+// import IviewFcForm from '../formConnector/iview/iview-fc-form'
+// import IviewFcStatic from '../formConnector/iview/iview-fc-static'
 
-import MintFcGroup from '../formConnector/mint/mint-fc-group'
-import MintFcForm from '../formConnector/mint/mint-fc-form'
-import MintFcStatic from '../formConnector/mint/mint-fc-static'
+// import MintFcGroup from '../formConnector/mint/mint-fc-group'
+// import MintFcForm from '../formConnector/mint/mint-fc-form'
+// import MintFcStatic from '../formConnector/mint/mint-fc-static'
 
 export default {
     name: "tg-form",
@@ -31,9 +31,9 @@ export default {
     props:{
         type:String
     },
-    components: {
-        IviewFcForm,IviewFcStatic,IviewFcGroup,MintFcGroup,MintFcForm,MintFcStatic
-    },
+    // components: {
+    //     IviewFcForm,IviewFcStatic,IviewFcGroup,MintFcGroup,MintFcForm,MintFcStatic
+    // },
     data(){
         let isGrouped = this.fields.some(item => item.name.startsWith("group:[") === true);
         return {
@@ -48,23 +48,23 @@ export default {
         }
     },
     mounted(){
-        if (this.isGroupForm) {
-            for(let slot in this.$slots){
-                this.$slots[slot].map(item => {
-                    let name = item.data.attrs.name;
-                    if (this.$refs[slot] !== undefined && this.$refs[slot].length === 1){
-                        this.$refs[slot][0].$slots[name] = item;
-                    }
-                })
-            }
-        } else {
-            if (this.$slots.renderItem !== undefined) {
-                this.$slots.renderItem.map(item => {
-                    let name = item.data.attrs.name;
-                    this.$refs.tiled_form.$slots[name] = item;
-                })
-            }
-        }
+        // if (this.isGroupForm) {
+        //     for(let slot in this.$slots){
+        //         this.$slots[slot].map(item => {
+        //             let name = item.data.attrs.name;
+        //             if (this.$refs[slot] !== undefined && this.$refs[slot].length === 1){
+        //                 this.$refs[slot][0].$slots[name] = item;
+        //             }
+        //         })
+        //     }
+        // } else {
+        //     if (this.$slots.renderItem !== undefined) {
+        //         this.$slots.renderItem.map(item => {
+        //             let name = item.data.attrs.name;
+        //             this.$refs.tiled_form.$slots[name] = item;
+        //         })
+        //     }
+        // }
     }
 }
 </script>
