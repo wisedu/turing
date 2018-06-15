@@ -1,16 +1,23 @@
 <template>
-    <component :is="type + '-fc-' + xtype" :model="model" :caption="caption" :name="name" :value="value"
-    :display="display" :xtype="xtype" :options="options" :placeholder="placeholder" :required="required"
-    :formReadonly="formReadonly" :readonly="readonly" :disabled="disabled" :params="params"></component>
+    <component :is="type + '-fc-' + model.xtype" :model="model" :caption="model.caption" :name="model.name" :value="value"
+    :display="display" :xtype="model.xtype" :options="model.options" :placeholder="model.placeholder" :required="model.required"
+    :formReadonly="formReadonly" :readonly="model.readonly" :disabled="model.disabled" :params="model.params"></component>
 </template>
 
 <script>
-import connectItem from "../formConnector/ConnectItem";
 export default {
     name:"tg-field",
-    extends:connectItem,
     props:{
         type:String,
+        model: {
+            type: Object,
+            default: function() {
+                return {};
+            }
+        },
+        value: null,
+        display: String,
+        formReadonly: Boolean,
     },
 }
 </script>
