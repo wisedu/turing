@@ -19,7 +19,7 @@ import TgLeftRight from './components/tg-left-right.vue';
 import TgLinkbutton from './components/tg-linkbutton.vue';
 import TgListview from './components/tg-listview.vue';
 import TgText from './components/tg-text.vue';
-const version = "1.7.6";
+const version = "1.7.7";
 const description = "turing components";
 const author = "金智教育 wisedu";
 const components = {

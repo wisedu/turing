@@ -100,7 +100,7 @@ export class DataAdapter {
     
     querySetting = undefined
 
-    extractQuerySetting(searchValues, defaultScope){
+    querySettingBuilder(searchValues, defaultScope){
         let newQS = {};
         newQS[defaultScope] = {};
         for (const key in searchValues) {
