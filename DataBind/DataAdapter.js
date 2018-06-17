@@ -100,6 +100,25 @@ export class DataAdapter {
     
     querySetting = undefined
 
+    extractQuerySetting(searchValues, defaultScope){
+        let newQS = {};
+        newQS[defaultScope] = {};
+        for (const key in searchValues) {
+            const element = searchValues[key];
+            if (key.indexOf(".") > -1) {
+                let newScope = key.substring(0, key.indexOf("."));
+                let newKey = key.substring(key.indexOf(".") + 1, key.length);
+                if (newQS[newScope] === undefined){
+                    newQS[newScope] = {}
+                } 
+                newQS[newScope][newKey] = element;
+            } else {
+                newQS[defaultScope][key] = element;
+            }
+        }
+        return newQS;
+    }
+
     findAll(param) {
         let bfCallback = this.beforeFindAll;
         let afCallback = this.afterFindAll;
