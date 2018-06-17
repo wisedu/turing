@@ -48,6 +48,16 @@ export class DataAdapter {
             url = url.replace(item, params[item.substring(1, item.length -1)])
         })
 
+        if (this.querySetting !== undefined && this.querySetting.length > 0) {
+            if (params === undefined) {
+                params = {
+                    querySetting: this.querySetting
+                } 
+            } else {
+                params["querySetting"] = this.querySetting;
+            }
+        }
+
         if (action.method === "post") {
             return axios.post(url, params)
         } else if (action.method === "delete") {
@@ -87,6 +97,8 @@ export class DataAdapter {
             orders: [],
         }
     }
+    
+    querySetting = []
 
     findAll(param) {
         let bfCallback = this.beforeFindAll;
