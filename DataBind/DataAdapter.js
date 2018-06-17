@@ -48,7 +48,7 @@ export class DataAdapter {
             url = url.replace(item, params[item.substring(1, item.length -1)])
         })
 
-        if (this.querySetting !== undefined && this.querySetting.length > 0) {
+        if (this.querySetting !== undefined) {
             if (params === undefined) {
                 params = {
                     querySetting: this.querySetting
@@ -98,7 +98,7 @@ export class DataAdapter {
         }
     }
     
-    querySetting = []
+    querySetting = undefined
 
     findAll(param) {
         let bfCallback = this.beforeFindAll;
