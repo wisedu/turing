@@ -100,11 +100,19 @@ export class DataAdapter {
     
     querySetting = undefined
 
-    querySettingBuilder(searchValues, defaultScope){
+    querySettingBuilder(searchValues, defaultScope, ignoreEmpty){
+        let ie = ignoreEmpty || true;
         let newQS = {};
         newQS[defaultScope] = {};
         for (const key in searchValues) {
             const element = searchValues[key];
+            if (ie) {
+                if (element === "") {
+                    continue;
+                } else if (element instanceof Array && !element.some(item => item !== "")) {
+                    continue;
+                }
+            }
             if (key.indexOf(".") > -1) {
                 let newScope = key.substring(0, key.indexOf("."));
                 let newKey = key.substring(key.indexOf(".") + 1, key.length);
