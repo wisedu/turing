@@ -101,7 +101,7 @@ export class DataAdapter {
     querySetting = undefined
 
     querySettingBuilder(searchValues, defaultScope, ignoreEmpty){
-        let ie = ignoreEmpty || true;
+        let ie = ignoreEmpty === undefined ? true : ignoreEmpty;
         let newQS = {};
         newQS[defaultScope] = {};
         for (const key in searchValues) {
