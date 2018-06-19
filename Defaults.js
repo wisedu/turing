@@ -18,7 +18,7 @@ export default {
                 })
                 callback(datas);
             } catch (e) {
-                console.error(e, result, this.dictFilter[0], datas);
+                console.error(e, result);
             }
         })
     }],
