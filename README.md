@@ -18,7 +18,8 @@ npm i tg-turing --save
 > es6 写法
 
 ```js
-import {DataAdapter, iviewAdapter} from 'tg-turing'
+import {DataAdapter} from 'tg-turing'
+import TgIview from 'tg-turing-iview'
 export default class extends DataAdapter {
     constructor() {
         super()
@@ -55,10 +56,15 @@ export default class extends DataAdapter {
     view(name, params) {
         let props = name.split(":")
         let iviewtype = props[1];
-        return iviewAdapter(iviewtype, this.getView(props), params);
+        return TgIview.Adapter(iviewtype, this.getView(props), params);
     }
     toTreeData(data) {
-        return iviewAdapter("tree", data, {ukey:"id", pkey:'pId', root: "", label:"name"})
+        return TgIview.Adapter("tree", data, {ukey:"id", pkey:'pId', root: "", label:"name"})
+    }
+    scdFindAll() {
+        //覆盖一个findAll，一般用在新的实例上。
+        this.actions.find.url = "/api/dept/scdFindAll";
+        return this.findAll().then(datas => datas === undefined ? [] : datas)
     }
 }
 ```
@@ -83,6 +89,32 @@ console.log(columns)
 ```html
 <Table :columns="columns" :data="rowData"></Table>
 ```
+
+### 查询数据动态条件 querySetting
+
+```js
+/**
+ * Dept.vue：
+ * this.searchValues = {"字段":"值","User.字段":"值"}
+ * 
+ * */
+methods: {
+    query() {
+        inst.querySetting = inst.querySettingBuilder(this.searchValues, "Dept");
+        inst.findAll().then(datas => {
+            this.data5 = datas;
+        });
+    },
+}
+/**
+ * 提交值：
+ * {
+ *   querySetting:{ "Dept":{"字段":"值"},"User":{"字段":"值"} }
+ *   where:{...}
+ * }
+ * */
+```
+
 
 ### 获取数据 findAll
 
@@ -110,6 +142,31 @@ inst.findAll({ parentId:"00001" }).then(datas => {
     "offset":0,"limit":100
 }
 ```
+
+#### 排序
+
+使用order方法，设置排序，该参数只在findAll方法中生效。
+
+```js
+methods: {
+    query() {
+        inst.querySetting = inst.querySettingBuilder(this.searchValues, "Dept");
+        inst.findAll().then(datas => {
+            this.data5 = datas;
+        });
+    },
+    sortHandler(param) {
+        let keys = param.key.split(".")
+        if (param.order !== "normal"){
+            inst.order(keys.concat([param.order]));
+        } else {
+            inst.order(keys);
+        }
+        this.query()
+    }
+}
+```
+
 
 #### 提交参数格式需要 自定义
 
