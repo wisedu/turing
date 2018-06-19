@@ -31,7 +31,7 @@ export default {
                 return connectorItems[xtype]
             }
         },
-        updateValue(name, value, model, display){
+        updateValue(name, value, display, model){
             this.formValue[name] = value;
             if (display !== undefined) {
                 this.formDisplay[name] = display;
