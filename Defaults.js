@@ -1,11 +1,28 @@
+import utils from "./utils";
 export default {
-    dictFilter:[function dictFilter(result){
+    afterFindAll:[function (result, findAction, params){
         return result.data;
     }],
-    afterFindAll:[function afterFindAll(result, findAction, params){
-        return result.data;
-    }],
-    beforeFindAll:[function beforeFindAll(action, params, props){
+    beforeFindAll:[function (action, params, props){
         return params;
-    }]
+    }],
+    getDictData:[function (dict, callback) {
+        utils.Get(dict.url).then(result => {
+            let datas;
+            try{
+                datas = this.dictFilter[0](result).map(item => {
+                    return {
+                        label: item[dict.label],
+                        value: item[dict.value]
+                    }
+                })
+                callback(datas);
+            } catch (e) {
+                console.error(e, result, this.dictFilter[0], datas);
+            }
+        })
+    }],
+    dictFilter:[function (result){
+        return result.data;
+    }],
 }
