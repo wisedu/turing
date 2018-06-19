@@ -58,7 +58,6 @@ components.forEach(item => {
 
 let template = 
 `import utils from './utils.js';
-import 'core-js';
 import axios from 'axios';
 import moment from 'moment';
 import ConnectItem from './formConnector/ConnectItem.js';
