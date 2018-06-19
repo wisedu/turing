@@ -8,7 +8,7 @@ import DocConnector from './formConnector/DocConnector.js';
 
 import {DataAdapter} from './DataBind/DataAdapter.js';
 import {DataSourceManager} from './DataBind/DataSourceManager.js';
-import DataFilter from './DataBind/DataFilter.js';
+import defaults from './Defaults.js';
 import TgContainer from './components/tg-container.vue';
 import TgDiv from './components/tg-div.vue';
 import TgField from './components/tg-field.vue';
@@ -19,7 +19,7 @@ import TgLeftRight from './components/tg-left-right.vue';
 import TgLinkbutton from './components/tg-linkbutton.vue';
 import TgListview from './components/tg-listview.vue';
 import TgText from './components/tg-text.vue';
-const version = "1.7.10";
+const version = "1.8.0";
 const description = "turing components";
 const author = "金智教育 wisedu";
 const components = {
@@ -38,11 +38,11 @@ if (typeof window !== 'undefined' && window.Vue) {
 export default Object.assign({}, {
     install, ...components,
     utils, version, description, author, 
-    DataAdapter, DataSourceManager, ConnectItem, FormConnector, DocConnector, DataFilter,
+    DataAdapter, DataSourceManager, ConnectItem, FormConnector, DocConnector, defaults,
     axios, moment
 });
 export {
     utils, version, description, author, 
-    DataAdapter, DataSourceManager, ConnectItem, FormConnector, DocConnector, DataFilter,
+    DataAdapter, DataSourceManager, ConnectItem, FormConnector, DocConnector, defaults,
     axios, moment
 }

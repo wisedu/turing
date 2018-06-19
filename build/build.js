@@ -67,7 +67,7 @@ import DocConnector from './formConnector/DocConnector.js';
 
 import {DataAdapter} from './DataBind/DataAdapter.js';
 import {DataSourceManager} from './DataBind/DataSourceManager.js';
-import DataFilter from './DataBind/DataFilter.js';
+import defaults from './Defaults.js';
 ${jsImport.join("\r\n")}
 const version = "${packageJSON.version}";
 const description = "${packageJSON.description}";
@@ -88,12 +88,12 @@ if (typeof window !== 'undefined' && window.Vue) {
 export default Object.assign({}, {
     install, ...components,
     utils, version, description, author, 
-    DataAdapter, DataSourceManager, ConnectItem, FormConnector, DocConnector, DataFilter,
+    DataAdapter, DataSourceManager, ConnectItem, FormConnector, DocConnector, defaults,
     axios, moment
 });
 export {
     utils, version, description, author, 
-    DataAdapter, DataSourceManager, ConnectItem, FormConnector, DocConnector, DataFilter,
+    DataAdapter, DataSourceManager, ConnectItem, FormConnector, DocConnector, defaults,
     axios, moment
 }`
 

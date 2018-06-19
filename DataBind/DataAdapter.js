@@ -1,5 +1,6 @@
 import utils from '../utils.js';
 import axios from 'axios'
+import defaults from '../Defaults'
 
 export class DataAdapter {
     constructor(meta) {
@@ -128,8 +129,6 @@ export class DataAdapter {
     }
 
     findAll(param) {
-        let bfCallback = this.beforeFindAll;
-        let afCallback = this.afterFindAll;
         var that = this;
         
         let defaultParams = {
@@ -144,19 +143,13 @@ export class DataAdapter {
         defaultParams["offset"] = (this.pageNumber - 1) * this.pageSize;
         defaultParams["limit"] = this.pageSize;
 
-        if (bfCallback !== undefined) {
-            defaultParams = bfCallback(this.actions.find, defaultParams, {
-                pageNumber: this.pageNumber, 
-                pageSize: this.pageSize
-            });
-        }
+        defaultParams = defaults.beforeFindAll[0](this.actions.find, defaultParams, {
+            pageNumber: this.pageNumber, 
+            pageSize: this.pageSize
+        });
 
         return this.execute(this.actions.find, defaultParams).then(function(result){
-            if (afCallback !== undefined) {
-                return afCallback(result.data, that.actions.find);
-            } else {
-                return result.data;
-            }
+            return defaults.afterFindAll[0](result, that.actions.find, defaultParams)
         });
     }
     findById(params) {
