@@ -10,7 +10,7 @@ export default {
         utils.Get(dict.url).then(result => {
             let datas;
             try{
-                datas = this.dictFilter[0](result).map(item => {
+                datas = result.data.map(item => {
                     return {
                         label: item[dict.label],
                         value: item[dict.value]
@@ -21,8 +21,5 @@ export default {
                 console.error(e, result, this.dictFilter[0], datas);
             }
         })
-    }],
-    dictFilter:[function (result){
-        return result.data;
     }],
 }
