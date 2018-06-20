@@ -15,6 +15,7 @@ export default {
                 return {};
             }
         },
+        name: null,
         value: null,
         display: String,
         formReadonly: Boolean,
