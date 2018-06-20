@@ -6,7 +6,7 @@ export default {
     beforeFindAll:[function (action, params, props){
         return params;
     }],
-    getDictData:[function (dict, callback) {
+    getDictData:[function (dict, params, callback) {
         utils.Get(dict.url).then(result => {
             let datas;
             try{
