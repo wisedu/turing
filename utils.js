@@ -37,7 +37,7 @@ utils.Post = (url, data = null, config = {}) => {
   return axios({
     method: 'post',
     url: url,
-    data: serialize(data),
+    data: data,
     withCredentials: true,
     headers: {
       contentType: "application/json"

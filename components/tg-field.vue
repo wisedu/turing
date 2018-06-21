@@ -1,5 +1,5 @@
 <template>
-    <component :is="type + '-fc-' + model.xtype" :model="model" :name="name" :value="value" :display="display" 
+    <component :is="registedComponentList()" :model="model" :name="name" :value="value" :display="display" 
     :xtype="model.xtype" :options="model.options" :placeholder="model.placeholder" :required="model.required"
     :formReadonly="formReadonly" :readonly="model.readonly" :disabled="model.disabled" :params="model.params" @on-item-change="itemChange"></component>
 </template>
@@ -23,6 +23,18 @@ export default {
     methods: {
         itemChange(name, value, label, model){
             this.$emit("on-item-change", this.name, value, label, this.model)
+        },
+        registedComponentList(){
+            const defaultXtype = 'static';
+            if (this.model.xtype === undefined) {
+                console.warn(`Turing Field: field ${this.name}'s xtype is undefined, instead of using 'static'.`, this.model)
+                return this.model.connectorItems['static']
+            } else if (this.model.connectorItems[this.model.xtype] === undefined) {
+                console.warn(`Turing Field: field ${this.name}'s xtype '${this.model.xtype}' is undefined, instead of using 'static'.`, this.model)
+                return this.model.connectorItems['static'];
+            } else {
+                return this.model.connectorItems[this.model.xtype]
+            }
         }
     }
 }
