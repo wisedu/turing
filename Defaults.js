@@ -7,7 +7,7 @@ export default {
         return params;
     }],
     getDictData:[function (dict, params, callback) {
-        utils.Get(dict.url).then(result => {
+        utils.Get(dict.url, params).then(result => {
             let datas;
             try{
                 datas = result.data.map(item => {
@@ -16,6 +16,38 @@ export default {
                         value: item[dict.value]
                     }
                 })
+                callback(datas);
+            } catch (e) {
+                console.error(e, result);
+            }
+        })
+    }],
+    getDictTreeData:[function (dict, params, callback) {
+        utils.Get(dict.url, params).then(result => {
+            let datas;
+            try{
+                datas = result.data.map(item => {
+                    item["label"] = item[dict.label],
+                    item["value"] = item[dict.value]
+                    return item;
+                })
+                datas = utils.toTreeData(datas, "", {ukey:"id", pkey:'parentid', toCKey:'children'})
+                callback(datas);
+            } catch (e) {
+                console.error(e, result);
+            }
+        })
+    }],
+    getDictTreeOneData:[function (dict, params, callback) {
+        utils.Get(dict.url, {"id": params.key,"checkParent": true}).then(result => {
+            let datas;
+            try{
+                datas = result.data.map(item => {
+                    item["label"] = item[dict.label],
+                    item["value"] = item[dict.value]
+                    return item;
+                })
+                datas = utils.toTreeData(datas, "", {ukey:"id", pkey:'parentid', toCKey:'children'})
                 callback(datas);
             } catch (e) {
                 console.error(e, result);
