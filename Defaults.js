@@ -54,4 +54,5 @@ export default {
             }
         })
     }],
+    currentType:undefined
 }

@@ -18,12 +18,20 @@
 </template>
 <script>
 import formConnector from "../formConnector/FormConnector";
+import defaults from "../Defaults";
 
 export default {
     name: "tg-form",
     extends: formConnector,
     props:{
-        type:String
+        type:String,
+        default:function(){
+            if (defaults.currentType !== undefined) {
+                return defaults.currentType;
+            } else {
+                console.error("TgForm Error: type is undefined, you can set with tg-form or window['tg-turing'].defaults.currentType")
+            }
+        }
     },
     // components: {
     //     IviewFcForm,IviewFcStatic,IviewFcGroup,MintFcGroup,MintFcForm,MintFcStatic
