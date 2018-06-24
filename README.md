@@ -19,7 +19,7 @@ npm i tg-turing --save
 
 ```js
 import {DataAdapter} from 'tg-turing'
-import TgIview from 'tg-turing-iview'
+import TgAntd from 'tg-turing-antd'
 export default class extends DataAdapter {
     constructor() {
         super()
@@ -55,11 +55,11 @@ export default class extends DataAdapter {
     }
     view(name, params) {
         let props = name.split(":")
-        let iviewtype = props[1];
-        return TgIview.Adapter(iviewtype, this.getView(props), params);
+        let antdtype = props[1];
+        return TgTgAntd.Adapter(antdtype, this.getView(props), params);
     }
     toTreeData(data) {
-        return TgIview.Adapter("tree", data, {ukey:"id", pkey:'pId', root: "", label:"name"})
+        return TgAntd.Adapter("tree", data, {ukey:"id", pkey:'pId', root: "", label:"name"})
     }
     scdFindAll() {
         //覆盖一个findAll，一般用在新的实例上。
@@ -84,7 +84,7 @@ console.log(columns)
 ]
 ```
 
-`默认列表:table` 属性与 `default` 属性 合并再经过 iviewAdapter 转换，返回以上属性结果，与 [iview table column](https://www.iviewui.com/components/table#column) 相匹配，可以如下方示例，直接绑定到 table 的 columns 属性上
+`默认列表:table` 属性与 `default` 属性 合并再经过 antdAdapter 转换，返回以上属性结果，与 [iview table column](https://www.iviewui.com/components/table#column) 相匹配，可以如下方示例，直接绑定到 table 的 columns 属性上
 
 ```html
 <Table :columns="columns" :data="rowData"></Table>
@@ -198,7 +198,7 @@ inst.delete(deptId).then(result => {
 
 ## 视图属性的定义
 
-以下定义为我们所约定的标准化属性，依此映射到不同的实现组件库，如：iview
+以下定义为我们所约定的标准化属性，依此映射到不同风格的实现组件库，如：iview
 
 ### 标准属性
 
