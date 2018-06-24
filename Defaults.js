@@ -7,7 +7,11 @@ export default {
         return params;
     }],
     getDictData:[function (dict, params, callback) {
-        utils.Get(dict.url, params).then(result => {
+        let filterparams = undefined;
+        if (params !== undefined && params.key !== "") {
+            filterparams = params;
+        }
+        utils.Post(dict.url, filterparams).then(result => {
             let datas;
             try{
                 datas = result.data.map(item => {
@@ -23,7 +27,11 @@ export default {
         })
     }],
     getDictTreeData:[function (dict, params, callback) {
-        utils.Get(dict.url, params).then(result => {
+        let filterparams = undefined;
+        if (params !== undefined && params.key !== "") {
+            filterparams = params;
+        }
+        utils.Post(dict.url, filterparams).then(result => {
             let datas;
             try{
                 datas = result.data.map(item => {
@@ -39,7 +47,7 @@ export default {
         })
     }],
     getDictTreeOneData:[function (dict, params, callback) {
-        utils.Get(dict.url, {"id": params.key,"checkParent": true}).then(result => {
+        utils.Post(dict.url, {"id": params.key,"checkParent": true}).then(result => {
             let datas;
             try{
                 datas = result.data.map(item => {
