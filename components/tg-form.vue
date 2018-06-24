@@ -4,6 +4,8 @@
             <component :is="type + '-fc-group'" v-for="item in formitems" :key="item.name" :name="item.title" :desc="item.desc">
                 <component :model="formValue" :fields="item.items" :is="type + '-fc-form'" :value="value" :displayFieldFormat="displayFieldFormat"
                 :column="column" :labelWidth="labelWidth" :readonly="readonly" @on-value-change="updateValue" :ref="item.name">
+                    <slot name="before" slot="before"></slot>
+                    <slot name="after" slot="after"></slot>
                     <slot :name="model.name" :slot="model.name" :model="model" :value="formValue[model.name]" :display="formValue[model.name + displayFieldFormat]" v-for="model in item.items"></slot>
                 </component>
             </component>
@@ -11,6 +13,8 @@
         <template v-else>
             <component :model="formValue" :fields="fields" :is="type + '-fc-form'" :column="column" :displayFieldFormat="displayFieldFormat"
             :value="value" :labelWidth="labelWidth" :readonly="readonly" @on-value-change="updateValue" ref="tiled_form">
+                <slot name="before" slot="before"></slot>
+                <slot name="after" slot="after"></slot>
                 <slot :name="model.name" :slot="model.name" :model="model" :value="formValue[model.name]" :display="formValue[model.name + displayFieldFormat]" v-for="model in fields"></slot>
             </component>
         </template>
@@ -26,6 +30,7 @@ export default {
     props:{
         type:String,
         default:function(){
+            debugger
             if (defaults.currentType !== undefined) {
                 return defaults.currentType;
             } else {
