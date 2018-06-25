@@ -2,7 +2,7 @@
     <div>
         <template v-if="isGroupForm">
             <component :is="type + '-fc-group'" v-for="item in formitems" :key="item.name" :name="item.title" :desc="item.desc">
-                <component :model="formValue" :fields="item.items" :is="type + '-fc-form'" v-model="value" :displayFieldFormat="displayFieldFormat"
+                <component :model="formValue" :fields="item.items" :is="type + '-fc-form'" :value="value" :displayFieldFormat="displayFieldFormat"
                 :column="column" :labelWidth="labelWidth" :readonly="readonly" @on-value-change="updateValue" :ref="item.name">
                     <slot name="before" slot="before"></slot>
                     <slot name="after" slot="after"></slot>
@@ -12,7 +12,7 @@
         </template>
         <template v-else>
             <component :model="formValue" :fields="fields" :is="type + '-fc-form'" :column="column" :displayFieldFormat="displayFieldFormat"
-            v-model="value" :labelWidth="labelWidth" :readonly="readonly" @on-value-change="updateValue" ref="tiled_form">
+            :value="value" :labelWidth="labelWidth" :readonly="readonly" @on-value-change="updateValue" ref="tiled_form">
                 <slot name="before" slot="before"></slot>
                 <slot name="after" slot="after"></slot>
                 <slot :name="model.name" :slot="model.name" :model="model" :value="formValue[model.name]" :display="formValue[model.name + displayFieldFormat]" v-for="model in fields"></slot>

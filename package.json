@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "npm run buildcss && cross-env NODE_ENV=development webpack-dev-server --open --inline --hot --config build/webpack.dev.config.js",
     "build": "npm run buildskin && node ./build/build.js && cross-env NODE_ENV=production webpack --progress --hide-modules --config build/webpack.prod.config.js",
+    "local": "npm run buildskin && node ./build/build.js && cross-env NODE_ENV=production webpack --progress --hide-modules --config build/webpack.prod.config.js && cp -r ./dist/* ../turing-example/node_modules/tg-turing/dist/",
     "deploy": "rm -rf dist && node ./build/deploy.js",
     "buildcss": "node ./build/buildcss.js",
     "buildskin": "node ./build/buildskin.js"

@@ -10,6 +10,9 @@ export class DataAdapter {
         this.pageNumber = 1;
         this.pageSize = 100;
     }
+    initView(views){
+        this.viewDefine = views;
+    }
     getView(viewId) {
         let views = this.viewDefine;
         let result = {}
@@ -32,8 +35,21 @@ export class DataAdapter {
         }
         return result;
     }
-    initView(views){
-        this.viewDefine = views;
+    initData(viewId) {
+        let views = this.viewDefine;
+        let result = {}
+        for(let prop in views[viewId]) {
+            //如果有分组，则循环分组中的items
+            if (prop.startsWith("group:[")) {
+                let groupItems = views[viewId][prop].items;
+                for(let item in groupItems){
+                    result[item] = undefined;
+                }
+            } else {
+                result[prop] = undefined;
+            }
+        }
+        return result;
     }
     execute(action, data){
         var url = "";

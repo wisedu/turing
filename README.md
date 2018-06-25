@@ -90,6 +90,31 @@ console.log(columns)
 <Table :columns="columns" :data="rowData"></Table>
 ```
 
+### 数据赋值
+
+为了配合 [Vue.js的响应式机制](https://cn.vuejs.org/v2/guide/reactivity.html) ，需要初始化时就构造完整的数据项，以便在过程中补充新的数据项时，监听器仍然生效。
+1. 提供了根据视图模型构造初始数据对象的方法：initData
+1. 整个数据赋值，为了保证每个数据项的监听器可以被正确的触发，请使用浅拷贝方法：Object.assign。IE系列不支持，需要通过[Polyfill](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)来支持
+
+```js
+export default {
+    data(){
+        return {
+            fields: inst.view("默认表单:form"),
+            data: inst.initData("默认表单:form"),
+        }
+    },
+    mounted(){
+        inst.execute({url:"http://localhost:2500/axsfw/data.json", method:"get"}).then(results => {
+            Object.assign(this.data, results.data);
+        })
+    },
+}
+
+```
+
+
+
 ### 查询数据动态条件 querySetting
 
 ```js

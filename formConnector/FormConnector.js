@@ -17,14 +17,14 @@ export default {
             optionsMap: {}
         }
     },
-    watch:{
-        value:{
-            handler(newValue){
-                this.formValue = newValue;
-            },
-            deep:true
-        }
-    },
+    // watch:{
+    //     value:{
+    //         handler(newValue){
+    //             this.formValue = newValue;
+    //         },
+    //         deep:true
+    //     }
+    // },
     methods:{
         registedComponentList(model, connectorItems, defaultXtype, index){
             let xtype = model.xtype;
