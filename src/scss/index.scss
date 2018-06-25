@@ -58,3 +58,10 @@ pre{
     clear: both;
   }
 }
+
+.#{$namespace}-overflow-hidden{
+  overflow: hidden;
+}
+.#{$namespace}-overflow-auto{
+  overflow: auto;
+}
