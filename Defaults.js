@@ -7,11 +7,11 @@ export default {
         return params;
     }],
     getDictData:[function (dict, params, callback) {
-        let filterparams = undefined;
+        let filterparams = dict.params;
         if (params !== undefined && params.key !== "") {
-            filterparams = params;
+            Object.assign(filterparams, params);
         }
-        utils.Post(dict.url, filterparams).then(result => {
+        utils.Post(dict.url, {where:filterparams}).then(result => {
             let datas;
             try{
                 datas = result.data.map(item => {
