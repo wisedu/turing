@@ -17,14 +17,21 @@ export default {
             optionsMap: {}
         }
     },
-    // watch:{
-    //     value:{
-    //         handler(newValue){
-    //             this.formValue = newValue;
-    //         },
-    //         deep:true
-    //     }
-    // },
+    watch:{
+        value:{
+            handler(newValue){
+                this.formValue = newValue;
+            },
+            deep:true
+        },
+        // formValue:{
+        //     handler(){
+        //         this.$emit("input", this.formValue)
+        //     },
+        //     deep:true
+        // },
+    },
+    
     methods:{
         registedComponentList(model, connectorItems, defaultXtype, index){
             let xtype = model.xtype;
@@ -40,7 +47,7 @@ export default {
             }
         },
         updateValue(name, value, display, model){
-            this.formValue[name] = value;
+            this.$set(this.formValue, name, value);
             if (display !== undefined) {
                 this.formDisplay[name] = display;
             }

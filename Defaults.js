@@ -7,7 +7,7 @@ export default {
         return params;
     }],
     getDictData:[function (dict, params, callback) {
-        let filterparams = dict.params;
+        let filterparams = dict.params || {};
         if (params !== undefined && params.key !== "") {
             Object.assign(filterparams, params);
         }
