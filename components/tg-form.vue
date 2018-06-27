@@ -28,13 +28,15 @@ export default {
     name: "tg-form",
     extends: formConnector,
     props:{
-        type:String,
-        default:function(){
-            debugger
-            if (defaults.currentType !== undefined) {
-                return defaults.currentType;
-            } else {
-                console.error("TgForm Error: type is undefined, you can set with tg-form or window['tg-turing'].defaults.currentType")
+        type:{
+            type:String,
+            default:function(){
+                debugger
+                if (defaults.currentType !== undefined) {
+                    return defaults.currentType;
+                } else {
+                    console.error("TgForm Error: type is undefined, you can set with tg-form or window['tg-turing'].defaults.currentType")
+                }
             }
         }
     },
