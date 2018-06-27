@@ -65,9 +65,12 @@ import ConnectItem from './formConnector/ConnectItem.js';
 import FormConnector from './formConnector/FormConnector.js';
 import DocConnector from './formConnector/DocConnector.js';
 
+import {EMAPDataAdapter} from './DataBind/EMAPDataAdapter.js';
 import {DataAdapter} from './DataBind/DataAdapter.js';
 import {DataSourceManager} from './DataBind/DataSourceManager.js';
 import defaults from './Defaults.js';
+
+// import tgFunckey from './components/tg-funckey.js';
 ${jsImport.join("\r\n")}
 const version = "${packageJSON.version}";
 const description = "${packageJSON.description}";
@@ -81,18 +84,19 @@ const install = function (Vue, opts = {}) {
         if (key === "utils") return;
         Vue.component(components[key].name, components[key]);
     });
+    
 };
 if (typeof window !== 'undefined' && window.Vue) {
     install(window.Vue);
 }
 export default Object.assign({}, {
-    install, ...components,
-    utils, version, description, author, 
+    install, ...components, 
+    utils, version, description, author, EMAPDataAdapter,
     DataAdapter, DataSourceManager, ConnectItem, FormConnector, DocConnector, defaults,
     axios, moment, accounting
 });
 export {
-    utils, version, description, author, 
+    utils, version, description, author, EMAPDataAdapter,
     DataAdapter, DataSourceManager, ConnectItem, FormConnector, DocConnector, defaults,
     axios, moment, accounting
 }`

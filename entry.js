@@ -6,9 +6,12 @@ import ConnectItem from './formConnector/ConnectItem.js';
 import FormConnector from './formConnector/FormConnector.js';
 import DocConnector from './formConnector/DocConnector.js';
 
+import {EMAPDataAdapter} from './DataBind/EMAPDataAdapter.js';
 import {DataAdapter} from './DataBind/DataAdapter.js';
 import {DataSourceManager} from './DataBind/DataSourceManager.js';
 import defaults from './Defaults.js';
+
+// import tgFunckey from './components/tg-funckey.js';
 import TgContainer from './components/tg-container.vue';
 import TgDiv from './components/tg-div.vue';
 import TgField from './components/tg-field.vue';
@@ -19,11 +22,12 @@ import TgLeftRight from './components/tg-left-right.vue';
 import TgLinkbutton from './components/tg-linkbutton.vue';
 import TgListview from './components/tg-listview.vue';
 import TgText from './components/tg-text.vue';
-const version = "1.8.23";
+import TgToolbar from './components/tg-toolbar.vue';
+const version = "1.9.0";
 const description = "turing components";
 const author = "金智教育 wisedu";
 const components = {
-    TgContainer,TgDiv,TgField,TgForm,TgImg,TgLeftRightItem,TgLeftRight,TgLinkbutton,TgListview,TgText
+    TgContainer,TgDiv,TgField,TgForm,TgImg,TgLeftRightItem,TgLeftRight,TgLinkbutton,TgListview,TgText,TgToolbar
 };
 const install = function (Vue, opts = {}) {
     if (install.installed) return;
@@ -31,18 +35,19 @@ const install = function (Vue, opts = {}) {
         if (key === "utils") return;
         Vue.component(components[key].name, components[key]);
     });
+    
 };
 if (typeof window !== 'undefined' && window.Vue) {
     install(window.Vue);
 }
 export default Object.assign({}, {
-    install, ...components,
-    utils, version, description, author, 
+    install, ...components, 
+    utils, version, description, author, EMAPDataAdapter,
     DataAdapter, DataSourceManager, ConnectItem, FormConnector, DocConnector, defaults,
     axios, moment, accounting
 });
 export {
-    utils, version, description, author, 
+    utils, version, description, author, EMAPDataAdapter,
     DataAdapter, DataSourceManager, ConnectItem, FormConnector, DocConnector, defaults,
     axios, moment, accounting
 }

@@ -68,6 +68,7 @@
 }
 </style>
 <script type="text/javascript">
+    import {EMAPDataAdapter} from '../../../DataBind/EMAPDataAdapter'
     import TgListview from '../../../components/tg-listview.vue'
     import TgDiv from '../../../components/tg-div.vue'
     import TgText from '../../../components/tg-text.vue'
