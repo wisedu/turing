@@ -1,7 +1,7 @@
 {
   "name": "tg-turing",
   "description": "turing components",
-  "version": "1.8.22",
+  "version": "1.8.23",
   "author": "金智教育 wisedu",
   "homepage": "https://github.com/wisedu",
   "packageName": "tg-turing",
@@ -15,6 +15,7 @@
     "buildskin": "node ./build/buildskin.js"
   },
   "dependencies": {
+    "accounting-js": "^1.1.1",
     "axios": "^0.18.0",
     "core-js": "^2.5.7",
     "moment": "^2.22.1",

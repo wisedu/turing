@@ -130,9 +130,9 @@ export class DataAdapter {
                     continue;
                 }
             }
-            if (key.indexOf(".") > -1) {
-                let newScope = key.substring(0, key.indexOf("."));
-                let newKey = key.substring(key.indexOf(".") + 1, key.length);
+            if (key.indexOf("@") > -1) {
+                let newScope = key.substring(0, key.indexOf("@"));
+                let newKey = key.substring(key.indexOf("@") + 1, key.length);
                 if (newQS[newScope] === undefined){
                     newQS[newScope] = {}
                 } 

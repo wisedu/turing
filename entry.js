@@ -1,6 +1,7 @@
 import utils from './utils.js';
 import axios from 'axios';
 import moment from 'moment';
+import accounting from 'accounting-js';
 import ConnectItem from './formConnector/ConnectItem.js';
 import FormConnector from './formConnector/FormConnector.js';
 import DocConnector from './formConnector/DocConnector.js';
@@ -38,10 +39,10 @@ export default Object.assign({}, {
     install, ...components,
     utils, version, description, author, 
     DataAdapter, DataSourceManager, ConnectItem, FormConnector, DocConnector, defaults,
-    axios, moment
+    axios, moment, accounting
 });
 export {
     utils, version, description, author, 
     DataAdapter, DataSourceManager, ConnectItem, FormConnector, DocConnector, defaults,
-    axios, moment
+    axios, moment, accounting
 }
