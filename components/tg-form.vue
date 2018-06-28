@@ -31,7 +31,6 @@ export default {
         type:{
             type:String,
             default:function(){
-                debugger
                 if (defaults.currentType !== undefined) {
                     return defaults.currentType;
                 } else {
@@ -54,23 +53,23 @@ export default {
         }
     },
     mounted(){
-        // if (this.isGroupForm) {
-        //     for(let slot in this.$slots){
-        //         this.$slots[slot].map(item => {
-        //             let name = item.data.attrs.name;
-        //             if (this.$refs[slot] !== undefined && this.$refs[slot].length === 1){
-        //                 this.$refs[slot][0].$slots[name] = item;
-        //             }
-        //         })
-        //     }
-        // } else {
-        //     if (this.$slots.renderItem !== undefined) {
-        //         this.$slots.renderItem.map(item => {
-        //             let name = item.data.attrs.name;
-        //             this.$refs.tiled_form.$slots[name] = item;
-        //         })
-        //     }
-        // }
+    },
+    methods: {
+        validate(callback){
+            for (let form in this.$refs) {
+                this.$refs[form].validate(callback);
+            }
+        },
+        validateField(prop, callback){
+            for (let form in this.$refs) {
+                this.$refs[form].validateField(prop, callback);
+            }
+        },
+        resetFields(){
+            for (let form in this.$refs) {
+                this.$refs[form].resetFields();
+            }
+        }
     }
 }
 </script>

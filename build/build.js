@@ -70,7 +70,6 @@ import {DataAdapter} from './DataBind/DataAdapter.js';
 import {DataSourceManager} from './DataBind/DataSourceManager.js';
 import defaults from './Defaults.js';
 
-// import tgFunckey from './components/tg-funckey.js';
 ${jsImport.join("\r\n")}
 const version = "${packageJSON.version}";
 const description = "${packageJSON.description}";
@@ -84,7 +83,19 @@ const install = function (Vue, opts = {}) {
         if (key === "utils") return;
         Vue.component(components[key].name, components[key]);
     });
-    
+    Vue.directive('tg-funckey', {
+        inserted: function(el,binding) {
+            let authkeys = [];
+            let authkeys_str = window.sessionStorage.getItem("tg-authkeys");
+            if (authkeys_str !== undefined && authkeys_str !== null) {
+                authkeys = authkeys_str.split(",")
+            }
+            let funckeys = binding.value.split(",");
+            if (authkeys.some(item => funckeys.indexOf(item) > -1) ) {
+                el.parentNode.removeChild(el);
+            }
+        }
+    })
 };
 if (typeof window !== 'undefined' && window.Vue) {
     install(window.Vue);
