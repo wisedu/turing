@@ -33,7 +33,7 @@ export default {
                 console.warn(`Turing Field: field ${this.name}'s xtype '${this.model.xtype}' is undefined, instead of using 'static'.`, this.model)
                 return this.model.connectorItems['static'];
             } else {
-                return this.model.connectorItems[this.model.xtype]
+                return this.model.connectorItems[this.model.xtype].name
             }
         }
     }

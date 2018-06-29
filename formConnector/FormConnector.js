@@ -43,7 +43,7 @@ export default {
                 console.warn(`Turing FormConnector: field ${caption}'s xtype '${xtype}' is undefined, instead of using '${defaultXtype}'.`, model, index)
                 return defaultXtype;
             } else {
-                return connectorItems[xtype]
+                return connectorItems[xtype].name
             }
         },
         updateValue(name, value, display, model){
