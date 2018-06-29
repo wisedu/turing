@@ -46,27 +46,29 @@ export default {
     if (this.grid) {
       //横向排列模式
       let gutter = 0;
-      switch (typeof(this.grid.gutter)){
-        case "number":
-          gutter = isNaN(Number(this.grid.gutter)) ? 0 : Number(this.grid.gutter);
-          this.layoutStyle = {
-            padding: "" + (gutter/2) + "px"
-          }
-          break;
-        case "string":
-          //字符串类型必须最少输入 "0 2px"，取第二位作为左右边距
-          gutter = this.grid.gutter.split(" ")[1].replace("px", "")
-          this.layoutStyle = {
-            padding: this.grid.gutter
-          }
-          break;
+      if (this.grid.gutter !== "") {
+        switch (typeof(this.grid.gutter)){
+          case "number":
+            gutter = isNaN(Number(this.grid.gutter)) ? 0 : Number(this.grid.gutter);
+            this.layoutStyle = {
+              padding: "" + (gutter/2) + "px"
+            }
+            break;
+          case "string":
+            //字符串类型必须最少输入 "0 2px"，取第二位作为左右边距
+            gutter = this.grid.gutter.split(" ")[1].replace("px", "")
+            this.layoutStyle = {
+              padding: this.grid.gutter
+            }
+            break;
+        }
       }
       
       this.containerStyle = {
         margin: "0 -"+gutter+"px"
       }
-      
-      if (this.grid.column !== undefined){
+
+      if (this.grid.column !== undefined && this.grid.column !== ""){
         //栅格模式，按照百分比宽度伸缩
         let size = isNaN(Number(this.grid.column)) ? 24 : 24/Number(this.grid.column)
         this.layoutClassObject["tg-col-" + size ] = true

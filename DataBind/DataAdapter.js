@@ -55,7 +55,7 @@ export class DataAdapter {
         var url = "";
         var params = data || action.params;
         if (action.url.substring(0, 1) === ".") {
-            url = (window.apiPath || '') + action.url.substring(1, action.url.length)
+            url = (window.apiPath || '') + action.url;//.substring(2, action.url.length)
         } else if (action.url.substring(0, 1) === "/") {
             url = (window.apiPath || '') + action.url;
         } else {
