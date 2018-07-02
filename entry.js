@@ -15,6 +15,7 @@ import TgContainer from './components/tg-container.vue';
 import TgDiv from './components/tg-div.vue';
 import TgField from './components/tg-field.vue';
 import TgForm from './components/tg-form.vue';
+import TgGridview from './components/tg-gridview.vue';
 import TgImg from './components/tg-img.vue';
 import TgLeftRightItem from './components/tg-left-right-item.vue';
 import TgLeftRight from './components/tg-left-right.vue';
@@ -26,7 +27,7 @@ const version = "1.10.1";
 const description = "turing components";
 const author = "金智教育 wisedu";
 const components = {
-    TgContainer,TgDiv,TgField,TgForm,TgImg,TgLeftRightItem,TgLeftRight,TgLinkbutton,TgListview,TgText,TgToolbar
+    TgContainer,TgDiv,TgField,TgForm,TgGridview,TgImg,TgLeftRightItem,TgLeftRight,TgLinkbutton,TgListview,TgText,TgToolbar
 };
 const install = function (Vue, opts = {}) {
     if (install.installed) return;

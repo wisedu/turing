@@ -9,7 +9,9 @@ export default {
     getDictData:[function (dict, params, callback) {
         let filterparams = dict.params || {};
         if (params !== undefined && params.key !== "") {
-            Object.assign(filterparams, params);
+            let newparam = {};
+            newparam[dict.label] = params.key;
+            Object.assign(filterparams, newparam);
         }
         utils.Post(dict.url, {where:filterparams}).then(result => {
             let datas;
