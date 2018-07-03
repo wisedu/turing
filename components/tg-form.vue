@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="tg-form-wrap">
         <template v-if="isGroupForm">
             <component :is="type + '-fc-group'" v-for="item in formitems" :key="item.name" :name="item.title" :desc="item.desc">
                 <component :model="formValue" :fields="item.items" :is="type + '-fc-form'" :value="value" :displayFieldFormat="displayFieldFormat"
@@ -74,5 +74,5 @@ export default {
 }
 </script>
 <style>
-
+.tg-form-wrap{}
 </style>
