@@ -1,21 +1,15 @@
 <template>
     <div class="tg-gridview-wrap">
-        <component :model="formValue" :fields="fields" :is="type + '-fc-form'" :value="value" :displayFieldFormat="displayFieldFormat"
-            :column="fieldColumn" :labelWidth="labelWidth" :readonly="readonly" @on-value-change="updateValue" :ref="fields">
-            <slot name="search-before" slot="before"></slot>
-            <slot name="search-after" slot="after">
-                <FormItem>
-                    <Button @click="searchReload" type="primary">查询</Button>
-                    <Button @click="searchClear" type="primary">清空</Button>
-                </FormItem>
-            </slot>
-            <slot :name="'fields-'+model.name" :slot="model.name" v-for="model in fields"></slot>
+        <component :model="formValue" :fields="fields" :is="type + '-gc-search'" :value="value" :displayFieldFormat="displayFieldFormat"
+            :column="fieldColumn" :labelWidth="labelWidth" :readonly="readonly" @on-value-change="updateValue" @search="searchReload">
+            <slot :name="'search-'+model.name" :slot="'search-'+model.name" v-for="model in fields"></slot>
         </component>
-        <tg-toolbar>
+        <tg-toolbar v-if="showToolbar">
             <slot name="toolbar-left" slot="left"></slot>
             <slot name="toolbar-right" slot="right"></slot>
         </tg-toolbar>
-        <component :is="type + '-gc-grid'" :columns="columns" :data="data" @reload="tableReload" :pager="pager">
+        <component :is="type + '-gc-grid'" :columns="columns" :data="data" :pager="pager" 
+            @reload="tableReload" @on-highlight="onHighlight" @on-select-all="onSelectAll" @on-selection-change="onSelectionChange">
             <slot :name="'columns-'+model.name" :slot="model.name" v-for="model in columns"></slot>
             <slot name="pagerTotal" slot="pagerTotal"></slot>
         </component>
@@ -27,10 +21,6 @@ import defaults from "../Defaults";
 export default {
     name: "tg-gridview",
     props: {
-        hideToolbar: {
-            type: Boolean,
-            default: false
-        },
         fieldColumn: {
             type: Number,
             default: 4
@@ -64,7 +54,13 @@ export default {
     data() {
         return {
             formValue: this.fieldsData,
-            formDisplay: {}
+            formDisplay: {},
+            showToolbar: true
+        }
+    },
+    created() {
+        if (this.$slots["toolbar-left"] === undefined && this.$slots["toolbar-right"] === undefined) {
+            this.showToolbar = false;
         }
     },
     methods: {
@@ -82,10 +78,15 @@ export default {
             this.$emit("on-value-change", name, value, display, model, this.formValue);
             this.$emit("update:fields-data", this.formValue)
         },
-        searchClear() {
-            this.formValue = {};
-            this.formDisplay = {};
-        }
+        onHighlight(currentRow, oldCurrentRow) {
+            this.$emit("on-highlight", currentRow, oldCurrentRow);
+        },
+        onSelectAll(selection) {
+            this.$emit("on-select-all", selection);
+        },
+        onSelectionChange(selection) {
+            this.$emit("on-selection-change", selection);
+        },
     }
 }
 </script>

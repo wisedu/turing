@@ -58,6 +58,7 @@ components.forEach(item => {
 
 let template = 
 `import utils from './utils.js';
+import uuid from 'uuid'
 import axios from 'axios';
 import moment from 'moment';
 import accounting from 'accounting-js';
@@ -104,12 +105,12 @@ export default Object.assign({}, {
     install, ...components, 
     utils, version, description, author, EMAPDataAdapter,
     DataAdapter, DataSourceManager, ConnectItem, FormConnector, DocConnector, defaults,
-    axios, moment, accounting
+    axios, moment, accounting, uuid
 });
 export {
     utils, version, description, author, EMAPDataAdapter,
     DataAdapter, DataSourceManager, ConnectItem, FormConnector, DocConnector, defaults,
-    axios, moment, accounting
+    axios, moment, accounting, uuid
 }`
 
 fs.writeFileSync(OUTPUT_PATH, template);

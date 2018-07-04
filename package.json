@@ -1,7 +1,7 @@
 {
   "name": "tg-turing",
   "description": "turing components",
-  "version": "1.11.0",
+  "version": "1.11.2",
   "author": "金智教育 wisedu",
   "homepage": "https://github.com/wisedu",
   "packageName": "tg-turing",
@@ -19,6 +19,7 @@
     "axios": "^0.18.0",
     "core-js": "^2.5.7",
     "moment": "^2.22.1",
+    "uuid": "^3.3.2",
     "vue": "^2.5.16"
   },
   "devDependencies": {

@@ -1,4 +1,5 @@
 import utils from './utils.js';
+import uuid from 'uuid'
 import axios from 'axios';
 import moment from 'moment';
 import accounting from 'accounting-js';
@@ -23,7 +24,7 @@ import TgLinkbutton from './components/tg-linkbutton.vue';
 import TgListview from './components/tg-listview.vue';
 import TgText from './components/tg-text.vue';
 import TgToolbar from './components/tg-toolbar.vue';
-const version = "1.11.0";
+const version = "1.11.2";
 const description = "turing components";
 const author = "金智教育 wisedu";
 const components = {
@@ -56,10 +57,10 @@ export default Object.assign({}, {
     install, ...components, 
     utils, version, description, author, EMAPDataAdapter,
     DataAdapter, DataSourceManager, ConnectItem, FormConnector, DocConnector, defaults,
-    axios, moment, accounting
+    axios, moment, accounting, uuid
 });
 export {
     utils, version, description, author, EMAPDataAdapter,
     DataAdapter, DataSourceManager, ConnectItem, FormConnector, DocConnector, defaults,
-    axios, moment, accounting
+    axios, moment, accounting, uuid
 }

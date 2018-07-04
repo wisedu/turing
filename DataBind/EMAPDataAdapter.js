@@ -139,17 +139,20 @@ export class EMAPDataAdapter extends DataAdapter{
 	                    break;
 	                case "xtype":
 	                case "required":
-	                case "url":
 	                case "col":
 	                case "placeholder":
 	                case "options":
 	                case "default":
-	                case "JSONParam":
 	                case "dataSize":
 	                case "checkType":
 	                case "checkSize":
 	                    struct["form"][name][prop] = metaItem[prop];
-	                    break;
+                        break;
+                    case "url":
+                        struct["form"][name].dict = {url: metaItem[prop], value:"id", label:"name"};
+                        break;
+                    case "JSONParam":
+                        struct["form"][name]["params"] = metaItem[prop];
 	                case "optionData":
 	                	struct["form"][name]["options"] = metaItem[prop];
 	                    break;
