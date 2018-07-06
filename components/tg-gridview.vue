@@ -1,14 +1,14 @@
 <template>
     <div class="tg-gridview-wrap">
-        <component :model="formValue" :fields="fields" :is="type + '-gc-search'" :value="value" :displayFieldFormat="displayFieldFormat"
-            :column="fieldColumn" :labelWidth="labelWidth" :readonly="readonly" @on-value-change="updateValue" @search="searchReload">
+        <component :model="formValue" :fields="fields" :is="type + '-gb-search'" :value="value" :displayFieldFormat="displayFieldFormat"
+            :column="fieldColumn" :labelWidth="labelWidth" @on-value-change="updateValue" @search="searchReload" @clear="searchClear">
             <slot :name="'search-'+model.name" :slot="'search-'+model.name" v-for="model in fields"></slot>
         </component>
         <tg-toolbar v-if="showToolbar">
             <slot name="toolbar-left" slot="left"></slot>
             <slot name="toolbar-right" slot="right"></slot>
         </tg-toolbar>
-        <component :is="type + '-gc-grid'" :columns="columns" :data="data" :pager="pager" 
+        <component :is="type + '-gb-grid'" :columns="columns" :data="data" :pager="pager" 
             @reload="tableReload" @on-highlight="onHighlight" @on-select-all="onSelectAll" @on-selection-change="onSelectionChange">
             <slot :name="'columns-'+model.name" :slot="model.name" v-for="model in columns"></slot>
             <slot name="pagerTotal" slot="pagerTotal"></slot>
@@ -21,6 +21,8 @@ import defaults from "../Defaults";
 export default {
     name: "tg-gridview",
     props: {
+        displayFieldFormat: String,
+        labelWidth: Number,
         fieldColumn: {
             type: Number,
             default: 4
@@ -69,6 +71,10 @@ export default {
         },
         searchReload() {
             this.$emit("reload", 1, this.pager.size, this.formValue, "fields")
+        },
+        searchClear() {
+            this.formValue = {};
+            this.$emit("update:fields-data", {})
         },
         updateValue(name, value, display, model){
             this.$set(this.formValue, name, value);

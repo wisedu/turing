@@ -261,18 +261,18 @@ format：日期、数字，或字符串格式化，因效率需要通过后端�
 
 xtype 控件类型枚举
 
-| 属性 | 描述 | 
-| :--- | :--- | 
-| select | 单选下拉 
-| multi-select | 多选下拉
-| selecttable | 下拉表格/模糊搜索 
-| date-ym | 年月选择框， 默认 yyyy-MM 
-| date-local | 日期选择框， 默认 yyyy-MM-dd 
-| date-full | 日期时间选择框， 默认 yyyy-MM-dd HH:mm 
-| date-range | 日期范围选择， 默认 yyyy-MM-dd 
-| radiolist | 单选按钮组 
-| checkboxlist | 多选按钮组 
-| tree | 单选下拉树 
+| 属性 | 描述 | 特征 |
+| :--- | :--- | :--- | 
+| select | 单选下拉 | 大量数据，远程搜索，展开，字典映射 |
+| multi-select | 多选下拉 | |
+| autocomplete | 下拉表格/模糊搜索 | 大数据量，远程搜索，展开，补全选择内容 |
+| date-ym | 年月选择框， 默认 yyyy-MM | 年月 |
+| date-local | 日期选择框， 默认 yyyy-MM-dd | 年月日 |
+| date-full | 日期时间选择框， 默认 yyyy-MM-dd HH:mm | 年月日时分 |
+| date-range | 日期范围选择， 默认 yyyy-MM-dd | 年月日，开始、结束 |
+| radiolist | 单选按钮组 | 平铺，适用极少选项，字典映射 |
+| checkboxlist | 多选按钮组 | 平铺，适用极少选项，字典映射 |
+| tree | 单选下拉树 | 展开，大量数据，树状结构，字典映射 |
 | multi-tree | 多选下拉树 
 | switcher | 开关 
 | buttonlist | 单选按钮组 

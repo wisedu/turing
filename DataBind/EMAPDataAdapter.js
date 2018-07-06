@@ -168,7 +168,26 @@ export class EMAPDataAdapter extends DataAdapter{
 	        }
 	    })
 	    return struct;
-	}
+    }
+    
+    querySettingBuilder(params) {
+        if (Object.keys(params).length > 0 && !params.querySetting) {
+            var query = [];
+            for (var key in params) {
+                query.push({
+                    name: key,
+                    value: params[key],
+                    linkOpt: 'OR',
+                    builder: 'include'
+                });
+            }
+            return {
+                querySetting: JSON.stringify(query)
+            };
+        } else {
+            return Object.assign({}, params);
+        }
+    }
 
 
     // view(name, params) {
