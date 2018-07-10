@@ -223,117 +223,12 @@ inst.delete(deptId).then(result => {
 
 ## 视图属性的定义
 
-以下定义为我们所约定的标准化属性，依此映射到不同风格的实现组件库，如：iview
+以下定义为我们所约定的标准化属性，依此映射到不同风格的实现组件库，如：ant desgin
 
-### 标准属性
+使用视图定义的展现组件:
 
-#### default
-
-| 属性 | 描述 | 数据类型 | 默认值 |
-| :--- | :--- | :--- | :--- |
-| caption | 显示文字 | String | 空 |
-| hidden | 是否隐藏 | Boolean | false |
-
-format：日期、数字，或字符串格式化，因效率需要通过后端处理 
-
-
-#### 列表
-
-| 属性 | 描述 | 数据类型 | 默认值 |
-| :--- | :--- | :--- | :--- |
-| width | 列宽 | Number | 空 |
-| isFixed | 固定列 | Boolean | 空 |
-
-#### 表单
-
-| 属性 | 描述 | 数据类型 | 默认值 |
-| :--- | :--- | :--- | :--- |
-| xtype | 显示控件类型 | Enum | text |
-| required | 必填 | Boolean | false |
-| url | 远程数据地址 | String | 空 |
-| col | 所占列数 | Integer | 1 |
-| placeholder | 提示文字 | String | 空 |
-| options | 数据选项 | Array | 空 |
-| default | 默认值 | String | 空 |
-| dataSize | 最大长度校验值 | Integer | 空 |
-| checkType | 校验类型 | Enum | 空 |
-| JSONParam | 传递个实际组件的参数 | Object | 空 |
-
-xtype 控件类型枚举
-
-| 属性 | 描述 | 特征 |
-| :--- | :--- | :--- | 
-| select | 单选下拉 | 大量数据，远程搜索，展开，字典映射 |
-| multi-select | 多选下拉 | |
-| autocomplete | 下拉表格/模糊搜索 | 大数据量，远程搜索，展开，补全选择内容 |
-| date-ym | 年月选择框， 默认 yyyy-MM | 年月 |
-| date-local | 日期选择框， 默认 yyyy-MM-dd | 年月日 |
-| date-full | 日期时间选择框， 默认 yyyy-MM-dd HH:mm | 年月日时分 |
-| date-range | 日期范围选择， 默认 yyyy-MM-dd | 年月日，开始、结束 |
-| radiolist | 单选按钮组 | 平铺，适用极少选项，字典映射 |
-| checkboxlist | 多选按钮组 | 平铺，适用极少选项，字典映射 |
-| tree | 单选下拉树 | 展开，大量数据，树状结构，字典映射 |
-| multi-tree | 多选下拉树 
-| switcher | 开关 
-| buttonlist | 单选按钮组 
-| multi-buttonlist | 多选按钮组 
-| textarea | 计数文本域
-| number | 数字文本框
-| number-range | 数字区间
-| uploadfile | 文件上传
-| uploadsingleimage | 单图片上传 
-| uploadmuiltimage | 多图片上传
-| text | 文本 
-| div | div占位 
-| static | 表单静态字段 
-
-
-### iviewAdapter 组件属性适配器
-
-以上标准配置由该适配器内部实现属性转换。如果超出的属性，可以直接在模型上定义所需属性，如 minWidth 属性
-
-```js
-"默认列表:table": {
-    id: { },
-    name: { minWidth:150 },
-    pId: {},
-},
-```
-
-#### table类型返回结果
-```js
-console.log(new Dept().view("默认列表:form"));
-
-[
-    {"caption":"编号","title":"编号","key":"id","minWidth":120},
-    {"caption":"名称","title":"名称","key":"name","minWidth":150},
-    {"caption":"父级部门编号","title":"父级部门编号","key":"pId","minWidth":120}
-]
-```
-
-#### form类型返回结果
-```js
-console.log(new Dept().view("默认表单:form"));
-
-[
-    {"caption":"编号","name":"id"},
-    {"caption":"名称","name":"name","placeholder":"请填写"},
-    {"caption":"父级部门编号","name":"pId","xtype":"select"}
-]
-```
-
-#### tree类型返回结果
-```js
-var data = [
-    {"id": "1","name": "党群组织","pId": "","isParent": 1},
-    {"id": "000010","name": "党群组织/工会","pId": "1","isParent": 0},
-    {"id": "000012","name": "行政部门/校长办公室","pId": "3","isParent": 1}
-]
-console.log(iviewAdapter("tree", data, {ukey:"id", pkey:'pId', root: "", label:"name"}))
-
-
-
-```
+1. 表单组件：[formConnector](./formConnector.md)
+1. 表格组件：[gridBuilder](./gridBuilder.md)
 
 
 ## action 默认定义

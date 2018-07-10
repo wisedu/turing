@@ -1,3 +1,4 @@
+import 'es6-promise/auto';
 import utils from './utils.js';
 import uuid from 'uuid'
 import axios from 'axios';
@@ -24,7 +25,7 @@ import TgLinkbutton from './components/tg-linkbutton.vue';
 import TgListview from './components/tg-listview.vue';
 import TgText from './components/tg-text.vue';
 import TgToolbar from './components/tg-toolbar.vue';
-const version = "1.11.3";
+const version = "1.11.4";
 const description = "turing components";
 const author = "金智教育 wisedu";
 const components = {

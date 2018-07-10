@@ -57,7 +57,8 @@ components.forEach(item => {
 });
 
 let template = 
-`import utils from './utils.js';
+`import 'es6-promise/auto';
+import utils from './utils.js';
 import uuid from 'uuid'
 import axios from 'axios';
 import moment from 'moment';

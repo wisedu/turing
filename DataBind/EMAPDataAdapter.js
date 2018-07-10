@@ -181,11 +181,9 @@ export class EMAPDataAdapter extends DataAdapter{
                     builder: 'include'
                 });
             }
-            return {
-                querySetting: JSON.stringify(query)
-            };
+            return JSON.stringify(query);
         } else {
-            return Object.assign({}, params);
+            return undefined;
         }
     }
 

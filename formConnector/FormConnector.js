@@ -47,9 +47,14 @@ export default {
             }
         },
         updateValue(name, value, display, model){
-            this.$set(this.formValue, name, value);
-            if (display !== undefined) {
-                this.formDisplay[name] = display;
+            if (value === "") {
+                this.$delete(this.formValue, name);
+                this.$delete(this.formDisplay, name);
+            } else {
+                this.$set(this.formValue, name, value);
+                if (display !== undefined) {
+                    this.formDisplay[name] = display;
+                }
             }
             this.$emit("on-value-change", name, value, display, model, this.formValue);
             this.$emit("input", this.formValue)

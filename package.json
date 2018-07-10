@@ -1,7 +1,7 @@
 {
   "name": "tg-turing",
   "description": "turing components",
-  "version": "1.11.3",
+  "version": "1.11.4",
   "author": "金智教育 wisedu",
   "homepage": "https://github.com/wisedu",
   "packageName": "tg-turing",
@@ -15,12 +15,12 @@
     "buildskin": "node ./build/buildskin.js"
   },
   "dependencies": {
+    "es6-promise": "^4.2.4",
     "accounting-js": "^1.1.1",
     "axios": "^0.18.0",
     "core-js": "^2.5.7",
     "moment": "^2.22.1",
-    "uuid": "^3.3.2",
-    "vue": "^2.5.16"
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "autoprefixer-loader": "^3.2.0",
@@ -40,8 +40,6 @@
     "babel-preset-stage-2": "^6.24.1",
     "babel-preset-stage-3": "^6.24.1",
     "babel-runtime": "^6.23.0",
-    "bh-iview": "^1.0.1",
-    "bh-mint-ui2": "^1.1.41",
     "cross-env": "^3.2.4",
     "css-loader": "^0.25.0",
     "extract-text-webpack-plugin": "^3.0.1",
@@ -55,8 +53,9 @@
     "shelljs": "^0.7.8",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
+    "vue": "^2.5.16",
     "vue-loader": "^10.0.0",
-    "vue-router": "^2.1.1",
+    "vue-router": "^3.0.1",
     "vue-style-loader": "^4.1.0",
     "vue-template-compiler": "^2.5.16",
     "webpack": "^3.6.0",
