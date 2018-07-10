@@ -65,3 +65,7 @@ pre{
 .#{$namespace}-overflow-auto{
   overflow: auto;
 }
+
+.#{$namespace}-likehide{
+  position: absolute;z-index: -999;
+}
