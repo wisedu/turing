@@ -57,8 +57,7 @@ components.forEach(item => {
 });
 
 let template = 
-`import 'es6-promise/auto';
-import utils from './utils.js';
+`import utils from './utils.js';
 import uuid from 'uuid'
 import axios from 'axios';
 import moment from 'moment';
@@ -102,6 +101,13 @@ const install = function (Vue, opts = {}) {
 if (typeof window !== 'undefined' && window.Vue) {
     install(window.Vue);
 }
+
+if (!String.prototype.startsWith) {
+	String.prototype.startsWith = function(search, pos) {
+		return this.substr(!pos || pos < 0 ? 0 : +pos, search.length) === search;
+	};
+}
+
 export default Object.assign({}, {
     install, ...components, 
     utils, version, description, author, EMAPDataAdapter,

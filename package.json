@@ -1,7 +1,7 @@
 {
   "name": "tg-turing",
   "description": "turing components",
-  "version": "1.11.4",
+  "version": "1.11.6",
   "author": "金智教育 wisedu",
   "homepage": "https://github.com/wisedu",
   "packageName": "tg-turing",
@@ -15,7 +15,6 @@
     "buildskin": "node ./build/buildskin.js"
   },
   "dependencies": {
-    "es6-promise": "^4.2.4",
     "accounting-js": "^1.1.1",
     "axios": "^0.18.0",
     "core-js": "^2.5.7",
@@ -27,7 +26,6 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-component": "^0.9.0",
-    "babel-plugin-dynamic-import-node": "^1.2.0",
     "babel-plugin-syntax-jsx": "^6.18.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-es5-property-mutators": "^6.24.1",
