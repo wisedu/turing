@@ -52,6 +52,7 @@ export class DataAdapter {
         return result;
     }
     execute(action, data){
+        this.onFetching("doing", true);
         var url = "";
         var params = data || action.params;
         if (action.url.substring(0, 1) === ".") {
@@ -78,12 +79,27 @@ export class DataAdapter {
         }
 
         if (action.method === "post") {
-            return axios.post(url, params)
+            return axios.post(url, params).catch(e=>{
+                console.error(e)
+                this.onFetching("error", false, e);
+            }).finally(()=>{
+                this.onFetching("done", false);
+            })
         } else if (action.method === "delete") {
             //删除资源仅允许与rest接口约定的url方式
-            return axios.delete(url)
+            return axios.delete(url).catch(e=>{
+                console.error(e)
+                this.onFetching("error", false, e);
+            }).finally(()=>{
+                this.onFetching("done", false);
+            })
         }else {
-            return axios.get(url, {params: params})
+            return axios.get(url, {params: params}).catch(e=>{
+                console.error(e)
+                this.onFetching("error", false, e);
+            }).finally(()=>{
+                this.onFetching("done", false);
+            })
         }
     }
     events = {
@@ -195,5 +211,18 @@ export class DataAdapter {
      */
     order(fields){
         this.__orders = fields;
+    }
+
+    onFetching(status, result) {
+        switch (status) {
+            case "doing":
+                break;
+            case "done":
+                break;
+            case "error":
+                break;
+            default:
+                break;
+        }
     }
 }
