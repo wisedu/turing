@@ -24,7 +24,7 @@ import TgLinkbutton from './components/tg-linkbutton.vue';
 import TgListview from './components/tg-listview.vue';
 import TgText from './components/tg-text.vue';
 import TgToolbar from './components/tg-toolbar.vue';
-const version = "1.11.8";
+const version = "1.11.9";
 const description = "turing components";
 const author = "金智教育 wisedu";
 const components = {
@@ -59,6 +59,8 @@ if (!String.prototype.startsWith) {
 		return this.substr(!pos || pos < 0 ? 0 : +pos, search.length) === search;
 	};
 }
+
+axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest';
 
 export default Object.assign({}, {
     install, ...components, 

@@ -108,6 +108,8 @@ if (!String.prototype.startsWith) {
 	};
 }
 
+axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest';
+
 export default Object.assign({}, {
     install, ...components, 
     utils, version, description, author, EMAPDataAdapter,

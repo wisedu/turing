@@ -8,7 +8,7 @@
             <slot name="toolbar-left" slot="left"></slot>
             <slot name="toolbar-right" slot="right"></slot>
         </tg-toolbar>
-        <component :is="type + '-gb-grid'" :columns="columns" :data="data" :pager="pager" 
+        <component :is="type + '-gb-grid'" :columns="columns" :data="data" :pager="pager" :loading="loading"
             @reload="tableReload" @on-highlight="onHighlight" @on-select-all="onSelectAll" @on-selection-change="onSelectionChange">
             <slot :name="'columns-'+model.name" :slot="model.name" v-for="model in columns"></slot>
             <slot name="pagerTotal" slot="pagerTotal"></slot>
@@ -35,6 +35,7 @@ export default {
                 return {};
             }
         },
+        loading: Boolean,
         data: [Array, Object],
         type:{
             type:String,
