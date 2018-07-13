@@ -64,5 +64,6 @@ export default {
             }
         })
     }],
-    currentType:undefined
+    currentType:undefined,
+    validateRules:[]
 }

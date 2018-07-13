@@ -12,26 +12,15 @@ export default {
     },
     data(){
         return {
-            formValue:this.value,
             formDisplay: {},
             optionsMap: {}
         }
     },
-    watch:{
-        value:{
-            handler(newValue){
-                this.formValue = newValue;
-            },
-            deep:true
-        },
-        // formValue:{
-        //     handler(){
-        //         this.$emit("input", this.formValue)
-        //     },
-        //     deep:true
-        // },
+    computed:{
+        formValue: function() {
+            return this.value;
+        }
     },
-    
     methods:{
         registedComponentList(model, connectorItems, defaultXtype, index){
             let xtype = model.xtype;

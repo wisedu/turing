@@ -24,6 +24,16 @@ let views = {
 }
 ```
 
+运行时格式为：
+
+```js
+[
+    {"name":"WID","xtype":"text","caption":"WID"},
+    {"name":"XSBH","xtype":"text","caption":"登录名","dataSize":40}
+    ...
+]
+```
+
 ### 分组表单格式
 
 ```js
@@ -62,6 +72,31 @@ let views = {
         },
     }
 }
+```
+
+运行时格式为：
+
+```js
+[
+    {
+        "name":"group:[个人基本信息]",
+        "title":"个人基本信息",
+        "desc":"~个人基本信息~",
+        "items":[
+            {"name":"XSBH","xtype":"text","caption":"登录名","dataSize":40}
+            ...
+        ]
+    },{
+        "name":"group:[学籍信息]",
+        "title":"学籍信息",
+        "desc":"~学籍信息~",
+        "items":[
+            {"name":"XJZTDM","url": "/axsfw/code/12eb4f7c-69a1-41c2-b21e-c99fe850264a.do","xtype": "select","dataSize": 6}
+            ...
+        ]
+    },
+    ...
+]
 ```
 
 

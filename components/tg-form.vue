@@ -39,20 +39,19 @@ export default {
             }
         }
     },
-    data(){
-        let isGrouped = this.fields.some(item => item.name.startsWith("group:[") === true);
-        return {
-            isGroupForm:isGrouped,
-            formitems:this.fields.filter(item => {
-                if (isGrouped) {
+    computed:{
+        isGroupForm: function() {
+            return this.fields.some(item => item.name.startsWith("group:[") === true);
+        },
+        formitems: function(){
+            return this.fields.filter(item => {
+                if (this.isGroupForm) {
                     return item.name.startsWith("group:[")
                 } else {
                     return true;
                 }
-            })
+            }) 
         }
-    },
-    mounted(){
     },
     methods: {
         validate(callback){
