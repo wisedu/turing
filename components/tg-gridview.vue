@@ -88,7 +88,7 @@ export default {
     },
     methods: {
         reload(pager, callback) {
-            this.dataAdapter.querySetting = this.dataAdapter.querySettingBuilder(Object.assign({}, this.formValue, this.filterValues), "Customer", false);
+            this.dataAdapter.querySetting = this.dataAdapter.querySettingBuilder(Object.assign({}, this.formValue, this.filterValues), this.dataAdapter.name, false);
             this.DataBind(pager, callback);
         },
         SetData(datas) {
@@ -105,9 +105,9 @@ export default {
         sortHandler(column, key, order) {
             let keys = key.split(".")
             if (order !== "normal"){
-                inst.order(keys.concat([order]));
+                this.dataAdapter.order(keys.concat([order]));
             } else {
-                inst.order(keys);
+                this.dataAdapter.order(keys);
             }
             this.reload({pageNumber:1, pageSize:this.pager.size})
         },

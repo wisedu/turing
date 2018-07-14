@@ -1,12 +1,7 @@
 export default{
     props:{
         dataAdapter: Object,
-        datasource: Object,
         autoReadyDataBind: Boolean,
-        // pageSize: {
-        //     type: Number,
-        //     default: 10
-        // },
         params: {
             type: Object,
             default:function() {
@@ -48,7 +43,6 @@ export default{
             }
             this.dataAdapter.pageSize = this.pager.size;
             this.dataAdapter.pageNumber = this.pager.index;
-            console.log("测试");
             this.dataAdapter.findAll(this.params).then(function(datas) {
                 if (callback === undefined){
                     that.SetData(datas);

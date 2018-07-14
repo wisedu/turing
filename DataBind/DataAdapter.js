@@ -9,6 +9,7 @@ export class DataAdapter {
         this.__orders = [];
         this.pageNumber = 1;
         this.pageSize = 50;
+        this.name = "";
     }
     initView(views){
         this.viewDefine = views;
@@ -169,8 +170,8 @@ export class DataAdapter {
             where: utils.extend(true, {}, this.actions.find.params, param || {})
         };
         
-        defaultParams["order"] = this.actions.find.orders.concat(this.__orders);
-        if (defaultParams["order"].length == 0) {
+        defaultParams["order"] = [this.actions.find.orders.concat(this.__orders)];
+        if (defaultParams["order"][0].length == 0) {
             delete defaultParams.order;
         }
 
