@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import ComDataBindBase from './ComDataBindBase'
+import ComDataBindBase from '../dataBind/ComDataBindBase'
 export default {
   extends: ComDataBindBase,
   name: "tg-listview",
@@ -109,7 +109,7 @@ export default {
     },
     LoadMore() {
       var that = this;
-      this.DataBind({}, {
+      this.DataBind({
           pageNumber: ++this.pageNumber,
           pageSize: this.pageSize
         }, function(datas) {
