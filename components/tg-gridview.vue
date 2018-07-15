@@ -10,7 +10,9 @@
         </tg-toolbar>
         <component :is="type + '-gb-grid'" :columns="columns" :data="table_data" :pager="pager" :loading="loading" @on-sort-change="sortHandler"
             @reload="tableReload" @on-highlight="onHighlight" @on-select-all="onSelectAll" @on-selection-change="onSelectionChange">
-            <slot :name="'columns-'+model.name" :slot="model.name" v-for="model in columns"></slot>
+            <template :slot="model.key" slot-scope="scope" v-for="model in columns.filter(item => {return $scopedSlots['columns-' + item.key] !== undefined})">
+                <slot :name="'columns-'+model.key" :index="scope.index" :column="scope.column" :row="scope.row"></slot>
+            </template>
             <slot name="pagerTotal" slot="pagerTotal"></slot>
         </component>
     </div>
