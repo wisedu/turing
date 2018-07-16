@@ -133,7 +133,7 @@ format：日期、数字、金额，或字符串格式化，因效率一般通�
 | default | 默认值 | String | 空 |
 | dataSize | 最大长度校验值 | Integer | 空 |
 | checkType | 校验类型 | Enum | 空 |
-| JSONParam | 传递个实际组件的参数 | Object | 空 |
+| params | 传递个实际组件的参数 | Object | 空 |
 
 xtype 控件类型枚举
 
