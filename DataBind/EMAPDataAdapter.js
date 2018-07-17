@@ -114,7 +114,9 @@ export class EMAPDataAdapter extends DataAdapter{
 	            // name:{quickSearch:true}
 	            // status:{}
 	        }
-	    }
+        }
+        
+        let groupNames = [];
 	    
 	    metas.map(function(metaItem) {
 	        var name = metaItem["name"];
@@ -125,48 +127,81 @@ export class EMAPDataAdapter extends DataAdapter{
 	        	if (struct["form"][name] === undefined)struct["form"][name] = {};
 	        	if (struct["search"][name] === undefined)struct["search"][name] = {};
 
-	            if (prop === "name")continue;
-	            switch (prop) {
-	                case "caption":
-	                case "hidden":
-	                case "format":
-	                case "groupName":
-	                    struct["default"][name][prop] = metaItem[prop];
-	                    break;
-	                case "width":
-	                case "isFixed":
-	                    struct["grid"][name][prop] = metaItem[prop];
-	                    break;
-	                case "xtype":
-	                case "required":
-	                case "col":
-	                case "placeholder":
-	                case "options":
-	                case "default":
-	                case "dataSize":
-	                case "checkType":
-	                case "checkSize":
-	                    struct["form"][name][prop] = metaItem[prop];
-                        break;
-                    case "url":
-                        struct["form"][name].dict = {url: metaItem[prop], value:"id", label:"name"};
-                        break;
-                    case "JSONParam":
-                        struct["form"][name]["params"] = metaItem[prop];
-	                case "optionData":
-	                	struct["form"][name]["options"] = metaItem[prop];
-	                    break;
-	                case "defaultValue":
-	                	struct["form"][name]["default"] = metaItem[prop];
-	                    break;
-	                case "quickSearch":
-	                    struct["search"][name][prop] = metaItem[prop];
-	                    break;
-	                default:
-	                    break;
-	            }
-	        }
-	    })
+                if (prop === "name")continue;
+                let prop_name = "";
+                let proptype = "";
+                if (prop.indexOf(".") > -1) {
+                    let temp = prop.split(".");
+                    proptype = temp[0];
+                    prop_name = temp[1];
+                    struct[proptype][name][prop_name] = metaItem[prop_name];
+                } else {
+                    prop_name = prop;
+                    switch (prop_name) {
+                        case "caption":
+                        case "hidden":
+                        case "format":
+                            struct["default"][name][prop_name] = metaItem[prop_name];
+                            break;
+                        case "width":
+                        case "fixed":
+                            struct["grid"][name][prop_name] = metaItem[prop_name];
+                            break;
+                        case "xtype":
+                        case "required":
+                        case "col":
+                        case "placeholder":
+                        case "options":
+                        case "default":
+                        case "dataSize":
+                        case "checkType":
+                        case "checkSize":
+                        case "groupName":
+                            if (prop_name === "groupName") {
+                                if (groupNames.indexOf(metaItem[prop_name]) === -1) {
+                                    groupNames.push(metaItem[prop_name]);
+                                }
+                            }
+                            struct["form"][name][prop_name] = metaItem[prop_name];
+                            break;
+                        case "url":
+                            struct["form"][name].dict = {url: metaItem[prop_name], value:"id", label:"name"};
+                            break;
+                        case "JSONParam":
+                            struct["form"][name]["params"] = metaItem[prop_name];
+                        case "optionData":
+                            struct["form"][name]["options"] = metaItem[prop_name];
+                            break;
+                        case "defaultValue":
+                            struct["form"][name]["default"] = metaItem[prop_name];
+                            break;
+                        case "quickSearch":
+                            struct["search"][name][prop_name] = metaItem[prop_name];
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        })
+        
+        if (groupNames.length > 0) {
+            let newForm = {};
+            groupNames.map(group => {
+                let newItem = newForm[`group:[${group}]`] = {
+                    // desc:"~个人基本信息~",
+                    items:{}
+                };
+                for (let key in struct["form"]) {
+                    let item = struct["form"][key];
+                    if (item.groupName === group) {
+                        newItem.items[key] = item;
+                    }
+                }
+            })
+            struct["form"] = newForm;
+        }
+
 	    return struct;
     }
     

@@ -59,6 +59,7 @@ export default {
             showToolbar: true,
             table_data: [],
             filterValues: {},
+            sortFields: []
         }
     },
     watch:{
@@ -81,7 +82,10 @@ export default {
                 } else {
                     that.filterValues[key] = values
                 }
-                that.reload();
+                that.$emit("on-change", {index:1, size:that.pager.size}, that.formValue, that.sortFields, "filter");
+                if (that.dataAdapter !== undefined) {
+                    that.reload();
+                }
             }
         })
         if (this.autoReadyDataBind === true) {
@@ -97,21 +101,29 @@ export default {
             this.$set(this, "table_data", datas);
         },
         tableReload(pageNumber, pageSize) {
-            this.$emit("reload", pageNumber, pageSize, this.formValue, "columns");
-            this.reload({pageNumber:pageNumber, pageSize:pageSize});
+            this.$emit("on-change", {index:pageNumber, size:pageSize}, this.formValue, this.sortFields, "columns");
+            if (this.dataAdapter !== undefined) {
+                this.reload({pageNumber:pageNumber, pageSize:pageSize});
+            }
         },
         searchReload() {
-            this.$emit("reload", 1, this.pager.size, this.formValue, "fields")
-            this.reload({pageNumber:1, pageSize:this.pager.size});
+            this.$emit("on-change", {index:1, size:this.pager.size}, this.formValue, this.sortFields, "fields");
+            if (this.dataAdapter !== undefined) {
+                this.reload({pageNumber:1, pageSize:this.pager.size});
+            }
         },
         sortHandler(column, key, order) {
-            let keys = key.split(".")
-            if (order !== "normal"){
-                this.dataAdapter.order(keys.concat([order]));
-            } else {
-                this.dataAdapter.order(keys);
+            this.sortFields = [{column, key, order}]
+            this.$emit("on-change", {index:1, size:this.pager.size}, this.formValue, this.sortFields, "sort");
+            if (this.dataAdapter !== undefined) {
+                let keys = key.split(".")
+                if (order !== "normal"){
+                    this.dataAdapter.order(keys.concat([order]));
+                } else {
+                    this.dataAdapter.order(keys);
+                }
+                this.reload({pageNumber:1, pageSize:this.pager.size})
             }
-            this.reload({pageNumber:1, pageSize:this.pager.size})
         },
         searchClear() {
             this.formValue = {};
