@@ -143,6 +143,14 @@ export class EMAPDataAdapter extends DataAdapter{
                         case "format":
                             struct["default"][name][prop_name] = metaItem[prop_name];
                             break;
+                        case "JSONParam":
+                            struct["default"][name]["params"] = metaItem[prop_name];
+                        case "optionData":
+                            struct["default"][name]["options"] = metaItem[prop_name];
+                            break;
+                        case "defaultValue":
+                            struct["default"][name]["default"] = metaItem[prop_name];
+                            break;
                         case "width":
                         case "fixed":
                             struct["grid"][name][prop_name] = metaItem[prop_name];
@@ -166,14 +174,7 @@ export class EMAPDataAdapter extends DataAdapter{
                             break;
                         case "url":
                             struct["form"][name].dict = {url: metaItem[prop_name], value:"id", label:"name"};
-                            break;
-                        case "JSONParam":
-                            struct["form"][name]["params"] = metaItem[prop_name];
-                        case "optionData":
-                            struct["form"][name]["options"] = metaItem[prop_name];
-                            break;
-                        case "defaultValue":
-                            struct["form"][name]["default"] = metaItem[prop_name];
+                            struct["search"][name].dict = {url: metaItem[prop_name], value:"id", label:"name"};
                             break;
                         case "quickSearch":
                             struct["search"][name][prop_name] = metaItem[prop_name];

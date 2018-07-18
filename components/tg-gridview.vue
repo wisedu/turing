@@ -89,6 +89,7 @@ export default {
             }
         })
         if (this.autoReadyDataBind === true) {
+            this.$emit("on-change", this.pager, this.formValue, this.sortFields, "autoReadyDataBind");
             this.reload();
         }
     },
@@ -98,6 +99,7 @@ export default {
             this.DataBind(pager, callback);
         },
         SetData(datas) {
+            this.$emit("update:data", datas)
             this.$set(this, "table_data", datas);
         },
         tableReload(pageNumber, pageSize) {
