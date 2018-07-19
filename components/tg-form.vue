@@ -56,12 +56,20 @@ export default {
     methods: {
         validate(callback){
             for (let form in this.$refs) {
-                this.$refs[form].validate(callback);
+                if (this.isGroupForm === true) {
+                    this.$refs[form][0].validate(callback);
+                } else {
+                    this.$refs[form].validate(callback);
+                }
             }
         },
         validateField(prop, callback){
             for (let form in this.$refs) {
-                this.$refs[form].validateField(prop, callback);
+                if (this.isGroupForm === true) {
+                    this.$refs[form][0].validateField(prop, callback);
+                } else {
+                    this.$refs[form].validateField(prop, callback);
+                }
             }
         },
         resetFields(){

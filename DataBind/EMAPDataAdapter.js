@@ -134,7 +134,7 @@ export class EMAPDataAdapter extends DataAdapter{
                     let temp = prop.split(".");
                     proptype = temp[0];
                     prop_name = temp[1];
-                    struct[proptype][name][prop_name] = metaItem[prop_name];
+                    struct[proptype][name][prop_name] = metaItem[prop];
                 } else {
                     prop_name = prop;
                     switch (prop_name) {
@@ -202,6 +202,7 @@ export class EMAPDataAdapter extends DataAdapter{
             })
             struct["form"] = newForm;
         }
+        console.log(struct);
 
 	    return struct;
     }
