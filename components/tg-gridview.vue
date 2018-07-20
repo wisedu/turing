@@ -8,7 +8,7 @@
             <slot name="toolbar-left" slot="left"></slot>
             <slot name="toolbar-right" slot="right"></slot>
         </tg-toolbar>
-        <component :is="type + '-gb-grid'" :columns="columns" :data="table_data" :pager="pager" :loading="loading" @on-sort-change="sortHandler"
+        <component :is="type + '-gb-grid'" :columns="columns" :data="table_data" :pager="pager" :loading="loading" @on-sort-change="sortHandler" :displayFieldFormat="displayFieldFormat"
             @reload="tableReload" @on-highlight="onHighlight" @on-select-all="onSelectAll" @on-selection-change="onSelectionChange">
             <template :slot="model.key" slot-scope="scope" v-for="model in columns.filter(item => {return $scopedSlots['columns-' + item.key] !== undefined})">
                 <slot :name="'columns-'+model.key" :index="scope.index" :column="scope.column" :row="scope.row"></slot>

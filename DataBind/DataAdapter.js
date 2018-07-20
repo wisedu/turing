@@ -188,19 +188,16 @@ export class DataAdapter {
         });
     }
     findById(params) {
-        var that = this;
         return this.execute(this.actions.findById, params).then(function(result){
             return result.data;
         });
     }
     delete(params) {
-        var that = this;
         return this.execute(this.actions.delete, params).then(function(result){
             return result.data;
         });
     }
     save(data) {
-        var that = this;
         return this.execute(this.actions.save, data).then(function(result){
             return result.data;
         });

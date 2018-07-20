@@ -202,7 +202,7 @@ export class EMAPDataAdapter extends DataAdapter{
             })
             struct["form"] = newForm;
         }
-        console.log(struct);
+        // console.log(struct);
 
 	    return struct;
     }
@@ -211,9 +211,13 @@ export class EMAPDataAdapter extends DataAdapter{
         if (Object.keys(params).length > 0 && !params.querySetting) {
             var query = [];
             for (var key in params) {
+                let value = params[key];
+                if (Array.isArray(value)){
+                    value = value.join(",");
+                }
                 query.push({
                     name: key,
-                    value: params[key],
+                    value: value,
                     linkOpt: 'OR',
                     builder: 'include'
                 });
@@ -222,6 +226,10 @@ export class EMAPDataAdapter extends DataAdapter{
         } else {
             return undefined;
         }
+    }
+
+    getSearchView() {
+        
     }
 
 
