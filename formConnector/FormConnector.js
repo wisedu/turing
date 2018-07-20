@@ -1,8 +1,18 @@
+import defaults from "../Defaults";
 export default {
     props:{
         fields:Array,
         value: { type: Object, default () { return {}; } },
-        displayFieldFormat: String,
+        displayFieldFormat:{
+            type:String,
+            default:function(){
+                if (defaults.displayFieldFormat !== undefined) {
+                    return defaults.displayFieldFormat;
+                } else {
+                    console.error("TgForm Error: type is undefined, you can set with tg-form or window['tg-turing'].defaults.displayFieldFormat")
+                }
+            }
+        },
         column:Number,
         labelWidth:{
             type:Number,

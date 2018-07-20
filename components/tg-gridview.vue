@@ -47,7 +47,17 @@ export default {
                 if (defaults.currentType !== undefined) {
                     return defaults.currentType;
                 } else {
-                    console.error("TgGridView Error: type is undefined, you can set with tg-form or window['tg-turing'].defaults.currentType")
+                    console.error("TgGridView Error: type is undefined, you can set with tg-gridview or window['tg-turing'].defaults.currentType")
+                }
+            }
+        },
+        displayFieldFormat:{
+            type:String,
+            default:function(){
+                if (defaults.displayFieldFormat !== undefined) {
+                    return defaults.displayFieldFormat;
+                } else {
+                    console.error("TgGridView Error: type is undefined, you can set with tg-form or window['tg-turing'].defaults.displayFieldFormat")
                 }
             }
         },
