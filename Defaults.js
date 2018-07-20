@@ -65,5 +65,6 @@ export default {
         })
     }],
     currentType:undefined,
-    validateRules:[]
+    validateRules:[],
+    displayFieldFormat:""
 }
