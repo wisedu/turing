@@ -16,7 +16,11 @@ export default {
         utils.Post(dict.url, {where:filterparams}).then(result => {
             let datas;
             try{
-                datas = result.data.map(item => {
+                let root = result.data;
+                if (dict.root !== undefined) {
+                    root = result.data[dict.root];
+                }
+                datas = root.map(item => {
                     return {
                         label: item[dict.label],
                         value: item[dict.value]
@@ -24,7 +28,7 @@ export default {
                 })
                 callback(datas);
             } catch (e) {
-                console.error(e, result);
+                console.error("返回数据格式有误", e, "返回结果集", result, "字典配置参数", dict);
             }
         })
     }],
