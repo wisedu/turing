@@ -191,5 +191,33 @@ utils.extend = function extend() {
 	return target;
 };
 
+/**
+ * 向父页面发送消息
+ * @param data
+ * @param data.type {string} 要发送的message类型
+ * @param data.data {object} 要发送的数据
+ */
+utils.sendMessageToParent = function (data) {
+    var type = data.type;
+    var sendData = data.data;
+    var guid = _createGuid();
+    guid = '_send_message_flag_'+guid;
+    window[guid] = guid;
+
+    var href = window.location.href;
+    sendData['__send__message_href'] = href;
+
+    parent.postMessage({
+        type: type,
+        data: sendData
+    },'*');
+};
+
+function _createGuid() {
+    var S4 = function() {
+        return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+    };
+    return (S4() + S4() + "_" + S4() + "_" + S4() + "_" + S4() + "_" + S4() + S4() + S4());
+}
 
 export default utils;
