@@ -202,10 +202,13 @@ utils.sendMessageToParent = function (data) {
     var sendData = data.data;
     var guid = _createGuid();
     guid = '_send_message_flag_'+guid;
+    //在当前页面中添加标识
     window[guid] = guid;
 
     var href = window.location.href;
-    sendData['__send__message_href'] = href;
+    //将标识和链接地址发给父页面
+    sendData['_send_message_href_'] = href;
+    sendData['_send_message_flag_'] = guid;
 
     parent.postMessage({
         type: type,
