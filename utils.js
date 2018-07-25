@@ -86,6 +86,18 @@ utils.setFullUrl = function (url, prefix) {
   }
 }
 
+utils.getContextPath = function(isFullPath) {
+  var pathName = window.location.pathname;
+  var index = pathName.substr(1).indexOf("/");
+  var result = pathName.substr(0,index+1);
+
+  if (isFullPath === false) {
+    return result;
+  } else {
+    return window.location.origin + result;
+  }
+}
+
 utils.toTreeData = function (data, parent_id, options) {
   let opt = options || {ukey:"id", pkey:'parent_id', toCKey:'children'}
   var tree = [];
