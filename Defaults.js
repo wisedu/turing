@@ -70,5 +70,5 @@ export default {
     }],
     currentType:undefined,
     validateRules:[],
-    displayFieldFormat:undefined
+    displayFieldFormat:""
 }
