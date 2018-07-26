@@ -44,8 +44,8 @@ export default{
                 // this.pager = pager_params;
                 this.$emit("update:pager", pager_params)
             }
-            this.dataAdapter.pageSize = this.pager.size;
-            this.dataAdapter.pageNumber = this.pager.index;
+            this.dataAdapter.pageSize = pager_params && pager_params.pageSize || this.pager.size;
+            this.dataAdapter.pageNumber = pager_params && pager_params.pageNumber || this.pager.index;
             this.dataAdapter.findAll(this.params).then(function(datas) {
                 if (callback === undefined){
                     that.SetData(datas);
