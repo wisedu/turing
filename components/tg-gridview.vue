@@ -1,6 +1,6 @@
 <template>
     <div class="tg-gridview-wrap">
-        <component :model="formValue" :fields="fields" :is="type + '-gb-search'" :value="value" :displayFieldFormat="displayFieldFormat"
+        <component v-if="fields !== undefined && fields.length > 0" :model="formValue" :fields="fields" :is="type + '-gb-search'" :value="value" :displayFieldFormat="displayFieldFormat"
             :column="fieldColumn" :labelWidth="labelWidth" @on-value-change="updateValue" @search="searchReload" @clear="searchClear">
             <slot :name="'search-'+model.name" :slot="'search-'+model.name" v-for="model in fields"></slot>
         </component>
@@ -67,17 +67,13 @@ export default {
             formValue: this.fieldsData,
             formDisplay: {},
             showToolbar: true,
-            table_data: [],
             filterValues: {},
             sortFields: []
         }
     },
-    watch:{
-        data: {
-            handler:function(newValue){
-                this.table_data = newValue;
-            },
-            deep: true
+    computed:{
+        table_data:function() {
+            return this.data;
         }
     },
     created() {
@@ -110,7 +106,6 @@ export default {
         },
         SetData(datas) {
             this.$emit("update:data", datas)
-            this.$set(this, "table_data", datas);
         },
         tableReload(pageNumber, pageSize) {
             this.$emit("on-change", {index:pageNumber, size:pageSize}, this.formValue, this.sortFields, "columns");
