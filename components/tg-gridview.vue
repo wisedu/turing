@@ -68,12 +68,13 @@ export default {
             formDisplay: {},
             showToolbar: true,
             filterValues: {},
-            sortFields: []
+            sortFields: [],
+            loadedData: this.data
         }
     },
     computed:{
         table_data:function() {
-            return this.data;
+            return this.loadedData;
         }
     },
     created() {
@@ -106,6 +107,7 @@ export default {
         },
         SetData(datas) {
             this.$emit("update:data", datas)
+            this.loadedData = datas;
         },
         tableReload(pageNumber, pageSize) {
             this.$emit("on-change", {index:pageNumber, size:pageSize}, this.formValue, this.sortFields, "columns");
