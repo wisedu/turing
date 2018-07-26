@@ -1,8 +1,8 @@
 <template>
     <div class="tg-gridview-wrap">
-        <component v-if="fields !== undefined && fields.length > 0" :model="formValue" :fields="fields" :is="type + '-gb-search'" :value="value" :displayFieldFormat="displayFieldFormat"
-            :column="fieldColumn" :labelWidth="labelWidth" @on-value-change="updateValue" @search="searchReload" @clear="searchClear">
-            <slot :name="'search-'+model.name" :slot="'search-'+model.name" v-for="model in fields"></slot>
+        <component v-if="searcher !== undefined" :model="formValue" :is="type + '-gb-' + searcher.name" :displayFieldFormat="displayFieldFormat"
+            v-bind="searcher" @on-value-change="updateValue" @search="searchReload" @clear="searchClear">
+            <slot :name="'search-'+model.name" :slot="'search-'+model.name" v-for="model in searcher.fields"></slot>
         </component>
         <tg-toolbar v-if="showToolbar">
             <slot name="toolbar-left" slot="left"></slot>
@@ -25,22 +25,10 @@ export default {
     name: "tg-gridview",
     extends: ComDataBindBase,
     props: {
-        displayFieldFormat: String,
-        labelWidth: Number,
-        fieldColumn: {
-            type: Number,
-            default: 4
-        },
-        fields: Array,
+        searcher: Object,
         columns: Array,
-        fieldsData: {
-            type: Object,
-            default:function() {
-                return {};
-            }
-        },
         loading: Boolean,
-        data: [Array, Object],
+        datas: [Array, Object],
         type:{
             type:String,
             default:function(){
@@ -63,17 +51,23 @@ export default {
         },
     },
     data() {
+        let searchvalue = {};
+        if (this.searcher !== undefined) {
+            if (this.searcher.value !== undefined) {
+                searchvalue = this.searcher.value;
+            }
+        }
         return {
-            formValue: this.fieldsData,
+            formValue: searchvalue,
             formDisplay: {},
             showToolbar: true,
             filterValues: {},
             sortFields: [],
-            loadedData: this.data
+            loadedData: this.datas
         }
     },
     watch:{
-        data: {
+        datas: {
             handler:function(newValue){
                 this.loadedData = newValue;
             },
@@ -114,7 +108,7 @@ export default {
             this.DataBind(pager, callback);
         },
         SetData(datas) {
-            this.$emit("update:data", datas)
+            this.$emit("update:datas", datas)
             this.loadedData = datas;
         },
         tableReload(pageNumber, pageSize) {
@@ -144,7 +138,7 @@ export default {
         },
         searchClear() {
             this.formValue = {};
-            this.$emit("update:fields-data", {})
+            this.$emit("update:searcher.value", {})
         },
         updateValue(name, value, display, model){
             if (value === "") {
@@ -157,7 +151,7 @@ export default {
                 }
             }
             this.$emit("on-value-change", name, value, display, model, this.formValue);
-            this.$emit("update:fields-data", this.formValue)
+            this.$emit("update:searcher.value", this.formValue)
         },
         onHighlight(currentRow, oldCurrentRow) {
             this.$emit('update:currentRow', currentRow)
