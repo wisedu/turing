@@ -72,6 +72,14 @@ export default {
             loadedData: this.data
         }
     },
+    watch:{
+        data: {
+            handler:function(newValue){
+                this.loadedData = newValue;
+            },
+            deep: true
+        }
+    },
     computed:{
         table_data:function() {
             return this.loadedData;
