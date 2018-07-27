@@ -11,7 +11,7 @@ export class DataAdapter {
         this.pageSize = 50;
         this.name = "";
     }
-    initView(views){
+    initView(views) {
         this.viewDefine = views;
     }
     getView(viewId) {
@@ -26,7 +26,7 @@ export class DataAdapter {
             if (prop.startsWith("group:[")) {
                 let newGroupItem = {}
                 let groupItems = views[viewId][prop].items;
-                for(let item in groupItems){
+                for(let item in groupItems) {
                     newGroupItem[item] = {};
                     utils.extend(true, newGroupItem[item], views["default"][item], groupItems[item]);
                 }

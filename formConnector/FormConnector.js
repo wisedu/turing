@@ -18,7 +18,8 @@ export default {
             type:Number,
             default:100
         },
-        readonly:Boolean
+        readonly:Boolean,
+        validateRules: [Object, Array]
     },
     data(){
         return {

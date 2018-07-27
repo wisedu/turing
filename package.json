@@ -1,7 +1,7 @@
 {
   "name": "tg-turing",
   "description": "turing components",
-  "version": "1.13.8",
+  "version": "1.14.0",
   "author": "金智教育 wisedu",
   "homepage": "https://github.com/wisedu",
   "packageName": "tg-turing",
@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "npm run buildcss && cross-env NODE_ENV=development webpack-dev-server --open --inline --hot --config build/webpack.dev.config.js",
     "build": "npm run buildskin && node ./build/build.js && cross-env NODE_ENV=production webpack --progress --hide-modules --config build/webpack.prod.config.js",
-    "local": "npm run buildskin && node ./build/build.js && cross-env NODE_ENV=production webpack --progress --hide-modules --config build/webpack.prod.config.js && cp -r ./dist/* ../turing-example/node_modules/tg-turing/dist/",
+    "local": "npm run buildskin && node ./build/build.js && cross-env NODE_ENV=production webpack --progress --hide-modules --config build/webpack.prod.config.js && cp -r ./dist/* ../turing-antd/node_modules/tg-turing/dist/",
     "local2": "npm run buildskin && node ./build/build.js && cross-env NODE_ENV=production webpack --progress --hide-modules --config build/webpack.prod.config.js && cp -r ./dist/* ../../GitLab/egg/project-v/node_modules/tg-turing/dist/",
     "deploy": "rm -rf dist && node ./build/deploy.js",
     "buildcss": "node ./build/buildcss.js",
