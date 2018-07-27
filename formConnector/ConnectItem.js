@@ -9,7 +9,7 @@ export default{
         caption: String,
         name: String,
         value: null,
-        display: String,
+        display: null,
         xtype: String,
         options: {
             type:Array,
