@@ -16,6 +16,9 @@ export class DataAdapter {
     }
     getView(viewId) {
         let views = this.viewDefine;
+        if (views === undefined) {
+            throw "模型定义缺失，请检查data-adapter初始化"
+        }
         let result = {}
         for(let prop in views[viewId]) {
             result[prop] = {};
