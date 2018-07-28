@@ -24,12 +24,16 @@ export default {
     data(){
         return {
             formDisplay: {},
-            optionsMap: {}
+            optionsMap: {},
+            formValue: this.value
         }
     },
-    computed:{
-        formValue: function() {
-            return this.value;
+    watch:{
+        value: {
+            handler: function(newValue){
+                this.formValue = newValue;
+            },
+            deep: true
         }
     },
     methods:{

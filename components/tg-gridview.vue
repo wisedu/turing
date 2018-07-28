@@ -139,7 +139,7 @@ export default {
         },
         searchClear() {
             this.formValue = {};
-            this.$emit("update:searcher.value", {})
+            this.formDisplay = {};
         },
         updateValue(name, value, display, model){
             if (value === "") {
@@ -152,7 +152,6 @@ export default {
                 }
             }
             this.$emit("on-value-change", name, value, display, model, this.formValue);
-            this.$emit("update:searcher.value", this.formValue)
         },
         onHighlight(currentRow, oldCurrentRow) {
             this.$emit('update:currentRow', currentRow)

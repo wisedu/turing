@@ -1,7 +1,7 @@
 <template>
     <div class="tg-form-wrap">
         <template v-if="isGroupForm">
-            <component :is="type + '-fc-group'" v-for="item in groupedItems" :key="item.name" :name="item.title" :desc="item.desc">
+            <component :is="type + '-fc-group'" v-for="item in groupedFields" :key="item.name" :name="item.title" :desc="item.desc">
                 <component :model="formValue" :fields="item.items.filter(item => item.hidden !== true)" :is="type + '-fc-form'" :value="value" :displayFieldFormat="displayFieldFormat"
                 :column="column" :labelWidth="labelWidth" :readonly="readonly" @on-value-change="updateValue" :ref="item.name" :validateRules="groupedRules[item.name]">
                     <slot name="before" slot="before"></slot>
@@ -11,7 +11,7 @@
             </component>
         </template>
         <template v-else>
-            <component :model="formValue" :fields="tiledItems" :is="type + '-fc-form'" :column="column" :displayFieldFormat="displayFieldFormat"
+            <component :model="formValue" :fields="tiledFields" :is="type + '-fc-form'" :column="column" :displayFieldFormat="displayFieldFormat"
             :value="value" :labelWidth="labelWidth" :readonly="readonly" @on-value-change="updateValue" :validateRules="tiledRules" ref="tiled_form">
                 <slot name="before" slot="before"></slot>
                 <slot name="after" slot="after"></slot>
@@ -42,45 +42,52 @@ export default {
     data() {
         return {
             tiledRules: {},
-            groupedRules: {}
+            groupedRules: {},
+            isGroupForm: false,
+            groupedFields: [],
+            tiledFields: []
         }
     },
-    computed: {
-        isGroupForm: function() {
-            return this.fields.some(item => item.name.startsWith("group:[") === true);
-        },
-        groupedItems: function(){
-            let rules = {};
-            let newFields = this.fields.filter(group => {
-                let isGrouped = group.name.startsWith("group:[");
-                if (isGrouped) {
-                    //校验
-                    let rules = {};
-                    let newFields = group.items.filter(item => {
-                        this.getValidateRules(item, rules);
-                        return item.hidden !== true;
-                    });
-                    this.groupedRules[group.name] = rules;
-                    //
-                }
-                return isGrouped;
-            })
-
-            this.$emit("update:validateRules", this.groupedRules);
-            return newFields;
-        },
-        tiledItems: function(){
-            let rules = {};
-            let newFields = this.fields.filter(item => {
-                this.getValidateRules(item, rules);
-                return item.hidden !== true;
-            });
-            this.tiledRules = rules;
-            this.$emit("update:validateRules", this.tiledRules)
-            return newFields;
+    watch:{
+        fields:{
+            handler:function(newValue){
+                this.refresh(newValue);
+            },
+            deep: true
         }
+    },
+    created(){
+        this.refresh(this.fields);
     },
     methods: {
+        refresh(newValue){
+            this.isGroupForm = newValue.some(item => item.name.startsWith("group:[") === true);
+            let rules = {};
+            if (this.isGroupForm === true) {
+                this.groupedFields = newValue.filter(group => {
+                    let isGrouped = group.name.startsWith("group:[");
+                    if (isGrouped) {
+                        //校验
+                        let rules = {};
+                        let newFields = group.items.filter(item => {
+                            this.getValidateRules(item, rules);
+                            return item.hidden !== true;
+                        });
+                        this.groupedRules[group.name] = rules;
+                        //
+                    }
+                    return isGrouped;
+                })
+                this.$emit("update:validateRules", this.groupedRules);
+            } else {
+                this.tiledFields = newValue.filter(item => {
+                    this.getValidateRules(item, rules);
+                    return item.hidden !== true;
+                });
+                this.tiledRules = rules;
+                this.$emit("update:validateRules", this.tiledRules)
+            }
+        },
         validate(callback){
             for (let form in this.$refs) {
                 if (this.isGroupForm === true) {
