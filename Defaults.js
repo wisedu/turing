@@ -1,4 +1,5 @@
 import utils from "./utils";
+import rules from "./vaildateRules";
 export default {
     afterFindAll:[function (result, findAction, params){
         return result.data;
@@ -69,6 +70,6 @@ export default {
         })
     }],
     currentType:undefined,
-    validateRules:[],
+    validateRules:rules,
     displayFieldFormat:""
 }

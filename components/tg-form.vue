@@ -40,51 +40,49 @@ export default {
         }
     },
     data() {
+        let isGroupForm = _isGrouped(this.fields);
+        let fields_and_rules = {};
+        let tiledRules = {};
+        let groupedRules = {};
+        let groupedFields = [];
+        let tiledFields = [];
+        if (isGroupForm === true) {
+            fields_and_rules = _getGroupdFieldsAndRules(this.fields);
+            groupedFields = fields_and_rules.fields;
+            groupedRules = fields_and_rules.rules;
+        } else {
+            fields_and_rules = _getTiledFieldsAndRules(this.fields);
+            tiledFields = fields_and_rules.fields;
+            tiledRules = fields_and_rules.rules;
+        }
+        
         return {
-            tiledRules: {},
-            groupedRules: {},
-            isGroupForm: false,
-            groupedFields: [],
-            tiledFields: []
+            tiledRules: tiledRules,
+            groupedRules: groupedRules,
+            isGroupForm: _isGrouped(this.fields),
+            groupedFields: groupedFields,
+            tiledFields: tiledFields
         }
     },
     watch:{
         fields:{
             handler:function(newValue){
                 this.refresh(newValue);
-            },
-            deep: true
+            }
         }
-    },
-    created(){
-        this.refresh(this.fields);
     },
     methods: {
         refresh(newValue){
-            this.isGroupForm = newValue.some(item => item.name.startsWith("group:[") === true);
-            let rules = {};
+            this.isGroupForm = _isGrouped(this.fields);
             if (this.isGroupForm === true) {
-                this.groupedFields = newValue.filter(group => {
-                    let isGrouped = group.name.startsWith("group:[");
-                    if (isGrouped) {
-                        //校验
-                        let rules = {};
-                        let newFields = group.items.filter(item => {
-                            this.getValidateRules(item, rules);
-                            return item.hidden !== true;
-                        });
-                        this.groupedRules[group.name] = rules;
-                        //
-                    }
-                    return isGrouped;
-                })
+                let fields_and_rules = _getGroupdFieldsAndRules(newValue);
+                this.groupedFields = fields_and_rules.fields;
+                this.groupedRules = fields_and_rules.rules;
                 this.$emit("update:validateRules", this.groupedRules);
             } else {
-                this.tiledFields = newValue.filter(item => {
-                    this.getValidateRules(item, rules);
-                    return item.hidden !== true;
-                });
-                this.tiledRules = rules;
+                let fields_and_rules = _getTiledFieldsAndRules(newValue);
+                this.tiledFields = fields_and_rules.fields;
+                this.tiledRules = fields_and_rules.rules;
                 this.$emit("update:validateRules", this.tiledRules)
             }
         },
@@ -110,18 +108,62 @@ export default {
             for (let form in this.$refs) {
                 this.$refs[form].resetFields();
             }
-        },
-        getValidateRules(item, rules) {
-            if (item.required === true && item.hidden !== true) {
-                if (rules[item.name] === undefined){
-                    rules[item.name] = [];
-                }
-                rules[item.name].push({
-                    required: true, trigger: 'blur', message: `不能为空`
-                });
-            }
         }
     }
+}
+
+function _getValidateRules(field, rules) {
+    if (field.required !== undefined && field.hidden !== true) {
+        if (rules[field.name] === undefined){
+            rules[field.name] = [];
+        }
+        let required = defaults[defaults.currentType].form[field.xtype || "static"].required;
+        if (required !== undefined) {
+            required.required = true;
+            rules[field.name].push(required);
+        }
+    }
+    if (field.vaildator !== undefined && field.hidden !== true) {
+        if (rules[field.name] === undefined){
+            rules[field.name] = [];
+        }
+        rules[field.name] = rules[field.name].concat(field.vaildator);
+    }
+}
+
+function _isGrouped(fields) {
+    return fields.some(item => item.name.startsWith("group:[") === true)
+}
+
+function _getGroupdFieldsAndRules(fields) {
+    let groupedRules = {};
+    let groupedFields = fields.filter(group => {
+        let isGrouped = group.name.startsWith("group:[");
+        if (isGrouped) {
+            //校验
+            let rules = {};
+            group.items.map(item => {
+                if (item.hidden !== true) {
+                    _getValidateRules(item, rules);
+                }
+            });
+            groupedRules[group.name] = rules;
+            //
+        }
+        return isGrouped;
+    });
+    return {fields:groupedFields, rules:groupedRules};
+}
+
+function _getTiledFieldsAndRules(fields) {
+    let tiledRules = {};
+    let tiledFields = fields.filter(item => {
+        if (item.hidden !== true) {
+            _getValidateRules(item, tiledRules);
+        }
+        return item.hidden !== true;
+    });
+    return {fields:tiledFields, rules:tiledRules};
 }
 
 </script>
