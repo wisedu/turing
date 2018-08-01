@@ -105,8 +105,10 @@ export default {
     },
     methods: {
         reload(pager, callback) {
-            this.dataAdapter.querySetting = this.dataAdapter.querySettingBuilder(Object.assign({}, this.formValue, this.filterValues), this.dataAdapter.name, false);
-            this.DataBind(pager, callback);
+            if (this.dataAdapter !== undefined) {
+                this.dataAdapter.querySetting = this.dataAdapter.querySettingBuilder(Object.assign({}, this.formValue, this.filterValues), this.dataAdapter.name, false);
+                this.DataBind(pager, callback);
+            }
         },
         SetData(datas) {
             this.$emit("update:datas", datas)

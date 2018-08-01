@@ -50,10 +50,16 @@ export default {
             fields_and_rules = _getGroupdFieldsAndRules(this.fields);
             groupedFields = fields_and_rules.fields;
             groupedRules = fields_and_rules.rules;
+            if (this.validateRules !== undefined) {
+                groupedRules = this.validateRules;
+            }
         } else {
             fields_and_rules = _getTiledFieldsAndRules(this.fields);
             tiledFields = fields_and_rules.fields;
             tiledRules = fields_and_rules.rules;
+            if (this.validateRules !== undefined) {
+                tiledRules = this.validateRules;
+            }
         }
         
         return {

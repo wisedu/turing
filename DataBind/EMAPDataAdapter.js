@@ -36,7 +36,7 @@ export class EMAPDataAdapter extends DataAdapter{
         for (var index = 0; index < data.models.length; index++) {
             var element = data.models[index];
 
-            if (element.url.indexOf("_SAVE") > -1) {
+            if (element.url.lastIndexOf("_SAVE") > -1) {
                 if (["http"].indexOf(element.url.substring(0, 4)) > -1) {
                     this.actions["save"].url = element.url;
                 } else {
@@ -45,7 +45,7 @@ export class EMAPDataAdapter extends DataAdapter{
                 this.actions["save"].method = "post";
                 this.actions["save"].name = element.name;
             }
-            if (element.url.indexOf("_DELETE") > -1) {
+            if (element.url.lastIndexOf("_DELETE") > -1) {
                 if (["http"].indexOf(element.url.substring(0, 4)) > -1) {
                     this.actions["delete"].url = element.url;
                 } else {
@@ -54,7 +54,7 @@ export class EMAPDataAdapter extends DataAdapter{
                 this.actions["delete"].method = "post";
                 this.actions["delete"].name = element.name;
             }
-            if (element.url.indexOf("_QUERY") > -1 || element.url.indexOf(modelName) > -1) {
+            if (element.url.lastIndexOf("_QUERY") > -1 || element.url.indexOf(modelName) > -1) {
                 if (["http"].indexOf(element.url.substring(0, 4)) > -1) {
                     this.actions["find"].url = element.url;
                 } else {
@@ -161,9 +161,13 @@ export class EMAPDataAdapter extends DataAdapter{
                         case "placeholder":
                         case "options":
                         case "default":
+                            struct["form"][name][prop_name] = metaItem[prop_name];
+                            break;
                         case "dataSize":
                         case "checkType":
                         case "checkSize":
+                            struct["form"][name]["vaildator"] = metaItem[prop_name];
+                            break;
                         case "groupName":
                             if (prop_name === "groupName") {
                                 if (groupNames.indexOf(metaItem[prop_name]) === -1) {
