@@ -69,3 +69,9 @@ pre{
 .#{$namespace}-likehide{
   position: absolute;z-index: -999;
 }
+
+.#{$namespace}-cut-str{
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
