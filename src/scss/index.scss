@@ -34,6 +34,13 @@ pre{
   margin: 0;
 }
 
+.#{$namespace}-hide{
+  display: none;
+}
+.#{$namespace}-show{
+  display: block;
+}
+
 .#{$namespace}-left{
   float: left;
 }
