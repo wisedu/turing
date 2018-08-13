@@ -15,7 +15,7 @@ export class EMAPDataAdapter extends DataAdapter{
         return this.Adapter(type, this.getView(props[0]), params);
     }
 
-    load(uri, modelName, findParams){
+    load(uri, modelName, findParams) {
         var self = this;
         var url = "";
         if ([".", "/"].indexOf(uri.substring(0, 1)) > -1) {
@@ -28,6 +28,41 @@ export class EMAPDataAdapter extends DataAdapter{
             self.refresh(data, modelName, findParams);
             return self;
         })
+    }
+
+    getIntegratedModel(uri, modelName, findParams) {
+        return this.load(uri, modelName, findParams).then(function(model){
+            var formModel = model;
+            if(formModel && formModel.length>0){
+                return axios.get(WIS_EMAP_SERV.getContextPath() + '/sys/emapflow/definition/queryFormActions.do', {params:{"*json":1}}).then(function(resp){
+                    var result;
+                    try {
+                        result = resp.data;
+                        var processModel = result.datas;
+                        if(processModel && processModel.action && processModel.action.length>0 ){
+                            processModel.action.forEach(function(obj){
+                                if(obj.field && obj.field.length>0){
+                                    obj.field.forEach(function(field){
+                                        var selectedIdx = -1;
+                                        formModel.map(function(item,index){
+                                            if(item.name === field.id) selectedIdx = index;
+                                        });
+                                        if(selectedIdx > -1){
+                                            formModel[selectedIdx].hidden = field.hidden?JSON.parse(field.hidden):false;
+                                            formModel[selectedIdx].readonly = field.readonly?JSON.parse(field.readonly):false;
+                                            formModel[selectedIdx].required = field.required?JSON.parse(field.required):false;
+                                        }
+                                    });
+                                }
+                            });
+                            return formModel;
+                        }
+                    } catch (e) {
+                        throw e;
+                    }
+                })
+            }
+        });
     }
 
     refresh(data, modelName, findParams) {
