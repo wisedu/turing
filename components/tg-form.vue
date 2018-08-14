@@ -123,10 +123,13 @@ function _getValidateRules(field, rules) {
         if (rules[field.name] === undefined){
             rules[field.name] = [];
         }
-        let required = defaults[defaults.currentType].form[field.xtype || "static"].required;
-        if (required !== undefined) {
-            required.required = true;
-            rules[field.name].push(required);
+        let xtype = defaults[defaults.currentType].form[field.xtype || "static"]; 
+        if (xtype !== undefined) {
+            let required = xtype.required;
+            if (required !== undefined) {
+                required.required = true;
+                rules[field.name].push(required);
+            }
         }
     }
     if (field.vaildator !== undefined && field.hidden !== true) {
