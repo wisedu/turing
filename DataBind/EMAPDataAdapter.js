@@ -56,7 +56,12 @@ export class EMAPDataAdapter extends DataAdapter{
                                                 if(item.name === field.id) selectedIdx = index;
                                             });
                                             if(selectedIdx > -1){
-                                                formModel[selectedIdx].hidden = field.hidden?JSON.parse(field.hidden):false;
+                                                if (formModel[selectedIdx].hidden === true || field.hidden === true) {
+                                                    formModel[selectedIdx].hidden = true;
+                                                } else {
+                                                    formModel[selectedIdx].hidden = field.hidden?JSON.parse(field.hidden):false;
+                                                }
+                                                
                                                 formModel[selectedIdx].readonly = field.readonly?JSON.parse(field.readonly):false;
                                                 formModel[selectedIdx].required = field.required?JSON.parse(field.required):false;
                                             }
