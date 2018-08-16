@@ -206,6 +206,7 @@ export class EMAPDataAdapter extends DataAdapter{
                             break;
                         case "xtype":
                         case "required":
+                        case "readonly":
                         case "col":
                         case "placeholder":
                         case "options":
