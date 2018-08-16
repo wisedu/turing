@@ -32,6 +32,7 @@ export default {
       type: String,
       default: "default"
     },
+    pageSize: Number
   },
   data: function() {
     return {
