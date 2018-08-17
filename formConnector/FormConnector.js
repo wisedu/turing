@@ -45,7 +45,7 @@ export default {
                 return connectorItems['static']
             } else if (connectorItems[xtype] === undefined) {
                 console.warn(`Turing FormConnector: field ${caption}'s xtype '${xtype}' is undefined, instead of using '${defaultXtype}'.`, model, index)
-                return defaultXtype;
+                return connectorItems[defaultXtype];
             } else {
                 return connectorItems[xtype].name
             }
