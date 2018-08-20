@@ -51,6 +51,7 @@ export default {
             }
         },
         updateValue(name, value, display, model){
+            if (value === null) value = "";
             if (value === "") {
                 this.$delete(this.formValue, name);
                 this.$delete(this.formDisplay, name);
