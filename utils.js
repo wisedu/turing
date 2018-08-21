@@ -98,6 +98,15 @@ utils.getContextPath = function(isFullPath) {
   }
 }
 
+utils.cleanProps = function(data) {
+  for(let prop in data) {
+    if (data[prop] === null || data[prop] === undefined) {
+      delete data[prop];
+    }
+  }
+  return data;
+} 
+
 utils.toTreeData = function (data, parent_id, options) {
   let opt = options || {ukey:"id", pkey:'parent_id', toCKey:'children'}
   var tree = [];

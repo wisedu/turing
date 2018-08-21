@@ -1,4 +1,5 @@
 import defaults from "../Defaults";
+import utils from "../utils";
 export default {
     props:{
         fields:Array,
@@ -25,13 +26,13 @@ export default {
         return {
             formDisplay: {},
             optionsMap: {},
-            formValue: this.value
+            formValue: utils.cleanProps(this.value)
         }
     },
     watch:{
         value: {
             handler: function(newValue){
-                this.formValue = newValue;
+                this.formValue = utils.cleanProps(newValue);
             },
             deep: true
         }
