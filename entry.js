@@ -25,7 +25,7 @@ import TgListview from './components/tg-listview.vue';
 import TgText from './components/tg-text.vue';
 import TgToolbar from './components/tg-toolbar.vue';
 import TgValidator from './components/tg-validator.vue';
-const version = "1.16.11";
+const version = "1.16.18";
 const description = "turing components";
 const author = "金智教育 wisedu";
 const components = {
@@ -45,7 +45,13 @@ const install = function (Vue, opts = {}) {
                 authkeys = authkeys_str.split(",")
             }
             let funckeys = binding.value.split(",");
+
+            let hasKey = false;
             if (authkeys.some(item => funckeys.indexOf(item) > -1) ) {
+                hasKey = true;
+            }
+
+            if (hasKey === false) {
                 el.parentNode.removeChild(el);
             }
         }

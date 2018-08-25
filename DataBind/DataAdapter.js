@@ -8,7 +8,7 @@ export class DataAdapter {
         this.viewDefine;
         this.__orders = [];
         this.pageNumber = 1;
-        this.pageSize = 50;
+        this.pageSize = 20;
         this.name = "";
     }
     initView(views) {

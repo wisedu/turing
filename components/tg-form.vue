@@ -53,6 +53,7 @@ export default {
             if (this.validateRules !== undefined) {
                 groupedRules = this.validateRules;
             }
+            this.$emit("update:validateRules", groupedRules);
         } else {
             fields_and_rules = _getTiledFieldsAndRules(this.fields);
             tiledFields = fields_and_rules.fields;
@@ -60,6 +61,7 @@ export default {
             if (this.validateRules !== undefined) {
                 tiledRules = this.validateRules;
             }
+            this.$emit("update:validateRules", tiledRules)
         }
         
         return {

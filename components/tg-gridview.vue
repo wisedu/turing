@@ -27,7 +27,6 @@ export default {
     props: {
         searcher: Object,
         columns: Array,
-        loading: Boolean,
         datas: [Array, Object],
         type:{
             type:String,

@@ -3,6 +3,10 @@ export default{
         datasource: Object,//被弃用
         dataAdapter: Object,
         autoReadyDataBind: Boolean,
+        loading: {
+            type:Boolean,
+            default: false
+        },
         params: {
             type: Object,
             default:function() {
@@ -12,7 +16,7 @@ export default{
         pager: {
             type: Object,
             default:function() {
-                return {size:50,index:1};
+                return {size:20,index:1};
             }
         },
     },
@@ -27,10 +31,12 @@ export default{
         },
         DataBind(pager_params, callback) {
             let that = this;
+            this.$emit("update:loading", true);
             if (this.datasource !== undefined) {    //后续将不再支持
                 this.datasource.inst.pageSize = pager_params && pager_params.pageSize || this.pageSize;
                 this.datasource.inst.pageNumber = pager_params && pager_params.pageNumber || this.pageNumber;
                 this.datasource.inst.findAll(this.params).then(function(datas) {
+                    that.$emit("update:loading", false);
                     if (callback === undefined){
                         that.SetData(datas);
                     } else {
@@ -47,6 +53,7 @@ export default{
             this.dataAdapter.pageSize = pager_params && pager_params.pageSize || this.pager.size;
             this.dataAdapter.pageNumber = pager_params && pager_params.pageNumber || this.pager.index;
             this.dataAdapter.findAll(this.params).then(function(datas) {
+                that.$emit("update:loading", false);
                 if (callback === undefined){
                     that.SetData(datas);
                 } else {

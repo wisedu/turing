@@ -92,7 +92,13 @@ const install = function (Vue, opts = {}) {
                 authkeys = authkeys_str.split(",")
             }
             let funckeys = binding.value.split(",");
+
+            let hasKey = false;
             if (authkeys.some(item => funckeys.indexOf(item) > -1) ) {
+                hasKey = true;
+            }
+
+            if (hasKey === false) {
                 el.parentNode.removeChild(el);
             }
         }
