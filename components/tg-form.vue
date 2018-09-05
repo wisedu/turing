@@ -96,6 +96,7 @@ export default {
         },
         validate(callback){
             for (let form in this.$refs) {
+                if (this.$refs[form] === undefined)continue;
                 if (this.isGroupForm === true) {
                     this.$refs[form][0].validate(callback);
                 } else {
@@ -105,6 +106,7 @@ export default {
         },
         validateField(prop, callback){
             for (let form in this.$refs) {
+                if (this.$refs[form] === undefined)continue;
                 if (this.isGroupForm === true) {
                     this.$refs[form][0].validateField(prop, callback);
                 } else {
@@ -114,6 +116,7 @@ export default {
         },
         resetFields(){
             for (let form in this.$refs) {
+                if (this.$refs[form] === undefined)continue;
                 this.$refs[form].resetFields();
             }
         }
