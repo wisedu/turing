@@ -131,8 +131,8 @@ function _getValidateRules(field, rules) {
         let xtype = defaults[defaults.currentType].form[field.xtype || "static"]; 
         if (xtype !== undefined) {
             let required = xtype.required;
-            if (required === true || required === "true") {
-                required.required = true;
+            if (required !== undefined) {
+                // required.required = true;
                 rules[field.name].push(Object.assign({field:field}, required));
             }
         }
