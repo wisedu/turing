@@ -216,7 +216,7 @@ export class EMAPDataAdapter extends DataAdapter{
                         case "dataSize":
                         case "checkType":
                         case "checkSize":
-                            struct["form"][name]["vaildator"] = metaItem[prop_name];
+                            // struct["form"][name]["vaildator"] = metaItem[prop_name];
                             break;
                         case "groupName":
                             if (prop_name === "groupName") {

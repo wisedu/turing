@@ -95,13 +95,25 @@ export default {
             }
         },
         validate(callback){
-            for (let form in this.$refs) {
-                if (this.$refs[form] === undefined)continue;
-                if (this.isGroupForm === true) {
-                    this.$refs[form][0].validate(callback);
-                } else {
-                    this.$refs[form].validate(callback);
+            if (this.isGroupForm === true) {
+                var proms = [];
+                for (let form in this.$refs) {
+                    if (this.$refs[form] === undefined)continue;
+                    proms.push(new Promise((resolve, reject) => {
+                        this.$refs[form][0].validate((valid) => {
+                            resolve(valid);
+                        });
+                    }));
                 }
+                Promise.all(proms).then(function(values){
+                    let result = true;
+                    values.map(item => {
+                        result = result && item;
+                    })
+                    callback(result);
+                });
+            } else {
+                this.$refs.tiled_form.validate(callback);
             }
         },
         validateField(prop, callback){
@@ -133,7 +145,7 @@ function _getValidateRules(field, rules) {
             let required = xtype.required;
             if (required !== undefined) {
                 // required.required = true;
-                rules[field.name].push(Object.assign({field:field}, required));
+                rules[field.name].push(Object.assign({}, field, required));
             }
         }
     }
@@ -141,7 +153,7 @@ function _getValidateRules(field, rules) {
         if (rules[field.name] === undefined){
             rules[field.name] = [];
         }
-        rules[field.name] = rules[field.name].concat(Object.assign({field:field},field.vaildator));
+        rules[field.name] = rules[field.name].concat(Object.assign({}, field, field.vaildator));
     }
 }
 
