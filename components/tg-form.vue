@@ -117,20 +117,39 @@ export default {
             }
         },
         validateField(prop, callback){
-            for (let form in this.$refs) {
-                if (this.$refs[form] === undefined)continue;
-                if (this.isGroupForm === true) {
+            if (this.isGroupForm === true) {
+                for (let form in this.$refs) {
+                    if (this.$refs[form] === undefined)continue;
                     this.$refs[form][0].validateField(prop, callback);
-                } else {
-                    this.$refs[form].validateField(prop, callback);
                 }
+            } else {
+                this.$refs.tiled_form.validateField(prop, callback);
             }
         },
         resetFields(){
-            for (let form in this.$refs) {
-                if (this.$refs[form] === undefined)continue;
-                this.$refs[form].resetFields();
+            if (this.isGroupForm === true) {
+                for (let form in this.$refs) {
+                    if (this.$refs[form] === undefined)continue;
+                    this.$refs[form].resetFields();
+                }
+            } else {
+                this.$refs.tiled_form.resetFields();
             }
+        },
+        getField(key){
+            let field_model;
+            if (this.isGroupForm === true) {
+                for (let i in this.groupedFields) {
+                    let group = this.groupedFields[i];
+                    field_model = group.items.find(item => item.name === key);
+                    if (field_model !== undefined) {
+                        return field_model;
+                    }
+                }
+            } else {
+                field_model = this.tiledFields.find(item => item.name === key);
+            }
+            return field_model;
         }
     }
 }
