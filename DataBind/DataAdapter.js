@@ -128,6 +128,14 @@ export class DataAdapter {
             method: "get",
             name: ""
         },
+        findAll:{
+            url: "",
+            method: "post",
+            name: "",
+            params: {},
+            orders: [],
+        },
+        //将废弃
         find:{
             url: "",
             method: "post",
@@ -170,10 +178,12 @@ export class DataAdapter {
         var that = this;
         
         let defaultParams = {
-            where: utils.extend(true, {}, this.actions.find.params, param || {})
+            where: utils.extend(true, {}, (this.actions.findAll || this.actions.find).params, param || {})
+            // where: utils.extend(true, {}, this.actions.find.params, param || {})
         };
         
-        defaultParams["order"] = [this.actions.find.orders.concat(this.__orders)];
+        defaultParams["order"] = [(this.actions.findAll || this.actions.find).orders.concat(this.__orders)];
+        // defaultParams["order"] = [this.actions.findAll.orders.concat(this.__orders)];
         if (defaultParams["order"][0].length == 0) {
             delete defaultParams.order;
         }
@@ -181,13 +191,17 @@ export class DataAdapter {
         defaultParams["offset"] = (this.pageNumber - 1) * this.pageSize;
         defaultParams["limit"] = this.pageSize;
 
-        defaultParams = defaults.beforeFindAll[0](this.actions.find, defaultParams, {
+        // defaultParams = defaults.beforeFindAll[0](this.actions.find, defaultParams, {
+        defaultParams = defaults.beforeFindAll[0]((this.actions.findAll || this.actions.find), defaultParams, {
             pageNumber: this.pageNumber, 
             pageSize: this.pageSize
         });
 
-        return this.execute(this.actions.find, defaultParams).then(function(result){
-            return defaults.afterFindAll[0](result, that.actions.find, defaultParams)
+        // return this.execute(this.actions.findAll, defaultParams).then(function(result){
+        //     return defaults.afterFindAll[0](result, that.actions.findAll, defaultParams)
+        // });
+        return this.execute((this.actions.findAll || this.actions.find), defaultParams).then(function(result){
+            return defaults.afterFindAll[0](result, (that.actions.findAll || that.actions.find), defaultParams)
         });
     }
     findById(params) {

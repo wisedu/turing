@@ -450,7 +450,7 @@ export default class extends DataAdapter{
                 "BZ20": {}
             }
         }
-        this.actions.find.url = "/api/user";
+        this.actions.findAll.url = "/api/user";
         this.actions.save.url = "/api/user/save";
         this.actions.delete.url = "/api/user";
         this.actions.delete.method = "delete"

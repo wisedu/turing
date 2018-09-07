@@ -105,15 +105,15 @@ export class EMAPDataAdapter extends DataAdapter{
             }
             if (element.url.lastIndexOf("_QUERY") > -1 || element.url.indexOf(modelName) > -1) {
                 if (["http"].indexOf(element.url.substring(0, 4)) > -1) {
-                    this.actions["find"].url = element.url;
+                    this.actions["findAll"].url = element.url;
                 } else {
-                    this.actions["find"].url = "./" + element.url;
+                    this.actions["findAll"].url = "./" + element.url;
                 }
-                this.actions["find"].method = "post";
-                this.actions["find"].params = findParams || {}
-                // this.actions["find"].params.pageSize = 10;
-                // this.actions["find"].params.pageNumber = 1;
-                this.actions["find"].name = element.name;
+                this.actions["findAll"].method = "post";
+                this.actions["findAll"].params = findParams || {}
+                // this.actions["findAll"].params.pageSize = 10;
+                // this.actions["findAll"].params.pageNumber = 1;
+                this.actions["findAll"].name = element.name;
             }
 
             this.actions[element.name] = {

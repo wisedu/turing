@@ -73,7 +73,7 @@ export default {
   },
   methods: {
     queryUser() {
-      inst_scd.actions.find.orders = [{ created_at: "+" }];
+      inst_scd.actions.findAll.orders = [{ created_at: "+" }];
       inst_scd.pageSize = 100;
       inst_scd.findAll().then(datas => {
         this.rowData = datas.data;
@@ -108,9 +108,9 @@ export default {
       let key = data.key;
       let values = data.selectedFilterValue;
       if (values.length === 0) {
-        delete inst_scd.actions.find.params[key];
+        delete inst_scd.actions.findAll.params[key];
       } else {
-        inst_scd.actions.find.params[key] = values;
+        inst_scd.actions.findAll.params[key] = values;
       }
       this.queryUser();
     }

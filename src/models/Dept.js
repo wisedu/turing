@@ -22,8 +22,8 @@ export default class extends DataAdapter {
             "查询": {
             }
         }
-        this.actions.find.url = "/api/dept";
-        this.actions.find.method = "get"
+        this.actions.findAll.url = "/api/dept";
+        this.actions.findAll.method = "get"
         this.actions.save.url = "/api/dept/save";
         this.actions.delete.url = "/api/dept";
         this.actions.delete.method = "delete"
