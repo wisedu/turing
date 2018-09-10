@@ -164,7 +164,7 @@ function _getValidateRules(field, rules) {
             let required = xtype.required;
             if (required !== undefined) {
                 // required.required = true;
-                rules[field.name].push(Object.assign({}, field, required));
+                rules[field.name].push(Object.assign({}, {field:field}, required, {required:field.required}));
             }
         }
     }
@@ -172,7 +172,7 @@ function _getValidateRules(field, rules) {
         if (rules[field.name] === undefined){
             rules[field.name] = [];
         }
-        rules[field.name] = rules[field.name].concat(Object.assign({}, field, field.vaildator));
+        rules[field.name] = rules[field.name].concat(Object.assign({}, {field:field}, field.vaildator));
     }
 }
 
