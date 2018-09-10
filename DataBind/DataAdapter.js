@@ -86,23 +86,17 @@ export class DataAdapter {
             return axios.post(url, params).catch(e=>{
                 console.error(e)
                 this.onFetching("error", false, e);
-            }).finally(()=>{
-                this.onFetching("done", false);
             })
         } else if (action.method === "delete") {
             //删除资源仅允许与rest接口约定的url方式
             return axios.delete(url).catch(e=>{
                 console.error(e)
                 this.onFetching("error", false, e);
-            }).finally(()=>{
-                this.onFetching("done", false);
             })
         }else {
             return axios.get(url, {params: params}).catch(e=>{
                 console.error(e)
                 this.onFetching("error", false, e);
-            }).finally(()=>{
-                this.onFetching("done", false);
             })
         }
     }
