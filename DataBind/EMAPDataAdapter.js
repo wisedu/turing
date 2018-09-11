@@ -5,6 +5,7 @@ export class EMAPDataAdapter extends DataAdapter{
     constructor(Adapter) {
         super()
         this.Adapter = Adapter;
+        this.searchDefine = {};
         // if (arguments.length >= 2) {
         //     this.load.apply(this, arguments);
         // }
@@ -29,6 +30,14 @@ export class EMAPDataAdapter extends DataAdapter{
             self.refresh(data, modelName, findParams);
             return self;
         })
+    }
+
+    async getSearchView() {
+        let url = this.actions.findAll.url;
+        let res = await axios.get(url, {params:{"*searchMeta":1}});
+        this.searchDefine = res.data;
+
+        return this.searchDefine;
     }
 
     getIntegratedModel(uri, modelName, findParams) {
@@ -89,7 +98,7 @@ export class EMAPDataAdapter extends DataAdapter{
                 if (["http"].indexOf(element.url.substring(0, 4)) > -1) {
                     this.actions["save"].url = element.url;
                 } else {
-                    this.actions["save"].url = "./" + element.url;
+                    this.actions["save"].url = "/" + element.url;
                 }
                 this.actions["save"].method = "post";
                 this.actions["save"].name = element.name;
@@ -98,7 +107,7 @@ export class EMAPDataAdapter extends DataAdapter{
                 if (["http"].indexOf(element.url.substring(0, 4)) > -1) {
                     this.actions["delete"].url = element.url;
                 } else {
-                    this.actions["delete"].url = "./" + element.url;
+                    this.actions["delete"].url = "/" + element.url;
                 }
                 this.actions["delete"].method = "post";
                 this.actions["delete"].name = element.name;
@@ -107,7 +116,7 @@ export class EMAPDataAdapter extends DataAdapter{
                 if (["http"].indexOf(element.url.substring(0, 4)) > -1) {
                     this.actions["findAll"].url = element.url;
                 } else {
-                    this.actions["findAll"].url = "./" + element.url;
+                    this.actions["findAll"].url = "/" + element.url;
                 }
                 this.actions["findAll"].method = "post";
                 this.actions["findAll"].params = findParams || {}
@@ -281,11 +290,6 @@ export class EMAPDataAdapter extends DataAdapter{
             return undefined;
         }
     }
-
-    getSearchView() {
-        
-    }
-
 
     // view(name, params) {
     //     let props = name.split(":")

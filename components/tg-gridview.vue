@@ -104,7 +104,7 @@ export default {
     },
     methods: {
         reload(pager, callback) {
-            if (this.dataAdapter !== undefined && this.dataAdapter.querySettingBuilder !== undefined) {
+            if (this.dataAdapter !== undefined && this.dataAdapter.querySettingBuilder !== undefined && this.dataAdapter.actions.findAll.url !== "") {
                 this.dataAdapter.querySetting = this.dataAdapter.querySettingBuilder(Object.assign({}, this.formValue, this.filterValues), this.dataAdapter.name, false);
                 this.DataBind(pager, callback);
             }
