@@ -32,10 +32,18 @@ export class EMAPDataAdapter extends DataAdapter{
         })
     }
 
-    async getSearchView() {
-        let url = this.actions.findAll.url;
-        let res = await axios.get(url, {params:{"*searchMeta":1}});
-        this.searchDefine = res.data;
+    async getSearchView(url) {
+        let path;
+        if (url !== undefined){
+            path = url;
+        } else {
+            path = this.actions.findAll.url;
+        }
+        if (path === undefined || path === null || path === "") {
+            throw `没有传入url，也没有默认的findAll.url。无法调用该函数`
+        }
+        let res = await axios.get(path, {params:{"*searchMeta":1}});
+        this.searchDefine = res.data !== undefined && res.data.searchMeta !== undefined ? res.data.searchMeta : {};
 
         return this.searchDefine;
     }
@@ -126,7 +134,7 @@ export class EMAPDataAdapter extends DataAdapter{
             }
 
             this.actions[element.name] = {
-                url: element.url,
+                url: "/" + element.url,
                 method: "post"
             };
             //只有指定名称下的模型，被填充到默认模型对象中，用于显示
