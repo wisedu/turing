@@ -201,11 +201,11 @@ export class EMAPDataAdapter extends DataAdapter{
                     prop_name = temp[1];
                     switch (prop_name) {
                         case "JSONParam":
-                            struct[proptype][name]["params"] = metaItem[prop_name];
+                            struct[proptype][name]["params"] = metaItem[prop];
                         case "optionData":
-                            struct[proptype][name]["options"] = metaItem[prop_name];
+                            struct[proptype][name]["options"] = metaItem[prop];
                         case "width":
-                            struct[proptype][name][prop_name] = Number(metaItem[prop_name].replace("px", ""));
+                            struct[proptype][name][prop_name] = Number(metaItem[prop].replace("px", ""));
                             if ( isNaN(struct[proptype][name][prop_name]) === true ) {
                                 delete struct[proptype][name][prop_name];
                                 console.warn(name, prop_name, metaItem[prop_name], "无法转换为数值，已经被删除");
