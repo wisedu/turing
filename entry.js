@@ -25,7 +25,7 @@ import TgListview from './components/tg-listview.vue';
 import TgText from './components/tg-text.vue';
 import TgToolbar from './components/tg-toolbar.vue';
 import TgValidator from './components/tg-validator.vue';
-const version = "1.18.5";
+const version = "1.19.3";
 const description = "turing components";
 const author = "金智教育 wisedu";
 const components = {
@@ -55,6 +55,34 @@ const install = function (Vue, opts = {}) {
                 el.parentNode.removeChild(el);
             }
         }
+    })
+    Vue.filter('date', function (value, format) {
+        if (!value) return ''
+        if (!format) {
+            format = 'YYYY-MM-DD'
+        }
+        let newstr = moment(value).format(format);
+        return newstr;
+    })
+    Vue.filter('uppercase', function (value) {
+        if (!value) return ''
+        return value.toString().toUpperCase()
+    })
+    Vue.filter('lowercase', function (value) {
+        if (!value) return ''
+        return value.toString().toLowerCase()
+    })
+    Vue.filter('currency', function (value, symbol, format, precision, thousand, decimal) {
+        if (value === undefined || value === null || value === "") return ''
+        if (!symbol) {
+            symbol = '￥'
+        }
+        value = value.toString();
+        return accounting.formatMoney(value, symbol, precision, thousand, decimal, format)
+    })
+    Vue.filter('percent', function (value, precision, thousand, decimal) {
+        if (value === undefined || value === null || value === "") return ''
+        return accounting.formatNumber(value, precision, thousand, decimal)
     })
 };
 if (typeof window !== 'undefined' && window.Vue) {

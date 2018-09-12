@@ -44,7 +44,6 @@ export class EMAPDataAdapter extends DataAdapter{
         }
         let res = await axios.get(path, {params:{"*searchMeta":1}});
         this.searchDefine = res.data !== undefined && res.data.searchMeta !== undefined ? res.data.searchMeta : {};
-
         return this.searchDefine;
     }
 
@@ -200,7 +199,21 @@ export class EMAPDataAdapter extends DataAdapter{
                     let temp = prop.split(".");
                     proptype = temp[0];
                     prop_name = temp[1];
-                    struct[proptype][name][prop_name] = metaItem[prop];
+                    switch (prop_name) {
+                        case "JSONParam":
+                            struct[proptype][name]["params"] = metaItem[prop_name];
+                        case "optionData":
+                            struct[proptype][name]["options"] = metaItem[prop_name];
+                        case "width":
+                            struct[proptype][name][prop_name] = Number(metaItem[prop_name].replace("px", ""));
+                            if ( isNaN(struct[proptype][name][prop_name]) === true ) {
+                                delete struct[proptype][name][prop_name];
+                                console.warn(name, prop_name, metaItem[prop_name], "无法转换为数值，已经被删除");
+                            }
+                            break;
+                        default:
+                            struct[proptype][name][prop_name] = metaItem[prop];
+                    }
                 } else {
                     prop_name = prop;
                     switch (prop_name) {
@@ -218,6 +231,12 @@ export class EMAPDataAdapter extends DataAdapter{
                             struct["default"][name]["default"] = metaItem[prop_name];
                             break;
                         case "width":
+                            struct["grid"][name][prop_name] = Number(metaItem[prop_name].replace("px", ""));
+                            if ( isNaN(struct["grid"][name][prop_name]) === true ) {
+                                delete struct["grid"][name][prop_name];
+                                console.warn(name, prop_name, metaItem[prop_name], "无法转换为数值，已经被删除");
+                            }
+                            break;
                         case "fixed":
                             struct["grid"][name][prop_name] = metaItem[prop_name];
                             break;

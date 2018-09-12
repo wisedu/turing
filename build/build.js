@@ -103,6 +103,34 @@ const install = function (Vue, opts = {}) {
             }
         }
     })
+    Vue.filter('date', function (value, format) {
+        if (!value) return ''
+        if (!format) {
+            format = 'YYYY-MM-DD'
+        }
+        let newstr = moment(value).format(format);
+        return newstr;
+    })
+    Vue.filter('uppercase', function (value) {
+        if (!value) return ''
+        return value.toString().toUpperCase()
+    })
+    Vue.filter('lowercase', function (value) {
+        if (!value) return ''
+        return value.toString().toLowerCase()
+    })
+    Vue.filter('currency', function (value, symbol, format, precision, thousand, decimal) {
+        if (value === undefined || value === null || value === "") return ''
+        if (!symbol) {
+            symbol = '￥'
+        }
+        value = value.toString();
+        return accounting.formatMoney(value, symbol, precision, thousand, decimal, format)
+    })
+    Vue.filter('percent', function (value, precision, thousand, decimal) {
+        if (value === undefined || value === null || value === "") return ''
+        return accounting.formatNumber(value, precision, thousand, decimal)
+    })
 };
 if (typeof window !== 'undefined' && window.Vue) {
     install(window.Vue);
