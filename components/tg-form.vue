@@ -1,6 +1,7 @@
 <template>
     <div class="tg-form-wrap">
         <form ref="syncForm" :action="syncPostUrl" target="localFrame" method="POST" enctype="multipart/form-data">
+            <input type="hidden" v-for="item in syncFields" :key="item.key" :name="item.key" :value="item.value">
             <template v-if="isGroupForm">
                 <component :is="type + '-fc-group'" v-for="item in groupedFields" :key="item.name" :name="item.title" :desc="item.desc">
                     <component :model="formValue" :fields="item.items.filter(item => item.hidden !== true)" :is="type + '-fc-form'" :value="value" :displayFieldFormat="displayFieldFormat"
@@ -19,7 +20,6 @@
                     <slot :name="model.name" :slot="model.name" :model="model" :value="formValue[model.name]" :display="formValue[model.name + displayFieldFormat]" v-for="model in fields"></slot>
                 </component>
             </template>
-            <input type="hidden" v-for="item in syncFields" :key="item.key" :name="item.key" :value="item.value">
         </form>
         <iframe name="localFrame"></iframe>
     </div>
@@ -101,15 +101,28 @@ export default {
             }
         },
         submit(url){
+            let that = this;
             this.syncPostUrl = url;
             this.syncFields = [];
             for (let key in this.formValue){
                 this.syncFields.push({key:key,value:this.formValue[key]})
             }
-            console.log(this.syncFields);
-            this.$nextTick(()=>{
-                this.$refs.syncForm.submit();
-            })
+            return new Promise((resolve, reject) => {
+                function feedback(messageEvent) {
+                    var data = messageEvent.data;// messageEvent: {source, currentTarget, data}
+                    console.info('message from child:', data);
+                    removeFeedback();
+                    resolve(data);
+                }
+                function removeFeedback(){
+                    window.removeEventListener('message', feedback, false);
+                }
+                window.addEventListener('message', feedback, false);
+                
+                that.$nextTick(()=>{
+                    that.$refs.syncForm.submit();
+                })
+            });
         },
         validate(callback){
             if (this.isGroupForm === true) {
