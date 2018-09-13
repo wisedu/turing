@@ -1,23 +1,27 @@
 <template>
     <div class="tg-form-wrap">
-        <template v-if="isGroupForm">
-            <component :is="type + '-fc-group'" v-for="item in groupedFields" :key="item.name" :name="item.title" :desc="item.desc">
-                <component :model="formValue" :fields="item.items.filter(item => item.hidden !== true)" :is="type + '-fc-form'" :value="value" :displayFieldFormat="displayFieldFormat"
-                :column="column" :labelWidth="labelWidth" :readonly="readonly" @on-value-change="updateValue" :ref="item.name" :validateRules="groupedRules[item.name]">
+        <form ref="syncForm" :action="syncPostUrl" target="localFrame" method="POST" enctype="multipart/form-data">
+            <template v-if="isGroupForm">
+                <component :is="type + '-fc-group'" v-for="item in groupedFields" :key="item.name" :name="item.title" :desc="item.desc">
+                    <component :model="formValue" :fields="item.items.filter(item => item.hidden !== true)" :is="type + '-fc-form'" :value="value" :displayFieldFormat="displayFieldFormat"
+                    :column="column" :labelWidth="labelWidth" :readonly="readonly" @on-value-change="updateValue" :ref="item.name" :validateRules="groupedRules[item.name]">
+                        <slot name="before" slot="before"></slot>
+                        <slot name="after" slot="after"></slot>
+                        <slot :name="model.name" :slot="model.name" :model="model" :value="formValue[model.name]" :display="formValue[model.name + displayFieldFormat]" v-for="model in item.items"></slot>
+                    </component>
+                </component>
+            </template>
+            <template v-else>
+                <component :model="formValue" :fields="tiledFields" :is="type + '-fc-form'" :column="column" :displayFieldFormat="displayFieldFormat"
+                :value="value" :labelWidth="labelWidth" :readonly="readonly" @on-value-change="updateValue" :validateRules="tiledRules" ref="tiled_form">
                     <slot name="before" slot="before"></slot>
                     <slot name="after" slot="after"></slot>
-                    <slot :name="model.name" :slot="model.name" :model="model" :value="formValue[model.name]" :display="formValue[model.name + displayFieldFormat]" v-for="model in item.items"></slot>
+                    <slot :name="model.name" :slot="model.name" :model="model" :value="formValue[model.name]" :display="formValue[model.name + displayFieldFormat]" v-for="model in fields"></slot>
                 </component>
-            </component>
-        </template>
-        <template v-else>
-            <component :model="formValue" :fields="tiledFields" :is="type + '-fc-form'" :column="column" :displayFieldFormat="displayFieldFormat"
-            :value="value" :labelWidth="labelWidth" :readonly="readonly" @on-value-change="updateValue" :validateRules="tiledRules" ref="tiled_form">
-                <slot name="before" slot="before"></slot>
-                <slot name="after" slot="after"></slot>
-                <slot :name="model.name" :slot="model.name" :model="model" :value="formValue[model.name]" :display="formValue[model.name + displayFieldFormat]" v-for="model in fields"></slot>
-            </component>
-        </template>
+            </template>
+            <input type="hidden" v-for="item in syncFields" :key="item.key" :name="item.key" :value="item.value">
+        </form>
+        <iframe name="localFrame"></iframe>
     </div>
 </template>
 <script>
@@ -69,7 +73,9 @@ export default {
             groupedRules: groupedRules,
             isGroupForm: _isGrouped(this.fields),
             groupedFields: groupedFields,
-            tiledFields: tiledFields
+            tiledFields: tiledFields,
+            syncPostUrl:"",
+            syncFields: []
         }
     },
     watch:{
@@ -93,6 +99,17 @@ export default {
                 this.tiledRules = fields_and_rules.rules;
                 this.$emit("update:validateRules", this.tiledRules)
             }
+        },
+        submit(url){
+            this.syncPostUrl = url;
+            this.syncFields = [];
+            for (let key in this.formValue){
+                this.syncFields.push({key:key,value:this.formValue[key]})
+            }
+            console.log(this.syncFields);
+            this.$nextTick(()=>{
+                this.$refs.syncForm.submit();
+            })
         },
         validate(callback){
             if (this.isGroupForm === true) {
