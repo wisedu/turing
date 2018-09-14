@@ -129,6 +129,8 @@ export default {
                 var proms = [];
                 for (let form in this.$refs) {
                     if (this.$refs[form] === undefined)continue;
+                    let group_rules = this.groupedRules[form];
+                    _removeRequiredFalseRule(group_rules);
                     proms.push(new Promise((resolve, reject) => {
                         this.$refs[form][0].validate((valid) => {
                             resolve(valid);
@@ -143,6 +145,7 @@ export default {
                     callback(result);
                 });
             } else {
+                _removeRequiredFalseRule(this.tiledRules);
                 this.$refs.tiled_form.validate(callback);
             }
         },
@@ -150,9 +153,12 @@ export default {
             if (this.isGroupForm === true) {
                 for (let form in this.$refs) {
                     if (this.$refs[form] === undefined)continue;
+                    let group_rules = this.groupedRules[form];
+                    _removeRequiredFalseRule(group_rules);
                     this.$refs[form][0].validateField(prop, callback);
                 }
             } else {
+                _removeRequiredFalseRule(this.tiledRules);
                 this.$refs.tiled_form.validateField(prop, callback);
             }
         },
@@ -239,6 +245,18 @@ function _getTiledFieldsAndRules(fields) {
         return item.hidden !== true;
     });
     return {fields:tiledFields, rules:tiledRules};
+}
+
+function _removeRequiredFalseRule(rules) {
+    for (let key in rules) {
+        let field = rules[key];
+        for(var i = field.length-1; i>=0; i--){
+            let rule = field[i];
+            if (rule.required === false){
+                field.splice(i, 1);
+            }
+        }
+    }
 }
 
 </script>
