@@ -20,7 +20,8 @@ export default {
             default:100
         },
         readonly:Boolean,
-        validateRules: [Object, Array]
+        validateRules: [Object, Array],
+        loaddata: Function
     },
     data(){
         return {

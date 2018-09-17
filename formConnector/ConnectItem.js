@@ -27,6 +27,7 @@ export default{
             default(){
                 return {}
             }
-        }
+        },
+        loaddata: Function
     },
 }

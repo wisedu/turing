@@ -5,7 +5,7 @@
             <template v-if="isGroupForm">
                 <component :is="type + '-fc-group'" v-for="item in groupedFields" :key="item.name" :name="item.title" :desc="item.desc">
                     <component :model="formValue" :fields="item.items.filter(item => item.hidden !== true)" :is="type + '-fc-form'" :value="value" :displayFieldFormat="displayFieldFormat"
-                    :column="column" :labelWidth="labelWidth" :readonly="readonly" @on-value-change="updateValue" :ref="item.name" :validateRules="groupedRules[item.name]">
+                    :loaddata="loaddata" :column="column" :labelWidth="labelWidth" :readonly="readonly" @on-value-change="updateValue" :ref="item.name" :validateRules="groupedRules[item.name]">
                         <slot name="before" slot="before"></slot>
                         <slot name="after" slot="after"></slot>
                         <slot :name="model.name" :slot="model.name" :model="model" :value="formValue[model.name]" :display="formValue[model.name + displayFieldFormat]" v-for="model in item.items"></slot>
@@ -13,7 +13,7 @@
                 </component>
             </template>
             <template v-else>
-                <component :model="formValue" :fields="tiledFields" :is="type + '-fc-form'" :column="column" :displayFieldFormat="displayFieldFormat"
+                <component :model="formValue" :fields="tiledFields" :is="type + '-fc-form'" :column="column" :displayFieldFormat="displayFieldFormat" :loaddata="loaddata"
                 :value="value" :labelWidth="labelWidth" :readonly="readonly" @on-value-change="updateValue" :validateRules="tiledRules" ref="tiled_form">
                     <slot name="before" slot="before"></slot>
                     <slot name="after" slot="after"></slot>
@@ -255,6 +255,9 @@ function _removeRequiredFalseRule(rules) {
             if (rule.required === false){
                 field.splice(i, 1);
             }
+        }
+        if (field.length === 0) {
+            delete rules[key];
         }
     }
 }
