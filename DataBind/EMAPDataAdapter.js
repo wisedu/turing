@@ -190,7 +190,6 @@ export class EMAPDataAdapter extends DataAdapter{
 	        	if (struct["default"][name] === undefined)struct["default"][name] = {};
 	        	if (struct["grid"][name] === undefined)struct["grid"][name] = {};
 	        	if (struct["form"][name] === undefined)struct["form"][name] = {};
-	        	if (struct["search"][name] === undefined)struct["search"][name] = {};
 
                 if (prop === "name")continue;
                 let prop_name = "";
@@ -264,9 +263,13 @@ export class EMAPDataAdapter extends DataAdapter{
                             break;
                         case "url":
                             struct["form"][name].dict = {url: metaItem[prop_name], value:"id", label:"name"};
-                            struct["search"][name].dict = {url: metaItem[prop_name], value:"id", label:"name"};
+                            if (metaItem.quickSearch === true) {
+                                if (struct["search"][name] === undefined)struct["search"][name] = {};
+                                struct["search"][name].dict = {url: metaItem[prop_name], value:"id", label:"name"};
+                            }
                             break;
                         case "quickSearch":
+                            if (struct["search"][name] === undefined)struct["search"][name] = {};
                             struct["search"][name][prop_name] = metaItem[prop_name];
                             break;
                         default:
