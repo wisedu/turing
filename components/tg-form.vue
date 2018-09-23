@@ -21,7 +21,7 @@
                 </component>
             </template>
         </form>
-        <iframe name="localFrame"></iframe>
+        <iframe name="localFrame" style="height:0"></iframe>
     </div>
 </template>
 <script>
