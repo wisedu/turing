@@ -248,6 +248,7 @@ export class EMAPDataAdapter extends DataAdapter{
                         case "default":
                             struct["form"][name][prop_name] = metaItem[prop_name];
                             break;
+                        case "dataType":
                         case "dataSize":
                         case "checkType":
                         case "checkSize":
