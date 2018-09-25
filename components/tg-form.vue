@@ -21,7 +21,7 @@
                 </component>
             </template>
         </form>
-        <iframe name="localFrame"></iframe>
+        <iframe name="localFrame" style="height:0"></iframe>
     </div>
 </template>
 <script>
@@ -202,7 +202,11 @@ function _getValidateRules(field, rules) {
             let required = xtype.required;
             if (required !== undefined) {
                 // required.required = true;
-                rules[field.name].push(Object.assign({}, {field:field}, required, {required:field.required}));
+                let ctl = {required:field.required};
+                if (field.dataType !== undefined) {
+                    ctl["type"] = field.dataType;
+                }
+                rules[field.name].push(Object.assign({}, {field:field}, required, ctl));
             }
         }
     }
