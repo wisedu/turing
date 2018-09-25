@@ -128,14 +128,16 @@ export default {
             if (this.isGroupForm === true) {
                 var proms = [];
                 for (let form in this.$refs) {
-                    if (this.$refs[form] === undefined)continue;
-                    let group_rules = this.groupedRules[form];
-                    _removeRequiredFalseRule(group_rules);
-                    proms.push(new Promise((resolve, reject) => {
-                        this.$refs[form][0].validate((valid) => {
-                            resolve(valid);
-                        });
-                    }));
+                    let isGrouped = form.startsWith("group:[");
+                    if (isGrouped === true) {
+                        let group_rules = this.groupedRules[form];
+                        _removeRequiredFalseRule(group_rules);
+                        proms.push(new Promise((resolve, reject) => {
+                            this.$refs[form][0].validate((valid) => {
+                                resolve(valid);
+                            });
+                        }));
+                    }
                 }
                 Promise.all(proms).then(function(values){
                     let result = true;
