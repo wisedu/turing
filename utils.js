@@ -251,6 +251,39 @@ utils.sendMessageToParent = function (data) {
     },'*');
 };
 
+/**
+ * 向父页面发送消息
+ * @param data
+ * @param data.container {selector} 页面容器
+ */
+utils.sendMessageToResetHeight = function (data) {
+    var pageContainerSelector = data.container;
+    var container = document.querySelector(pageContainerSelector);
+    var height = 0;
+    if(container){
+        height = container.scrollHeight;
+    }else{
+        return;
+    }
+
+    var sendData = {};
+    var guid = _createGuid();
+    guid = '_send_message_flag_'+guid;
+    //在当前页面中添加标识
+    window[guid] = guid;
+
+    var href = window.location.href;
+    //将标识和链接地址发给父页面
+    sendData['_send_message_href_'] = href;
+    sendData['_send_message_flag_'] = guid;
+    sendData['height'] = height;
+
+    parent.postMessage({
+        type: 'portals-card-height-reset',
+        data: sendData
+    },'*');
+};
+
 function _createGuid() {
     var S4 = function() {
         return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
