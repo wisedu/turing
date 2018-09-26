@@ -256,7 +256,7 @@ utils.sendMessageToParent = function (data) {
  * @param data
  * @param data.container {selector} 页面容器
  */
-utils.sendMessageToResetHeight = function (data) {
+utils.sendMessageToResetCardHeight = function (data) {
     var pageContainerSelector = data.container;
     var container = document.querySelector(pageContainerSelector);
     var height = 0;
