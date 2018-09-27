@@ -37,6 +37,7 @@ export default{
                 this.datasource.inst.pageNumber = pager_params && pager_params.pageNumber || this.pageNumber;
                 this.datasource.inst.findAll(this.params).then(function(datas) {
                     that.$emit("update:loading", false);
+                    that.$emit('data-loaded', datas);
                     if (callback === undefined){
                         that.SetData(datas);
                     } else {
@@ -54,6 +55,7 @@ export default{
             this.dataAdapter.pageNumber = pager_params && pager_params.pageNumber || this.pager.index;
             this.dataAdapter.findAll(this.params).then(function(datas) {
                 that.$emit("update:loading", false);
+                that.$emit('data-loaded', datas);
                 if (callback === undefined){
                     that.SetData(datas);
                 } else {

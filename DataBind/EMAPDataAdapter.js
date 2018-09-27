@@ -211,6 +211,7 @@ export class EMAPDataAdapter extends DataAdapter{
                             }
                             break;
                         default:
+                            if (proptype === "search" && struct["search"][name] === undefined)struct["search"][name] = {};
                             struct[proptype][name][prop_name] = metaItem[prop];
                     }
                 } else {

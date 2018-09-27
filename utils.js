@@ -126,7 +126,7 @@ utils.toTreeData = function (data, parent_id, options) {
   var tree = [];
   var temp;
   for (var i = 0; i < data.length; i++) {
-    if (data[i][opt.pkey] == parent_id) {
+    if (data[i][opt.pkey] == parent_id || data[i][opt.ukey] === data[i][opt.pkey]) {
       var obj = data[i];
       temp = utils.toTreeData(data, data[i][opt.ukey], opt);
       if (temp.length > 0) {
