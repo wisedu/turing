@@ -4,6 +4,8 @@ import defaults from '../Defaults'
 
 export class DataAdapter {
     constructor(meta) {
+        this.__baseUrl = "";
+        this.__doingUrl = "";
         this.__meta = meta;
         this.viewDefine;
         this.__orders = [];
@@ -56,16 +58,24 @@ export class DataAdapter {
         return result;
     }
     execute(action, data){
-        this.onFetching("doing", true);
         var url = "";
         var params = data || action.params;
-        if (action.url.substring(0, 1) === ".") {
-            url = (window.apiPath || '') + action.url;//.substring(2, action.url.length)
-        } else if (action.url.substring(0, 1) === "/") {
-            url = (window.apiPath || '') + action.url;
+
+        if (typeof(action) === "string") {
+            this.__doingUrl = action;
+            this.onFetching("doing-string", true);
+            url = this.__doingUrl;
         } else {
-            url = action.url
+            this.onFetching("doing", true);
+            url = action.url;
         }
+
+        if (url.substring(0, 1) === ".") {
+            url = (window.apiPath || '') + url;//.substring(2, url.length)
+        } else if (url.substring(0, 1) === "/") {
+            url = (window.apiPath || '') + url;
+        }
+
         let matchs = url.match(/\{(.*?)\}/ig);
         matchs = matchs === null ? [] : matchs;
         matchs.map(item => {
@@ -93,7 +103,12 @@ export class DataAdapter {
                 console.error(e)
                 this.onFetching("error", false, e);
             })
-        }else {
+        } if (typeof(action) === "string") {
+            return axios.post(url, params).catch(e=>{
+                console.error(e)
+                this.onFetching("error", false, e);
+            })
+        } else {
             return axios.get(url, {params: params}).catch(e=>{
                 console.error(e)
                 this.onFetching("error", false, e);
@@ -235,3 +250,18 @@ export class DataAdapter {
         }
     }
 }
+
+// propDefine(DataAdapter.prototype.findAll)
+// propDefine(DataAdapter.prototype.save)
+// propDefine(DataAdapter.prototype.delete)
+// propDefine(DataAdapter.prototype.findById)
+
+// function propDefine(that,actionName){
+//     Object.defineProperties(that[actionName], {
+//         'name': {writable: true},
+//         'method': {writable: true},
+//         'orders': {writable: true},
+//         'params': {writable: true},
+//         'url': {writable: true}
+//     });
+// }

@@ -25,6 +25,7 @@ export class EMAPDataAdapter extends DataAdapter{
         } else {
             url = uri
         }
+        this.__baseUrl = uri;
         return axios.get(url, {params:{"*json":1}}).then(function(res){
             var data = res.data;
             self.refresh(data, modelName, findParams);
@@ -328,4 +329,18 @@ export class EMAPDataAdapter extends DataAdapter{
     //     let type = props[1];
     //     return tgTuringAntd.Adapter(type, this.getView(name), params);
     // }
+
+    onFetching(status, result) {
+        switch (status) {
+            case "doing-string":
+                this.__doingUrl = this.__baseUrl.replace(".do", "/" + this.__doingUrl + ".do");
+                break;
+            case "done":
+                break;
+            case "error":
+                break;
+            default:
+                break;
+        }
+    }
 }
