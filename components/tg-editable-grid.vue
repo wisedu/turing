@@ -118,6 +118,9 @@ export default {
                     data: cells
                 }
             });
+        },
+        reset(){
+            this.inst.resetWidth();
         }
     }
 }
