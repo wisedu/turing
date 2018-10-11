@@ -1,6 +1,6 @@
 <template>
-    <div class="tg-editable-grid">
-        <div ref="editableGrid"></div>
+    <div class="tg-editable-grid" >
+        <div ref="editableGrid" :style="{height:autoHeight + 'px'}"></div>
     </div>
 </template>
 
@@ -9,6 +9,14 @@ import defaults from "../Defaults";
 export default {
     name: "tg-editable-grid",
     props: {
+        height: {
+            type:Number,
+            default: -1
+        },
+        maxHeight: {
+            type:Number,
+            default: 500
+        },
         columns: Array,
         value: {
             type:Array,
@@ -21,11 +29,30 @@ export default {
             type:String,
             default:""
         },
+        params: {
+            type: Object,
+            default:function() {
+                return {};
+            }
+        },
         rowRending: Function
     },
     data() {
         return {
             inst:null
+        }
+    },
+    computed:{
+        autoHeight(){
+            let actual = (this.value.length + 1) * 50;
+            if (this.height !== -1) {
+                actual = this.height;
+            }
+            if (this.maxHeight < actual) {
+                return this.maxHeight;
+            } else {
+                return actual;
+            }
         }
     },
     watch:{
@@ -52,7 +79,7 @@ export default {
         initGrid(){
             if (this.columns.length > 0) {
                 let EditableGrid = window["tg-editable-grid"].default;
-                this.inst = new EditableGrid(this.$refs.editableGrid, {displayFieldFormat:this.displayFieldFormat});
+                this.inst = new EditableGrid(this.$refs.editableGrid, Object.assign({}, this.params, {displayFieldFormat:this.displayFieldFormat}));
                 this.inst.onEditorLoadData = function(model, value, callback) {
                     switch (model.xtype) {
                         case "tree":
@@ -104,13 +131,25 @@ export default {
             this.inst.setData(datas);
         },
         setErrorCells(datas){
-            // let datas = [{row:1,name:""}];
+            // let datas = [{row:1,name:"",message:"",type:""}];
             let cells = {};
             datas.map(item => {
                 if (cells[item.row] === undefined){
                     cells[item.row] = {}
                 }
-                cells[item.row][item.name] = { borderLeft: "red", borderTop: "red", borderBottom: "red", borderRight: "red" };
+                let color = "#ed4014";
+                switch(item.type) {
+                    case "primary":
+                        color = "#2d8cf0";
+                        break;
+                    case "warning":
+                        color = "#ff9900";
+                        break;
+                    case "success":
+                        color = "#19be6b";
+                        break;                    
+                }
+                cells[item.row][item.name] = { borderLeft: color, borderTop: color, borderBottom: color, borderRight: color, message:item.message };
             })
             this.inst.grid.addProperties({
                 renderer:['SimpleCell', 'Borders'],
