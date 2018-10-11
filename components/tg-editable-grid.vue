@@ -119,7 +119,7 @@ export default {
                 }
             });
         },
-        reset(){
+        resetWidth(){
             this.inst.resetWidth();
         }
     }
