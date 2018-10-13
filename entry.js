@@ -25,7 +25,7 @@ import TgListview from './components/tg-listview.vue';
 import TgText from './components/tg-text.vue';
 import TgToolbar from './components/tg-toolbar.vue';
 import TgValidator from './components/tg-validator.vue';
-const version = "1.23.5";
+const version = "1.23.6";
 const description = "turing components";
 const author = "金智教育 wisedu";
 const components = {
@@ -78,11 +78,11 @@ const install = function (Vue, opts = {}) {
             symbol = '￥'
         }
         value = value.toString();
-        return accounting.formatMoney(value, symbol, precision, thousand, decimal, format)
+        return accounting.formatMoney(value, {symbol, precision, thousand, decimal, format})
     })
     Vue.filter('percent', function (value, precision, thousand, decimal) {
         if (value === undefined || value === null || value === "") return ''
-        return accounting.formatNumber(value, precision, thousand, decimal)
+        return accounting.formatNumber(value, {precision, thousand, decimal})
     })
 };
 if (typeof window !== 'undefined' && window.Vue) {
