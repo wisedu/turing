@@ -25,7 +25,7 @@ import TgListview from './components/tg-listview.vue';
 import TgText from './components/tg-text.vue';
 import TgToolbar from './components/tg-toolbar.vue';
 import TgValidator from './components/tg-validator.vue';
-const version = "1.23.6";
+const version = "1.23.7";
 const description = "turing components";
 const author = "金智教育 wisedu";
 const components = {
@@ -72,11 +72,8 @@ const install = function (Vue, opts = {}) {
         if (!value) return ''
         return value.toString().toLowerCase()
     })
-    Vue.filter('currency', function (value, symbol, format, precision, thousand, decimal) {
+    Vue.filter('currency', function (value, symbol='￥', format='%s%v', precision=2, thousand=',', decimal='.') {
         if (value === undefined || value === null || value === "") return ''
-        if (!symbol) {
-            symbol = '￥'
-        }
         value = value.toString();
         return accounting.formatMoney(value, {symbol, precision, thousand, decimal, format})
     })
