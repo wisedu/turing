@@ -119,17 +119,14 @@ const install = function (Vue, opts = {}) {
         if (!value) return ''
         return value.toString().toLowerCase()
     })
-    Vue.filter('currency', function (value, symbol, format, precision, thousand, decimal) {
+    Vue.filter('currency', function (value, symbol='￥', format='%s%v', precision=2, thousand=',', decimal='.') {
         if (value === undefined || value === null || value === "") return ''
-        if (!symbol) {
-            symbol = '￥'
-        }
         value = value.toString();
-        return accounting.formatMoney(value, symbol, precision, thousand, decimal, format)
+        return accounting.formatMoney(value, {symbol, precision, thousand, decimal, format})
     })
     Vue.filter('percent', function (value, precision, thousand, decimal) {
         if (value === undefined || value === null || value === "") return ''
-        return accounting.formatNumber(value, precision, thousand, decimal)
+        return accounting.formatNumber(value, {precision, thousand, decimal})
     })
 };
 if (typeof window !== 'undefined' && window.Vue) {

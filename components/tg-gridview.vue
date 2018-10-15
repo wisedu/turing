@@ -14,6 +14,7 @@
                 <slot :name="'columns-'+model.key" :index="scope.index" :column="scope.column" :row="scope.row"></slot>
             </template>
             <slot name="pagerTotal" slot="pagerTotal"></slot>
+            <slot name="footer" slot="footer"></slot>
         </component>
     </div>
 </template>
