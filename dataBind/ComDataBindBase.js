@@ -7,12 +7,12 @@ export default{
             type:Boolean,
             default: false
         },
-        params: {
-            type: Object,
-            default:function() {
-                return {};
-            }
-        },
+        // params: {
+        //     type: Object,
+        //     default:function() {
+        //         return {};
+        //     }
+        // },
         pager: {
             type: Object,
             default:function() {
@@ -29,12 +29,12 @@ export default{
         SetData(){
             console.warn("需要在组件中实现该方法")
         },
-        DataBind(pager_params, callback) {
+        DataBind(query_params, callback) {
             let that = this;
             this.$emit("update:loading", true);
             if (this.datasource !== undefined) {    //后续将不再支持
-                this.datasource.inst.pageSize = pager_params && pager_params.pageSize || this.pageSize;
-                this.datasource.inst.pageNumber = pager_params && pager_params.pageNumber || this.pageNumber;
+                this.datasource.inst.pageSize = query_params && query_params.pageSize || this.pageSize;
+                this.datasource.inst.pageNumber = query_params && query_params.pageNumber || this.pageNumber;
                 this.datasource.inst.findAll(this.params).then(function(datas) {
                     that.$emit("update:loading", false);
                     that.$emit('data-loaded', datas);
@@ -47,13 +47,13 @@ export default{
                 return;
             }
 
-            if (pager_params !== undefined){
-                // this.pager = pager_params;
-                this.$emit("update:pager", pager_params)
+            if (query_params !== undefined){
+                // this.pager = query_params;
+                this.$emit("update:pager", query_params)
             }
-            this.dataAdapter.pageSize = pager_params && pager_params.pageSize || this.pager.size;
-            this.dataAdapter.pageNumber = pager_params && pager_params.pageNumber || this.pager.index;
-            this.dataAdapter.findAll(this.params).then(function(datas) {
+            this.dataAdapter.pageSize = query_params && query_params.pageSize || this.pager.size;
+            this.dataAdapter.pageNumber = query_params && query_params.pageNumber || this.pager.index;
+            this.dataAdapter.findAll(query_params.params).then(function(datas) {
                 that.$emit("update:loading", false);
                 that.$emit('data-loaded', datas);
                 if (callback === undefined){
