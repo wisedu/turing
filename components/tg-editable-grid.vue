@@ -111,8 +111,11 @@ export default {
                     let oldValue = event.detail.oldValue;
                     let schema = event.detail.input.column.schema;
                     let row = event.detail.input.event.dataRow;
+                    row[name] = newValue;
+                    //刷新最新值
                     let index = event.detail.input.event.dataCell.y;
                     this.$emit("on-item-change", name, newValue, oldValue, schema, row, index);
+                    this.$emit("input", this.inst.getData());
                 });
                 this.inst.grid.addEventListener('fin-row-header-clicked', event => {
                     let row = event.detail.row;

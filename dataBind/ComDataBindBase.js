@@ -29,7 +29,7 @@ export default{
         SetData(){
             console.warn("需要在组件中实现该方法")
         },
-        DataBind(query_params, callback) {
+        DataBind(query_params = {}, callback) {
             let that = this;
             this.$emit("update:loading", true);
             if (this.datasource !== undefined) {    //后续将不再支持
@@ -47,7 +47,7 @@ export default{
                 return;
             }
 
-            if (query_params !== undefined){
+            if (query_params.pageSize !== undefined || query_params.pageNumber !== undefined){
                 // this.pager = query_params;
                 this.$emit("update:pager", query_params)
             }
