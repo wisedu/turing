@@ -157,8 +157,8 @@ export default {
             })
             this.inst.grid.addProperties({
                 renderer:['SimpleCell', 'Borders'],
-                cells: {
-                    data: cells
+                custom: {
+                    error: cells
                 }
             });
         },
