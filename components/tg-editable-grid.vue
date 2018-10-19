@@ -15,7 +15,7 @@ export default {
         },
         maxHeight: {
             type:Number,
-            default: 500
+            default: 550
         },
         columns: Array,
         value: {

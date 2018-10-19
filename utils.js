@@ -57,8 +57,7 @@ utils.Post = (url, data = null, config = {}) => {
 utils.Get = (url, data = null, config = {}) => {
   return axios({
     method: 'get',
-    url: url,
-    params: serialize(data),
+    url: url + "?" + serialize(data),
     ...config
   })
 }
