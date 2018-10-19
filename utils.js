@@ -57,7 +57,7 @@ utils.Post = (url, data = null, config = {}) => {
 utils.Get = (url, data = null, config = {}) => {
   return axios({
     method: 'get',
-    url: url + "?" + serialize(data),
+    url: url + (url.indexOf("?") > -1 ? "&" : "?") + serialize(data),
     ...config
   })
 }
