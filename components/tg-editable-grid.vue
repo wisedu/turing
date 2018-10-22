@@ -156,7 +156,6 @@ export default {
                 cells[item.row][item.name] = { borderLeft: color, borderTop: color, borderBottom: color, borderRight: color, message:item.message };
             })
             this.inst.grid.addProperties({
-                renderer:['SimpleCell', 'Borders'],
                 custom: {
                     error: cells
                 }
