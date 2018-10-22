@@ -1,5 +1,9 @@
 <template>
     <div class="tg-editable-grid" >
+        <div slot="toolbar" v-if="showToolbar">
+            <a href="#" @click="addRow({})">添加行</a>
+            <a href="#" @click="removeActivedRow()">删除选中行</a>
+        </div>
         <div ref="editableGrid" :style="{height:autoHeight + 'px'}"></div>
     </div>
 </template>
@@ -9,6 +13,7 @@ import defaults from "../Defaults";
 export default {
     name: "tg-editable-grid",
     props: {
+        showToolbar:false,
         height: {
             type:Number,
             default: -1
@@ -39,7 +44,8 @@ export default {
     },
     data() {
         return {
-            inst:null
+            inst:null,
+            activedIndex:-1
         }
     },
     computed:{
@@ -73,8 +79,11 @@ export default {
         }
     },
     methods:{
-        addrow(row){
-            this.inst.grid.setData(this.inst.grid.getData());
+        addRow(row){
+            this.inst.grid.setData(this.inst.grid.getData().push(row));
+        },
+        removeActivedRow(){
+            this.inst.grid.setData(this.inst.grid.getData.splice(this.activedIndex, 1));
         },
         initGrid(){
             if (this.columns.length > 0) {
@@ -120,6 +129,7 @@ export default {
                 this.inst.grid.addEventListener('fin-row-header-clicked', event => {
                     let row = event.detail.row;
                     let rowIndex = event.detail.dataCell.y;
+                    this.activedIndex = rowIndex;
                     this.$emit("on-highlight", row, rowIndex);
                 });
                 // this.inst.grid.addEventListener('fin-row-selection-changed', event => {
