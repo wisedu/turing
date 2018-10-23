@@ -1,10 +1,10 @@
 <template>
-    <div class="tg-editable-grid" >
+    <div>
         <div slot="toolbar" v-if="showToolbar">
-            <a href="#" @click="addRow({})">添加行</a>
+            <a href="#" @click="addRow({})">添加行</a> | 
             <a href="#" @click="removeActivedRow()">删除选中行</a>
         </div>
-        <div ref="editableGrid" :style="{height:autoHeight + 'px'}"></div>
+        <div ref="editableGrid" class="tg-editable-grid" :style="{height:autoHeight + 'px'}"></div>
     </div>
 </template>
 
@@ -80,10 +80,10 @@ export default {
     },
     methods:{
         addRow(row){
-            this.inst.grid.setData(this.inst.grid.getData().push(row));
+            this.inst.setData(this.inst.getData().push(row));
         },
         removeActivedRow(){
-            this.inst.grid.setData(this.inst.grid.getData.splice(this.activedIndex, 1));
+            this.inst.setData(this.inst.getData().splice(this.activedIndex, 1));
         },
         initGrid(){
             if (this.columns.length > 0) {
@@ -181,5 +181,6 @@ export default {
 <style scoped>
 .tg-editable-grid{
     border:1px solid #E8E8E8;
+    margin-top:8px;
 }
 </style>
