@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div slot="toolbar" v-if="showToolbar">
+        <div slot="toolbar" class="toolbar" v-if="showToolbar">
             <a href="#" @click="addRow({})">添加行</a> | 
             <a href="#" @click="removeActivedRow()">删除选中行</a>
         </div>
@@ -80,10 +80,10 @@ export default {
     },
     methods:{
         addRow(row){
-            this.inst.setData(this.inst.getData().push(row));
+            this.value.push(row)
         },
         removeActivedRow(){
-            this.inst.setData(this.inst.getData().splice(this.activedIndex, 1));
+            this.value.splice(this.activedIndex, 1)
         },
         initGrid(){
             if (this.columns.length > 0) {
@@ -181,6 +181,8 @@ export default {
 <style scoped>
 .tg-editable-grid{
     border:1px solid #E8E8E8;
-    margin-top:8px;
+}
+.toolbar{
+    margin-bottom:8px;
 }
 </style>
