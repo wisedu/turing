@@ -15,11 +15,8 @@ import defaults from './Defaults.js';
 import TgContainer from './components/tg-container.vue';
 import TgDiv from './components/tg-div.vue';
 import TgEditableGrid from './components/tg-editable-grid.vue';
-import TgElse from './components/tg-else.vue';
-import TgFor from './components/tg-for.vue';
 import TgForm from './components/tg-form.vue';
 import TgGridview from './components/tg-gridview.vue';
-import TgIf from './components/tg-if.vue';
 import TgImg from './components/tg-img.vue';
 import TgLeftRightItem from './components/tg-left-right-item.vue';
 import TgLeftRight from './components/tg-left-right.vue';
@@ -28,11 +25,11 @@ import TgListview from './components/tg-listview.vue';
 import TgText from './components/tg-text.vue';
 import TgToolbar from './components/tg-toolbar.vue';
 import TgValidator from './components/tg-validator.vue';
-const version = "1.25.8";
+const version = "1.25.12";
 const description = "turing components";
 const author = "金智教育 wisedu";
 const components = {
-    TgContainer,TgDiv,TgEditableGrid,TgElse,TgFor,TgForm,TgGridview,TgIf,TgImg,TgLeftRightItem,TgLeftRight,TgLinkbutton,TgListview,TgText,TgToolbar,TgValidator
+    TgContainer,TgDiv,TgEditableGrid,TgForm,TgGridview,TgImg,TgLeftRightItem,TgLeftRight,TgLinkbutton,TgListview,TgText,TgToolbar,TgValidator
 };
 const install = function (Vue, opts = {}) {
     if (install.installed) return;

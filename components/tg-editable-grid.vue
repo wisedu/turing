@@ -4,7 +4,7 @@
             <a href="javascript:void(0)" @click="addRow({})">添加行</a> | 
             <a href="javascript:void(0)" @click="removeActivedRow()">删除选中行</a>
         </div>
-        <div ref="editableGrid" class="tg-editable-grid" :style="{height:autoHeight + 'px'}"></div>
+        <div ref="editableGrid" class="tg-editable-grid" :style="{height:autoHeight + 'px'}" v-bind="params"></div>
     </div>
 </template>
 
@@ -13,6 +13,7 @@ import defaults from "../Defaults";
 export default {
     name: "tg-editable-grid",
     props: {
+        name: String,
         showToolbar:false,
         height: {
             type:Number,
@@ -21,6 +22,12 @@ export default {
         maxHeight: {
             type:Number,
             default: 550
+        },
+        params: {
+            type:Object, 
+            default(){
+                return {}
+            }
         },
         columns: Array,
         value: {
@@ -123,7 +130,7 @@ export default {
                     row[name] = newValue;
                     //刷新最新值
                     let index = event.detail.input.event.dataCell.y;
-                    this.$emit("on-item-change", name, newValue, oldValue, schema, row, index);
+                    this.$emit("on-item-change", name, newValue, oldValue, schema, {row, index, name:this.name});
                     this.$emit("input", this.inst.getData());
                 });
                 this.inst.grid.addEventListener('fin-row-header-clicked', event => {
@@ -139,7 +146,7 @@ export default {
                 this.inst.grid.addEventListener('fin-grid-rendered', event => {
                     this.$emit("ready");
                 });
-                this.inst.setData({});
+                // this.inst.setData([]);
             }
         },
         setData(datas){
