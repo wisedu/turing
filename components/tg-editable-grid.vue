@@ -1,8 +1,8 @@
 <template>
     <div>
         <div slot="toolbar" class="toolbar" v-if="showToolbar">
-            <a href="#" @click="addRow({})">添加行</a> | 
-            <a href="#" @click="removeActivedRow()">删除选中行</a>
+            <a href="javascript:void(0)" @click="addRow({})">添加行</a> | 
+            <a href="javascript:void(0)" @click="removeActivedRow()">删除选中行</a>
         </div>
         <div ref="editableGrid" class="tg-editable-grid" :style="{height:autoHeight + 'px'}"></div>
     </div>
@@ -139,6 +139,7 @@ export default {
                 this.inst.grid.addEventListener('fin-grid-rendered', event => {
                     this.$emit("ready");
                 });
+                this.inst.setData({});
             }
         },
         setData(datas){
