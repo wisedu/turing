@@ -53,7 +53,7 @@ export default {
             }
         })
     }],
-    getDictTreeOneData:[function (dict, params, callback) {
+    getDictTreeDataAsync:[function (dict, params, callback) {
         utils.Post(dict.url, {"id": params.key,"checkParent": true}).then(result => {
             let datas;
             try{
