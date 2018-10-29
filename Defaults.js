@@ -1,6 +1,9 @@
 import utils from "./utils";
 import rules from "./vaildateRules";
 export default {
+    test:function(){
+        console.log(1);
+    },
     afterFindAll:[function (result, findAction, params){
         return result.data;
     }],
