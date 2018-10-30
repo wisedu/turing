@@ -242,6 +242,7 @@ export class EMAPDataAdapter extends DataAdapter{
                             struct["grid"][name][prop_name] = metaItem[prop_name];
                             break;
                         case "xtype":
+                        case "dataType":
                         case "required":
                         case "readonly":
                         case "col":
@@ -250,11 +251,20 @@ export class EMAPDataAdapter extends DataAdapter{
                         case "default":
                             struct["form"][name][prop_name] = metaItem[prop_name];
                             break;
-                        case "dataType":
-                        case "dataSize":
                         case "checkType":
+                            if (struct["form"][name]["vaildator"] === undefined){
+                                struct["form"][name]["vaildator"] = {};
+                            }
+                            let checkType = metaItem[prop_name].replace(/\[|\]|\"|\{|\}|custom/g, "");
+                            struct["form"][name]["vaildator"][prop_name] = checkType;
+                            break;
+                        case "dataSize":
                         case "checkSize":
-                            // struct["form"][name]["vaildator"] = metaItem[prop_name];
+                        case "checkExp":
+                            if (struct["form"][name]["vaildator"] === undefined){
+                                struct["form"][name]["vaildator"] = {};
+                            }
+                            struct["form"][name]["vaildator"][prop_name] = metaItem[prop_name];
                             break;
                         case "groupName":
                             if (prop_name === "groupName") {

@@ -191,7 +191,8 @@ export class DataAdapter {
             // where: utils.extend(true, {}, this.actions.find.params, param || {})
         };
         
-        defaultParams["order"] = [(this.actions.findAll || this.actions.find).orders.concat(this.__orders)];
+        let orders = (this.actions.findAll || this.actions.find).orders || [];
+        defaultParams["order"] = [orders.concat(this.__orders)];
         // defaultParams["order"] = [this.actions.findAll.orders.concat(this.__orders)];
         if (defaultParams["order"][0].length == 0) {
             delete defaultParams.order;

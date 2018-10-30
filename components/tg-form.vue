@@ -203,18 +203,35 @@ function _getValidateRules(field, rules) {
             if (required !== undefined) {
                 // required.required = true;
                 let ctl = {required:field.required};
-                if (field.dataType !== undefined) {
-                    ctl["type"] = field.dataType;
-                }
+                // if (field.dataType !== undefined) {
+                //     ctl["type"] = field.dataType.toLowerCase();
+                // }
                 rules[field.name].push(Object.assign({}, {field:field}, required, ctl));
             }
         }
     }
     if (field.vaildator !== undefined && field.hidden !== true) {
-        if (rules[field.name] === undefined){
-            rules[field.name] = [];
+        if (field.vaildator.dataSize !== undefined || field.vaildator.checkSize) {
+            if (rules[field.name] === undefined){
+                rules[field.name] = [];
+            }
+            let max = Math.max(field.vaildator.dataSize || 0, field.vaildator.checkSize || 0)
+            rules[field.name] = rules[field.name].concat(Object.assign({}, {field:field}, field.vaildator, {max:max, message:`内容太长，不能超过 ${max}`}));
         }
-        rules[field.name] = rules[field.name].concat(Object.assign({}, {field:field}, field.vaildator));
+        if (field.vaildator.checkExp !== undefined) {
+            if (rules[field.name] === undefined){
+                rules[field.name] = [];
+            }
+            rules[field.name] = rules[field.name].concat(Object.assign({}, {field:field}, {type:'pattern', pattern:field.vaildator.checkExp, message:field.vaildator.message}));
+        } else if (field.vaildator.checkType !== undefined) {
+            if (rules[field.name] === undefined){
+                rules[field.name] = [];
+            }
+            field.vaildator.checkType.split(',').map(function(item) {
+                rules[field.name] = rules[field.name].concat(Object.assign({}, {field:field}, {type:'pattern', pattern:defaults.validateRules[item].regex, message:defaults.validateRules[item].alertText}));
+            });
+        }
+        
     }
 }
 
