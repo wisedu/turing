@@ -14,7 +14,10 @@ export default {
                 }
             }
         },
-        column:Number,
+        column:{
+            type:Number,
+            default:1
+        },
         labelWidth:{
             type:Number,
             default:100

@@ -92,12 +92,12 @@ export class DataAdapter {
             }
         }
 
-        if (action.method === "post") {
+        if (action.method.toLowerCase() === "post") {
             return axios.post(url, params).catch(e=>{
                 console.error(e)
                 this.onFetching("error", false, e);
             })
-        } else if (action.method === "delete") {
+        } else if (action.method.toLowerCase() === "delete") {
             //删除资源仅允许与rest接口约定的url方式
             return axios.delete(url).catch(e=>{
                 console.error(e)
