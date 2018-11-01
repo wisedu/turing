@@ -135,8 +135,8 @@ export default {
                 });
 
                 this.inst.grid.addEventListener('fin-click', event => {
-                    let row = e.dataRow;
-                    let rowIndex = event.gridCell.y;
+                    let row = event.detail.row;
+                    let rowIndex = event.detail.dataCell.y;
                     this.activedIndex = rowIndex;
                     this.$emit("on-highlight", row, rowIndex);
                 });

@@ -241,8 +241,29 @@ export class EMAPDataAdapter extends DataAdapter{
                         case "fixed":
                             struct["grid"][name][prop_name] = metaItem[prop_name];
                             break;
-                        case "xtype":
                         case "dataType":
+                            let type = "string";
+                            switch(metaItem[prop_name].toUpperCase()){
+                                case "INTEGER":
+                                case "DOUBLE":
+                                case "LONG":
+                                case "SHORT":
+                                case "FLOAT":
+                                case "DECIMAL":
+                                    type = "number";
+                                    break;
+                                case "BOOLEAN":
+                                    type = "boolean";
+                                    break;
+                                case "DATE":
+                                case "TIMPSTAMP":
+                                case "TIME":
+                                    type = "date";
+                                    break;
+                            }
+                            struct["form"][name][prop_name] = type;
+                            break;
+                        case "xtype":
                         case "required":
                         case "readonly":
                         case "col":
@@ -252,19 +273,19 @@ export class EMAPDataAdapter extends DataAdapter{
                             struct["form"][name][prop_name] = metaItem[prop_name];
                             break;
                         case "checkType":
-                            if (struct["form"][name]["vaildator"] === undefined){
-                                struct["form"][name]["vaildator"] = {};
+                            if (struct["form"][name]["validator"] === undefined){
+                                struct["form"][name]["validator"] = {};
                             }
                             let checkType = metaItem[prop_name].replace(/\[|\]|\"|\{|\}|custom/g, "");
-                            struct["form"][name]["vaildator"][prop_name] = checkType;
+                            struct["form"][name]["validator"][prop_name] = checkType;
                             break;
                         case "dataSize":
                         case "checkSize":
                         case "checkExp":
-                            if (struct["form"][name]["vaildator"] === undefined){
-                                struct["form"][name]["vaildator"] = {};
+                            if (struct["form"][name]["validator"] === undefined){
+                                struct["form"][name]["validator"] = {};
                             }
-                            struct["form"][name]["vaildator"][prop_name] = metaItem[prop_name];
+                            struct["form"][name]["validator"][prop_name] = metaItem[prop_name];
                             break;
                         case "groupName":
                             if (prop_name === "groupName") {
