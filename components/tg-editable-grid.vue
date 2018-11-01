@@ -133,6 +133,13 @@ export default {
                     this.$emit("on-item-change", name, newValue, oldValue, schema, {row, index, name:this.name});
                     this.$emit("input", this.inst.getData());
                 });
+
+                this.inst.grid.addEventListener('fin-click', event => {
+                    let row = e.dataRow;
+                    let rowIndex = event.gridCell.y;
+                    this.activedIndex = rowIndex;
+                    this.$emit("on-highlight", row, rowIndex);
+                });
                 this.inst.grid.addEventListener('fin-row-header-clicked', event => {
                     let row = event.detail.row;
                     let rowIndex = event.detail.dataCell.y;
