@@ -224,10 +224,10 @@ function _getValidateRules(field, rules) {
             field.validator.checkType.split(',').map(function(item) {
                 rules[field.name] = rules[field.name].concat(Object.assign({}, {field:field}, {type:'pattern', pattern:defaults.validateRules[item].regex, message:defaults.validateRules[item].alertText}));
             });
-        } else {
+        } 
+        if (rules[field.name].length === 0) {
             delete rules[field.name];
         }
-        
     }
 }
 
