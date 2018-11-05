@@ -1,4 +1,4 @@
-export class QuerySettingBuilder{
+export default class QuerySettingBuilder{
     constructor(){
 
     }
