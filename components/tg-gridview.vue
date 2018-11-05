@@ -49,7 +49,8 @@ export default {
                 }
             }
         },
-        rowRending: Function
+        rowRending: Function,
+        searchHandler: Function,
     },
     data() {
         let searchvalue = {};
@@ -121,9 +122,13 @@ export default {
             }
         },
         searchReload() {
-            this.$emit("on-change", {index:1, size:this.pager.size}, this.formValue, this.sortFields, "fields");
-            if (this.dataAdapter !== undefined) {
-                this.reload({pageNumber:1, pageSize:this.pager.size});
+            if (this.searchHandler !== undefined) {
+                this.searchHandler(formValue);
+            } else {
+                this.$emit("on-change", {index:1, size:this.pager.size}, this.formValue, this.sortFields, "fields");
+                if (this.dataAdapter !== undefined) {
+                    this.reload({pageNumber:1, pageSize:this.pager.size});
+                }
             }
         },
         sortHandler(column, key, order) {

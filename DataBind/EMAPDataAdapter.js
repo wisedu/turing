@@ -1,11 +1,14 @@
 import {DataAdapter} from './DataAdapter'
 import axios from 'axios'
 import utils from '../utils'
+import qsb from './QuerySettingBuilder'
 export class EMAPDataAdapter extends DataAdapter{
     constructor(Adapter) {
         super()
         this.Adapter = Adapter;
         this.searchDefine = {};
+        this.builderList = []; //searchView 中使用
+        this.__baseUrl = ""; //模型路径
         // if (arguments.length >= 2) {
         //     this.load.apply(this, arguments);
         // }
@@ -33,22 +36,38 @@ export class EMAPDataAdapter extends DataAdapter{
         })
     }
 
-    async getSearchView(url) {
+    async viewSearch(emapActionName) {
         let path;
-        if (url !== undefined){
-            path = url;
+        if (emapActionName !== undefined){
+            path = window.apiPath + this.__baseUrl.replace(".do", "/" + emapActionName + ".do");
         } else {
-            path = this.actions.findAll.url;
-        }
-        if (path === undefined || path === null || path === "") {
-            throw `没有传入url，也没有默认的findAll.url。无法调用该函数`
+            throw `没有传入EMAP查询动作名称。无法调用该函数`
         }
         let res = await axios.get(path, {params:{"*searchMeta":1}});
         this.searchDefine = res.data !== undefined && res.data.searchMeta !== undefined ? res.data.searchMeta : {};
-        return this.searchDefine;
+        this.builderList = this.searchDefine.builderLists;
+        let metas = this.searchDefine.controls.map(function(metaItem) {
+            let newItem = metaItem;
+            for(var prop in metaItem) {
+                if (prop.indexOf(".") > -1) {
+                    let temp = prop.split(".");
+                    let proptype = temp[0];
+                    let prop_name = temp[1];
+                    if (proptype === "search") {
+                        newItem[prop_name] = metaItem[prop];
+                    }
+                }
+            }
+            if (newItem.xtype === undefined) {
+                newItem.xtype = "text";
+            }
+            return newItem;
+        });
+        return metas;
     }
 
     getIntegratedModel(uri, modelName, findParams) {
+        this.__baseUrl = uri;
         var url = "";
         if ([".", "/"].indexOf(uri.substring(0, 1)) > -1) {
             url = window.apiPath + uri
@@ -135,7 +154,8 @@ export class EMAPDataAdapter extends DataAdapter{
 
             this.actions[element.name] = {
                 url: "/" + element.url,
-                method: "post"
+                method: "post",
+                controls:element.controls
             };
             //只有指定名称下的模型，被填充到默认模型对象中，用于显示
             if(element.name == modelName){
@@ -334,26 +354,7 @@ export class EMAPDataAdapter extends DataAdapter{
 	    return struct;
     }
     
-    querySettingBuilder(params) {
-        if (Object.keys(params).length > 0 && !params.querySetting) {
-            var query = [];
-            for (var key in params) {
-                let value = params[key];
-                if (Array.isArray(value)){
-                    value = value.join(",");
-                }
-                query.push({
-                    name: key,
-                    value: value,
-                    linkOpt: 'OR',
-                    builder: 'include'
-                });
-            }
-            return JSON.stringify(query);
-        } else {
-            return undefined;
-        }
-    }
+    querySettingBuilder = qsb.lite
 
     // view(name, params) {
     //     let props = name.split(":")

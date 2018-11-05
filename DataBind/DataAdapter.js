@@ -1,6 +1,7 @@
 import utils from '../utils.js';
 import axios from 'axios'
 import defaults from '../Defaults'
+import qsb from './QuerySettingBuilder'
 
 export class DataAdapter {
     constructor(meta) {
@@ -153,32 +154,7 @@ export class DataAdapter {
     
     querySetting = undefined
 
-    querySettingBuilder(searchValues, defaultScope, ignoreEmpty){
-        let ie = ignoreEmpty === undefined ? true : ignoreEmpty;
-        let newQS = {};
-        newQS[defaultScope] = {};
-        for (const key in searchValues) {
-            const element = searchValues[key];
-            if (ie) {
-                if (element === "") {
-                    continue;
-                } else if (element instanceof Array && !element.some(item => item !== "")) {
-                    continue;
-                }
-            }
-            if (key.indexOf("@") > -1) {
-                let newScope = key.substring(0, key.indexOf("@"));
-                let newKey = key.substring(key.indexOf("@") + 1, key.length);
-                if (newQS[newScope] === undefined){
-                    newQS[newScope] = {}
-                } 
-                newQS[newScope][newKey] = element;
-            } else {
-                newQS[defaultScope][key] = element;
-            }
-        }
-        return newQS;
-    }
+    querySettingBuilder = qsb.sequelize
 
     findAll(param) {
         var that = this;
