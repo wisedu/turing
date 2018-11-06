@@ -154,10 +154,12 @@ export default {
         validateField(prop, callback){
             if (this.isGroupForm === true) {
                 for (let form in this.$refs) {
-                    if (this.$refs[form] === undefined)continue;
-                    let group_rules = this.groupedRules[form];
-                    _removeRequiredFalseRule(group_rules);
-                    this.$refs[form][0].validateField(prop, callback);
+                    let isGrouped = form.startsWith("group:[");
+                    if (isGrouped === true) {
+                        let group_rules = this.groupedRules[form];
+                        _removeRequiredFalseRule(group_rules);
+                        this.$refs[form][0].validateField(prop, callback);
+                    }
                 }
             } else {
                 _removeRequiredFalseRule(this.tiledRules);
@@ -167,8 +169,10 @@ export default {
         resetFields(){
             if (this.isGroupForm === true) {
                 for (let form in this.$refs) {
-                    if (this.$refs[form] === undefined)continue;
-                    this.$refs[form].resetFields();
+                    let isGrouped = form.startsWith("group:[");
+                    if (isGrouped === true) {
+                        this.$refs[form][0].resetFields();
+                    }
                 }
             } else {
                 this.$refs.tiled_form.resetFields();

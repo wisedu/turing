@@ -123,7 +123,7 @@ export default {
         },
         searchReload() {
             if (this.searchHandler !== undefined) {
-                this.searchHandler(formValue);
+                this.searchHandler(this.formValue);
             } else {
                 this.$emit("on-change", {index:1, size:this.pager.size}, this.formValue, this.sortFields, "fields");
                 if (this.dataAdapter !== undefined) {
