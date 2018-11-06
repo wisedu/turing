@@ -48,7 +48,8 @@ export default{
             }
 
             if (query_params.pageSize !== undefined || query_params.pageNumber !== undefined){
-                // this.pager = query_params;
+                this.pager.size = query_params.pageSize;
+                this.pager.index = query_params.pageNumber;
                 this.$emit("update:pager", query_params)
             }
             this.dataAdapter.pageSize = query_params && query_params.pageSize || this.pager.size;
