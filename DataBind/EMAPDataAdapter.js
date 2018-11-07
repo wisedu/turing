@@ -263,21 +263,21 @@ export class EMAPDataAdapter extends DataAdapter{
                             break;
                         case "dataType":
                             let type = "string";
-                            switch(metaItem[prop_name].toUpperCase()){
-                                case "INTEGER":
-                                case "DOUBLE":
-                                case "LONG":
-                                case "SHORT":
-                                case "FLOAT":
-                                case "DECIMAL":
+                            switch(metaItem[prop_name]){
+                                case "int":
+                                case "double":
+                                case "long":
+                                case "short":
+                                case "float":
+                                case "Decimal":
                                     type = "number";
                                     break;
-                                case "BOOLEAN":
+                                case "boolean":
                                     type = "boolean";
                                     break;
-                                case "DATE":
-                                case "TIMPSTAMP":
-                                case "TIME":
+                                case "Date":
+                                case "Timestamp":
+                                case "Time":
                                     type = "date";
                                     break;
                             }
