@@ -275,10 +275,10 @@ export class EMAPDataAdapter extends DataAdapter{
                                 case "boolean":
                                     type = "boolean";
                                     break;
-                                case "Date":
-                                case "Timestamp":
-                                case "Time":
-                                    type = "date";
+                                // case "Date":
+                                // case "Timestamp":
+                                // case "Time":
+                                //     type = "date";
                                     break;
                             }
                             struct["form"][name][prop_name] = type;
