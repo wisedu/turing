@@ -12,6 +12,7 @@ import {DataAdapter} from './DataBind/DataAdapter.js';
 import {DataSourceManager} from './DataBind/DataSourceManager.js';
 import defaults from './Defaults.js';
 
+import TgCollectionView from './components/tg-collection-view.vue';
 import TgContainer from './components/tg-container.vue';
 import TgDiv from './components/tg-div.vue';
 import TgEditableGrid from './components/tg-editable-grid.vue';
@@ -25,11 +26,11 @@ import TgListview from './components/tg-listview.vue';
 import TgText from './components/tg-text.vue';
 import TgToolbar from './components/tg-toolbar.vue';
 import TgValidator from './components/tg-validator.vue';
-const version = "1.27.19";
+const version = "1.28.0";
 const description = "turing components";
 const author = "金智教育 wisedu";
 const components = {
-    TgContainer,TgDiv,TgEditableGrid,TgForm,TgGridview,TgImg,TgLeftRightItem,TgLeftRight,TgLinkbutton,TgListview,TgText,TgToolbar,TgValidator
+    TgCollectionView,TgContainer,TgDiv,TgEditableGrid,TgForm,TgGridview,TgImg,TgLeftRightItem,TgLeftRight,TgLinkbutton,TgListview,TgText,TgToolbar,TgValidator
 };
 const install = function (Vue, opts = {}) {
     if (install.installed) return;

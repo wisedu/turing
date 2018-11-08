@@ -58,7 +58,7 @@ export class DataAdapter {
         }
         return result;
     }
-    execute(action, data){
+    execute(action, data, config = {}){
         var url = "";
         var params = data || action.params;
         let method = action.method || "get";
@@ -96,18 +96,18 @@ export class DataAdapter {
         }
 
         if (method.toLowerCase() === "post") {
-            return axios.post(url, params).catch(e=>{
+            return axios.post(url, params, config).catch(e=>{
                 console.error(e)
                 this.onFetching("error", false, e);
             })
         } else if (method.toLowerCase() === "delete") {
             //删除资源仅允许与rest接口约定的url方式
-            return axios.delete(url).catch(e=>{
+            return axios.delete(url, config).catch(e=>{
                 console.error(e)
                 this.onFetching("error", false, e);
             })
         } else {
-            return axios.get(url, {params: params}).catch(e=>{
+            return axios.get(url, Object.assign({params: params}, config)).catch(e=>{
                 console.error(e)
                 this.onFetching("error", false, e);
             })
