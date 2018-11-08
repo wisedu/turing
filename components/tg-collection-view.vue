@@ -8,9 +8,13 @@
             <slot name="toolbar-left" slot="left"></slot>
             <slot name="toolbar-right" slot="right"></slot>
         </tg-toolbar>
-        <component :is="type + '-gb-collection-view'" :columns="columns" :data="table_data" :pager="pager" :displayFieldFormat="displayFieldFormat"
-            @reload="tableReload" @on-highlight="onHighlight" @on-select-all="onSelectAll" @on-selection-change="onSelectionChange" :rowRending="rowRending">
-            <slot name="pagerTotal" slot="pagerTotal"></slot>
+        <component :is="type + '-gb-collection'" :grid="grid" :datas="table_data" :pager="pager" :displayFieldFormat="displayFieldFormat" @reload="tableReload">
+            <template slot="itemTemplate" slot-scope="props">
+                <slot name="itemTemplate" :data="props.data" :index="props.index"></slot>
+            </template>
+            <template slot="alternateTemplate" slot-scope="props">
+                <slot name="alternateTemplate" :data="props.data" :index="props.index"></slot>
+            </template>
         </component>
         <slot name="footer"></slot>
     </div>
@@ -24,7 +28,7 @@ export default {
     extends: ComDataBindBase,
     props: {
         searcher: Object,
-        columns: Array,
+        grid:Object,
         datas: [Array, Object],
         type:{
             type:String,
@@ -46,7 +50,6 @@ export default {
                 }
             }
         },
-        rowRending: Function,
         searchHandler: Function,
     },
     data() {
@@ -82,20 +85,7 @@ export default {
         if (this.$slots["toolbar-left"] === undefined && this.$slots["toolbar-right"] === undefined) {
             this.showToolbar = false;
         }
-        let that = this;
-        this.columns.filter(item => item.filters !== undefined).map(col => {
-            col.filterRemote = function(values, key) {
-                if (values.length === 0) {
-                    delete that.filterValues[key];
-                } else {
-                    that.filterValues[key] = values
-                }
-                that.$emit("on-change", {index:1, size:that.pager.size}, that.formValue, that.sortFields, "filter");
-                if (that.dataAdapter !== undefined) {
-                    that.reload();
-                }
-            }
-        })
+        
         if (this.autoReadyDataBind === true) {
             this.$emit("on-change", this.pager, this.formValue, this.sortFields, "autoReadyDataBind");
             this.reload();
@@ -128,19 +118,6 @@ export default {
                 }
             }
         },
-        sortHandler(column, key, order) {
-            this.sortFields = [{column, key, order}]
-            this.$emit("on-change", {index:1, size:this.pager.size}, this.formValue, this.sortFields, "sort");
-            if (this.dataAdapter !== undefined) {
-                let keys = key.split(".")
-                if (order !== "normal"){
-                    this.dataAdapter.order(keys.concat([order]));
-                } else {
-                    this.dataAdapter.order(keys);
-                }
-                this.reload({pageNumber:1, pageSize:this.pager.size})
-            }
-        },
         searchClear() {
             this.formValue = {};
             this.formDisplay = {};
@@ -157,22 +134,9 @@ export default {
             }
             this.$emit("on-value-change", name, value, display, model, this.formValue);
         },
-        onHighlight(currentRow, oldCurrentRow) {
-            this.$emit('update:currentRow', currentRow)
-            this.$emit("on-highlight", currentRow, oldCurrentRow);
-        },
-        onSelectAll(selection) {
-            this.$emit('update:selection', selection);
-            this.$emit("on-select-all", selection);
-        },
-        onSelectionChange(selection) {
-            this.$emit('update:selection', selection);
-            this.$emit("on-selection-change", selection);
-        },
     }
 }
 </script>
 
 <style>
-.tg-collection-view-wrap{}
 </style>

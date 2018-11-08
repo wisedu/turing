@@ -219,7 +219,7 @@ function _getValidateRules(field, rules) {
             rules[field.name] = [];
         }
         if (field.validator.dataSize !== undefined || field.validator.checkSize) {
-            let max = Math.max(field.validator.dataSize || 0, field.validator.checkSize || 0)
+            let max = field.validator.checkSize !== undefined ? field.validator.checkSize : field.validator.dataSize;
             rules[field.name] = rules[field.name].concat(Object.assign({}, {field:field}, field.validator, {max:max, message:`内容太长，不能超过 ${max}`}));
         }
         if (field.validator.checkExp !== undefined) {
