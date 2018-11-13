@@ -134,6 +134,18 @@ export default {
                     this.$emit("input", this.inst.getData());
                 });
 
+                 this.inst.grid.addEventListener('tg-checkbox-change', event => {
+                    // console.log(event)
+                    let name = event.detail.name;
+                    let newValue = event.detail.value;
+                    let schema = event.detail.schema;
+                    let row = event.detail.dataRow;
+                    //刷新最新值
+                    let index = event.detail.dataCell.y;
+                    this.$emit("on-item-change", name, newValue, undefined, schema, {row, index, name:this.name});
+                    this.$emit("input", this.inst.getData());
+                });
+
                 this.inst.grid.addEventListener('fin-click', event => {
                     let row = event.detail.row;
                     let rowIndex = event.detail.dataCell.y;
