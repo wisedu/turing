@@ -1,15 +1,17 @@
 <template>
     <div>
         <div slot="toolbar" class="toolbar" v-if="showToolbar">
-            <a href="javascript:void(0)" @click="addRow({})">添加行</a> | 
+            <a :href="'#' + uuid" @click="addRow({})">添加行</a> | 
             <a href="javascript:void(0)" @click="removeActivedRow()">删除选中行</a>
         </div>
         <div ref="editableGrid" class="tg-editable-grid" :style="{height:autoHeight + 'px'}" v-bind="params"></div>
+        <span :id="uuid"></span>
     </div>
 </template>
 
 <script>
 import defaults from "../Defaults";
+import uuid from 'uuid';
 export default {
     name: "tg-editable-grid",
     props: {
@@ -52,7 +54,8 @@ export default {
     data() {
         return {
             inst:null,
-            activedIndex:-1
+            activedIndex:-1,
+            uuid: uuid()
         }
     },
     computed:{
