@@ -60,7 +60,7 @@ export default {
     },
     computed:{
         autoHeight(){
-            let actual = (this.value.length + 1) * 50;
+            let actual = (this.value instanceof Array ? this.value.length + 1 : 1) * 50;
             if (this.height !== -1) {
                 actual = this.height;
             }
