@@ -84,7 +84,7 @@ export default {
     },
     mounted(){
         this.initGrid();
-        if (this.value !== undefined && this.value.length > 0) {
+        if (this.value instanceof Array && this.value.length > 0) {
             this.setData(this.value);
         }
     },
