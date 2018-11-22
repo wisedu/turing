@@ -1,7 +1,7 @@
 {
   "name": "tg-turing",
   "description": "turing components",
-  "version": "1.28.23",
+  "version": "1.28.24",
   "author": "金智教育 wisedu",
   "homepage": "https://github.com/wisedu",
   "packageName": "tg-turing",
@@ -14,7 +14,8 @@
     "esm": "rollup --config ./build/rollup.config.js",
     "deploy": "rm -rf dist && node ./build/deploy.js",
     "buildcss": "node ./build/buildcss.js",
-    "buildskin": "node ./build/buildskin.js"
+    "buildskin": "node ./build/buildskin.js",
+    "prepublish": "npm run build"
   },
   "dependencies": {
     "accounting-js": "^1.1.1",

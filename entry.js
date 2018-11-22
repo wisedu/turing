@@ -23,15 +23,15 @@ import TgLeftRightItem from './components/tg-left-right-item.vue';
 import TgLeftRight from './components/tg-left-right.vue';
 import TgLinkbutton from './components/tg-linkbutton.vue';
 import TgListview from './components/tg-listview.vue';
+import TgPerson from './components/tg-person.vue';
 import TgText from './components/tg-text.vue';
 import TgToolbar from './components/tg-toolbar.vue';
 import TgValidator from './components/tg-validator.vue';
-import TgPerson from './components/tg-person.vue';
-const version = "1.28.23";
+const version = "1.28.24";
 const description = "turing components";
 const author = "金智教育 wisedu";
 const components = {
-    TgCollectionView,TgContainer,TgDiv,TgEditableGrid,TgForm,TgGridview,TgImg,TgLeftRightItem,TgLeftRight,TgLinkbutton,TgListview,TgText,TgToolbar,TgValidator,TgPerson
+    TgCollectionView,TgContainer,TgDiv,TgEditableGrid,TgForm,TgGridview,TgImg,TgLeftRightItem,TgLeftRight,TgLinkbutton,TgListview,TgPerson,TgText,TgToolbar,TgValidator
 };
 const install = function (Vue, opts = {}) {
     if (install.installed) return;
