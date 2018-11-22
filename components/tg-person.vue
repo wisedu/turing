@@ -20,6 +20,16 @@ export default {
         treeData: [Array, Object],
         selected: Array,
         treeData: Array,
+        type:{
+            type:String,
+            default:function(){
+                if (defaults.currentType !== undefined) {
+                    return defaults.currentType;
+                } else {
+                    console.error("TgGridView Error: type is undefined, you can set with tg-gridview or window['tg-turing'].defaults.currentType")
+                }
+            }
+        },
     },
     data() {
         return {
