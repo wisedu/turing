@@ -90,10 +90,21 @@ export default {
     },
     methods:{
         addRow(row){
-            this.value.push(row)
+            let newRow = [];
+            if (this.value instanceof Array && this.value.length > 0) {
+                newRow = this.value.concat(row);
+            } else {
+                newRow.push(row);
+            }
+            this.$emit("on-item-change", this.name, newRow, undefined, this.columns)
+            this.$emit("input", newRow)
         },
         removeActivedRow(){
-            this.value.splice(this.activedIndex, 1)
+            if (this.value instanceof Array && this.value.length > 0) {
+                this.value.splice(this.activedIndex, 1)
+                this.$emit("on-item-change", this.name, this.value, undefined, this.columns)
+                this.$emit("input", this.value)
+            }
         },
         initGrid(){
             if (this.columns.length > 0) {
@@ -173,6 +184,8 @@ export default {
         },
         setData(datas){
             this.inst.setData(datas);
+            this.$emit("on-item-change", this.name, datas, undefined, this.columns)
+            this.$emit("input", datas)
         },
         setErrorCells(datas){
             // let datas = [{row:1,name:"",message:"",type:""}];
