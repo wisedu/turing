@@ -27,7 +27,7 @@ import TgPerson from './components/tg-person.vue';
 import TgText from './components/tg-text.vue';
 import TgToolbar from './components/tg-toolbar.vue';
 import TgValidator from './components/tg-validator.vue';
-const version = "1.28.24";
+const version = "1.28.25";
 const description = "turing components";
 const author = "金智教育 wisedu";
 const components = {
