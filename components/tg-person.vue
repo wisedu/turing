@@ -13,7 +13,7 @@
 <script>
 import defaults from "../Defaults";
 export default {
-    name: "tg-person",
+    name: "tg-persons",
     extends: '',
     props: {
         users: Array,
@@ -52,14 +52,17 @@ export default {
     },
     methods: {
         treeItemSelect_p(data){
-            this.$emit("treeItemSelect_p_p", data);
+            this.$emit("on-treeItemSelect", data);
         },
         check_p(data){
-            this.$emit("check_p_p", data);
+            this.$emit("on-check", data);
         },
         delete_p(data){
-            this.$emit("delete_p_p", data);
+            this.$emit("on-delete", data);
         },
+        searchUser(){
+            this.$emit("on-searchUser", data);
+        }
     }
 }
 </script>
