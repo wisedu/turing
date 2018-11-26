@@ -155,13 +155,17 @@ export class EMAPDataAdapter extends DataAdapter{
             this.actions[element.name] = {
                 url: "/" + element.url,
                 method: "post",
-                controls:element.controls
+                controls:element.controls,
+                name: element.name
             };
             //只有指定名称下的模型，被填充到默认模型对象中，用于显示
             if(element.name == modelName){
                 var controls = element.controls;
                 this.loadMeta(controls);
             }
+        }
+        if (this.actions[modelName] !== undefined) {
+            Object.assign(this.actions.findAll, this.actions[modelName]);
         }
         // if(typeof(this.events.onRefreshed) === "function")this.events.onRefreshed(this.getMeta());
     }
