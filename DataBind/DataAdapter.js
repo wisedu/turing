@@ -91,7 +91,16 @@ export class DataAdapter {
                     querySetting: this.querySetting
                 } 
             } else {
-                params["querySetting"] = this.querySetting;
+                // params["querySetting"] = this.querySetting;
+                let leftParams = {};
+                let rightParams = {};
+                if (params["querySetting"] !== "") {
+                    leftParams = JSON.parse(params["querySetting"]);
+                }
+                if (this.querySetting !== "") {
+                    rightParams = JSON.parse(this.querySetting);
+                }
+                params["querySetting"] = JSON.stringify(Object.assign(leftParams, rightParams));
             }
         }
 
