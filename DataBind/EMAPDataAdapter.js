@@ -57,12 +57,24 @@ export class EMAPDataAdapter extends DataAdapter{
                         newItem[prop_name] = metaItem[prop];
                     }
                 }
+                switch (prop) {
+                    case "optionData":
+                        newItem["options"] = metaItem[prop];
+                        break;
+                    case "defaultValue":
+                        newItem["default"] = metaItem[prop];
+                        break;
+                    case "url":
+                        newItem.dict = {url: metaItem[prop], value:"id", label:"name"};
+                        break;
+                }
             }
             if (newItem.xtype === undefined) {
                 newItem.xtype = "text";
             }
             return newItem;
         });
+        this.searchDefine.meta = metas;
         return metas;
     }
 
