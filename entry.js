@@ -7,9 +7,10 @@ import ConnectItem from './formConnector/ConnectItem.js';
 import FormConnector from './formConnector/FormConnector.js';
 import DocConnector from './formConnector/DocConnector.js';
 
-import {EMAPDataAdapter} from './DataBind/EMAPDataAdapter.js';
-import {DataAdapter} from './DataBind/DataAdapter.js';
-import {DataSourceManager} from './DataBind/DataSourceManager.js';
+import {QuerySettingBuilder} from './dataBind/QuerySettingBuilder.js';
+import {EMAPDataAdapter} from './dataBind/EMAPDataAdapter.js';
+import {DataAdapter} from './dataBind/DataAdapter.js';
+import {DataSourceManager} from './dataBind/DataSourceManager.js';
 import defaults from './Defaults.js';
 
 import TgCollectionView from './components/tg-collection-view.vue';
@@ -27,7 +28,7 @@ import TgPerson from './components/tg-person.vue';
 import TgText from './components/tg-text.vue';
 import TgToolbar from './components/tg-toolbar.vue';
 import TgValidator from './components/tg-validator.vue';
-const version = "1.28.28";
+const version = "1.28.32";
 const description = "turing components";
 const author = "金智教育 wisedu";
 const components = {
@@ -98,12 +99,12 @@ axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest';
 
 export default Object.assign({}, {
     install, ...components, 
-    utils, version, description, author, EMAPDataAdapter,
+    utils, version, description, author, EMAPDataAdapter, QuerySettingBuilder,
     DataAdapter, DataSourceManager, ConnectItem, FormConnector, DocConnector, defaults,
     axios, moment, accounting, uuid
 });
 export {
-    utils, version, description, author, EMAPDataAdapter,
+    utils, version, description, author, EMAPDataAdapter, QuerySettingBuilder,
     DataAdapter, DataSourceManager, ConnectItem, FormConnector, DocConnector, defaults,
     axios, moment, accounting, uuid
 }

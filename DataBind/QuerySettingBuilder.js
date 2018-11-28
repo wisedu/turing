@@ -1,4 +1,4 @@
-export default class QuerySettingBuilder{
+export class QuerySettingBuilder{
     constructor(){
 
     }
@@ -16,7 +16,7 @@ export default class QuerySettingBuilder{
                 query.push({
                     name: key,
                     value: value,
-                    linkOpt: 'OR',
+                    linkOpt: 'AND',
                     builder: 'include'
                 });
             }

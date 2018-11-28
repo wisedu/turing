@@ -1,7 +1,7 @@
 import utils from '../utils.js';
 import axios from 'axios'
 import defaults from '../Defaults'
-import qsb from './QuerySettingBuilder'
+import {QuerySettingBuilder} from './QuerySettingBuilder'
 
 export class DataAdapter {
     constructor(meta) {
@@ -91,16 +91,7 @@ export class DataAdapter {
                     querySetting: this.querySetting
                 } 
             } else {
-                // params["querySetting"] = this.querySetting;
-                let leftParams = {};
-                let rightParams = {};
-                if (params["querySetting"] !== "") {
-                    leftParams = JSON.parse(params["querySetting"]);
-                }
-                if (this.querySetting !== "") {
-                    rightParams = JSON.parse(this.querySetting);
-                }
-                params["querySetting"] = JSON.stringify(Object.assign(leftParams, rightParams));
+                params["querySetting"] = this.querySetting;
             }
         }
 
@@ -163,7 +154,7 @@ export class DataAdapter {
     
     querySetting = undefined
 
-    querySettingBuilder = qsb.sequelize
+    querySettingBuilder = QuerySettingBuilder.sequelize
 
     findAll(param) {
         var that = this;

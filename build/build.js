@@ -66,9 +66,10 @@ import ConnectItem from './formConnector/ConnectItem.js';
 import FormConnector from './formConnector/FormConnector.js';
 import DocConnector from './formConnector/DocConnector.js';
 
-import {EMAPDataAdapter} from './DataBind/EMAPDataAdapter.js';
-import {DataAdapter} from './DataBind/DataAdapter.js';
-import {DataSourceManager} from './DataBind/DataSourceManager.js';
+import {QuerySettingBuilder} from './dataBind/QuerySettingBuilder.js';
+import {EMAPDataAdapter} from './dataBind/EMAPDataAdapter.js';
+import {DataAdapter} from './dataBind/DataAdapter.js';
+import {DataSourceManager} from './dataBind/DataSourceManager.js';
 import defaults from './Defaults.js';
 
 ${jsImport.join("\r\n")}
@@ -143,12 +144,12 @@ axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest';
 
 export default Object.assign({}, {
     install, ...components, 
-    utils, version, description, author, EMAPDataAdapter,
+    utils, version, description, author, EMAPDataAdapter, QuerySettingBuilder,
     DataAdapter, DataSourceManager, ConnectItem, FormConnector, DocConnector, defaults,
     axios, moment, accounting, uuid
 });
 export {
-    utils, version, description, author, EMAPDataAdapter,
+    utils, version, description, author, EMAPDataAdapter, QuerySettingBuilder,
     DataAdapter, DataSourceManager, ConnectItem, FormConnector, DocConnector, defaults,
     axios, moment, accounting, uuid
 }`

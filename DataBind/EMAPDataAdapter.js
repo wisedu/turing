@@ -1,7 +1,7 @@
 import {DataAdapter} from './DataAdapter'
 import axios from 'axios'
 import utils from '../utils'
-import qsb from './QuerySettingBuilder'
+import {QuerySettingBuilder} from './QuerySettingBuilder'
 export class EMAPDataAdapter extends DataAdapter{
     constructor(Adapter) {
         super()
@@ -358,7 +358,7 @@ export class EMAPDataAdapter extends DataAdapter{
 	    return struct;
     }
     
-    querySettingBuilder = qsb.lite
+    querySettingBuilder = QuerySettingBuilder.lite
 
     // view(name, params) {
     //     let props = name.split(":")
