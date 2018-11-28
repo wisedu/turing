@@ -113,7 +113,7 @@ utils.getContextPath = function(isFullPath) {
 
 utils.cleanProps = function(data) {
   for(let prop in data) {
-    if (data[prop] === null || data[prop] === undefined) {
+    if (data[prop] === undefined || data[prop] === null || data[prop] === "") {
       delete data[prop];
     }
   }

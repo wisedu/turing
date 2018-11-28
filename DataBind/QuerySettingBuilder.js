@@ -3,7 +3,7 @@ export class QuerySettingBuilder{
 
     }
     static EMAP(){
-
+        
     }
     static lite(params) {
         if (Object.keys(params).length > 0 && !params.querySetting) {
