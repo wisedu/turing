@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div slot="toolbar" class="toolbar" v-if="showToolbar">
+        <div slot="toolbar" class="toolbar" v-if="showToolbar && readonly !== true">
             <a :href="'#' + uuid" @click="addRow({})">添加行</a> | 
             <a href="javascript:void(0)" @click="removeActivedRow()">删除选中行</a>
         </div>
@@ -49,7 +49,8 @@ export default {
                 return {};
             }
         },
-        rowRending: Function
+        rowRending: Function,
+        readonly: Boolean,
     },
     data() {
         return {
@@ -109,6 +110,9 @@ export default {
         initGrid(){
             if (this.columns.length > 0) {
                 let EditableGrid = window["tg-editable-grid"].default;
+                if (this.readonly === true) {
+                    this.params.readOnly = true;
+                }
                 this.inst = new EditableGrid(this.$refs.editableGrid, Object.assign({}, this.params, {displayFieldFormat:this.displayFieldFormat}));
                 this.inst.onEditorLoadData = function(model, value, callback) {
                     switch (model.xtype) {
@@ -134,31 +138,34 @@ export default {
                     }
                 }
                 this.inst.setSchema(this.columns);
-                this.inst.grid.addEventListener('fin-editor-data-change', event => {
-                    // console.log(event)
-                    let name = event.detail.input.column.schema.name;
-                    let newValue = event.detail.newValue;
-                    let oldValue = event.detail.oldValue;
-                    let schema = event.detail.input.column.schema;
-                    let row = event.detail.input.event.dataRow;
-                    row[name] = newValue;
-                    //刷新最新值
-                    let index = event.detail.input.event.dataCell.y;
-                    this.$emit("on-item-change", name, newValue, oldValue, schema, {row, index, name:this.name});
-                    this.$emit("input", this.inst.getData());
-                });
 
-                 this.inst.grid.addEventListener('tg-checkbox-change', event => {
-                    // console.log(event)
-                    let name = event.detail.name;
-                    let newValue = event.detail.value;
-                    let schema = event.detail.schema;
-                    let row = event.detail.dataRow;
-                    //刷新最新值
-                    let index = event.detail.dataCell.y;
-                    this.$emit("on-item-change", name, newValue, undefined, schema, {row, index, name:this.name});
-                    this.$emit("input", this.inst.getData());
-                });
+                if (this.readonly !== true) {
+                    this.inst.grid.addEventListener('fin-editor-data-change', event => {
+                        // console.log(event)
+                        let name = event.detail.input.column.schema.name;
+                        let newValue = event.detail.newValue;
+                        let oldValue = event.detail.oldValue;
+                        let schema = event.detail.input.column.schema;
+                        let row = event.detail.input.event.dataRow;
+                        row[name] = newValue;
+                        //刷新最新值
+                        let index = event.detail.input.event.dataCell.y;
+                        this.$emit("on-item-change", name, newValue, oldValue, schema, {row, index, name:this.name});
+                        this.$emit("input", this.inst.getData());
+                    });
+
+                    this.inst.grid.addEventListener('tg-checkbox-change', event => {
+                        // console.log(event)
+                        let name = event.detail.name;
+                        let newValue = event.detail.value;
+                        let schema = event.detail.schema;
+                        let row = event.detail.dataRow;
+                        //刷新最新值
+                        let index = event.detail.dataCell.y;
+                        this.$emit("on-item-change", name, newValue, undefined, schema, {row, index, name:this.name});
+                        this.$emit("input", this.inst.getData());
+                    });
+                }
 
                 this.inst.grid.addEventListener('fin-click', event => {
                     let row = event.detail.row;
