@@ -97,13 +97,13 @@ export default {
             } else {
                 newRow.push(row);
             }
-            this.$emit("on-item-change", this.name, newRow, undefined, this.columns, {})
+            this.$emit("on-item-change", this.name, newRow, undefined, this.columns, {row: newRow, index:this.value.length})
             this.$emit("input", newRow)
         },
         removeActivedRow(){
             if (this.value instanceof Array && this.value.length > 0) {
-                this.value.splice(this.activedIndex, 1)
-                this.$emit("on-item-change", this.name, this.value, undefined, this.columns, {})
+                let removeRow = this.value.splice(this.activedIndex, 1)
+                this.$emit("on-item-change", this.name, this.value, undefined, this.columns, {row: removeRow, index:this.value.length})
                 this.$emit("input", this.value)
             }
         },
@@ -191,7 +191,7 @@ export default {
         },
         setData(datas){
             this.inst.setData(datas);
-            this.$emit("on-item-change", this.name, datas, undefined, this.columns, {})
+            // this.$emit("on-item-change", this.name, datas, undefined, this.columns, {})
             this.$emit("input", datas)
         },
         setErrorCells(datas){
