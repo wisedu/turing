@@ -153,7 +153,7 @@ export default {
             this.formDisplay = {};
         },
         updateValue(name, value, display, model){
-            if (value === "") {
+            if (value === undefined | value === null || value === "") {
                 this.$delete(this.formValue, name);
                 this.$delete(this.formDisplay, name);
             } else {
