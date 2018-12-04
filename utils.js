@@ -107,7 +107,7 @@ utils.getContextPath = function(isFullPath) {
   if (isFullPath === false) {
     return result;
   } else {
-    return window.location.origin + result;
+    return window.location.protocol + "//" + window.location.host + result;
   }
 }
 
