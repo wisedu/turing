@@ -223,10 +223,10 @@ function _getValidateRules(field, rules) {
             rules[field.name] = rules[field.name].concat(Object.assign({}, {field:field}, field.validator, {max:max, message:`内容太长，不能超过 ${max}`}));
         }
         if (field.validator.checkExp !== undefined) {
-            rules[field.name] = rules[field.name].concat(Object.assign({}, {field:field}, {type:'pattern', pattern:field.validator.checkExp, message:field.validator.message}));
+            rules[field.name] = rules[field.name].concat(Object.assign({}, {field:field}, field.validator, {type:'pattern', pattern:field.validator.checkExp, message:field.validator.message}));
         } else if (field.validator.checkType !== undefined) {
             field.validator.checkType.split(',').map(function(item) {
-                rules[field.name] = rules[field.name].concat(Object.assign({}, {field:field}, {type:'pattern', pattern:defaults.validateRules[item].regex, message:defaults.validateRules[item].alertText}));
+                rules[field.name] = rules[field.name].concat(Object.assign({}, {field:field}, field.validator, {type:'pattern', pattern:defaults.validateRules[item].regex, message:defaults.validateRules[item].alertText}));
             });
         } 
         if (rules[field.name].length === 0) {
