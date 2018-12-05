@@ -314,6 +314,7 @@ export class EMAPDataAdapter extends DataAdapter{
                             }
                             let checkType = metaItem[prop_name].replace(/\[|\]|\"|\{|\}|custom/g, "");
                             struct["form"][name]["validator"][prop_name] = checkType;
+                            struct["form"][name]["validator"]["trigger"] = "blur";
                             break;
                         case "dataSize":
                         case "checkSize":
@@ -322,6 +323,7 @@ export class EMAPDataAdapter extends DataAdapter{
                                 struct["form"][name]["validator"] = {};
                             }
                             struct["form"][name]["validator"][prop_name] = metaItem[prop_name];
+                            struct["form"][name]["validator"]["trigger"] = "blur";
                             break;
                         case "groupName":
                             if (prop_name === "groupName") {
