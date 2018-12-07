@@ -92,18 +92,18 @@ export default {
     methods:{
         addRow(row){
             let newRow = [];
-            if (this.value instanceof Array && this.value.length > 0) {
+            if (this.value instanceof Array) {
                 newRow = this.value.concat(row);
             } else {
                 newRow.push(row);
             }
-            this.$emit("on-item-change", this.name, newRow, undefined, this.columns, {row: newRow, index:this.value.length})
+            this.$emit("on-item-change", this.name, newRow, undefined, this.columns, {row: newRow, index: this.value.length, name: this.name})
             this.$emit("input", newRow)
         },
         removeActivedRow(){
             if (this.value instanceof Array && this.value.length > 0) {
                 let removeRow = this.value.splice(this.activedIndex, 1)
-                this.$emit("on-item-change", this.name, this.value, undefined, this.columns, {row: removeRow, index:this.value.length})
+                this.$emit("on-item-change", this.name, this.value, undefined, this.columns, {row: removeRow, index:this.value.length, name: this.name})
                 this.$emit("input", this.value)
             }
         },
