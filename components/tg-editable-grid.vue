@@ -91,14 +91,14 @@ export default {
     },
     methods:{
         addRow(row){
-            let newRow = [];
+            let newRows = [];
             if (this.value instanceof Array) {
-                newRow = this.value.concat(row);
+                newRows = this.value.concat(row);
             } else {
-                newRow.push(row);
+                newRows.push(row);
             }
-            this.$emit("on-item-change", this.name, newRow, undefined, this.columns, {row: row, index: this.value.length, name: this.name})
-            this.$emit("input", newRow)
+            this.$emit("on-item-change", this.name, newRows, undefined, this.columns, {row: row, index: this.newRows.length, name: this.name})
+            this.$emit("input", newRows)
         },
         removeActivedRow(){
             if (this.value instanceof Array && this.value.length > 0) {
