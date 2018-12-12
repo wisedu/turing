@@ -97,7 +97,7 @@ export default {
             } else {
                 newRows.push(row);
             }
-            this.$emit("on-item-change", this.name, newRows, undefined, this.columns, {row: row, index: this.newRows.length, name: this.name})
+            this.$emit("on-item-change", this.name, newRows, undefined, this.columns, {row: row, index: newRows.length, name: this.name})
             this.$emit("input", newRows)
         },
         removeActivedRow(){
