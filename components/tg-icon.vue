@@ -1,11 +1,10 @@
 <template>
-  <img @click="handleClick" :src="src" :type="type" class="tg-img" />
+  <i @click="handleClick" class="tg-icon" :class="type"></i>
 </template>
 <script>
     export default {
-        name: 'tg-img',
+        name: 'tg-icon',
         props: {
-            src: String,
             type: String
         },
         methods: {
@@ -16,11 +15,4 @@
     };
 </script>
 <style>
-  .tg-img{
-    display: inline-block;
-  }
-
-  .tg-img[type="circular"]{
-    border-radius: 100%;
-  }
 </style>
