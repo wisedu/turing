@@ -19,6 +19,7 @@ import TgDiv from './components/tg-div.vue';
 import TgEditableGrid from './components/tg-editable-grid.vue';
 import TgForm from './components/tg-form.vue';
 import TgGridview from './components/tg-gridview.vue';
+import TgIcon from './components/tg-icon.vue';
 import TgImg from './components/tg-img.vue';
 import TgLeftRightItem from './components/tg-left-right-item.vue';
 import TgLeftRight from './components/tg-left-right.vue';
@@ -32,7 +33,7 @@ const version = "1.28.61";
 const description = "turing components";
 const author = "金智教育 wisedu";
 const components = {
-    TgCollectionView,TgContainer,TgDiv,TgEditableGrid,TgForm,TgGridview,TgImg,TgLeftRightItem,TgLeftRight,TgLinkbutton,TgListview,TgPerson,TgText,TgToolbar,TgValidator
+    TgCollectionView,TgContainer,TgDiv,TgEditableGrid,TgForm,TgGridview,TgIcon,TgImg,TgLeftRightItem,TgLeftRight,TgLinkbutton,TgListview,TgPerson,TgText,TgToolbar,TgValidator
 };
 const install = function (Vue, opts = {}) {
     if (install.installed) return;
