@@ -40,5 +40,7 @@ export default {
 <style>
   .tg-text{
     display: inline-block;
+    font-size: 14px;
+    line-height: 24px;
   }
 </style>
