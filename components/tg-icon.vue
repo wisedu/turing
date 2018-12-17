@@ -15,4 +15,7 @@
     };
 </script>
 <style>
+  .tg-icon{
+    display: inline-block;
+  }
 </style>
