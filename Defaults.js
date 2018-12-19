@@ -4,11 +4,17 @@ export default {
     test:function(){
         console.log(1);
     },
+    beforeFindAll:[function (action, params, props){
+        return params;
+    }],
     afterFindAll:[function (result, findAction, params){
         return result.data;
     }],
-    beforeFindAll:[function (action, params, props){
-        return params;
+    beforeSave:[function (data, model) {
+        return data;
+    }],
+    afterSave:[function (result, model) {
+        return result.data;
     }],
     getDictData:[function (dict, params, callback) {
         let filterparams = dict.params || {};

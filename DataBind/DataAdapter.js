@@ -198,8 +198,9 @@ export class DataAdapter {
         });
     }
     save(data) {
-        return this.execute(this.actions.save, data).then(function(result){
-            return result.data;
+        let processedData = defaults.beforeSave[0](this.actions.save, data, this.viewDefine);
+        return this.execute(this.actions.save, processedData).then(result => {
+            return defaults.afterSave[0](result, this.viewDefine);
         });
     }
     /**
