@@ -10,7 +10,7 @@ export default {
     afterFindAll:[function (result, findAction, params){
         return result.data;
     }],
-    beforeSave:[function (data, model) {
+    beforeSave:[function (action, data, model) {
         return data;
     }],
     afterSave:[function (result, model) {
