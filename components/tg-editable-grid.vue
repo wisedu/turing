@@ -120,8 +120,19 @@ export default {
                         case "tree":
                             if (model.dict !== undefined) {
                                 defaults.getDictTreeData[0](model.dict, {key:value}, datas => {
-                                    let treedatas = that.inst.utils.toTreeData(datas, "", {ukey:"id", pkey:'pId', toCKey:'children'})
-                                    callback(treedatas);
+                                    // 当datas非树形数据时，将datas直接返回，每项分别作为树的根目录 修改人：王永建  2019/1/8
+                                    let correntDatas = datas;
+                                    correntDatas = correntDatas.map(function(data){
+                                        data.text = data.label||data.name;
+                                        return data
+                                    });
+                                    let treedatas = that.inst.utils.toTreeData(correntDatas, "", {ukey:"id", pkey:'pId', toCKey:'children'});
+                                    if(treedatas.length){
+                                        callback(treedatas);
+                                    }else{
+                                        callback(correntDatas);
+                                    }
+                                    
                                 });
                             } else if (model.options !== undefined) {
                                 callback(model.options);
