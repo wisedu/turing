@@ -114,12 +114,13 @@ export default {
                     this.params.readOnly = true;
                 }
                 this.inst = new EditableGrid(this.$refs.editableGrid, Object.assign({}, this.params, {displayFieldFormat:this.displayFieldFormat}));
+                let that = this;
                 this.inst.onEditorLoadData = function(model, value, callback) {
                     switch (model.xtype) {
                         case "tree":
                             if (model.dict !== undefined) {
                                 defaults.getDictTreeData[0](model.dict, {key:value}, datas => {
-                                    let treedatas = inst.utils.toTreeData(datas, "", {ukey:"id", pkey:'pId', toCKey:'children'})
+                                    let treedatas = that.inst.utils.toTreeData(datas, "", {ukey:"id", pkey:'pId', toCKey:'children'})
                                     callback(treedatas);
                                 });
                             } else if (model.options !== undefined) {
