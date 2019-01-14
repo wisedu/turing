@@ -1,5 +1,5 @@
 <template>
-  <span @click="handleClick" :class="isCutStr" class="tg-text">
+  <span @click="handleClick" :class="isCutStr" :is-cut="cut" class="tg-text">
     <pre v-if="wordwrap"><slot></slot></pre>
     <slot v-else></slot>
   </span>
@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style>
-  .tg-text{
+  .tg-text[is-cut]{
     display: inline-block;
   }
 </style>
