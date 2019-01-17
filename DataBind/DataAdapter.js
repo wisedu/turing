@@ -73,6 +73,11 @@ export class DataAdapter {
             url = action.url;
         }
 
+        //新增重置ajax请求配置参数
+        if(data && data.config){
+            Object.assign(config, data.config);
+        }
+
         if (url.substring(0, 1) === ".") {
             url = (window.apiPath || '') + url;//.substring(2, url.length)
         } else if (url.substring(0, 1) === "/") {
