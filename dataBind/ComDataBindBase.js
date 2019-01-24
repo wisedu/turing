@@ -16,7 +16,7 @@ export default{
         pager: {
             type: Object,
             default:function() {
-                return {size:20,index:1};
+                return {size:10,index:1};
             }
         },
     },
