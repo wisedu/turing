@@ -74,8 +74,11 @@ export class DataAdapter {
         }
 
         //新增重置ajax请求配置参数
-        if(data && data.config){
-            Object.assign(config, data.config);
+        // if(data && data.config){
+        //     Object.assign(config, data.config);
+        // }
+        if(this.timeOut){
+            config.timeOut = this.timeOut;
         }
 
         if (url.substring(0, 1) === ".") {

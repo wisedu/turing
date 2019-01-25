@@ -54,6 +54,7 @@ export default{
             }
             this.dataAdapter.pageSize = query_params && query_params.pageSize || this.pager.size;
             this.dataAdapter.pageNumber = query_params && query_params.pageNumber || this.pager.index;
+            this.dataAdapter.timeOut = this.timeOut;
             this.dataAdapter.findAll(query_params.params).then(function(datas) {
                 that.$emit("update:loading", false);
                 that.$emit('data-loaded', datas);

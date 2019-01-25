@@ -113,12 +113,6 @@ export default {
         reload(pager, callback) {
             if (this.dataAdapter !== undefined && this.dataAdapter.querySettingBuilder !== undefined && this.dataAdapter.actions.findAll.url !== "") {
                 this.dataAdapter.querySetting = this.dataAdapter.querySettingBuilder(Object.assign({}, this.formValue, this.filterValues), this.dataAdapter.name, false);
-                if(this.timeOut && this.timeOut > 0){
-                    if(!pager){
-                        pager = {};
-                    }
-                    pager.config = {timeOut: this.timeOut};
-                }
                 this.DataBind(pager, callback);
             }
         },
