@@ -78,7 +78,7 @@ export class DataAdapter {
         //     Object.assign(config, data.config);
         // }
         if(this.timeOut){
-            config.timeOut = this.timeOut;
+            config.timeout = this.timeOut;
         }
 
         if (url.substring(0, 1) === ".") {

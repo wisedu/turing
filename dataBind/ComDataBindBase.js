@@ -35,6 +35,7 @@ export default{
             if (this.datasource !== undefined) {    //后续将不再支持
                 this.datasource.inst.pageSize = query_params && query_params.pageSize || this.pageSize;
                 this.datasource.inst.pageNumber = query_params && query_params.pageNumber || this.pageNumber;
+                this.datasource.inst.timeOut = this.timeOut;
                 this.datasource.inst.findAll(this.params).then(function(datas) {
                     that.$emit("update:loading", false);
                     that.$emit('data-loaded', datas);
