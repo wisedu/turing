@@ -79,8 +79,11 @@ export default {
             }
             this.initGrid();
         },
-        value(newVal, oldVal){
-            this.setData(newVal);
+        value:{
+            handler:function(newVal, oldVal){
+                this.setData(newVal);
+            },
+            deep:true,
         }
     },
     mounted(){
