@@ -122,7 +122,7 @@ export default {
                     if(index>-1) this.columnsCopy.splice(index,1);
                 }
             }
-            console.log('除去隐藏项后的columns:' + this.columnsCopy);
+            console.log('除去隐藏项后的columns:', this.columnsCopy);
             // 运行态处理只读项
 
             
@@ -216,7 +216,7 @@ export default {
                 this.inst.grid.addEventListener('fin-grid-rendered', event => {
                     this.$emit("ready");
                 });
-                // this.inst.setData([]);
+                this.inst.setData(this.value);
             }
         },
         setData(datas){
