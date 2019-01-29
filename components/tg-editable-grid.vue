@@ -25,12 +25,6 @@ export default {
             type:Number,
             default: 550
         },
-        params: {
-            type:Object, 
-            default(){
-                return {}
-            }
-        },
         columns: Array,
         value: {
             type:Array,
@@ -51,12 +45,15 @@ export default {
         },
         rowRending: Function,
         readonly: Boolean,
+        hideCol: String,
+        readonlyCol: String
     },
     data() {
         return {
             inst:null,
             activedIndex:-1,
-            uuid: uuid()
+            uuid: uuid(),
+            columnsCopy: this.columns, //columns的镜像值
         }
     },
     computed:{
@@ -74,6 +71,7 @@ export default {
     },
     watch:{
         columns(newVal, oldVal){
+            this.columnsCopy = newVal;
             if (this.inst !== null) {
                 this.inst.grid.terminate();
             }
@@ -100,18 +98,35 @@ export default {
             } else {
                 newRows.push(row);
             }
-            this.$emit("on-item-change", this.name, newRows, undefined, this.columns, {row: row, index: newRows.length, name: this.name})
+            this.$emit("on-item-change", this.name, newRows, undefined, this.columnsCopy, {row: row, index: newRows.length, name: this.name})
             this.$emit("input", newRows)
         },
         removeActivedRow(){
             if (this.value instanceof Array && this.value.length > 0) {
                 let removeRow = this.value.splice(this.activedIndex, 1)
-                this.$emit("on-item-change", this.name, this.value, undefined, this.columns, {row: removeRow[0], index:undefined, name: this.name})
+                this.$emit("on-item-change", this.name, this.value, undefined, this.columnsCopy, {row: removeRow[0], index:undefined, name: this.name})
                 this.$emit("input", this.value)
             }
         },
         initGrid(){
-            if (this.columns.length > 0) {
+            // 运行态去除需要隐藏的列
+            if(this.hideCol&&this.columns.length>0){
+                var hideCols = this.hideCol.split(',');
+                var colsName = [];
+                this.columnsCopy.forEach(function(col){
+                    colsName.push(col.name);
+                });
+                var indexs;
+                for(var i=hideCols.length-1;i>=0;i--){
+                    index = colsName.indexOf(hideCols[i]);
+                    if(index>-1) this.columnsCopy.splice(index,1);
+                }
+            }
+            console.log('除去隐藏项后的columns:' + this.columnsCopy);
+            // 运行态处理只读项
+
+            
+            if (this.columnsCopy.length > 0) {
                 let EditableGrid = window["tg-editable-grid"].default;
                 if (this.readonly === true) {
                     this.params.readOnly = true;
@@ -152,7 +167,7 @@ export default {
                             break;
                     }
                 }
-                this.inst.setSchema(this.columns);
+                this.inst.setSchema(this.columnsCopy);
 
                 if (this.readonly !== true) {
                     this.inst.grid.addEventListener('fin-editor-data-change', event => {
@@ -206,7 +221,7 @@ export default {
         },
         setData(datas){
             this.inst.setData(datas);
-            // this.$emit("on-item-change", this.name, datas, undefined, this.columns, {})
+            // this.$emit("on-item-change", this.name, datas, undefined, this.columnsCopy, {})
             this.$emit("input", datas)
         },
         setErrorCells(datas){
