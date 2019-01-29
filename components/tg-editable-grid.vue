@@ -116,7 +116,7 @@ export default {
                 this.columnsCopy.forEach(function(col){
                     colsName.push(col.name);
                 });
-                var indexs;
+                var index;
                 for(var i=hideCols.length-1;i>=0;i--){
                     index = colsName.indexOf(hideCols[i]);
                     if(index>-1) this.columnsCopy.splice(index,1);
