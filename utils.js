@@ -122,19 +122,46 @@ utils.cleanProps = function(data) {
 
 utils.toTreeData = function (data, parent_id, options) {
   let opt = options || {ukey:"id", pkey:'parent_id', toCKey:'children'}
-  var tree = [];
-  var temp;
-  for (var i = 0; i < data.length; i++) {
-    if (data[i][opt.pkey] == parent_id || data[i][opt.ukey] === data[i][opt.pkey]) {
-      var obj = data[i];
-      temp = utils.toTreeData(data, data[i][opt.ukey], opt);
-      if (temp.length > 0) {
-        obj[opt.toCKey] = temp;
+  let tree = [];
+  let temp;
+  let count = data.length;
+  for(let i=0; i<count; i++){
+      if(!data[i][opt.pkey] && data[i][opt.pkey] !== 0){
+          tree.push(data[i]);
+
+          utils.addChildToTreeData(data, data[i], opt);
       }
-      tree.push(obj);
-    }
   }
+
+    // for (var i = 0; i < data.length; i++) {
+    //     if (data[i][opt.pkey] == parent_id || data[i][opt.ukey] === data[i][opt.pkey]) {
+    //         var obj = data[i];
+    //         temp = utils.toTreeData(data, data[i][opt.ukey], opt);
+    //         if (temp.length > 0) {
+    //             obj[opt.toCKey] = temp;
+    //         }
+    //         tree.push(obj);
+    //     }
+    // }
+
+
   return tree;
+}
+
+utils.addChildToTreeData = function (allData, parentData, opt) {
+    let parent_id = parentData[opt.ukey];
+    let count = allData.length;
+    for(let i=0; i<count; i++){
+        if(allData[i][opt.pkey] === parent_id){
+            if(!parentData[opt.toCKey]){
+                parentData[opt.toCKey] = [];
+            }
+
+            parentData[opt.toCKey].push(allData[i]);
+
+            utils.addChildToTreeData(allData, allData[i], opt);
+        }
+    }
 }
 
 //---extend
