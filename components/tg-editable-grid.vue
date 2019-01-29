@@ -123,8 +123,20 @@ export default {
                 }
             }
             console.log('除去隐藏项后的columns:', this.columnsCopy);
-            // 运行态处理只读项
-
+            // 运行态处理只读项,将xtype改成readonly
+            if(this.readonlyCol&&this.columnsCopy.length>0){
+                var readonlyCols = this.readonlyCol.split(',');
+                var that = this;
+                readonlyCols.forEach(function(col){
+                    that.columnsCopy.map(function(obj){
+                        if(obj.name === col){
+                            obj.xtype = 'readonly';
+                        }
+                        return obj;
+                    });
+                });
+            }
+            console.log('处理只读项后的columns:', this.columnsCopy);
             
             if (this.columnsCopy.length > 0) {
                 let EditableGrid = window["tg-editable-grid"].default;
