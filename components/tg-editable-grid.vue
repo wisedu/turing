@@ -85,12 +85,10 @@ export default {
         }
     },
     mounted(){
-        this.$nextTick(function () {
-            this.initGrid();
-            if (this.value instanceof Array && this.value.length > 0) {
-                this.setData(this.value);
-            }
-        });
+        this.initGrid();
+        if (this.value instanceof Array && this.value.length > 0) {
+            this.setData(this.value);
+        }
     },
     methods:{
         addRow(row){
