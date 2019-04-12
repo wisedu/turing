@@ -148,6 +148,7 @@ export default {
                     this.params.readOnly = true;
                 }
                 this.inst = new EditableGrid(this.$refs.editableGrid, Object.assign({}, this.params, {displayFieldFormat:this.displayFieldFormat, columnAutosizing: this.columnAutosizing}));
+                this.inst.grid.properties.columnAutosizing = this.columnAutosizing;
                 let that = this;
                 this.inst.onEditorLoadData = function(model, value, callback) {
                     switch (model.xtype) {
