@@ -46,11 +46,7 @@ export default {
         rowRending: Function,
         readonly: Boolean,
         hideCol: String,
-        readonlyCol: String,
-        columnAutosizing: {
-            type: Boolean,
-            default:false
-        }
+        readonlyCol: String
     },
     data() {
         return {
@@ -147,8 +143,7 @@ export default {
                 if (this.readonly === true) {
                     this.params.readOnly = true;
                 }
-                this.inst = new EditableGrid(this.$refs.editableGrid, Object.assign({}, this.params, {displayFieldFormat:this.displayFieldFormat, columnAutosizing: this.columnAutosizing}));
-                this.inst.grid.properties.columnAutosizing = this.columnAutosizing;
+                this.inst = new EditableGrid(this.$refs.editableGrid, Object.assign({}, this.params, {displayFieldFormat:this.displayFieldFormat}));
                 let that = this;
                 this.inst.onEditorLoadData = function(model, value, callback) {
                     switch (model.xtype) {
