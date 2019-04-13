@@ -8,7 +8,7 @@
             <slot name="toolbar-left" slot="left"></slot>
             <slot name="toolbar-right" slot="right"></slot>
         </tg-toolbar>
-        <component :is="type + '-gb-grid'" :border="border" :columns="columns" :data="table_data" :pager="pager" :loading="loading" @on-sort-change="sortHandler" :displayFieldFormat="displayFieldFormat"
+        <component :is="type + '-gb-grid'" :border="border" :columns="columns" :data="table_data" :pager="pager" :loading="loading" :height="height" @on-sort-change="sortHandler" :displayFieldFormat="displayFieldFormat"
             @reload="tableReload" @on-highlight="onHighlight" @on-select-all="onSelectAll" @on-selection-change="onSelectionChange" :rowRending="rowRending">
             <template :slot="model.key" slot-scope="scope" v-for="model in columns.filter(item => {return $scopedSlots['columns-' + item.key] !== undefined})">
                 <slot :name="'columns-'+model.key" :index="scope.index" :column="scope.column" :row="scope.row"></slot>
@@ -56,7 +56,8 @@ export default {
         rowRending: Function,
         searchHandler: Function,
         timeOut: Number,
-        loaddata: Function
+        loaddata: Function,
+        height: Number,
     },
     data() {
         let searchvalue = {};
