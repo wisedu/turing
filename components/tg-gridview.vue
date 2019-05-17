@@ -154,6 +154,9 @@ export default {
         searchClear() {
             this.formValue = {};
             this.formDisplay = {};
+            if(this.searcher){
+                this.searcher.value = '';
+            }
         },
         updateValue(name, value, display, model){
             if (value === undefined | value === null || value === "") {
