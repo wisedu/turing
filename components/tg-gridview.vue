@@ -1,7 +1,7 @@
 <template>
     <div class="tg-gridview-wrap">
         <component v-if="searcher !== undefined" :fields="searcher.fields.filter(item => item.hidden !== true)" :is="type + '-gb-' + searcher.name" :displayFieldFormat="displayFieldFormat"
-                   :loaddata="loaddata" v-bind="searcher" @on-value-change="updateValue" @search="searchReload" @clear="searchClear">
+                   :loaddata="loaddata" v-bind="searcher" @on-value-change="updateValue" @search="searchReload" @clear="searchClear" :labelWidth="labelWidth">
             <slot :name="'search-'+model.name" :slot="'search-'+model.name" v-for="model in searcher.fields"></slot>
         </component>
         <tg-toolbar v-if="showToolbar">
@@ -58,6 +58,7 @@ export default {
         timeOut: Number,
         loaddata: Function,
         height: Number,
+        labelWidth: Number,
     },
     data() {
         let searchvalue = {};
