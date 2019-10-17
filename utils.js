@@ -80,14 +80,14 @@ utils.getUrlParam = function (name) {
       var str = url.substr(1);  
       var strs = str.split("&");  
       for(var i = 0; i < strs.length; i ++) {  
-          theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);  
+          theRequest[strs[i].split("=")[0]]=decodeURIComponent(strs[i].split("=")[1]);  
       }  
     } 
     return theRequest;
   } else {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-    if (r != null) return unescape(r[2]); return null; //返回参数值
+    if (r != null) return decodeURIComponent(r[2]); return null; //返回参数值
   }
 }
 
