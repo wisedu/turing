@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "accounting-js": "^1.1.1",
-    "axios": "0.17.1",
+    "axios": "0.21.1",
     "core-js": "^2.6.1",
     "moment": "^2.22.1",
     "uuid": "^3.3.2"
